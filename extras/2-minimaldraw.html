@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2 - Minimal Draw</title>
+</head>
+<body>
+
+<canvas width="400" height="400"></canvas>
+
+<script type="application/javascript;version=1.7">
+  "use strict";
+
+  let canvas = document.querySelector('canvas');
+  let gl = canvas.getContext('webgl');
+  // buffer to hold some vertex data
+  let vertexPosBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexPosBuffer);
+  let vertices = [
+    -0.5, -0.5,
+     0.5, -0.5,
+     0.0,  0.5
+  ];
+
+  gl.bufferData(gl.ARRAY_BUFFER,
+                new Float32Array(vertices),
+                gl.STATIC_DRAW);
+
+  // creating our vertex shader directly from a
+  // string. Shaders take shape data an turn it
+  // into pixels on the screen (3d->2d). Vertex
+  // shader runs on each corner of every triangle
+  // being rendered. It can lso manipulate
+  // attributes such as texture coordinates and
+  // normals, which are then passed to the frag
+  // shader.  gl_Position lets us store the
+  // transformed corner points. The value stored
+  // there for each of the corners is used to
+  // interpolate all the pixels being output.
+  var vs = 'attribute vec2 pos;' +
+           'void main() {gl_Position = vec4(pos, 0, 1); }';
+
+  // fragment shader (pixel shader) runs on each
+  // pixel of every transformed triangle passed
+  // in. gl_FragColor gives us the proper pixel
+  // data.
+  var fs = 'precision mediump float;' +
+           'void main () { gl_FragColor = vec4(0, 0.8, 0, 1); }';
+
+  // creates a shader program, which consists of a
+  // vertex shader and a fragment shader.
+  // 'attachShader()' lets us associate shaders
+  // and 'linkProgram()' lets us finalize the
+  // program. Call 'useProgram()' to select one to
+  // use.
+  var program = createProgram(vs, fs);
+  gl.useProgram(program);
+
+  // bind the triangles to the vertex shader's
+  // 'vertexPosition' attribute and then draw it.
+  program.vertexPosAttrib = gl.getAttribLocation(program, 'pos');
+  gl.enableVertexAttribArray(program.vertexPosAttrib);
+  gl.vertexAttribPointer(program.vertexPosAttrib, 2, gl.FLOAT,
+                         false, 0, 0);
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+  function createShader (str, type) {
+    let shader = gl.createShader(type);
+
+    gl.shaderSource(shader, str);
+    gl.compileShader(shader);
+
+    return shader;
+  }
+
+  function createProgram (vstr, fstr) {
+    let program = gl.createProgram();
+    let vshader = createShader(vstr, gl.VERTEX_SHADER);
+    let fshader = createShader(fstr, gl.FRAGMENT_SHADER);
+
+    gl.attachShader(program, vshader);
+    gl.attachShader(program, fshader);
+    gl.linkProgram(program);
+
+    return program;
+  }
+</script>
+
+</body>
+</html>
