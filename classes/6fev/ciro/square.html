@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Squares</title>
+</head>
+<body>
+
+  <canvas height="300" width="300"></canvas>
+
+  <script id="vshader" type="x-shader/x-vertex">
+  attribute vec4 a_Position;
+  uniform float u_theta;
+
+  void
+  main()
+  {
+    float s = sin(u_theta);
+    float c = cos(u_theta);
+
+    // -.5 translates to the left <<<
+    gl_Position.x = -s * a_Position.x + c * a_Position.y - .5;
+    gl_Position.y =  s * a_Position.y + c * a_Position.x - .5;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
+  }
+  </script>
+
+  <script id="fshader" type="x-shader/x-fragment">
+  precision mediump float;
+
+  void
+  main()
+  {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+  }
+  </script>
+  <script type="application/javascript;version=1.7" src="../../../common.js"></script>
+  <script type="application/javascript;version=1.7" src="squares.js"></script>
+</body>
+</html>
