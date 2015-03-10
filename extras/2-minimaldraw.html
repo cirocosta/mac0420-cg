@@ -8,6 +8,7 @@
 
 <canvas width="400" height="400"></canvas>
 
+<script type="application/javascript;version=1.7" src="webgl-utils.js"></script>
 <script type="application/javascript;version=1.7">
   "use strict";
 
@@ -63,27 +64,6 @@
   gl.vertexAttribPointer(program.vertexPosAttrib, 2, gl.FLOAT,
                          false, 0, 0);
   gl.drawArrays(gl.TRIANGLES, 0, 3);
-
-  function createShader (str, type) {
-    let shader = gl.createShader(type);
-
-    gl.shaderSource(shader, str);
-    gl.compileShader(shader);
-
-    return shader;
-  }
-
-  function createProgram (vstr, fstr) {
-    let program = gl.createProgram();
-    let vshader = createShader(vstr, gl.VERTEX_SHADER);
-    let fshader = createShader(fstr, gl.FRAGMENT_SHADER);
-
-    gl.attachShader(program, vshader);
-    gl.attachShader(program, fshader);
-    gl.linkProgram(program);
-
-    return program;
-  }
 </script>
 
 </body>

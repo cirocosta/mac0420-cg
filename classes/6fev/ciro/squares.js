@@ -1,4 +1,4 @@
-(function () {
+(function (window) {
   'use strict';
 
   let canvas = document.querySelector('canvas');
@@ -22,10 +22,12 @@
   gl.clearColor(.0, .0, .0, 1.);
 
 
-  render();
+  window.requestAnimationFrame((ms) => {
+    render();
+  });
 
   function render () {
     gl.clear(gl.COLOR_BUFFER_BIT);
-    // gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
   }
-})();
+})(window);
