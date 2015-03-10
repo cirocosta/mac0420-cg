@@ -10,6 +10,7 @@
 
   <script id="vshader" type="x-shader/x-vertex">
   attribute vec4 a_Position;
+  attribute float a_Translation;
   uniform float u_theta;
 
   void
@@ -18,9 +19,8 @@
     float s = sin(u_theta);
     float c = cos(u_theta);
 
-    // -.5 translates to the left <<<
-    gl_Position.x = -s * a_Position.x + c * a_Position.y - .5;
-    gl_Position.y =  s * a_Position.y + c * a_Position.x - .5;
+    gl_Position.x = -s * a_Position.x + c * a_Position.y + a_Translation;
+    gl_Position.y =  s * a_Position.y + c * a_Position.x + a_Translation;
     gl_Position.z = 0.0;
     gl_Position.w = 1.0;
   }
