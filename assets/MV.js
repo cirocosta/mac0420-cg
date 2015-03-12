@@ -17,17 +17,13 @@
      * @param  {Array<Array>} arr
      * @return {Array}
      */
-    flatten: (arr) => {
-      let newArr = [];
-
-      var recursiveArr = (givenArr) => {
-        givenArr.forEach((item) => {
-          (Array.isArray(item)) && (recursiveArr(item));
-          (!Array.isArray(item)) && (newArr.push(item));
-        });
-      };
-
-      return recursiveArr(arr);
+    flatten ([first, ...rest]) {
+      if (first === undefined)
+        return [];
+      else if (!Array.isArray(first))
+        return [first, ...this.flatten(rest)];
+      else
+        return [...this.flatten(first), ...this.flatten(rest)];
     },
 
     /**
@@ -36,17 +32,19 @@
      * @param  {Array<Array>} arr
      * @return {Float32Array}
      */
-    flatten32f: (arr) => new Float32Array(this.flatten(arr)),
+    flatten32f (arr) {
+      return new Float32Array(this.flatten(arr));
+    },
 
     /**
      * Bissects an array given an 's'
      * (0 <= S <= 1)
      *
-     * @param  {number} u
-     * @param  {number} v
+     * @param  {Array} u
+     * @param  {Array} v
      * @param  {number} s
      * @return {Array}
      */
-    bisect: (u, v, s) => [for (i of u) for (j of v) s*i + (1.0-s) * j],
+     bisect: (u, v, s) => u.map((val, i) => (s*val + (1.0-s) * v[i]))
   };
 })(window);
