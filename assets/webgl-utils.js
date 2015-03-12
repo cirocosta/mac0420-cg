@@ -111,4 +111,6 @@
       return;
     }
   };
+
+  root.WebGLUtils.Shaders = root.Shaders;
 })(window);

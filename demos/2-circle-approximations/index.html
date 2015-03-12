@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Squares</title>
+</head>
+<body>
+
+  <canvas height="300" width="300"></canvas>
+
+<script id="vshader" type="x-shader/x-vertex">
+attribute vec4 a_Position;
+
+void main ()
+{
+  gl_Position = a_Position;
+}
+</script>
+
+<script id="fshader" type="x-shader/x-fragment">
+precision mediump float;
+
+void main ()
+{
+  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+}
+</script>
+
+
+  <script src="../../assets/webgl-debug.js"></script>
+  <script type="application/javascript;version=1.7" src="../../assets/MV.js"></script>
+  <script type="application/javascript;version=1.7" src="../../assets/webgl-utils.js"></script>
+  <script type="application/javascript;version=1.7" src="index.js"></script>
+</body>
+</html>
