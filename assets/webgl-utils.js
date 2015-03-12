@@ -1,26 +1,6 @@
 (function (root) {
   'use strict';
 
-  root.MV = {
-    vec2: (a1=.0,a2=.0)=>Array.from(arguments),
-    vec3: (a1=.0,a2=.0,a3=.0)=>Array.from(arguments),
-    vec4: (a1=.0,a2=.0,a3=.0,a4=.0)=>Array.from(arguments),
-
-    flatten32f: (arr) => {
-      let newArr = [];
-
-      var recursiveArr = (givenArr) => {
-        givenArr.forEach((item) => {
-          (Array.isArray(item)) && (recursiveArr(item));
-          (!Array.isArray(item)) && (newArr.push(item));
-        });
-      };
-
-      recursiveArr(arr);
-      return new Float32Array(newArr);
-    }
-  };
-
   /**
    * Setup utilities for WebGL
    * @type {Object}
