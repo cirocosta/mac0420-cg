@@ -10,10 +10,11 @@
  */
 
 
-(function (window) {
+(function (root) {
   'use strict';
-  let g_points = [0.0, 0.0];
 
+  let g_points = [[0.0, 0.0]];
+  let g_colors = [[1.0, 0.0, 0.0, 1.0]];
   let canvas = document.querySelector('canvas');
   let gl = WebGLUtils.setupWebGL(canvas);
 
@@ -41,31 +42,21 @@
 
   // per-fragment operations
   const FSHADER_SOURCE = [
+    'precision mediump float;',
+    'uniform vec4 u_FragColor;',
     'void main () {',
-    '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);', // color
-    '}'
+    '  gl_FragColor = u_FragColor;',
+    '}',
   ].join('\n');
 
   if (!Shaders.initFromSrc(gl, VSHADER_SOURCE, FSHADER_SOURCE))
     throw new Error('Failed to initialize shaders');
 
-  // try to get a reference to shader attributes
-  // TODO add a routine that does this for various
-  // attributes taking benefit of array
-  // destructuring
-  let a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
-  if (!~a_PointSize)
-    throw new Error('Failed to get the storage location of a_Position');
-
-  let a_Position = gl.getAttribLocation(gl.program, 'a_Position');
-  if (!~a_Position)
-    throw new Error('Failed to get the storage location of a_Position');
-
-
+  let [a_Position, a_PointSize, u_FragColor] =
+    Shaders.getAttribs(gl, 'a_Position', 'a_PointSize', 'u_FragColor');
 
   // setting vertex attributes
   gl.vertexAttrib1f(a_PointSize, 20.0);
-  // gl.vertexAttrib4fv(a_Position, new Float32Array([0.0, 0.0, 0.0, 1.0]));
 
   canvas.addEventListener('mousedown', (ev) => {
     let x = ev.clientX;
@@ -79,25 +70,39 @@
 
     // adds the point to the global g_points
     // coordinates store.
-    g_points.push(x);
-    g_points.push(y);
+    g_colors.push([Math.random(), Math.random(), Math.random(), 1.0]);
+    g_points.push([x, y]);
   });
+
+  function resize (canvas) {
+    let {clientWidth, clientHeight} = canvas;
+
+    if (canvas.width !== clientWidth || canvas.height !== clientHeight)
+      (canvas.width = clientWidth, canvas.height = clientHeight);
+  }
+
+  root.addEventListener('resize', resize.bind(null, canvas));
 
   /**
    * Draws something into screen
    */
   function render () {
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    for (let i = 0, N = g_points.length; i < N; i += 2) {
-      gl.vertexAttrib3f(a_Position, g_points[i], g_points[i+1], 0.0);
+    for (let i in g_points) {
+      gl.uniform4f(u_FragColor, g_colors[i][0], g_colors[i][1], g_colors[i][2], g_colors[i][3]);
+      gl.vertexAttrib3f(a_Position, g_points[i][0], g_points[i][1], 0.0);
       gl.drawArrays(gl.POINTS, 0, 1);
     }
   }
 
+  resize(canvas);
+
   (function loop () {
-    window.requestAnimationFrame(loop);
+    root.requestAnimationFrame(loop);
     render();
   })();
 })(window);

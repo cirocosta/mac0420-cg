@@ -85,6 +85,24 @@
       return program;
     },
 
+    getAttribs (gl, ...names) {
+      return names.map((name) => {
+        let location;
+
+        if (name.startsWith('a_'))
+          location = gl.getAttribLocation(gl.program, name);
+        else if (name.startsWith('u_'))
+          location = gl.getUniformLocation(gl.program, name);
+        else // enforcing name consistency
+          throw new Error('Attrib/Unif/Var must start with u_, a_ or v_');
+
+        if (!~location)
+          throw new Error('Failed to retrieve location of ' + name);
+
+        return location;
+      });
+    },
+
     initFromSrc (gl, vsrc, fsrc) {
       let v = this._createVertShader(gl, vsrc, gl.VERTEX_SHADER);
       let f = this._createFragShader(gl, fsrc, gl.FRAGMENT_SHADER);
