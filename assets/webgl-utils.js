@@ -28,6 +28,13 @@
       return ctx;
     },
 
+    genResizeFun: (canvas) => (ev) => {
+      let {clientWidth, clientHeight} = canvas;
+
+      if (canvas.width !== clientWidth || canvas.height !== clientHeight)
+        (canvas.width = clientWidth, canvas.height = clientHeight);
+    },
+
     /**
      * Prepares the WebGL context.
      * @param  {HTMLElement} canvas

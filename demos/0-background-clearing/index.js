@@ -21,6 +21,8 @@
   if (!gl)
     throw new Error('Couldn\'t retrieve webgl context.');
 
+  let resize = WebGLUtils.genResizeFun(canvas);
+
   // per-vertex operations. This one will pass
   // gl_Position and gl_PointSize to the fshader
   // (actually, the fragments processed).
@@ -74,31 +76,23 @@
     g_points.push([x, y]);
   });
 
-  function resize (canvas) {
-    let {clientWidth, clientHeight} = canvas;
-
-    if (canvas.width !== clientWidth || canvas.height !== clientHeight)
-      (canvas.width = clientWidth, canvas.height = clientHeight);
-  }
-
-  root.addEventListener('resize', resize.bind(null, canvas));
-
   /**
    * Draws something into screen
    */
   function render () {
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+    gl.viewport(0, 0, canvas.width, canvas.height);
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     for (let i in g_points) {
-      gl.uniform4f(u_FragColor, g_colors[i][0], g_colors[i][1], g_colors[i][2], g_colors[i][3]);
+      gl.uniform4fv(u_FragColor, new Float32Array(g_colors[i]));
       gl.vertexAttrib3f(a_Position, g_points[i][0], g_points[i][1], 0.0);
       gl.drawArrays(gl.POINTS, 0, 1);
     }
   }
 
+  root.addEventListener('resize', resize);
   resize(canvas);
 
   (function loop () {
