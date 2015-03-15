@@ -23,18 +23,20 @@
 
 <script id="vshader" type="x-shader/vertex-shader">
 attribute vec4 a_Position;
+uniform mat4 u_xformMatrix;
 void main ()
 {
-  gl_Position = a_Position;
+  gl_Position = u_xformMatrix * a_Position;
   gl_PointSize = 10.0;
 }
 </script>
 
 <script id="fshader" type="x-shader/fragment-shader">
 precision mediump float;
+uniform vec4 u_FragColor;
 void main ()
 {
-  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  gl_FragColor = u_FragColor;
 }
 
 </script>
