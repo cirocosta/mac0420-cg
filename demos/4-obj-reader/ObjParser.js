@@ -11,44 +11,45 @@
     return val.split('/').map(to_float);
   };
 
-  // TODO: improve this .
-
-  // this is actually very expensive (doing this
-  // kind of match). We should actually take a
-  // better approach of applying the regex match
-  // after the first_letter lookup and then get
-  // the match.
-  var REGEXES = {
-    vertices: /^v\s(-?\d+\.\d+)\s(-?\d+\.\d+)\s(-?\d+\.\d+)?$/,
-    comments: /^#(.*)?/,
-    vertices_normals: /^vn\s(-?\d+\.\d+)\s(-?\d+\.\d+)\s(-?\d+\.\d+)$/,
-    faces: /^f\s(\d+)\s(\d+)\s(\d+)\s(\d+)$/,
-    faces2: /^f(\s\d+\/\d+)(\s\d+\/\d+)(\s\d+\/\d+)(\s\d+\/\d+)?$/,
-    faces3: /^f(\s\d+\/\d+?\/\d+)(\s\d+\/\d+?\/\d+)(\s\d+\/\d+?\/\d+)(\s\d+\/\d+?\/\d+)?$/,
-    faces4: /^f(\s\d+\/(\d+)?\/\d+)(\s\d+\/(\d+)?\/\d+)(\s\d+\/(\d+)?\/\d+)(\s\d+\/(\d+)?\/\d+)?$/,
-  };
-
   function parse (text) {
     var result = {vertices: [], comments: [], vertices_normals: [],
-      faces: [], faces2: [], faces3: [], faces4: []};
+      faces: []};
 
     text.split('\n').forEach(function (line) {
-      for (var reg in REGEXES) {
-        var match = line.match(REGEXES[reg]);
+      var match = line.match(/^(v|#|vn|vt|f)\s+/);
 
-        if (!match)
-          continue;
+      if (!match)
+        return;
 
-        switch (reg) {
-          case 'faces2':
-          case 'faces3':
-          case 'faces4':
-            result[reg].push(match.slice(1).filter(non_null).map(slashed_to_array));
-            break;
-          default:
-            result[reg].push(match.slice(1).map(to_float));
+      switch (match[1]) {
+        case 'v':
+        result.vertices.push(line.split(' ').slice(1).map(to_float));
+        break;
+
+        case 'vn':
+        result.vertices_normals.push(line.split(' ').slice(1).map(to_float));
+        break;
+
+        // every face is made up of: (vertex, [,
+        // texture, normal]), possible being
+        // made up of a triangle (3 vertices) or
+        // a quad (4 vertices) - actually, a
+        // face can contain any finite number of
+        // faces.
+        case 'f':
+        var faces = line.split(' ').slice(1);
+        if (faces.length === 3) {
+          result.faces.push(faces);
+        } else if (faces.length === 4) { // break a quad into triangles
+          result.faces.push([faces[0], faces[1], faces[2]]);
+          result.faces.push([faces[2], faces[3], faces[0]]);
+        } else {
+          throw new Error('can\'t deal with ' + faces.length + 'd faces');
         }
+        break;
 
+        case '#':
+        case 'vt':
         break;
       }
     });
@@ -56,7 +57,21 @@
     return result;
   }
 
+  function process_vertices (parsed_obj) {
+    // var indices = [];
+    var vertices = [];
+
+    parsed_obj.faces.forEach(function (face) {
+      face.forEach(function (face_v) {
+        vertices.push(parsed_obj.vertices[face_v-1]);
+      });
+    });
+
+    return vertices;
+  }
+
   root.ObjParser = {
-    parse: parse
+    parse: parse,
+    process_vertices: process_vertices
   };
 })(window);
