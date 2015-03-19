@@ -28,11 +28,14 @@
       return ctx;
     },
 
-    genResizeFun: (canvas) => (ev) => {
+    genResizeFun: (canvas, gl) => (ev) => {
       let {clientWidth, clientHeight} = canvas;
 
-      if (canvas.width !== clientWidth || canvas.height !== clientHeight)
-        (canvas.width = clientWidth, canvas.height = clientHeight);
+      if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
+        canvas.width = clientWidth;
+        canvas.height = clientHeight;
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
     },
 
     /**

@@ -18,10 +18,7 @@
   let canvas = document.querySelector('canvas');
   let gl = WebGLUtils.setupWebGL(canvas);
 
-  if (!gl)
-    throw new Error('Couldn\'t retrieve webgl context.');
-
-  let resize = WebGLUtils.genResizeFun(canvas);
+  const resize = WebGLUtils.genResizeFun(canvas, gl);
 
   // per-vertex operations. This one will pass
   // gl_Position and gl_PointSize to the fshader
