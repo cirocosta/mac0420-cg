@@ -38,6 +38,46 @@
       }
     },
 
+    _loadTexture (gl, texture, u_Sampler, image) {
+      // Flip the image's y axis so that it
+      // matches webgl's coordinate system.
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+      // Enable texture unit0
+      gl.activeTexture(gl.TEXTURE0);
+      // Bind the texture object to the target
+      // (we're specifying the nature of the
+      // texture itself, not the nature of what is
+      // going to be attached to)
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+
+      // Set the texture parameters: tells to
+      // opengl how the image will be processed
+      // when the texture image is mapped to
+      // shapes.
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      // Set the texture image
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+
+      // Set the texture unit 0 to the sampler
+      gl.uniform1i(u_Sampler, 0);
+      // gl.clear(gl.COLOR_BUFFER_BIT);
+      // gl.drawArrays(gl.TRIANGLE_STRIP, 0, n_vertices);
+    },
+
+    initTextures (gl, u_Sampler, url) {
+      let image = new Image();
+      let texture = gl.createTexture();
+
+      if (!texture)
+        throw new Error('Couldnt create the texture.');
+      if (!image)
+        throw new Error('Couldnt create image');
+
+      image.onload =
+        this._loadTexture.bind(null, gl, texture, u_Sampler, image);
+      image.src = url;
+    },
+
     /**
      * Prepares the WebGL context.
      * @param  {HTMLElement} canvas

@@ -39,15 +39,9 @@
     const OFFSET_QUAD = 0;
 
     const vertexBuffer = gl.createBuffer();
-    const pointSizeBuffer = gl.createBuffer();
-    const colorBuffer = gl.createBuffer();
 
-    if (!colorBuffer)
-      throw new Error('Failed to create colorBuffer');
     if (!vertexBuffer)
-      throw new Error('Failed to create vertexBuffer');
-    if (!pointSizeBuffer)
-      throw new Error('Failed to create pointSizeBuffer');
+      throw new Error('Failed to create colorBuffer');
 
     // bindings for a_Position
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
@@ -57,15 +51,11 @@
     gl.enableVertexAttribArray(locations.a_Position);
 
     // a_PointSize
-    gl.bindBuffer(gl.ARRAY_BUFFER, pointSizeBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
     gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false,
                            STRIDE, OFFSET_POINT);
     gl.enableVertexAttribArray(locations.a_PointSize);
 
     // a_Color
-    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
     gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
                            STRIDE, OFFSET_COLOR);
     gl.enableVertexAttribArray(locations.a_Color);
