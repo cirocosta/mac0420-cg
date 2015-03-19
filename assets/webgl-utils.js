@@ -99,8 +99,16 @@
       return program;
     },
 
-    getAttribs (gl, ...names) {
-      return names.map((name) => {
+    /**
+     * Get attribute/uniform location from
+     * shaders considering the consistent
+     * notation of a_, u_, v_
+     * @param  {WebGLContext} gl
+     * @param  {Array} names
+     * @return {Array}
+     */
+    getLocations (gl, names) {
+      return names.reduce((mem, name) => {
         let location;
 
         if (name.startsWith('a_'))
@@ -113,8 +121,10 @@
         if (!~location)
           throw new Error('Failed to retrieve location of ' + name);
 
-        return location;
-      });
+        mem[name] = location;
+
+        return mem;
+      }, {});
     },
 
     initFromSrc (gl, vsrc, fsrc) {
@@ -132,17 +142,7 @@
     },
 
     initFromElems (gl, vElem, fElem) {
-      let v = this._createVertShader(gl, vElem.text, gl.VERTEX_SHADER);
-      let f = this._createFragShader(gl, fElem.text, gl.FRAGMENT_SHADER);
-      let program = this._createProgram(gl, v, f);
-
-      gl.useProgram(program);
-      gl.program = program;
-
-      if (!program)
-        throw new Error('Failed to initialize shaders.');
-
-      return program;
+      return this.initFromSrc(gl, vElem.text, fElem.text);
     },
 
     initFromUrl () {

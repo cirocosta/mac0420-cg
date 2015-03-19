@@ -7,7 +7,7 @@
   let angle = 30.0;
   let t_matrix;
 
-  const VERTEX_SIZE = 3;
+  const QUAD_VERTEX_SIZE = 3;
   const resize = WebGLUtils.genResizeFun(canvas, gl);
 
   Shaders.initFromElems(gl, document.getElementById('vshader'),
@@ -24,49 +24,51 @@
    * 4. assign the buffer to an attribute variable
    * 5. enable the assignment
    */
-  function initVertexBuffers (gl, a_Position, a_PointSize) {
+  function initVertexBuffers (gl, locations) {
     const VERTICES = new Float32Array([
-      //    x ,   y ,  z, PointSize
-          -0.5, 0.5 , .0, 20.0,
-          -0.5, -0.5, .0, 30.0,
-           0.5, 0.5 , .0, 40.0,
-           0.5, -0.5, .0, 50.0,
+      //    x ,   y ,  z, PointSize , R, G, B
+          -0.5, 0.5 , .0, 20.0, 1.0, 0.0, 0.0,
+          -0.5, -0.5, .0, 30.0, 0.0, 1.0, 0.0,
+           0.5, 0.5 , .0, 40.0, 0.0, 0.0, 1.0,
+           0.5, -0.5, .0, 50.0, 1.0, 1.0, 1.0,
     ]);
     const FSIZE = VERTICES.BYTES_PER_ELEMENT;
+    const STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 1 + 3);
+    const OFFSET_POINT = FSIZE * QUAD_VERTEX_SIZE;
+    const OFFSET_COLOR = FSIZE * (QUAD_VERTEX_SIZE + 1);
+    const OFFSET_QUAD = 0;
 
-    let vertexBuffer = gl.createBuffer();
-    let pointSizeBuffer = gl.createBuffer();
+    const vertexBuffer = gl.createBuffer();
+    const pointSizeBuffer = gl.createBuffer();
+    const colorBuffer = gl.createBuffer();
+
+    if (!colorBuffer)
+      throw new Error('Failed to create colorBuffer');
     if (!vertexBuffer)
-      throw new Error('Failed to create buffer');
+      throw new Error('Failed to create vertexBuffer');
     if (!pointSizeBuffer)
-      throw new Error('Failed to create buffer');
+      throw new Error('Failed to create pointSizeBuffer');
 
-    // binding to a target tells webgl the type of
-    // data that the buffer contains.
+    // bindings for a_Position
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+    gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false,
+                           STRIDE, OFFSET_QUAD);
+    gl.enableVertexAttribArray(locations.a_Position);
 
-    // assign the buffer object to a_Position
-    // variable. It assigns an array of values to
-    // an attribute values. Although we don't
-    // explicity pass the buffer object, this will
-    // assign implicitly the buffer object bound
-    // to gl.ARRAY_BUFFER.
-    // Passing VERTEX_SIZE + 1 as we have vertex
-    // info + 1 of PointSize.
-    // (index, size, type, normalized, stride, offset)
-    gl.vertexAttribPointer(a_Position, VERTEX_SIZE, gl.FLOAT, false,
-                           FSIZE * (VERTEX_SIZE + 1), 0);
-    gl.enableVertexAttribArray(a_Position);
-
-    // repeat the procedure to pointSizeBuffer
+    // a_PointSize
     gl.bindBuffer(gl.ARRAY_BUFFER, pointSizeBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+    gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false,
+                           STRIDE, OFFSET_POINT);
+    gl.enableVertexAttribArray(locations.a_PointSize);
 
-    gl.vertexAttribPointer(a_PointSize, 1, gl.FLOAT, false,
-                           FSIZE * (VERTEX_SIZE + 1), FSIZE * VERTEX_SIZE);
-    // enable the assignment to a_Position
-    gl.enableVertexAttribArray(a_PointSize);
+    // a_Color
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+    gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
+                           STRIDE, OFFSET_COLOR);
+    gl.enableVertexAttribArray(locations.a_Color);
 
     // now that is enabled we CAN'T use
     // gl.vertexAttrib to assign data to
@@ -76,12 +78,11 @@
     return 4;
   }
 
-  let [a_Position, a_PointSize, u_FragColor, u_xformMatrix] =
-      Shaders.getAttribs(gl, 'a_Position', 'a_PointSize', 'u_FragColor', 'u_xformMatrix');
-  const N_VERTICES = initVertexBuffers(gl, a_Position, a_PointSize);
+  const LOCATIONS = Shaders.getLocations(gl,
+    ['a_Position', 'a_PointSize', 'a_Color', 'u_xformMatrix']);
+  const N_VERTICES = initVertexBuffers(gl, LOCATIONS);
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.uniform4fv(u_FragColor, new Float32Array([1.0,0.0,0.0,1.0]));
 
   function render () {
     angle += 1;
@@ -96,7 +97,7 @@
     MV.mat4.transpose(t_matrix, t_matrix);
 
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniformMatrix4fv(u_xformMatrix, false, t_matrix);
+    gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, t_matrix);
 
     // N_VERTICES tells how many times the vertex
     // shader needs to be executed for drawing
