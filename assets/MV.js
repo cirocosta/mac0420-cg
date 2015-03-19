@@ -1,3 +1,17 @@
+/**
+ * PS.: a few functions (like multiply) were
+ * taken from glMatrix (http://glmatrix.net/).
+ *
+ * As i'd like to implement most of the things
+ * my decision was to just grab the most basic
+ * from it (like multiplication and transpose
+ * operations).
+ *
+ * Note that in a production scenario glMatrix
+ * is much better than this (it's optimized for
+ * webgl and contains much more tests).
+ */
+
 (function (root) {
   'use strict';
 
@@ -7,9 +21,12 @@
   /**
    * GLSL-a-like vector constructors.
    */
-  const vec2 = (a1=.0,a2=.0)=> Array.from(arguments);
-  const vec3 = (a1=.0,a2=.0,a3=.0)=> Array.from(arguments);
-  const vec4 = (a1=.0,a2=.0,a3=.0,a4=.0)=> Array.from(arguments);
+  const vec2 = (a1=.0,a2=.0)=>
+    new Float32Array(Array.from(arguments));
+  const vec3 = (a1=.0,a2=.0,a3=.0)=>
+    new Float32Array(Array.from(arguments));
+  const vec4 = (a1=.0,a2=.0,a3=.0,a4=.0)=>
+    new Float32Array(Array.from(arguments));
 
   /**
    * Make a nested array flat.
@@ -45,12 +62,16 @@
   const bisect = (u, v, s) =>
     u.map((val, i) => (s*val + (1.0-s) * v[i]));
 
+  const _generate = (d) => new Float32Array(d*d);
+
   const mat4 = {
+    scale: _scale,
+    rotate: _rotate,
+    translate: _translate,
+    transpose: _transpose,
     multiply: _multiply.bind(null, 4),
-    scale: _scale.bind(null, 4),
-    rotate: _rotate.bind(null, 4),
-    translate: _translate.bind(null, 4),
-    identity: _identity.bind(null, 4)
+    identity: _identity.bind(null, 4),
+    generate: _generate.bind(null, 4),
   };
 
   /**
@@ -65,10 +86,7 @@
    * 0 0 z 0
    * 0 0 0 1
    */
-  function _scale (d, m, x=1, y=1, z=1) {
-    if (d !== 4)
-      throw new Error('allowed only for 4d');
-
+  function _scale (m, x=1., y=1., z=1.) {
     let scale_matrix = [
       x, 0., 0., 0.,
       0., y, 0., 0.,
@@ -76,7 +94,49 @@
       0., 0., 0., 1.
     ];
 
-    return mat4.multiply(m, scale);
+    return mat4.multiply(scale_matrix, m);
+  }
+
+  function _transpose (m, a) {
+    // If we are transposing ourselves we can skip
+    // a few steps but have to cache some values
+    if (m === a) {
+        let a01 = a[1], a02 = a[2], a03 = a[3],
+            a12 = a[6], a13 = a[7],
+            a23 = a[11];
+
+        m[1] = a[4];
+        m[2] = a[8];
+        m[3] = a[12];
+        m[4] = a01;
+        m[6] = a[9];
+        m[7] = a[13];
+        m[8] = a02;
+        m[9] = a12;
+        m[11] = a[14];
+        m[12] = a03;
+        m[13] = a13;
+        m[14] = a23;
+    } else {
+        m[0] = a[0];
+        m[1] = a[4];
+        m[2] = a[8];
+        m[3] = a[12];
+        m[4] = a[1];
+        m[5] = a[5];
+        m[6] = a[9];
+        m[7] = a[13];
+        m[8] = a[2];
+        m[9] = a[6];
+        m[10] = a[10];
+        m[11] = a[14];
+        m[12] = a[3];
+        m[13] = a[7];
+        m[14] = a[11];
+        m[15] = a[15];
+    }
+
+    return m;
   }
 
   /**
@@ -101,10 +161,7 @@
    * "Any orientation can be achieved by composing
    * three elemental rotations"
    */
-  function _rotate (d, m, radian, axis) {
-    if (d !== 4)
-      throw new Error('rotation only for 4x4 matrices');
-
+  function _rotate (m, radian, axis) {
     let rotate_matrix;
     let cos = Math.cos(radian);
     let sin = Math.sin(radian);
@@ -129,7 +186,7 @@
       case 'z':
         rotate_matrix = [
           cos, -sin, 0., 0.,
-          sin, cos, -sin, 0.,
+          sin, cos, 0., 0.,
           0., 0., 1., 0.,
           0., 0., 0., 1.,
         ];
@@ -138,7 +195,7 @@
         throw new Error('invalid axis. (x|y|z)');
     }
 
-    return mat4.multiply(m, rotate_matrix);
+    return mat4.multiply(rotate_matrix, m);
   }
 
   /**
@@ -156,10 +213,7 @@
    * @param  {[type]} m [description]
    * @return {[type]}   [description]
    */
-  function _translate (d, m, tx=0., ty=0., tz=0.) {
-    if (d !== 5)
-      throw new Error('allowed only for 4d');
-
+  function _translate (m, tx=0., ty=0., tz=0.) {
     let translate_matrix = [
       1., .0, .0, tx,
       .0, 1., .0, ty,
@@ -167,7 +221,7 @@
       .0, .0, .0, 1.,
     ];
 
-    return mat4.multiply(m, translate_matrix);
+    return mat4.multiply(translate_matrix, m);
   }
 
   /**
@@ -178,7 +232,9 @@
    * @param  {mat[d]} b
    * @return {mat[d]}
    */
-  function _multiply (d, m, a, b) {
+  function _multiply (d, b, a) {
+    let m = _generate(d);
+
     switch (d) {
       case 2:
         m[0] = a[0] * b[0] + a[1] * b[2];
@@ -207,7 +263,8 @@
             a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
             a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
 
-        let b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+        let b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+
         m[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
         m[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
         m[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;

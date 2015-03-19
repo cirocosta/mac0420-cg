@@ -49,7 +49,11 @@
       if (!window.WebGLRenderingContext)
         throw new Error('No WebGLRenderingContext in window.');
 
-      return this._create3DContext(canvas, opt_attribs);
+      let ctx = this._create3DContext(canvas, opt_attribs);
+      if (!ctx)
+        throw new Error('Couldn\'t retrieve webgl context.');
+
+      return ctx;
     },
   };
 
@@ -118,6 +122,9 @@
       gl.useProgram(program);
       gl.program = program;
 
+      if (!program)
+        throw new Error('Failed to initialize shaders.');
+
       return program;
     },
 
@@ -128,6 +135,9 @@
 
       gl.useProgram(program);
       gl.program = program;
+
+      if (!program)
+        throw new Error('Failed to initialize shaders.');
 
       return program;
     },

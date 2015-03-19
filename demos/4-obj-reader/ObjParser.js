@@ -1,22 +1,21 @@
 (function (root) {
-  var non_null = function (val) {
-    return val != null;
-  };
+  'use strict';
 
-  var to_float = function (val) {
-    return val == '' ? undefined : parseFloat(val);
-  };
+  const non_null = (val) => val != null;
+  const to_float = (val) => val == '' ? undefined : parseFloat(val);
+  const slashed_to_array = (val) => val.split('/').map(to_float);
 
-  var slashed_to_array = function (val) {
-    return val.split('/').map(to_float);
-  };
-
+  /**
+   * Parses .obj and returns a representation of
+   * that.
+   * @param  {string} text .obj source
+   * @return {Object}
+   */
   function parse (text) {
-    var result = {vertices: [], comments: [], vertices_normals: [],
-      faces: []};
+    let result = {vertices: [], comments: [], vertices_normals: [], faces: []};
 
-    text.split('\n').forEach(function (line) {
-      var match = line.match(/^(v|#|vn|vt|f)\s+/);
+    text.split('\n').forEach((line) => {
+      let match = line.match(/^(v|#|vn|vt|f)\s+/);
 
       if (!match)
         return;
@@ -59,10 +58,10 @@
 
   function process_vertices (parsed_obj) {
     // var indices = [];
-    var vertices = [];
+    let vertices = [];
 
-    parsed_obj.faces.forEach(function (face) {
-      face.forEach(function (face_v) {
+    parsed_obj.faces.forEach((face) => {
+      face.forEach((face_v) => {
         vertices.push(parsed_obj.vertices[face_v-1]);
       });
     });
@@ -71,7 +70,7 @@
   }
 
   root.ObjParser = {
-    parse: parse,
-    process_vertices: process_vertices
+    parse,
+    process_vertices,
   };
 })(window);

@@ -7,15 +7,10 @@
 
   let gl = WebGLUtils.setupWebGL(canvas);
   let angle = 30.0;
+  let t_matrix;
 
-  if (!gl)
-    throw new Error('Couldn\'t retrieve webgl context.');
-
-  if (!Shaders.initFromElems(gl,
-                             document.getElementById('vshader'),
-                             document.getElementById('fshader'))) {
-    throw new Error('Failed to initialize shaders');
-  }
+  Shaders.initFromElems(gl, document.getElementById('vshader'),
+                            document.getElementById('fshader'))
 
   /**
    * A benefit that comes from using buffers is
@@ -67,36 +62,29 @@
       Shaders.getAttribs(gl, 'a_Position', 'u_FragColor', 'u_xformMatrix');
   const N_VERTICES = initVertexBuffers(gl);
 
-  let radian = Math.PI * angle/180.0;
-  let cosB = Math.cos(radian);
-  let sinB = Math.sin(radian);
-  let xformMatrix = new Float32Array([
-    cosB, sinB, .0, .0,
-    -sinB, cosB, .0, .0,
-    .0, .0, 1., .0,
-    .0, .0, .0, 1.,
-  ]);
-
-  console.log(xformMatrix);
-
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.uniform4fv(u_FragColor, new Float32Array([1.0,0.0,0.0,1.0]));
 
   function render () {
+    angle += 1;
+
+    // we always need to finish the transformation
+    // matrix by transposing it as opengl operater
+    // on column-major order.
+    t_matrix = MV.mat4.identity();
+    // t_matrix = MV.mat4.scale(t_matrix, .3);
+    t_matrix = MV.mat4.rotate(t_matrix, MV.deg_to_rad(angle), 'z');
+    // t_matrix = MV.mat4.translate(t_matrix, .0, .3, .0);
+    MV.mat4.transpose(t_matrix, t_matrix);
+
     gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix);
+    gl.uniformMatrix4fv(u_xformMatrix, false, t_matrix);
 
     // N_VERTICES tells how many times the vertex
     // shader needs to be executed for drawing
     // something.
-    gl.uniform4fv(u_FragColor, new Float32Array([1.0,0.0,0.0,1.0]));
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, N_VERTICES);
-
-    // gl.uniform4fv(u_FragColor, new Float32Array([0.0,1.0,0.0,1.0]));
-    // gl.drawArrays(gl.LINE_STRIP, 0, N_VERTICES);
-
-    // gl.uniform4fv(u_FragColor, new Float32Array([1.0,1.0,1.0,1.0]));
-    // gl.drawArrays(gl.POINTS, 0, N_VERTICES);
   }
 
   resize();

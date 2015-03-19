@@ -5,14 +5,14 @@
     <title>Assets tests</title>
     <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.17.1.css">
     <script src="http://code.jquery.com/qunit/qunit-1.17.1.js"></script>
-    <script src="ObjParser.js"></script>
+    <script type="application/javascript;version=1.7" src="ObjParser.js"></script>
   </head>
 
   <body>
     <div id="qunit"></div>
   </body>
 
-<script>
+<script type="application/javascript;version=1.7">
 var rounder = function (num) {
   return Math.round(num * Math.pow(10,3))/Math.pow(10,3);
 };
@@ -89,6 +89,8 @@ QUnit.test("::parse", function (assert) {
   assert.deepEqual(ObjParser.parse(OBJ_1).vertices,
             expected,
             'all vertex lines should be parsed');
+
+  console.log(ObjParser.parse(OBJ_1));
 
   // OBJ_2
 
