@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas></canvas>
+
+<script id="vshader" type="x-shader/vertex-shader">
+attribute vec4 a_Position;
+attribute vec4 a_Color;
+varying vec4 v_Color;
+uniform mat4 u_xformMatrix;
+uniform mat4 u_viewMatrix;
+
+void main ()
+{
+  gl_Position = u_viewMatrix * a_Position;
+  v_Color = a_Color;
+}
+</script>
+
+<script id="fshader" type="x-shader/fragment-shader">
+precision mediump float;
+varying vec4 v_Color;
+void main ()
+{
+  gl_FragColor = v_Color;
+}
+
+</script>
+
+  <script src="../../assets/webgl-debug.js"></script>
+  <script src="../../assets/cuon.js"></script>
+  <script type="application/javascript;version=1.7" src="../../assets/MV.js"></script>
+  <script type="application/javascript;version=1.7" src="../../assets/webgl-utils.js"></script>
+  <script type="application/javascript;version=1.7" src="index.js"></script>
+</body>
+</html>
