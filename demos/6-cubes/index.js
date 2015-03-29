@@ -2,22 +2,32 @@
   'use strict';
 
   const canvas = document.querySelector('canvas');
-
   let gl = WebGLUtils.setupWebGL(canvas);
-  let angle = 30.0;
-  let eye_x = .0, eye_y = .0, eye_z = .2;
-  let near = .0, far = 2.0;
-
-  const QUAD_VERTEX_SIZE = 3;
-  const N_VERTICES = 3 * 3;
   const resize = WebGLUtils.genResizeFun(canvas, gl);
 
   Shaders.initFromElems(gl, document.getElementById('vshader'),
                             document.getElementById('fshader'))
 
-  let modelMatrix = MV.mat4.identity();;
-  let projMatrix = new Matrix4();
-  let viewMatrix = new Matrix4();
+  let mvpMatrix = new Matrix4();
+                        // fov, aspect, near, far
+  mvpMatrix.setPerspective( 30,     1,     1,  100);
+  mvpMatrix.lookAt(3, 3, 7,  // eye
+                   0, 0, 0,  // at
+                   0, 1, 0); // up
+
+  const LOCATIONS = Shaders.getLocations(gl,
+    ['a_Position', 'a_Color', 'u_MvpMatrix']);
+  const N_VERTICES = initVertexBuffers(gl, LOCATIONS);
+
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  gl.enable(gl.DEPTH_TEST);
+  gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
+  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  // drawElements will draw from the info that a
+  // buffer with gl.ELEMENT_ARRAY_BUFFER as a
+  // target.
+                  // mode, count, type, offset
+  gl.drawElements(gl.TRIANGLES, N_VERTICES, gl.UNSIGNED_BYTE, 0);
 
   /**
    * A benefit that comes from using buffers is
@@ -31,113 +41,61 @@
    * 5. enable the assignment
    */
   function initVertexBuffers (gl, locations) {
+    // 8 vertices that denotes what a cube is.
     const VERTICES = new Float32Array([
-      //    x ,   y ,  z,       R,   G,   B
-           0.0, 0.5 ,  -0.4,  1.0, 0.0, 0.0,
-          -0.5, -0.5,  -0.4,  0.0, 1.0, 0.0,
-           0.5, -0.5,  -0.4,  0.0, 1.0, 0.0,
-
-          -0.5, 0.5,  -0.2,  1.0, 0.0, 1.0,
-           0.0, -0.5 ,  -0.2,  0.0, 0.0, 1.0,
-          0.5, 0.5 ,  -0.2,  0.0, 1.0, 0.0,
-
-          0.0, 0.5  ,  -0.0,  0.0, 1.0, 0.0,
-          -0.5, -0.5,  -0.0,  1.0, 0.0, 1.0,
-          0.5, -0.5 , -0.0,  0.0, 0.0, 1.0,
+       1.0,  1.0,  1.0,     1.0,  1.0,  1.0,  // v0 White
+      -1.0,  1.0,  1.0,     1.0,  0.0,  1.0,  // v1 Magenta
+      -1.0, -1.0,  1.0,     1.0,  0.0,  0.0,  // v2 Red
+       1.0, -1.0,  1.0,     1.0,  1.0,  0.0,  // v3 Yellow
+       1.0, -1.0, -1.0,     0.0,  1.0,  0.0,  // v4 Green
+       1.0,  1.0, -1.0,     0.0,  1.0,  1.0,  // v5 Cyan
+      -1.0,  1.0, -1.0,     0.0,  0.0,  1.0,  // v6 Blue
+      -1.0, -1.0, -1.0,     0.0,  0.0,  0.0   // v7 Black
     ]);
-    const FSIZE = VERTICES.BYTES_PER_ELEMENT;
-    const STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 3);
-    const OFFSET_COLOR = FSIZE * QUAD_VERTEX_SIZE;
-    const OFFSET_QUAD = 0;
 
-    const vertexBuffer = gl.createBuffer();
+    // indices to be used internally for creating
+    // the triangles that represents the cube
+    // (each face contains 6 vertices from 3
+    // triangles).
+    const INDICES = new Uint8Array([
+      0, 1, 2,   0, 2, 3,    // front
+      0, 3, 4,   0, 4, 5,    // right
+      0, 5, 6,   0, 6, 1,    // up
+      1, 6, 7,   1, 7, 2,    // left
+      7, 4, 3,   7, 3, 2,    // down
+      4, 7, 6,   4, 6, 5     // back
+    ]);
 
-    if (!vertexBuffer)
-      throw new Error('Failed to create colorBuffer');
 
-    // bindings for a_Position
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    const vertexAndColorBuffer = gl.createBuffer();
+    const indexBuffer = gl.createBuffer();
+    if (!(vertexAndColorBuffer && indexBuffer))
+      throw new Error('failed to create buffer');
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexAndColorBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
 
+    // getting the float size.
+    const TRIANGLE_VSIZE = 3;
+    const COLOR_VSIZE = 3;
+    const FSIZE = VERTICES.BYTES_PER_ELEMENT;
+    const STRIDE = FSIZE * (TRIANGLE_VSIZE + COLOR_VSIZE);
+    const OFFSET_COLOR = FSIZE * TRIANGLE_VSIZE;
+    const OFFSET_QUAD = 0;
+
     // a_Position
-    gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false,
+    gl.vertexAttribPointer(locations.a_Position, TRIANGLE_VSIZE, gl.FLOAT, false,
                            STRIDE, OFFSET_QUAD);
     gl.enableVertexAttribArray(locations.a_Position);
 
     // a_Color
-    gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
+    gl.vertexAttribPointer(locations.a_Color, COLOR_VSIZE, gl.FLOAT, false,
                            STRIDE, OFFSET_COLOR);
     gl.enableVertexAttribArray(locations.a_Color);
+
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);
+
+    return INDICES.length;
   }
-
-  const LOCATIONS = Shaders.getLocations(gl,
-    ['a_Position', 'a_Color', 'u_modelMatrix', 'u_viewMatrix', 'u_projMatrix']);
-  initVertexBuffers(gl, LOCATIONS);
-
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
-  gl.enable(gl.DEPTH_TEST);
-
-  function render () {
-    // we always need to finish the transformation
-    // matrix by transposing it as opengl operater
-    // on column-major order.
-    viewMatrix.setLookAt(eye_x, eye_y, eye_z,   // eye points
-                         .0, .0, .0,            // at point
-                         .0, 1., .0);           // up vector
-
-    projMatrix.setOrtho(-1., 1.,      // left, right
-                        -1., 1.,      // bottom, top
-                        near, far); // near, far
-
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.uniformMatrix4fv(LOCATIONS.u_projMatrix, false, projMatrix.elements);
-    gl.uniformMatrix4fv(LOCATIONS.u_viewMatrix, false, viewMatrix.elements);
-    gl.uniformMatrix4fv(LOCATIONS.u_modelMatrix, false, modelMatrix);
-
-    // N_VERTICES tells how many times the vertex
-    // shader needs to be executed for drawing
-    // something.
-    gl.drawArrays(gl.TRIANGLES, 0, N_VERTICES);
-  }
-
-  resize();
-  root.addEventListener('resize', resize);
-  document.addEventListener('keydown', (ev) => {
-    console.log("eye (x,y,z)", eye_x, eye_y, eye_z);
-    console.log("near, far: ", near, far);
-
-    switch (ev.key) {
-      case 'ArrowRight':
-        near += .01;
-        break;
-      case 'ArrowLeft':
-        near -= .01;
-        break;
-      case 'ArrowUp':
-        far += .01;
-        break;
-      case 'ArrowDown':
-        far -= .01;
-        break;
-      case 'a':
-        eye_x -= .01;
-        break;
-      case 'd':
-        eye_x += .01;
-        break;
-      case 'w':
-        eye_z -= .01;
-        break;
-      case 's':
-        eye_z += .01;
-        break;
-      default:
-        return;
-    }
-  });
-
-  (function loop () {
-    root.requestAnimationFrame(loop);
-    render();
-  })();
 })(window, document);
