@@ -78,6 +78,20 @@
       image.src = url;
     },
 
+    initArrayBuffer (gl, data, num, type, attrib_location) {
+      if (arguments.length < 5)
+        throw new Error('initSimpleArrayBuffer requires all args');
+
+      const buffer = gl.createBuffer();
+      if (!buffer)
+        throw new Error('Error while creating buffer');
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+      gl.vertexAttribPointer(attrib_location, num, type, false, 0, 0);
+      gl.enableVertexAttribArray(attrib_location);
+    },
+
     /**
      * Prepares the WebGL context.
      * @param  {HTMLElement} canvas
