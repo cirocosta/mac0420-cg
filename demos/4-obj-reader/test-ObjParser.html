@@ -67,10 +67,10 @@ QUnit.test("::parse", function (assert) {
   // OBJ_1
 
   var lines = OBJ_1.split('\n');
-  // assert.ok(!ObjParser.parse(lines[0]).vertices.length,
-  //           'comment shouldn\'t produce vertices, etc');
-  // assert.ok(ObjParser.parse(lines[4]).vertices.length,
-  //           'vertex line should produce vertices');
+  assert.ok(!ObjParser.parse(lines[0]).vertices.length,
+            'comment shouldn\'t produce vertices, etc');
+  assert.ok(ObjParser.parse(lines[4]).vertices.length,
+            'vertex line should produce vertices');
   assert.deepEqual(ObjParser.parse(lines[4]).vertices,
             [[1.000, -1.000, -1.000]],
             'vertex line should be parsed correctly with 3 comps');
@@ -90,8 +90,6 @@ QUnit.test("::parse", function (assert) {
             expected,
             'all vertex lines should be parsed');
 
-  console.log(ObjParser.parse(OBJ_1));
-
   // OBJ_2
 
   lines = OBJ_2.split('\n');
@@ -99,8 +97,8 @@ QUnit.test("::parse", function (assert) {
             [[0.707 ,0.000, 0.707]],
             'vertices_normals line should be parsed correctly with 3 comps');
 
-  assert.deepEqual(ObjParser.parse('f 1 2 3 4').faces,
-                   [["1", "2", "3"], ["3", "4", "1"] ], 'faces');
+  assert.deepEqual(ObjParser.parse('f 1 2 3 4', true).faces,
+                   [["1", "2", "3"], ["3", "4", "1"] ], 'quad faces should correctly be converted to triangles');
   assert.deepEqual(ObjParser.parse('f 3/1 4/2 5/3').faces,
                    [['3/1', '4/2', '5/3']], 'faces2');
   assert.deepEqual(ObjParser.parse('f 6/4/1 3/5/3 7/6/5').faces,
@@ -110,15 +108,9 @@ QUnit.test("::parse", function (assert) {
       [['1//2', '3//4', '5//6']],
       'faces4 without texture');
   assert.deepEqual(
-      ObjParser.parse('f 1//2 3//4 5//6 7//8').faces,
+      ObjParser.parse('f 1//2 3//4 5//6 7//8', true).faces,
       [["1//2", "3//4", "5//6"], ["5//6", "7//8", "1//2"]],
       'faces4 quad without texture');
-});
-
-QUnit.test("::process_vertices", function (assert) {
-  var obj = ObjParser.parse(OBJ_1);
-  var vertices = ObjParser.process_vertices(obj);
-  assert.deepEqual(vertices, [1], 'vertices');
 });
 </script>
 </html>

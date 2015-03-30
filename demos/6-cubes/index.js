@@ -16,7 +16,12 @@
                    0, 1, 0); // up
 
   const LOCATIONS = Shaders.getLocations(gl,
-    ['a_Position', 'a_Color', 'u_MvpMatrix']);
+    ['a_Position', 'a_Color', 'a_Normal', 'u_LightColor', 'u_LightDirection',
+     'u_MvpMatrix']);
+
+  gl.uniform3f(LOCATIONS.u_LightColor, 1.0, 1.0, 1.0);
+  gl.uniform3fv(LOCATIONS.u_LightDirection,
+                (new Vector3([0.5, 3.0, 4.0])).normalize().elements);
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
@@ -44,6 +49,15 @@
       0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0   // v4-v7-v6-v5 back
     ]);
 
+    const NORMALS = new Float32Array([    // Normal
+      0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,  // v0-v1-v2-v3 front
+      1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,  // v0-v3-v4-v5 right
+      0.0, 1.0, 0.0,   0.0, 1.0, 0.0,   0.0, 1.0, 0.0,   0.0, 1.0, 0.0,  // v0-v5-v6-v1 up
+     -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  -1.0, 0.0, 0.0,  // v1-v6-v7-v2 left
+      0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,   0.0,-1.0, 0.0,  // v7-v4-v3-v2 down
+      0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0   // v4-v7-v6-v5 back
+    ]);
+
     const INDICES = new Uint8Array([       // Indices of the vertices
        0, 1, 2,   0, 2, 3,    // front
        4, 5, 6,   4, 6, 7,    // right
@@ -59,6 +73,8 @@
       throw new Error('Error while creating buffer');
 
     // Write the vertex coordinates and color to the buffer object
+    WebGLUtils.initArrayBuffer(gl, NORMALS, 3, gl.FLOAT,
+                               locations.a_Normal);
     WebGLUtils.initArrayBuffer(gl, VERTICES, 3, gl.FLOAT,
                                locations.a_Position);
     WebGLUtils.initArrayBuffer(gl, COLORS, 3, gl.FLOAT,
