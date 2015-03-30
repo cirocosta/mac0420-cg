@@ -12,7 +12,7 @@
   let normalMatrix = new Matrix4();
   let mvpMatrix = new Matrix4();
   modelMatrix.setTranslate(0.0, 1.0, 0.0);
-  modelMatrix.rotate(45.0, 0.0, 0.0, 1.0);
+  modelMatrix.rotate(90.0, 0.0, 0.0, 1.0);
 
   mvpMatrix.setPerspective( 30, 1, 1, 100);
   mvpMatrix.lookAt(-7., 2.5,6.0,  // eye
@@ -26,18 +26,18 @@
 
   const LOCATIONS = Shaders.getLocations(gl,
     ['a_Position', 'a_Color', 'a_Normal',
-     'u_NormalMatrix', 'u_MvpMatrix',
-     'u_LightColor', 'u_LightDirection', 'u_AmbientLight'
+     'u_NormalMatrix', 'u_MvpMatrix', 'u_ModelMatrix',
+     'u_LightColor', 'u_AmbientLight', 'u_LightPosition'
     ]);
 
 
   gl.uniform3f(LOCATIONS.u_LightColor, 1.0, 1.0, 1.0);
   gl.uniform3f(LOCATIONS.u_AmbientLight, 0.2, 0.2, 0.2);
-  gl.uniform3fv(LOCATIONS.u_LightDirection,
-                (new Vector3([0.5, 3.0, 4.0])).normalize().elements);
+  gl.uniform3f(LOCATIONS.u_LightPosition, 2.3, 4.0, 3.5);
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
+  gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, modelMatrix.elements);
   gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
   gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -55,12 +55,12 @@
     ]);
 
     const COLORS = new Float32Array([     // Colors
-      0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  0.4, 0.4, 1.0,  // v0-v1-v2-v3 front(blue)
-      0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  0.4, 1.0, 0.4,  // v0-v3-v4-v5 right(green)
-      1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  1.0, 0.4, 0.4,  // v0-v5-v6-v1 up(red)
-      1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  1.0, 1.0, 0.4,  // v1-v6-v7-v2 left
-      1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  1.0, 1.0, 1.0,  // v7-v4-v3-v2 down
-      0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0,  0.4, 1.0, 1.0   // v4-v7-v6-v5 back
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v0-v1-v2-v3 front(blue)
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v0-v3-v4-v5 right(green)
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v0-v5-v6-v1 up(red)
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v1-v6-v7-v2 left
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v7-v4-v3-v2 down
+      1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0   // v4-v7-v6-v5 back
     ]);
 
     const NORMALS = new Float32Array([    // Normal
