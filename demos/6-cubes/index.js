@@ -11,15 +11,17 @@
   let mvpMatrix = new Matrix4();
                         // fov, aspect, near, far
   mvpMatrix.setPerspective( 30,     1,     1,  100);
-  mvpMatrix.lookAt(3, 3, 7,  // eye
-                   0, 0, 0,  // at
-                   0, 1, 0); // up
+  mvpMatrix.lookAt(3., 3.,7.,  // eye
+                   0., 0., 0.,  // at
+                   0., 1., 0.); // up
 
   const LOCATIONS = Shaders.getLocations(gl,
-    ['a_Position', 'a_Color', 'a_Normal', 'u_LightColor', 'u_LightDirection',
+    ['a_Position', 'a_Color', 'a_Normal',
+     'u_LightColor', 'u_LightDirection', 'u_AmbientLight',
      'u_MvpMatrix']);
 
   gl.uniform3f(LOCATIONS.u_LightColor, 1.0, 1.0, 1.0);
+  gl.uniform3f(LOCATIONS.u_AmbientLight, 0.2, 0.2, 0.2);
   gl.uniform3fv(LOCATIONS.u_LightDirection,
                 (new Vector3([0.5, 3.0, 4.0])).normalize().elements);
 
