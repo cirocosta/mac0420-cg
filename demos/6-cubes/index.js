@@ -8,17 +8,28 @@
   Shaders.initFromElems(gl, document.getElementById('vshader'),
                             document.getElementById('fshader'))
 
+  let modelMatrix = new Matrix4();
+  let normalMatrix = new Matrix4();
   let mvpMatrix = new Matrix4();
-                        // fov, aspect, near, far
-  mvpMatrix.setPerspective( 30,     1,     1,  100);
-  mvpMatrix.lookAt(3., 3.,7.,  // eye
+  modelMatrix.setTranslate(0.0, 1.0, 0.0);
+  modelMatrix.rotate(45.0, 0.0, 0.0, 1.0);
+
+  mvpMatrix.setPerspective( 30, 1, 1, 100);
+  mvpMatrix.lookAt(-7., 2.5,6.0,  // eye
                    0., 0., 0.,  // at
                    0., 1., 0.); // up
+  mvpMatrix.multiply(modelMatrix);
+
+  normalMatrix.setInverseOf(modelMatrix);
+  normalMatrix.transpose();
+
 
   const LOCATIONS = Shaders.getLocations(gl,
     ['a_Position', 'a_Color', 'a_Normal',
-     'u_LightColor', 'u_LightDirection', 'u_AmbientLight',
-     'u_MvpMatrix']);
+     'u_NormalMatrix', 'u_MvpMatrix',
+     'u_LightColor', 'u_LightDirection', 'u_AmbientLight'
+    ]);
+
 
   gl.uniform3f(LOCATIONS.u_LightColor, 1.0, 1.0, 1.0);
   gl.uniform3f(LOCATIONS.u_AmbientLight, 0.2, 0.2, 0.2);
@@ -27,6 +38,7 @@
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
+  gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
   gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   // drawColorCube(gl, LOCATIONS);

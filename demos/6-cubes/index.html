@@ -37,6 +37,7 @@ attribute vec4 a_Position;
 attribute vec4 a_Color;
 attribute vec4 a_Normal;
 
+uniform mat4 u_NormalMatrix;
 uniform vec3 u_LightColor;
 uniform vec3 u_AmbientLight;
 uniform vec3 u_LightDirection; // world coordinate, normalized
@@ -48,7 +49,7 @@ void main ()
 {
   gl_Position = u_MvpMatrix * a_Position;
   // color = light_color * base_color_of_surface * <light_dir, normal>
-  vec3 normal = normalize(vec3(a_Normal));
+  vec3 normal = normalize(vec3(u_NormalMatrix * a_Normal));
   // using max() to filter those cases where is
   // headed to the backface of the surface (when
   // theta > 89)
