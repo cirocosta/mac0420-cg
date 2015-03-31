@@ -10,6 +10,13 @@
   const to_int_minus_1 = (val) => val == '' ? undefined : (parseInt(val)-1);
   const slashed_to_array = (val) => val.split('/').map(to_float);
 
+  const FACES_TYPES = {
+    FACE: 'FACE',
+    FACE_TEXTURE: 'FACE_TEXTURE',
+    FACE_TEXTURE_NORMALS: 'FACE_TEXTURE_NORMALS',
+    FACE_NORMALS: 'FACE_NORMALS'
+  };
+
   /**
    * Parses .obj and returns a representation of
    * that.
@@ -18,10 +25,10 @@
    * should include quad_to_triangle conversion.
    * @return {Object}
    */
-  function parse (text, convert_quads) {
+  function parse (text) {
     let result = {
       _new: true, vertices: [], comments: [], vertices_normals: [],
-      faces: []
+      faces: [], _facesType: null
     };
 
     text.split('\n').forEach((line) => {
@@ -42,19 +49,24 @@
         case 'f':
           let faces = line.split(' ').slice(1);
 
-          if (!convert_quads || faces.length === 3) {
-            result.faces.push(...faces.map(to_int_minus_1));
-            break;
+          if (!result._facesType) {
+            if (~faces[0].indexOf('//'))
+              result._facesType = FACES_TYPES.FACE_NORMALS;
+            else if (faces[0].match(/\d+\/\d+\/\d+/))
+              result._facesType = FACES_TYPES.FACE_TEXTURE_NORMALS;
+            else
+              result._facesType = FACES_TYPES.FACE;
           }
 
-          if (faces.length === 4) { // break a quad into triangles
-            faces = faces.map(to_int_minus_1);
-            result.faces.push(faces[0], faces[1], faces[2]);
-            result.faces.push(faces[2], faces[3], faces[0]);
-            break;
-          } else {
+          if (faces.length === 4)
+            faces = [faces[0], faces[1], faces[2], faces[2], faces[3], faces[0]];
+          else if (faces.length > 4)
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
+
+          if (result._facesType === FACES_TYPES.FACE) {
+            result.faces.push(...faces.map(to_int_minus_1));
           }
+
           break;
 
         case '#':
@@ -128,6 +140,7 @@
     parse,
     calculateNormals,
     getNormal,
+    FACES_TYPES,
 
     to_float,
     slashed_to_array,
