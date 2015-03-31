@@ -4,38 +4,27 @@
   const ObjParser = window.ObjParser;
   const ELEMS = {
     canvas: document.querySelector('canvas'),
-    filename: document.querySelector('#filename'),
-    fileinput: document.querySelector('#fileinput'),
+    fileinput: document.querySelector('.fileupload input'),
+    filebtn: document.querySelector('.fileupload button'),
+    filename: document.querySelector('.fileupload p'),
     vshader: document.getElementById('vshader'),
     fshader: document.getElementById('fshader')
   };
 
   let current_file, obj;
   let VERTICES, INDICES, NORMALS;
-  let gl = WebGLUtils.setupWebGL(ELEMS.canvas);
   let angle = 0.0;
+  const gl = WebGLUtils.setupWebGL(ELEMS.canvas);
 
   let modelMatrix = new Matrix4();
   let normalMatrix = new Matrix4();
   let mvpMatrix = new Matrix4();
   var viewProjMatrix = new Matrix4();
 
-  viewProjMatrix.setPerspective(30.0, 1, 0.1, 50.0);
-  viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
-                        0.0, 0.0, 0.0,     // at
-                        0.0, 1.0, 0.0);    // up
-
-  modelMatrix.setRotate(10.0, 1.0, 0.0, 0.0);
-  // modelMatrix.rotate(angle, 0.0, 1.0, 0.0);
-  // modelMatrix.rotate(angle, 0.0, 0.0, 1.0);
-
-  // Calculate the normal transformation matrix and pass it to u_NormalMatrix
-  // normalMatrix.setInverseOf(modelMatrix);
-  // normalMatrix.transpose();
-
-  // Calculate the model view project matrix and pass it to u_MvpMatrix
-  mvpMatrix.set(viewProjMatrix);
-  mvpMatrix.multiply(modelMatrix);
+  const resize = WebGLUtils.genResizeFun(ELEMS.canvas, gl, (w, h) => {
+    viewProjMatrix.setPerspective(30.0, w/h, 0.1, 50.0);
+    draw();
+  });
 
   Shaders.initFromElems(gl, ELEMS.vshader, ELEMS.fshader);
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -92,6 +81,24 @@
    * Draws the entire scene.
    */
   function draw () {
+    viewProjMatrix.setPerspective(30.0, ELEMS.canvas.width/ELEMS.canvas.height,
+                                  0.1, 50.0);
+    viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
+                          0.0, 0.0, 0.0,     // at
+                          0.0, 1.0, 0.0);    // up
+
+    modelMatrix.setRotate(0.0, 1.0, 0.0, 0.0);
+    // modelMatrix.rotate(angle, 0.0, 1.0, 0.0);
+    // modelMatrix.rotate(angle, 0.0, 0.0, 1.0);
+
+    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
+    // normalMatrix.setInverseOf(modelMatrix);
+    // normalMatrix.transpose();
+
+    // Calculate the model view project matrix and pass it to u_MvpMatrix
+    mvpMatrix.set(viewProjMatrix);
+    mvpMatrix.multiply(modelMatrix);
+
     gl.uniform3fv(LOCATIONS.u_LightColor, new Float32Array([1.0, 1.0, 1.0]));
     gl.uniform3fv(LOCATIONS.u_AmbientLight, new Float32Array([0.2, 0.2, 0.2]));
     gl.uniform3fv(LOCATIONS.u_LightPosition, new Float32Array([0.0, 500.0, 200.0]));
@@ -103,23 +110,29 @@
     obj && draw_obj(obj);
   }
 
-  function onFileSubmitted (ev) {
+  ELEMS.fileinput.addEventListener('change', (ev) => {
     let file = ev.target.files && ev.target.files[0];
     let reader = new FileReader();
 
     if (!file)
       console.error('Error while handling file.', file);
 
+    ELEMS.filename.hidden = false;
     ELEMS.filename.innerHTML = file.name;
     current_file = file;
 
     reader.onload = (ev) => {
       obj = ObjParser.parse(ev.target.result, true);
+      resize();
       draw();
     };
 
     reader.readAsText(file);
-  }
+  });
 
-  ELEMS.fileinput.addEventListener('change', onFileSubmitted);
+  window.addEventListener('resize', resize);
+
+  ELEMS.filebtn.addEventListener('click', (ev) => {
+    ELEMS.fileinput.click();
+  });
 })(window);

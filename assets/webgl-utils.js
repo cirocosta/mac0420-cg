@@ -28,13 +28,28 @@
       return ctx;
     },
 
-    genResizeFun: (canvas, gl) => (ev) => {
+    /**
+     * Generates a resize function that keeps
+     * canvas in sync with window resizing.
+     *
+     * Note: perspective matrix must be handled
+     *       elsewhere.
+     *
+     * @param  {HTMLElement} canvas
+     * @param  {gl} gl
+     * @param {Function} fun callback (width,
+     * height)
+     * @return {Function} resize function
+     */
+    genResizeFun: (canvas, gl, fun) => () => {
       let {clientWidth, clientHeight} = canvas;
 
       if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
         canvas.width = clientWidth;
         canvas.height = clientHeight;
+
         gl.viewport(0, 0, canvas.width, canvas.height);
+        fun && fun.call(null, clientWidth, clientHeight);
       }
     },
 
