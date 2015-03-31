@@ -3,7 +3,6 @@
 
   const canvas = document.querySelector('canvas');
   let gl = WebGLUtils.setupWebGL(canvas);
-  const resize = WebGLUtils.genResizeFun(canvas, gl);
 
   Shaders.initFromElems(gl, document.getElementById('vshader'),
                             document.getElementById('fshader'))

@@ -78,18 +78,24 @@
       image.src = url;
     },
 
-    initArrayBuffer (gl, data, num, type, attrib_location) {
+    initBuffer (gl, data, num, type, attrib_location, buffer_type) {
       if (arguments.length < 5)
         throw new Error('initSimpleArrayBuffer requires all args');
 
-      const buffer = gl.createBuffer();
-      if (!buffer)
+      const buff = gl.createBuffer();
+      if (!buff)
         throw new Error('Error while creating buffer');
 
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
-      gl.vertexAttribPointer(attrib_location, num, type, false, 0, 0);
-      gl.enableVertexAttribArray(attrib_location);
+      buffer_type = buffer_type || gl.ARRAY_BUFFER;
+
+      gl.bindBuffer(buffer_type, buff);
+      if (data != null)
+        gl.bufferData(buffer_type, data, gl.STATIC_DRAW);
+      if (attrib_location != null && num != null)
+        gl.vertexAttribPointer(attrib_location, num, type, false, 0, 0);
+        gl.enableVertexAttribArray(attrib_location);
+
+      return buff;
     },
 
     /**
