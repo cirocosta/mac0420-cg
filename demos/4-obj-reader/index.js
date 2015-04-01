@@ -56,7 +56,7 @@
       VERTICES = new Float32Array(obj.vertices);
       INDICES = new Uint16Array(obj.faces);
       if (obj.vertices_normals && obj.vertices_normals.length)
-        NORMALS = new Float32Array(obj.vertices_normals);
+        NORMALS = new Float32Array(obj.normals);
       else
         NORMALS = new Float32Array(ObjParser.calculateNormals(obj.vertices, obj.faces));
       obj._new = false;
@@ -67,9 +67,6 @@
 
     gl.bindBuffer(gl.ARRAY_BUFFER, NBUFFER);
     gl.bufferData(gl.ARRAY_BUFFER, NORMALS, gl.STATIC_DRAW);
-
-    // gl.bindBuffer(gl.ARRAY_BUFFER, CBUFFER);
-    // gl.bufferData(gl.ARRAY_BUFFER, COLORS, gl.STATIC_DRAW);
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, IBUFFER);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);

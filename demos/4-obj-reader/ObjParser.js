@@ -27,8 +27,11 @@
    */
   function parse (text) {
     let result = {
-      _new: true, vertices: [], comments: [], vertices_normals: [],
-      faces: [], _facesType: null
+      _new: true, _facesType: null, // flags
+      vertices_normals: [], // indices to obtain 'normals' prop
+      vertices: [], normals: [], // will have the same size (BUFFER_ARRAY)
+      faces: [],  // indices to be passed through ELEMENT_BUFFER_ARRAY
+      normals_i: [], // indices to obtain 'normals' prop
     };
 
     text.split('\n').forEach((line) => {
@@ -65,6 +68,18 @@
 
           if (result._facesType === FACES_TYPES.FACE) {
             result.faces.push(...faces.map(to_int_minus_1));
+          } else if (result._facesType === FACES_TYPES.FACE_NORMALS) {
+            faces.forEach((elem) => {
+              let [faceI, normalI] = elem.split('//');
+              normalI = +normalI - 1;
+              faceI = +faceI - 1;
+
+              result.faces.push(faceI);
+              result.normals_i.push(normalI);
+              result.normals.push(result.vertices_normals[3*normalI],
+                                  result.vertices_normals[(3*normalI) + 1],
+                                  result.vertices_normals[(3*normalI) + 2]);
+            });
           }
 
           break;
