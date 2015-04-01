@@ -102,6 +102,10 @@
       }
     });
 
+    if (result.vertices.length)
+      result._center_of_mass =
+        result._center_of_mass.map((elem) => elem/result.vertices.length);
+
     result._scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
 
     return result;

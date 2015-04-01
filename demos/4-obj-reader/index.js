@@ -21,9 +21,9 @@
   let mvpMatrix = new Matrix4();
   var viewProjMatrix = new Matrix4();
 
-  const resize = WebGLUtils.genResizeFun(ELEMS.canvas, gl, (w, h) => {
+  const resize = WebGLUtils.genResizeFun(ELEMS.canvas, gl, (w, h, shouldDraw) => {
     viewProjMatrix.setPerspective(30.0, w/h, 0.1, 50.0);
-    draw();
+    shouldDraw && draw();
   });
 
   Shaders.initFromElems(gl, ELEMS.vshader, ELEMS.fshader);
@@ -60,7 +60,8 @@
       obj._new = false;
     }
 
-    modelMatrix.setScale(obj._scale, obj._scale, obj._scale);
+    modelMatrix.scale(obj._scale, obj._scale, obj._scale);
+    modelMatrix.translate(...(obj._center_of_mass.map((el) => -el)));
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBUFFER);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
@@ -71,40 +72,40 @@
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, IBUFFER);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);
 
-    gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_SHORT, 0);
+    return INDICES.length;
   }
 
   /**
    * Draws the entire scene.
    */
   function draw () {
+    modelMatrix = new Matrix4();
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.uniform3fv(LOCATIONS.u_LightColor, new Float32Array([1.0, 1.0, 1.0]));
+    gl.uniform3fv(LOCATIONS.u_AmbientLight, new Float32Array([0.2, 0.2, 0.2]));
+    gl.uniform3fv(LOCATIONS.u_LightPosition, new Float32Array([0.0, 500.0, 200.0]));
+
     viewProjMatrix.setPerspective(30.0, ELEMS.canvas.width/ELEMS.canvas.height,
                                   0.1, 50.0);
     viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
                           0.0, 0.0, 0.0,     // at
                           0.0, 1.0, 0.0);    // up
 
-    // modelMatrix.setRotate(0.0, 1.0, 0.0, 0.0);
-    // modelMatrix.rotate(angle, 0.0, 1.0, 0.0);
-    // modelMatrix.rotate(angle, 0.0, 0.0, 1.0);
-
-    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
-    // normalMatrix.setInverseOf(modelMatrix);
-    // normalMatrix.transpose();
+    let N = draw_obj(obj);
 
     // Calculate the model view project matrix and pass it to u_MvpMatrix
     mvpMatrix.set(viewProjMatrix);
     mvpMatrix.multiply(modelMatrix);
 
-    gl.uniform3fv(LOCATIONS.u_LightColor, new Float32Array([1.0, 1.0, 1.0]));
-    gl.uniform3fv(LOCATIONS.u_AmbientLight, new Float32Array([0.2, 0.2, 0.2]));
-    gl.uniform3fv(LOCATIONS.u_LightPosition, new Float32Array([0.0, 500.0, 200.0]));
+    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
+    normalMatrix.setInverseOf(modelMatrix);
+    normalMatrix.transpose();
+
     gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, modelMatrix.elements);
     gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
     gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    obj && draw_obj(obj);
+    gl.drawElements(gl.TRIANGLES, N, gl.UNSIGNED_SHORT, 0);
   }
 
   ELEMS.fileinput.addEventListener('change', (ev) => {
@@ -119,8 +120,8 @@
     current_file = file;
 
     reader.onload = (ev) => {
-      obj = ObjParser.parse(ev.target.result, true);
-      resize();
+      obj = ObjParser.parse(ev.target.result);
+      resize(false);
       draw();
     };
 

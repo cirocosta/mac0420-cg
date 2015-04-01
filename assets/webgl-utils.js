@@ -41,7 +41,7 @@
      * height)
      * @return {Function} resize function
      */
-    genResizeFun: (canvas, gl, fun) => () => {
+    genResizeFun: (canvas, gl, fun) => (shouldDraw) => {
       let {clientWidth, clientHeight} = canvas;
 
       if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
@@ -49,7 +49,7 @@
         canvas.height = clientHeight;
 
         gl.viewport(0, 0, canvas.width, canvas.height);
-        fun && fun.call(null, clientWidth, clientHeight);
+        fun && fun.call(null, clientWidth, clientHeight, shouldDraw);
       }
     },
 

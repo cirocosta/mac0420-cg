@@ -199,7 +199,7 @@ QUnit.test('properly calculate center of mass', (assert) => {
                                 'v -1.000000 1.000000 -1.000000',
                                 'v -1.000000 -1.000000 -1.000000',
                                 'v 1.000000 -1.000000 -1.000000',].join('\n'));
-  let expected = [0.0,0.0,0.5]; // ???
+  let expected = [0.0,0.0, -0.08333333333333333]; // ???
 
   assert.deepEqual(actual._center_of_mass, expected);
 });
