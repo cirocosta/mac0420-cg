@@ -86,11 +86,11 @@
       throw new Error('Error while creating buffer');
 
     // Write the vertex coordinates and color to the buffer object
-    WebGLUtils.initArrayBuffer(gl, NORMALS, 3, gl.FLOAT,
+    WebGLUtils.initBuffer(gl, NORMALS, 3, gl.FLOAT,
                                locations.a_Normal);
-    WebGLUtils.initArrayBuffer(gl, VERTICES, 3, gl.FLOAT,
+    WebGLUtils.initBuffer(gl, VERTICES, 3, gl.FLOAT,
                                locations.a_Position);
-    WebGLUtils.initArrayBuffer(gl, COLORS, 3, gl.FLOAT,
+    WebGLUtils.initBuffer(gl, COLORS, 3, gl.FLOAT,
                                locations.a_Color);
 
     // Write the indices to the buffer object

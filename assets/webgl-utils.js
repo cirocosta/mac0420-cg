@@ -220,6 +220,7 @@
       return this.initFromSrc(gl, vElem.text, fElem.text);
     },
 
+    // TODO
     initFromUrl () {
       return;
     }
