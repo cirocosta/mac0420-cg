@@ -15,14 +15,28 @@ body {
 }
 
 header {
+  width: 100%;
   position: absolute;
   text-align: center;
+  opacity: 0.3;
+  transition: opacity .2s ease;
+}
+
+header:hover {
+  opacity: 1.0;
 }
 
 footer {
   position: absolute;
   bottom: 5px;
   text-align: center;
+  width: 100%;
+  opacity: 0.3;
+  transition: opacity .2s ease;
+}
+
+footer:hover {
+  opacity: 1.0;
 }
 
 main {
@@ -44,11 +58,26 @@ canvas {
   visibility: hidden;
 }
 
-.fileupload button {
+button {
   cursor: pointer;
   font-size: 16px;
   border: none;
   color: white;
   padding: 11px 20px;
   background: #4D4D4D;
+}
+
+.commands-list {
+  text-align: center;
+}
+
+.commands-list li {
+  list-style: none;
+  float: left;
+}
+
+.commands-list button {
+  font-size: 10px;
+  padding: 2px;
+  margin-left: 4px;
 }

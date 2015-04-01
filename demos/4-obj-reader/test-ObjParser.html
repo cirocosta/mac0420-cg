@@ -158,14 +158,62 @@ QUnit.test('generate corresponding normals according to vertices and faces', (as
   assert.deepEqual(actual.normals, expected_normals);
 });
 
+QUnit.module("::parse - _scale");
+QUnit.test('do not scale if it fits the max', (assert) => {
+  let actual = ObjParser.parse(['v 1.000000 -1.000000 -1.000000',
+                                'v 1.000000 -1.000000 1.000000',
+                                'v -1.000000 -1.000000 -1.000000'].join('\n'));
+  let expected_scale = 1.0;
+  assert.equal(actual._scale, expected_scale);
+});
+
+QUnit.test('scale properly', (assert) => {
+  let actual = ObjParser.parse(['v 0.500000 -0.500000 -0.500000',
+                                'v 0.500000 -0.500000 0.500000',
+                                'v -0.500000 -0.500000 -0.500000'].join('\n'));
+  let expected_scale = 2.0;
+  assert.equal(actual._scale, expected_scale);
+});
+
+QUnit.module("::parse - _center_of_mass");
+QUnit.test('center of canonical cube should be 0,0,0', (assert) => {
+  let actual = ObjParser.parse(['v 1.000000 1.000000 1.000000',
+                                'v -1.000000 1.000000 1.000000',
+                                'v -1.000000 -1.000000 1.000000',
+                                'v 1.000000 -1.000000 1.000000',
+                                'v 1.000000 1.000000 -1.000000',
+                                'v -1.000000 1.000000 -1.000000',
+                                'v -1.000000 -1.000000 -1.000000',
+                                'v 1.000000 -1.000000 -1.000000',].join('\n'));
+  let expected = [0.0,0.0,0.0];
+
+  assert.deepEqual(actual._center_of_mass, expected);
+});
+
+QUnit.test('properly calculate center of mass', (assert) => {
+  let actual = ObjParser.parse(['v 1.000000 1.000000 0.500000',
+                                'v -1.000000 1.000000 0.500000',
+                                'v -1.000000 -1.000000 0.500000',
+                                'v 1.000000 -1.000000 0.500000',
+                                'v 1.000000 1.000000 -1.000000',
+                                'v -1.000000 1.000000 -1.000000',
+                                'v -1.000000 -1.000000 -1.000000',
+                                'v 1.000000 -1.000000 -1.000000',].join('\n'));
+  let expected = [0.0,0.0,0.5]; // ???
+
+  assert.deepEqual(actual._center_of_mass, expected);
+});
 
 QUnit.module("::getNormal");
 QUnit.test('should properly obtain normal from 3 points', (assert) => {
-  var a = [1.0, 0.0, 1.0];
-  var b = [1.0, 0.0, 0.0];
-  var c = [-1.0, 0.0, 0.0];
+  let a = [1.0, 0.0, 1.0];
+  let b = [1.0, 0.0, 0.0];
+  let c = [-1.0, 0.0, 0.0];
 
-  assert.deepEqual(ObjParser.getNormal(a,b,c), new Float32Array([0,1,0]));
+  let actual = ObjParser.getNormal(a,b,c);
+  let expected = new Float32Array([0,1,0]);
+
+  assert.deepEqual(actual, expected);
 });
 </script>
 </html>

@@ -28,11 +28,14 @@
   function parse (text) {
     let result = {
       _new: true, _facesType: null, // flags
+      _scale: 0.0,
+      _center_of_mass: [0.0, 0.0, 0.0],
       vertices_normals: [], // indices to obtain 'normals' prop
       vertices: [], normals: [], // will have the same size (BUFFER_ARRAY)
       faces: [],  // indices to be passed through ELEMENT_BUFFER_ARRAY
       normals_i: [], // indices to obtain 'normals' prop
     };
+    let bigger_vertex_dist = 0.0;
 
     text.split('\n').forEach((line) => {
       let match = line.match(/^(v|#|vn|vt|f)\s+/);
@@ -42,7 +45,17 @@
 
       switch (match[1]) {
         case 'v':
-          result.vertices.push(...line.split(' ').slice(1).map(to_float));
+          let [x, y, z] = line.split(' ').slice(1).map(to_float);
+          let dist = x*x + y*y + z*z;
+
+          result._center_of_mass[0] += x;
+          result._center_of_mass[1] += y;
+          result._center_of_mass[2] += z;
+
+          if (dist > bigger_vertex_dist)
+            bigger_vertex_dist = dist
+
+          result.vertices.push(x, y, z);
           break;
 
         case 'vn':
@@ -81,7 +94,6 @@
                                   result.vertices_normals[(3*normalI) + 2]);
             });
           }
-
           break;
 
         case '#':
@@ -89,6 +101,8 @@
           break;
       }
     });
+
+    result._scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
 
     return result;
   }

@@ -40,8 +40,6 @@
                                         LOCATIONS.a_Normal);
   const VBUFFER = WebGLUtils.initBuffer(gl, null, 3, gl.FLOAT,
                                         LOCATIONS.a_Position);
-  // const CBUFFER = WebGLUtils.initBuffer(gl, null, 4, gl.FLOAT,
-  //                                       LOCATIONS.a_Color);
   const IBUFFER = WebGLUtils.initBuffer(gl, null, null, gl.FLOAT, null,
                                         gl.ELEMENT_ARRAY_BUFFER);
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -61,6 +59,8 @@
         NORMALS = new Float32Array(ObjParser.calculateNormals(obj.vertices, obj.faces));
       obj._new = false;
     }
+
+    modelMatrix.setScale(obj._scale, obj._scale, obj._scale);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBUFFER);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
@@ -84,7 +84,7 @@
                           0.0, 0.0, 0.0,     // at
                           0.0, 1.0, 0.0);    // up
 
-    modelMatrix.setRotate(0.0, 1.0, 0.0, 0.0);
+    // modelMatrix.setRotate(0.0, 1.0, 0.0, 0.0);
     // modelMatrix.rotate(angle, 0.0, 1.0, 0.0);
     // modelMatrix.rotate(angle, 0.0, 0.0, 1.0);
 
