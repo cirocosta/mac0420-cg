@@ -1,19 +1,63 @@
-(function (window) {
+(function (window, document) {
   'use strict';
+
+  let _rotating = {
+    ROTATE_X: false,
+    ROTATE_Y: false,
+    ROTATE_Z: false
+  };
+  let _rotations = {
+    ROTATE_X: 0.0,
+    ROTATE_Y: 0.0,
+    ROTATE_Z: 0.0
+  };
+  let _looping = false;
+  let _pressed = null;
 
   const ObjParser = window.ObjParser;
   const ELEMS = {
     canvas: document.querySelector('canvas'),
+
     fileinput: document.querySelector('.fileupload input'),
     filebtn: document.querySelector('.fileupload button'),
     filename: document.querySelector('.fileupload p'),
+
     vshader: document.getElementById('vshader'),
-    fshader: document.getElementById('fshader')
+    fshader: document.getElementById('fshader'),
+
+    rotateX: document.querySelector('.command-rotateX'),
+    rotateY: document.querySelector('.command-rotateY'),
+    rotateZ: document.querySelector('.command-rotateZ'),
+    toggleProjection: document.querySelector('.command-toggleProjection'),
+    toggleRotation: document.querySelector('.command-toggleRotation'),
+    toggleMeshgrid: document.querySelector('.command-toggleMeshgrid'),
+    toggleShading: document.querySelector('.command-toggleShading'),
   };
+
+  function triggerRotation (which, flag) {
+    _rotating[which] = flag;
+  }
+
+  function incRotation (which) {
+    _rotations[which] += 2;
+  }
+
+  ELEMS.toggleRotation.addEventListener('click', (ev) => {
+    triggerRotation('ROTATE_X', true);
+    triggerRotation('ROTATE_Y', true);
+    triggerRotation('ROTATE_Z', true);
+  });
+
+  ELEMS.rotateX.addEventListener('mousedown', triggerRotation.bind(null, 'ROTATE_X', true));
+  ELEMS.rotateY.addEventListener('mousedown', triggerRotation.bind(null, 'ROTATE_Y', true));
+  ELEMS.rotateZ.addEventListener('mousedown', triggerRotation.bind(null, 'ROTATE_Z', true));
+
+  ELEMS.rotateX.addEventListener('mouseup', triggerRotation.bind(null, 'ROTATE_X', false));
+  ELEMS.rotateY.addEventListener('mouseup', triggerRotation.bind(null, 'ROTATE_Y', false));
+  ELEMS.rotateZ.addEventListener('mouseup', triggerRotation.bind(null, 'ROTATE_Z', false));
 
   let current_file, obj;
   let VERTICES, INDICES, NORMALS;
-  let angle = 0.0;
   const gl = WebGLUtils.setupWebGL(ELEMS.canvas);
 
   let modelMatrix = new Matrix4();
@@ -61,6 +105,9 @@
     }
 
     modelMatrix.scale(obj._scale, obj._scale, obj._scale);
+    modelMatrix.rotate(_rotations['ROTATE_X'], 1.0, 0.0, 0.0);
+    modelMatrix.rotate(_rotations['ROTATE_Y'], 0.0, 1.0, 0.0);
+    modelMatrix.rotate(_rotations['ROTATE_Z'], 0.0, 0.0, 1.0);
     modelMatrix.translate(...(obj._center_of_mass.map((el) => -el)));
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBUFFER);
@@ -122,7 +169,7 @@
     reader.onload = (ev) => {
       obj = ObjParser.parse(ev.target.result);
       resize(false);
-      draw();
+      !_looping && loop();
     };
 
     reader.readAsText(file);
@@ -133,4 +180,13 @@
   ELEMS.filebtn.addEventListener('click', (ev) => {
     ELEMS.fileinput.click();
   });
-})(window);
+
+  function loop () {
+    window.requestAnimationFrame(loop);
+
+    for (let rot in _rotating)
+      if (_rotating[rot])
+        incRotation(rot);
+    draw();
+  }
+})(window, document);
