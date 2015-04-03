@@ -97,25 +97,18 @@
     if (!obj)
       return 0;
 
-    if (obj._new) { // caching
-      VERTICES = new Float32Array(obj.vertices_coords);
-      INDICES = new Uint16Array(obj.faces);
-      if (obj.vertices_normals && obj.vertices_normals.length)
-        NORMALS = new Float32Array(obj.normals);
-      else
-        NORMALS = new Float32Array(ObjParser.calculateNormals(obj.vertices_coords, obj.faces));
-      obj._new = false;
+    if (obj.new) { // caching
+      VERTICES = new Float32Array(obj.vertices);
+      INDICES = new Uint16Array(obj.indices);
+      NORMALS = new Float32Array(obj.normals);
+      obj.new = false;
     }
 
-    // console.log(obj);
-
-    // console.log(INDICES);
-
-    modelMatrix.scale(obj._scale, obj._scale, obj._scale);
+    modelMatrix.scale(obj.scale, obj.scale, obj.scale);
     modelMatrix.rotate(_rotations['ROTATE_X'], 1.0, 0.0, 0.0);
     modelMatrix.rotate(_rotations['ROTATE_Y'], 0.0, 1.0, 0.0);
     modelMatrix.rotate(_rotations['ROTATE_Z'], 0.0, 0.0, 1.0);
-    modelMatrix.translate(...(obj._center_of_mass.map((el) => -el)));
+    modelMatrix.translate(...(obj.center_of_mass.map((el) => -el)));
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBUFFER);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
@@ -138,7 +131,7 @@
 
     viewProjMatrix.setPerspective(30.0, ELEMS.canvas.width/ELEMS.canvas.height,
                                   0.1, 50.0);
-    viewProjMatrix.lookAt(0.0, 0.0, 20.0, // eye
+    viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
                           0.0, 0.0, 0.0,     // at
                           0.0, 1.0, 0.0);    // up
 

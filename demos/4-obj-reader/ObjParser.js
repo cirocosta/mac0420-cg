@@ -27,15 +27,21 @@
    */
   function parse (text) {
     let result = {
-      _new: true, _facesType: null, // flags
-      _scale: 0.0,
-      _center_of_mass: [0.0, 0.0, 0.0],
+      new: true,
+      scale: 0.0,
+      center_of_mass: [0.0, 0.0, 0.0],
+
       vertices_normals: [], // indices to obtain 'normals' prop
       vertices_coords: [],  // coordinates that are references to actual vertices
-      vertices: [], normals: [], // will have the same size (BUFFER_ARRAY)
+
       faces: [],  // indices to be passed through ELEMENT_BUFFER_ARRAY
+      vertices: [], normals: [], indices: [], // final buffer data
     };
+
     let bigger_vertex_dist = 0.0;
+    let index_hashes = {};
+    let index = 0;
+    let facesType = null;
 
     text.split('\n').forEach((line) => {
       let match = line.match(/^(v|#|vn|vt|f)\s+/);
@@ -48,9 +54,9 @@
           let [x, y, z] = line.split(' ').slice(1).map(to_float);
           let dist = x*x + y*y + z*z;
 
-          result._center_of_mass[0] += x;
-          result._center_of_mass[1] += y;
-          result._center_of_mass[2] += z;
+          result.center_of_mass[0] += x;
+          result.center_of_mass[1] += y;
+          result.center_of_mass[2] += z;
 
           if (dist > bigger_vertex_dist)
             bigger_vertex_dist = dist
@@ -65,13 +71,13 @@
         case 'f':
           let faces = line.split(' ').slice(1);
 
-          if (!result._facesType) {
+          if (!facesType) {
             if (~faces[0].indexOf('//'))
-              result._facesType = FACES_TYPES.FACE_NORMALS;
+              facesType = FACES_TYPES.FACE_NORMALS;
             else if (faces[0].match(/\d+\/\d+\/\d+/))
-              result._facesType = FACES_TYPES.FACE_TEXTURE_NORMALS;
+              facesType = FACES_TYPES.FACE_TEXTURE_NORMALS;
             else
-              result._facesType = FACES_TYPES.FACE;
+              facesType = FACES_TYPES.FACE;
           }
 
           if (faces.length === 4)
@@ -79,26 +85,31 @@
           else if (faces.length > 4)
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
 
-          if (result._facesType === FACES_TYPES.FACE) {
-            for (let face of faces) {
-              face = face - 1;
-              result.faces.push(face);
-              result.vertices.push(result.vertices_coords[face*3],
-                                   result.vertices_coords[face*3+1],
-                                   result.vertices_coords[face*3+2]);
+          // face corresponds to a 'v/t/n' grouping
+          faces.forEach((face) => {
+            if (face in index_hashes) {
+              result.indices.push(index_hashes[face]);
+              return;
             }
-          } else if (result._facesType === FACES_TYPES.FACE_NORMALS) {
-            faces.forEach((elem) => {
-              let [faceI, normalI] = elem.split('//');
-              normalI = (+normalI) - 1;
-              faceI = (+faceI) - 1;
 
-              result.faces.push(faceI);
+            let [faceI, normalI] = face.split('//');
+            normalI = (+normalI) - 1;
+            faceI = (+faceI) - 1;
+
+            result.faces.push(faceI);
+            result.vertices.push(result.vertices_coords[faceI*3],
+                                 result.vertices_coords[faceI*3+1],
+                                 result.vertices_coords[faceI*3+2]);
+            if (facesType === FACES_TYPES.FACE_NORMALS) {
               result.normals.push(result.vertices_normals[3*normalI],
                                   result.vertices_normals[(3*normalI) + 1],
                                   result.vertices_normals[(3*normalI) + 2]);
-            });
-          }
+            }
+
+            index_hashes[face] = index;
+            result.indices.push(index++);
+          });
+
           break;
 
         case '#':
@@ -107,11 +118,11 @@
       }
     });
 
-    if (result.vertices_coords.length)
-      result._center_of_mass =
-        result._center_of_mass.map((elem) => elem/result.vertices_coords.length);
-
-    result._scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
+    if (result.vertices_coords.length) {
+      result.scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
+      result.center_of_mass =
+        result.center_of_mass.map((elem) => elem/result.vertices_coords.length);
+    }
 
     return result;
   }
