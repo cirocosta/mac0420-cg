@@ -80,8 +80,11 @@
               facesType = FACES_TYPES.FACE;
           }
 
-          if (faces.length === 4)
+          if (faces.length === 4) {
+            if (facesType === FACES_TYPES.FACE)
+              throw new Error('TODO: FACES_TYPE.FACE w/ quad obj');
             faces = [faces[0], faces[1], faces[2], faces[2], faces[3], faces[0]];
+          }
           else if (faces.length > 4)
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
 
@@ -190,39 +193,51 @@
     return (new Vector3(normal)).normalize().elements;
   }
 
-  /**
-   * Given object vertices and faces, calculate
-   * the normals array.
-   * @param  {Array} vertices (flattened)
-   * @param  {Array} faces (triangular form,
-   * flattened)
-   * @return {Array} (flattened)
-   */
-  function calculateNormals (vertices, faces) {
-    let normals = [];
+  function applySmoothShading (obj) {
+    let N = obj.vertices.length;
+    let visited = [];
 
-    for (let i = 0, N = faces.length; i < N; i+=3) {
-      let a = [vertices[(faces[i]-1)*3],
-               vertices[((faces[i]-1)*3)+1],
-               vertices[((faces[i]-1)*3)+2]];
-      let b = [vertices[(faces[i+1]-1)*3],
-               vertices[((faces[i+1]-1)*3)+1],
-               vertices[((faces[i+1]-1)*3)+2]];
-      let c = [vertices[(faces[i+2]-1)*3],
-               vertices[((faces[i+2]-1)*3)+1],
-               vertices[((faces[i+2]-1)*3)+2]];
+    for (let i = 0; i < N; i += 3) {
+      let indexes = [];
 
-      normals.push(...getNormal(a, b, c));
+      for (let j = 0; j < N; j+=3) {
+        if (obj.vertices[j] === obj.vertices[i] &&
+            obj.vertices[j+1] === obj.vertices[i+1] &&
+            obj.vertices[j+2] === obj.vertices[i+2]) {
+          indexes.push(j);
+        }
+      }
+
+      let hash = indexes.join(',');
+
+      if (~visited.indexOf(hash))
+        continue;
+
+      visited.push(hash);
+
+      let result_normal = indexes.reduce((result, index) => {
+        result[0] += obj.normals[index];
+        result[1] += obj.normals[index+1];
+        result[2] += obj.normals[index+2];
+
+        return result;
+      }, [0.0,0.0,0.0]);
+
+      result_normal = (new Vector3(result_normal)).normalize().elements;
+
+      indexes.forEach((index) => {
+        obj.normals[index] = result_normal[0];
+        obj.normals[index+1] = result_normal[1];
+        obj.normals[index+2] = result_normal[2];
+      });
     }
-
-    return normals;
   }
 
   root.ObjParser = {
     parse,
-    calculateNormals,
     getNormal,
     FACES_TYPES,
+    applySmoothShading,
 
     to_float,
     slashed_to_array,

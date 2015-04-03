@@ -98,6 +98,7 @@
       return 0;
 
     if (obj.new) { // caching
+      ObjParser.applySmoothShading(obj);
       VERTICES = new Float32Array(obj.vertices);
       INDICES = new Uint16Array(obj.indices);
       NORMALS = new Float32Array(obj.normals);
