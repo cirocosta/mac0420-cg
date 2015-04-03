@@ -34,13 +34,13 @@
       vertices_normals: [], // indices to obtain 'normals' prop
       vertices_coords: [],  // coordinates that are references to actual vertices
 
-      faces: [],  // indices to be passed through ELEMENT_BUFFER_ARRAY
       vertices: [], normals: [], indices: [], // final buffer data
     };
 
     let bigger_vertex_dist = 0.0;
     let index_hashes = {};
     let index = 0;
+    let normal_index = 1;
     let facesType = null;
 
     text.split('\n').forEach((line) => {
@@ -85,26 +85,59 @@
           else if (faces.length > 4)
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
 
+          // if no normals info, fix it
+          if (facesType === FACES_TYPES.FACE) {
+            let facesI = faces.map(to_int_minus_1);
+
+            let v0 = [result.vertices_coords[facesI[0]*3+0],
+                      result.vertices_coords[facesI[0]*3+1],
+                      result.vertices_coords[facesI[0]*3+2]];
+            let v1 = [result.vertices_coords[facesI[1]*3+0],
+                      result.vertices_coords[facesI[1]*3+1],
+                      result.vertices_coords[facesI[1]*3+2]];
+            let v2 = [result.vertices_coords[facesI[2]*3+0],
+                      result.vertices_coords[facesI[2]*3+1],
+                      result.vertices_coords[facesI[2]*3+2]];
+
+            // calculate the normal of the current face
+            let face_normal = getNormal(v0, v1, v2);
+            let found_index = -1;
+
+            // see if we have previously added a
+            // normal that is the same of this.
+            for (let i = 0; i < result.vertices_normals.length; i+=3) {
+              if (result.vertices_normals[i+0] === face_normal[0] &&
+                  result.vertices_normals[i+1] === face_normal[1] &&
+                  result.vertices_normals[i+2] === face_normal[2]) {
+                found_index = i/3+1;
+              }
+            }
+
+            // didn't found another normal like
+            // that
+            if (!~found_index) {
+              result.vertices_normals.push(...face_normal);
+              found_index = normal_index++;
+            }
+
+            faces = faces.map((face) => face + '//' + found_index);
+          }
+
           // face corresponds to a 'v/t/n' grouping
           faces.forEach((face) => {
-            if (face in index_hashes) {
-              result.indices.push(index_hashes[face]);
-              return;
-            }
+            if (face in index_hashes)
+              return result.indices.push(index_hashes[face]);
 
             let [faceI, normalI] = face.split('//');
             normalI = (+normalI) - 1;
             faceI = (+faceI) - 1;
 
-            result.faces.push(faceI);
             result.vertices.push(result.vertices_coords[faceI*3],
                                  result.vertices_coords[faceI*3+1],
                                  result.vertices_coords[faceI*3+2]);
-            if (facesType === FACES_TYPES.FACE_NORMALS) {
-              result.normals.push(result.vertices_normals[3*normalI],
-                                  result.vertices_normals[(3*normalI) + 1],
-                                  result.vertices_normals[(3*normalI) + 2]);
-            }
+            result.normals.push(result.vertices_normals[normalI*3],
+                                result.vertices_normals[normalI*3+1],
+                                result.vertices_normals[normalI*3+2]);
 
             index_hashes[face] = index;
             result.indices.push(index++);
@@ -138,7 +171,7 @@
    *   * oz = (x1 * y2) - (x2 * y1)
    *
    * Note that:
-   *   getNormal(a,b,c) = -getNormal(a,c,b).
+   *   - getNormal(a,b,c) = -getNormal(a,c,b).
    *
    * @param  {Array} a point
    * @param  {Array} b point
