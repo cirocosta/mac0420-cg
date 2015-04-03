@@ -77,7 +77,7 @@
   const LOCATIONS = Shaders.getLocations(gl, [
     'a_Position', 'a_Normal',
     'u_NormalMatrix', 'u_MvpMatrix', 'u_ModelMatrix',
-    'u_LightColor', 'u_AmbientLight', 'u_LightPosition'
+    // 'u_LightColor', 'u_AmbientLight', 'u_LightPosition'
   ]);
 
   const NBUFFER = WebGLUtils.initBuffer(gl, null, 3, gl.FLOAT,
@@ -94,15 +94,22 @@
    * ObjParser::parse
    */
   function draw_obj (obj) {
+    if (!obj)
+      return 0;
+
     if (obj._new) { // caching
-      VERTICES = new Float32Array(obj.vertices);
+      VERTICES = new Float32Array(obj.vertices_coords);
       INDICES = new Uint16Array(obj.faces);
       if (obj.vertices_normals && obj.vertices_normals.length)
         NORMALS = new Float32Array(obj.normals);
       else
-        NORMALS = new Float32Array(ObjParser.calculateNormals(obj.vertices, obj.faces));
+        NORMALS = new Float32Array(ObjParser.calculateNormals(obj.vertices_coords, obj.faces));
       obj._new = false;
     }
+
+    // console.log(obj);
+
+    // console.log(INDICES);
 
     modelMatrix.scale(obj._scale, obj._scale, obj._scale);
     modelMatrix.rotate(_rotations['ROTATE_X'], 1.0, 0.0, 0.0);
@@ -128,13 +135,10 @@
   function draw () {
     modelMatrix = new Matrix4();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.uniform3fv(LOCATIONS.u_LightColor, new Float32Array([1.0, 1.0, 1.0]));
-    gl.uniform3fv(LOCATIONS.u_AmbientLight, new Float32Array([0.2, 0.2, 0.2]));
-    gl.uniform3fv(LOCATIONS.u_LightPosition, new Float32Array([0.0, 500.0, 200.0]));
 
     viewProjMatrix.setPerspective(30.0, ELEMS.canvas.width/ELEMS.canvas.height,
                                   0.1, 50.0);
-    viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
+    viewProjMatrix.lookAt(0.0, 0.0, 20.0, // eye
                           0.0, 0.0, 0.0,     // at
                           0.0, 1.0, 0.0);    // up
 
@@ -152,6 +156,10 @@
     gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
     gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
 
+    // executes the shader and draws the geometric
+    // shape in the specified 'mode' using the
+    // indices specified in the buffer obj bound
+    // to gl.ELEMENT_ARRAY_BUFFER.
     gl.drawElements(gl.TRIANGLES, N, gl.UNSIGNED_SHORT, 0);
   }
 

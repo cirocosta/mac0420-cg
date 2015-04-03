@@ -202,13 +202,15 @@
       }, {});
     },
 
-    initFromSrc (gl, vsrc, fsrc) {
+    initFromSrc (gl, vsrc, fsrc, use=true) {
       let v = this._createVertShader(gl, vsrc, gl.VERTEX_SHADER);
       let f = this._createFragShader(gl, fsrc, gl.FRAGMENT_SHADER);
       let program = this._createProgram(gl, v, f);
 
-      gl.useProgram(program);
-      gl.program = program;
+      if (use) {
+        gl.useProgram(program);
+        gl.program = program;
+      }
 
       if (!program)
         throw new Error('Failed to initialize shaders.');
@@ -216,8 +218,8 @@
       return program;
     },
 
-    initFromElems (gl, vElem, fElem) {
-      return this.initFromSrc(gl, vElem.text, fElem.text);
+    initFromElems (gl, vElem, fElem, use=true) {
+      return this.initFromSrc(gl, vElem.text, fElem.text, use);
     },
 
     // TODO

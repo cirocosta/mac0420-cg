@@ -31,9 +31,9 @@
       _scale: 0.0,
       _center_of_mass: [0.0, 0.0, 0.0],
       vertices_normals: [], // indices to obtain 'normals' prop
+      vertices_coords: [],  // coordinates that are references to actual vertices
       vertices: [], normals: [], // will have the same size (BUFFER_ARRAY)
       faces: [],  // indices to be passed through ELEMENT_BUFFER_ARRAY
-      normals_i: [], // indices to obtain 'normals' prop
     };
     let bigger_vertex_dist = 0.0;
 
@@ -55,7 +55,7 @@
           if (dist > bigger_vertex_dist)
             bigger_vertex_dist = dist
 
-          result.vertices.push(x, y, z);
+          result.vertices_coords.push(x, y, z);
           break;
 
         case 'vn':
@@ -80,15 +80,20 @@
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
 
           if (result._facesType === FACES_TYPES.FACE) {
-            result.faces.push(...faces.map(to_int_minus_1));
+            for (let face of faces) {
+              face = face - 1;
+              result.faces.push(face);
+              result.vertices.push(result.vertices_coords[face*3],
+                                   result.vertices_coords[face*3+1],
+                                   result.vertices_coords[face*3+2]);
+            }
           } else if (result._facesType === FACES_TYPES.FACE_NORMALS) {
             faces.forEach((elem) => {
               let [faceI, normalI] = elem.split('//');
-              normalI = +normalI - 1;
-              faceI = +faceI - 1;
+              normalI = (+normalI) - 1;
+              faceI = (+faceI) - 1;
 
               result.faces.push(faceI);
-              result.normals_i.push(normalI);
               result.normals.push(result.vertices_normals[3*normalI],
                                   result.vertices_normals[(3*normalI) + 1],
                                   result.vertices_normals[(3*normalI) + 2]);
@@ -102,9 +107,9 @@
       }
     });
 
-    if (result.vertices.length)
+    if (result.vertices_coords.length)
       result._center_of_mass =
-        result._center_of_mass.map((elem) => elem/result.vertices.length);
+        result._center_of_mass.map((elem) => elem/result.vertices_coords.length);
 
     result._scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
 

@@ -66,11 +66,11 @@ QUnit.test("::ObjParser", (assert) => {
 QUnit.module("::parse");
 QUnit.test("vertices", (assert) => {
   var lines = OBJ_1.split('\n');
-  assert.ok(!ObjParser.parse(lines[0]).vertices.length,
+  assert.ok(!ObjParser.parse(lines[0]).vertices_coords.length,
             'comment shouldn\'t produce vertices, etc');
-  assert.ok(ObjParser.parse(lines[4]).vertices.length,
+  assert.ok(ObjParser.parse(lines[4]).vertices_coords.length,
             'vertex line should produce vertices');
-  assert.deepEqual(ObjParser.parse(lines[4]).vertices,
+  assert.deepEqual(ObjParser.parse(lines[4]).vertices_coords,
             [1.000, -1.000, -1.000],
             'vertex line should be parsed correctly with 3 comps');
 });
@@ -87,7 +87,7 @@ QUnit.test("vertices from generated blender obj", (assert) => {
     -1.000000,1.000000,-1.000000,
   ];
 
-  assert.deepEqual(ObjParser.parse(OBJ_1).vertices, expected,
+  assert.deepEqual(ObjParser.parse(OBJ_1).vertices_coords, expected,
                    'all vertex from OBJ1 lines should be parsed correctly');
 });
 
@@ -107,6 +107,30 @@ QUnit.test("produce flat array w/ stride of 3 for quads", (assert) => {
   assert.equal(actual._facesType, ObjParser.FACES_TYPES.FACE);
   assert.deepEqual(actual.faces, expected);
   assert.ok(!(actual.faces.length%3));
+});
+
+QUnit.test("produce correct vertices given vertices_coords and faces", (assert) => {
+  let actual = ObjParser.parse(['v -1.000000 0.000000 0.000000',
+                                'v 1.000000 0.000000 0.000000',
+                                'v 0.000000 1.000000 0.000000',
+                                'v 1.000000 0.000000 1.000000',
+                                'f 1 2 3',
+                                'f 2 4 3',
+                                'f 4 1 3',
+                                'f 4 1 2'].join('\n'));
+
+  let expected_vertices = [-1.0, 0.0, 0.0,   1.0, 0.0, 0.0,    0.0, 1.0, 0.0,
+                            1.0, 0.0, 0.0,    1.0, 0.0, 1.0,    0.0, 1.0, 0.0,
+                            1.0, 0.0, 1.0,    -1.0, 0.0, 0.0,   0.0, 1.0, 0.0,
+                            1.0, 0.0, 1.0,    -1.0, 0.0, 0.0,   1.0, 0.0, 0.0];
+  let expected_vertices_coords = [-1.000000, 0.000000, 0.000000,
+                                  1.000000, 0.000000, 0.000000,
+                                  0.000000, 1.000000, 0.000000,
+                                  1.000000, 0.000000, 1.000000];
+
+  assert.equal(actual.vertices.length, expected_vertices.length);
+  assert.deepEqual(actual.vertices_coords, expected_vertices_coords);
+  assert.deepEqual(actual.vertices, expected_vertices);
 });
 
 QUnit.test("produce flat array w/ stride of 3 for triangs", (assert) => {
