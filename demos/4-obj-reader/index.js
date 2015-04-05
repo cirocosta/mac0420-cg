@@ -13,6 +13,7 @@
   };
   let _looping = false;
   let _pressed = null;
+  let _smoothShading = true;
 
   const ObjParser = window.ObjParser;
   const ELEMS = {
@@ -98,10 +99,13 @@
       return 0;
 
     if (obj.new) { // caching
-      ObjParser.applySmoothShading(obj);
       VERTICES = new Float32Array(obj.vertices);
       INDICES = new Uint16Array(obj.indices);
-      NORMALS = new Float32Array(obj.normals);
+      if (_smoothShading)
+        NORMALS = new Float32Array(obj.smooth_normals);
+      else
+        NORMALS = new Float32Array(obj.flat_normals);
+
       obj.new = false;
     }
 

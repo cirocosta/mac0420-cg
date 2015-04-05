@@ -34,11 +34,16 @@
       vertices_normals: [], // indices to obtain 'normals' prop
       vertices_coords: [],  // coordinates that are references to actual vertices
 
-      vertices: [], normals: [], indices: [], // final buffer data
+      smooth_normals: [],
+      flat_normals: [],
+      vertices: [],
+      indices: [], // final buffer data
     };
 
     let bigger_vertex_dist = 0.0;
     let index_hashes = {};
+    let hash_vertices = {};
+    let same_vertices = {};
     let index = 0;
     let normal_index = 1;
     let facesType = null;
@@ -71,6 +76,8 @@
         case 'f':
           let faces = line.split(' ').slice(1);
 
+          // cache the type of face that we're
+          // dealing with
           if (!facesType) {
             if (~faces[0].indexOf('//'))
               facesType = FACES_TYPES.FACE_NORMALS;
@@ -80,13 +87,15 @@
               facesType = FACES_TYPES.FACE;
           }
 
+          // trnasform quad faces into triang
+          // faces
           if (faces.length === 4) {
             if (facesType === FACES_TYPES.FACE)
               throw new Error('TODO: FACES_TYPE.FACE w/ quad obj');
             faces = [faces[0], faces[1], faces[2], faces[2], faces[3], faces[0]];
-          }
-          else if (faces.length > 4)
+          } else if (faces.length > 4) {
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
+          }
 
           // if no normals info, fix it
           if (facesType === FACES_TYPES.FACE) {
@@ -128,24 +137,34 @@
 
           // face corresponds to a 'v/t/n' grouping
           faces.forEach((face) => {
+            // do not process redundant faces
             if (face in index_hashes)
               return result.indices.push(index_hashes[face]);
 
-            let [faceI, normalI] = face.split('//');
+            // 0-index
+            let [verticeI, normalI] = face.split('//');
             normalI = (+normalI) - 1;
-            faceI = (+faceI) - 1;
+            verticeI = (+verticeI) - 1;
 
-            result.vertices.push(result.vertices_coords[faceI*3],
-                                 result.vertices_coords[faceI*3+1],
-                                 result.vertices_coords[faceI*3+2]);
-            result.normals.push(result.vertices_normals[normalI*3],
-                                result.vertices_normals[normalI*3+1],
-                                result.vertices_normals[normalI*3+2]);
+            // store where same vertices lives in
+            // indexes
+            if (same_vertices[verticeI] == null)
+              same_vertices[verticeI] = [];
+            same_vertices[verticeI].push(result.vertices.length);
+
+            result.vertices.push(result.vertices_coords[verticeI*3],
+                                 result.vertices_coords[verticeI*3+1],
+                                 result.vertices_coords[verticeI*3+2]);
+            result.flat_normals.push(result.vertices_normals[normalI*3],
+                                     result.vertices_normals[normalI*3+1],
+                                     result.vertices_normals[normalI*3+2]);
+            result.smooth_normals.push(result.vertices_normals[normalI*3],
+                                     result.vertices_normals[normalI*3+1],
+                                     result.vertices_normals[normalI*3+2]);
 
             index_hashes[face] = index;
             result.indices.push(index++);
           });
-
           break;
 
         case '#':
@@ -153,6 +172,25 @@
           break;
       }
     });
+
+    for (let i in same_vertices) {
+      let indexes = same_vertices[i];
+      let result_normal = indexes.reduce((mem, index) => {
+        mem[0] += result.smooth_normals[index];
+        mem[1] += result.smooth_normals[index+1];
+        mem[2] += result.smooth_normals[index+2];
+
+        return mem;
+      }, [0.0,0.0,0.0]);
+
+      result_normal = (new Vector3(result_normal)).normalize().elements;
+
+      indexes.forEach((index) => {
+        result.smooth_normals[index] = result_normal[0];
+        result.smooth_normals[index+1] = result_normal[1];
+        result.smooth_normals[index+2] = result_normal[2];
+      });
+    }
 
     if (result.vertices_coords.length) {
       result.scale = Math.sqrt(3.0)/Math.sqrt(bigger_vertex_dist);
@@ -193,51 +231,11 @@
     return (new Vector3(normal)).normalize().elements;
   }
 
-  function applySmoothShading (obj) {
-    let N = obj.vertices.length;
-    let visited = [];
-
-    for (let i = 0; i < N; i += 3) {
-      let indexes = [];
-
-      for (let j = 0; j < N; j+=3) {
-        if (obj.vertices[j] === obj.vertices[i] &&
-            obj.vertices[j+1] === obj.vertices[i+1] &&
-            obj.vertices[j+2] === obj.vertices[i+2]) {
-          indexes.push(j);
-        }
-      }
-
-      let hash = indexes.join(',');
-
-      if (~visited.indexOf(hash))
-        continue;
-
-      visited.push(hash);
-
-      let result_normal = indexes.reduce((result, index) => {
-        result[0] += obj.normals[index];
-        result[1] += obj.normals[index+1];
-        result[2] += obj.normals[index+2];
-
-        return result;
-      }, [0.0,0.0,0.0]);
-
-      result_normal = (new Vector3(result_normal)).normalize().elements;
-
-      indexes.forEach((index) => {
-        obj.normals[index] = result_normal[0];
-        obj.normals[index+1] = result_normal[1];
-        obj.normals[index+2] = result_normal[2];
-      });
-    }
-  }
 
   root.ObjParser = {
     parse,
     getNormal,
     FACES_TYPES,
-    applySmoothShading,
 
     to_float,
     slashed_to_array,
