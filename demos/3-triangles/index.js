@@ -1,11 +1,13 @@
 (function (root) {
   'use strict';
 
+  const deg_to_rad = (deg) => deg*Math.PI/180.0;
   const canvas = document.querySelector('canvas');
 
   let gl = WebGLUtils.setupWebGL(canvas);
   let angle = 30.0;
-  let t_matrix;
+
+  let M = mat4.create();
 
   const QUAD_VERTEX_SIZE = 3;
   const resize = WebGLUtils.genResizeFun(canvas, gl);
@@ -80,14 +82,11 @@
     // we always need to finish the transformation
     // matrix by transposing it as opengl operater
     // on column-major order.
-    t_matrix = MV.mat4.identity();
-    // t_matrix = MV.mat4.scale(t_matrix, .3);
-    t_matrix = MV.mat4.rotate(t_matrix, MV.deg_to_rad(angle), 'z');
-    // t_matrix = MV.mat4.translate(t_matrix, .0, .3, .0);
-    MV.mat4.transpose(t_matrix, t_matrix);
+    mat4.identity(M);
+    mat4.rotateZ(M, M, deg_to_rad(angle));
 
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, t_matrix);
+    gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, M);
 
     // N_VERTICES tells how many times the vertex
     // shader needs to be executed for drawing

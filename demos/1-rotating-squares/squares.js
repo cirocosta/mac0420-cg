@@ -56,12 +56,12 @@
     gl.uniform1f(u_theta, theta);
 
     // first rectangle
-    gl.bufferData(gl.ARRAY_BUFFER, MV.flatten32f(VERTICES_1), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(VERTICES_1), gl.STATIC_DRAW);
     gl.vertexAttrib1f(a_Translation, TRANSLATION_1);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
     // second rectangle
-    gl.bufferData(gl.ARRAY_BUFFER, MV.flatten32f(VERTICES_2), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(VERTICES_2), gl.STATIC_DRAW);
     gl.vertexAttrib1f(a_Translation, TRANSLATION_2);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
