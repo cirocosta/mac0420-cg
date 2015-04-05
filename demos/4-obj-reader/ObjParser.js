@@ -183,7 +183,7 @@
         return mem;
       }, [0.0,0.0,0.0]);
 
-      result_normal = (new Vector3(result_normal)).normalize().elements;
+      vec3.normalize(result_normal, vec3.clone(result_normal));
 
       indexes.forEach((index) => {
         result.smooth_normals[index] = result_normal[0];
@@ -222,13 +222,15 @@
   function getNormal (a, b, c) {
     let v1 = b.map((elem, i) => elem - a[i]);
     let v2 = c.map((elem, i) => elem - a[i]);
-    let normal = new Float32Array(3);
+    let normal = vec3.create();
 
     normal[0] = (v1[1]*v2[2]) - (v1[2]*v2[1]);
     normal[1] = (v1[2]*v2[0]) - (v1[0]*v2[2]);
     normal[2] = (v1[0]*v2[1]) - (v1[1]*v2[0]);
 
-    return (new Vector3(normal)).normalize().elements;
+    vec3.normalize(normal, normal);
+
+    return normal;
   }
 
 

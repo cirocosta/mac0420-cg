@@ -24,7 +24,6 @@
                  [ 0.0,  1.0,  0.0]);
   mat4.multiply(VM, V, M);
   mat4.multiply(PVM, P, VM);
-
   mat4.invert(N, M);
   mat4.transpose(N, N);
 
