@@ -104,7 +104,7 @@ void main ()
 {
   gl_Position = u_MvpMatrix * a_Position;
 
-  v_Position = vec4(u_ModelMatrix * a_Position);
+  v_Position = -vec4(u_ModelMatrix * a_Position);
   v_Normal = normalize(vec4(u_NormalMatrix * a_Normal));
 }
 </script>
@@ -129,16 +129,14 @@ varying vec4 v_Position;
 
 void main ()
 {
-  vec4 pos = v_Position;
-  vec4 N = v_Normal;
-  vec4 L = normalize(lightPosition - vec4(pos));
-  vec4 V = normalize(pos);
+  vec4 L = normalize(lightPosition - vec4(v_Position));
+  vec4 V = normalize(v_Position);
   vec4 H = normalize(L + V);
 
-  float Kd = max(dot(N,L), 0.0);
+  float Kd = max(dot(v_Normal,L), 0.0);
   vec4 diffuse = Kd * lightDiffuse * mat_diffuse;
 
-  float Ks = pow(max(dot(N,H), 0.0), shininess);
+  float Ks = pow(max(dot(v_Normal,H), 0.0), shininess);
   vec4 specular = Ks * lightSpecular * mat_specular;
 
   gl_FragColor = vec4(ambient + diffuse + specular);
