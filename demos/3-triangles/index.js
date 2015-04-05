@@ -2,20 +2,16 @@
   'use strict';
 
   const canvas = document.querySelector('canvas');
-  const resize = WebGLUtils.genResizeFun(canvas);
-  const VERTEX_SIZE = 3;
 
   let gl = WebGLUtils.setupWebGL(canvas);
   let angle = 30.0;
+  let t_matrix;
 
-  if (!gl)
-    throw new Error('Couldn\'t retrieve webgl context.');
+  const QUAD_VERTEX_SIZE = 3;
+  const resize = WebGLUtils.genResizeFun(canvas, gl);
 
-  if (!Shaders.initFromElems(gl,
-                             document.getElementById('vshader'),
-                             document.getElementById('fshader'))) {
-    throw new Error('Failed to initialize shaders');
-  }
+  Shaders.initFromElems(gl, document.getElementById('vshader'),
+                            document.getElementById('fshader'))
 
   /**
    * A benefit that comes from using buffers is
@@ -28,75 +24,76 @@
    * 4. assign the buffer to an attribute variable
    * 5. enable the assignment
    */
-  function initVertexBuffers (gl) {
-    const VERTICES = [
-      -0.5, 0.5, .0,
-      -0.5, -0.5, .0,
-      0.5, 0.5, .0,
-      0.5, -0.5, .0,
-    ];
+  function initVertexBuffers (gl, locations) {
+    const VERTICES = new Float32Array([
+      //    x ,   y ,  z, PointSize , R, G, B
+          -0.5, 0.5 , .0, 20.0, 1.0, 0.0, 0.0,
+          -0.5, -0.5, .0, 30.0, 0.0, 1.0, 0.0,
+           0.5, 0.5 , .0, 40.0, 0.0, 0.0, 1.0,
+           0.5, -0.5, .0, 50.0, 1.0, 1.0, 1.0,
+    ]);
+    const FSIZE = VERTICES.BYTES_PER_ELEMENT;
+    const STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 1 + 3);
+    const OFFSET_POINT = FSIZE * QUAD_VERTEX_SIZE;
+    const OFFSET_COLOR = FSIZE * (QUAD_VERTEX_SIZE + 1);
+    const OFFSET_QUAD = 0;
 
-    let vertexBuffer = gl.createBuffer();
+    const vertexBuffer = gl.createBuffer();
+
     if (!vertexBuffer)
-      throw new Error('Failed to create buffer');
+      throw new Error('Failed to create colorBuffer');
 
-    // binding to a target tells webgl the type of
-    // data that the buffer contains.
+    // bindings for a_Position
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(VERTICES), gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+    gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false,
+                           STRIDE, OFFSET_QUAD);
+    gl.enableVertexAttribArray(locations.a_Position);
 
-    // assign the buffer object to a_Position
-    // variable. It assigns an array of values to
-    // an attribute values. Although we don't
-    // explicity pass the buffer object, this will
-    // assign implicitly the buffer object bound
-    // to gl.ARRAY_BUFFER.
-    gl.vertexAttribPointer(a_Position, VERTEX_SIZE, gl.FLOAT, false, 0, 0);
-    // enable the assignment to a_Position
-    gl.enableVertexAttribArray(a_Position);
+    // a_PointSize
+    gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false,
+                           STRIDE, OFFSET_POINT);
+    gl.enableVertexAttribArray(locations.a_PointSize);
+
+    // a_Color
+    gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
+                           STRIDE, OFFSET_COLOR);
+    gl.enableVertexAttribArray(locations.a_Color);
 
     // now that is enabled we CAN'T use
     // gl.vertexAttrib to assign data to
     // attribute. We must firstly disable what
     // we've done.
 
-    return VERTICES.length/VERTEX_SIZE;
+    return 4;
   }
 
-  let [a_Position, u_FragColor, u_xformMatrix] =
-      Shaders.getAttribs(gl, 'a_Position', 'u_FragColor', 'u_xformMatrix');
-  const N_VERTICES = initVertexBuffers(gl);
+  const LOCATIONS = Shaders.getLocations(gl,
+    ['a_Position', 'a_PointSize', 'a_Color', 'u_xformMatrix']);
+  const N_VERTICES = initVertexBuffers(gl, LOCATIONS);
 
-  let radian = Math.PI * angle/180.0;
-  let cosB = Math.cos(radian);
-  let sinB = Math.sin(radian);
-  let xformMatrix = new Float32Array([
-    cosB, sinB, .0, .0,
-    -sinB, cosB, .0, .0,
-    .0, .0, 1., .0,
-    .0, .0, .0, 1.,
-  ]);
-
-  console.log(xformMatrix);
-
+  gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
   function render () {
-    gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    angle += 1;
+
+    // we always need to finish the transformation
+    // matrix by transposing it as opengl operater
+    // on column-major order.
+    t_matrix = MV.mat4.identity();
+    // t_matrix = MV.mat4.scale(t_matrix, .3);
+    t_matrix = MV.mat4.rotate(t_matrix, MV.deg_to_rad(angle), 'z');
+    // t_matrix = MV.mat4.translate(t_matrix, .0, .3, .0);
+    MV.mat4.transpose(t_matrix, t_matrix);
+
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix);
+    gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, t_matrix);
 
     // N_VERTICES tells how many times the vertex
     // shader needs to be executed for drawing
     // something.
-    gl.uniform4fv(u_FragColor, new Float32Array([1.0,0.0,0.0,1.0]));
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, N_VERTICES);
-
-    // gl.uniform4fv(u_FragColor, new Float32Array([0.0,1.0,0.0,1.0]));
-    // gl.drawArrays(gl.LINE_STRIP, 0, N_VERTICES);
-
-    // gl.uniform4fv(u_FragColor, new Float32Array([1.0,1.0,1.0,1.0]));
-    // gl.drawArrays(gl.POINTS, 0, N_VERTICES);
+    gl.drawArrays(gl.POINTS, 0, N_VERTICES);
   }
 
   resize();

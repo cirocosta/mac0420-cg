@@ -18,10 +18,7 @@
   let canvas = document.querySelector('canvas');
   let gl = WebGLUtils.setupWebGL(canvas);
 
-  if (!gl)
-    throw new Error('Couldn\'t retrieve webgl context.');
-
-  let resize = WebGLUtils.genResizeFun(canvas);
+  const resize = WebGLUtils.genResizeFun(canvas, gl);
 
   // per-vertex operations. This one will pass
   // gl_Position and gl_PointSize to the fshader
@@ -54,11 +51,12 @@
   if (!Shaders.initFromSrc(gl, VSHADER_SOURCE, FSHADER_SOURCE))
     throw new Error('Failed to initialize shaders');
 
-  let [a_Position, a_PointSize, u_FragColor] =
-    Shaders.getAttribs(gl, 'a_Position', 'a_PointSize', 'u_FragColor');
+  const LOCATIONS = Shaders.getLocations(gl, [
+    'a_Position', 'a_PointSize', 'u_FragColor'
+  ]);
 
   // setting vertex attributes
-  gl.vertexAttrib1f(a_PointSize, 20.0);
+  gl.vertexAttrib1f(LOCATIONS.a_PointSize, 20.0);
 
   canvas.addEventListener('mousedown', (ev) => {
     let x = ev.clientX;
@@ -86,8 +84,8 @@
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     for (let i in g_points) {
-      gl.uniform4fv(u_FragColor, new Float32Array(g_colors[i]));
-      gl.vertexAttrib3f(a_Position, g_points[i][0], g_points[i][1], 0.0);
+      gl.uniform4fv(LOCATIONS.u_FragColor, new Float32Array(g_colors[i]));
+      gl.vertexAttrib3f(LOCATIONS.a_Position, g_points[i][0], g_points[i][1], 0.0);
       gl.drawArrays(gl.POINTS, 0, 1);
     }
   }

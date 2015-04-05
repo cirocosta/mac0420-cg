@@ -6,18 +6,18 @@
 
   let theta = 0.0;
   const VERTICES_1 = [
-    MV.vec2( 0, .5),
-    MV.vec2( .5, 0),
-    MV.vec2(-.5, 0),
-    MV.vec2( 0, -.5)
+    0.0, 0.5,
+    0.5, 0.0,
+    -0.5, 0.0,
+    0.0, -0.5
   ];
   const TRANSLATION_1 = -.3;
 
   const VERTICES_2 = [
-    MV.vec2( 0, .5),
-    MV.vec2( .5, 0),
-    MV.vec2(-.5, 0),
-    MV.vec2( 0, -.5)
+    0.0, 0.5,
+    0.5, 0.0,
+    -0.5, 0.0,
+    0.0, -0.5
   ];
   const TRANSLATION_2 = .3;
 
