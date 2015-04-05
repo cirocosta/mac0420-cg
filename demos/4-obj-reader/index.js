@@ -43,6 +43,11 @@
     _rotations[which] += 2;
   }
 
+  ELEMS.toggleShading.addEventListener('click', (ev) => {
+    _smoothShading = !_smoothShading;
+    obj && (obj.new = true);
+  });
+
   ELEMS.toggleRotation.addEventListener('click', (ev) => {
     triggerRotation('ROTATE_X', true);
     triggerRotation('ROTATE_Y', true);
