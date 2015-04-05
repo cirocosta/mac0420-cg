@@ -27,6 +27,9 @@
     vshader: document.getElementById('vshader'),
     fshader: document.getElementById('fshader'),
 
+    vshader_fragment: document.getElementById('vshader-fragment'),
+    fshader_fragment: document.getElementById('fshader-fragment'),
+
     rotateX: document.querySelector('.command-rotateX'),
     rotateY: document.querySelector('.command-rotateY'),
     rotateZ: document.querySelector('.command-rotateZ'),
@@ -79,7 +82,7 @@
     shouldDraw && draw();
   });
 
-  Shaders.initFromElems(gl, ELEMS.vshader, ELEMS.fshader);
+  Shaders.initFromElems(gl, ELEMS.vshader_fragment, ELEMS.fshader_fragment);
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
 
