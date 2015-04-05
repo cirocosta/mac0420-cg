@@ -1,0 +1,25 @@
+{
+  "name": "mac0420-cg",
+  "version": "1.0.0",
+  "description": "> Demos of what i've been doing while studying for MAC0420. Only works on evergreen browsers (i highly recommend Firefox Nightly builds (v38+) as it uses ES6 without providing any kind of polyfill.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cirocosta/mac0420-cg.git"
+  },
+  "author": "Ciro S. Costa <ciro9758@gmail.com> (http://www.cirocosta.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cirocosta/mac0420-cg/issues"
+  },
+  "homepage": "https://github.com/cirocosta/mac0420-cg",
+  "dependencies": {
+    "gl-matrix": "^2.1.0"
+  }
+}
