@@ -15,6 +15,7 @@
   let _pressed = null;
   let _smoothShading = true;
 
+  const deg_to_rad = (deg) => deg*Math.PI/180.0;
   const ObjParser = window.ObjParser;
   const ELEMS = {
     canvas: document.querySelector('canvas'),
@@ -66,13 +67,15 @@
   let VERTICES, INDICES, NORMALS;
   const gl = WebGLUtils.setupWebGL(ELEMS.canvas);
 
-  let modelMatrix = new Matrix4();
-  let normalMatrix = new Matrix4();
-  let mvpMatrix = new Matrix4();
-  var viewProjMatrix = new Matrix4();
+  let M = mat4.create();    // model
+  let N = mat4.create();    // normal
+  let V = mat4.create();    // view
+  let P = mat4.create();    // perspective
+  let VM = mat4.create();   // model-view
+  let PVM = mat4.create();  // model-view-perspective
 
   const resize = WebGLUtils.genResizeFun(ELEMS.canvas, gl, (w, h, shouldDraw) => {
-    viewProjMatrix.setPerspective(30.0, w/h, 0.1, 50.0);
+    mat4.perspective(P, deg_to_rad(30.0), w/h, 0.1, 50.0);
     shouldDraw && draw();
   });
 
@@ -114,11 +117,11 @@
       obj.new = false;
     }
 
-    modelMatrix.scale(obj.scale, obj.scale, obj.scale);
-    modelMatrix.rotate(_rotations['ROTATE_X'], 1.0, 0.0, 0.0);
-    modelMatrix.rotate(_rotations['ROTATE_Y'], 0.0, 1.0, 0.0);
-    modelMatrix.rotate(_rotations['ROTATE_Z'], 0.0, 0.0, 1.0);
-    modelMatrix.translate(...(obj.center_of_mass.map((el) => -el)));
+    mat4.scale(M, M, [obj.scale, obj.scale, obj.scale]);
+    mat4.rotateX(M, M, deg_to_rad(_rotations['ROTATE_X']));
+    mat4.rotateY(M, M, deg_to_rad(_rotations['ROTATE_Y']));
+    mat4.rotateZ(M, M, deg_to_rad(_rotations['ROTATE_Z']));
+    mat4.translate(M, M, obj.center_of_mass.map((el) => -el));
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBUFFER);
     gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
@@ -136,34 +139,30 @@
    * Draws the entire scene.
    */
   function draw () {
-    modelMatrix = new Matrix4();
+    mat4.identity(M);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    viewProjMatrix.setPerspective(30.0, ELEMS.canvas.width/ELEMS.canvas.height,
-                                  0.1, 50.0);
-    viewProjMatrix.lookAt(0.0, 0.0, 10.0, // eye
-                          0.0, 0.0, 0.0,     // at
-                          0.0, 1.0, 0.0);    // up
+    mat4.perspective(P, deg_to_rad(30.0), ELEMS.canvas.width/ELEMS.canvas.height, 0.1, 50.0);
+    mat4.lookAt(V, [0.0, 0.0, 10.0],  // eye
+                   [0.0, 0.0, 0.0],   // at
+                   [0.0, 1.0, 0.0]);  // up
 
-    let N = draw_obj(obj);
+    let N_INDICES = draw_obj(obj);
 
-    // Calculate the model view project matrix and pass it to u_MvpMatrix
-    mvpMatrix.set(viewProjMatrix);
-    mvpMatrix.multiply(modelMatrix);
+    mat4.multiply(VM, V, M);
+    mat4.multiply(PVM, P, VM);
+    mat4.invert(N, M);
+    mat4.transpose(N, N);
 
-    // Calculate the normal transformation matrix and pass it to u_NormalMatrix
-    normalMatrix.setInverseOf(modelMatrix);
-    normalMatrix.transpose();
-
-    gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, modelMatrix.elements);
-    gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
-    gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
+    gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, M);
+    gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, N);
+    gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, PVM);
 
     // executes the shader and draws the geometric
     // shape in the specified 'mode' using the
     // indices specified in the buffer obj bound
     // to gl.ELEMENT_ARRAY_BUFFER.
-    gl.drawElements(gl.TRIANGLES, N, gl.UNSIGNED_SHORT, 0);
+    gl.drawElements(gl.TRIANGLES, N_INDICES, gl.UNSIGNED_SHORT, 0);
   }
 
   ELEMS.fileinput.addEventListener('change', (ev) => {

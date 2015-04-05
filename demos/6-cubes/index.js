@@ -1,27 +1,31 @@
 (function (root, document) {
   'use strict';
 
+  const deg_to_rad = (deg) => deg*Math.PI/180.0;
   const canvas = document.querySelector('canvas');
   let gl = WebGLUtils.setupWebGL(canvas);
 
   Shaders.initFromElems(gl, document.getElementById('vshader'),
                             document.getElementById('fshader'))
 
-  let modelMatrix = new Matrix4();
-  let normalMatrix = new Matrix4();
-  let mvpMatrix = new Matrix4();
-  modelMatrix.setTranslate(0.0, 1.0, 0.0);
-  modelMatrix.rotate(90.0, 0.0, 0.0, 1.0);
+  let M = mat4.create();    // model
+  let N = mat4.create();    // normal
+  let V = mat4.create();    // view
+  let P = mat4.create();    // perspective
+  let VM = mat4.create();   // model-view
+  let PVM = mat4.create();  // model-view-perspective
 
-  mvpMatrix.setPerspective( 30, 1, 1, 100);
-  mvpMatrix.lookAt(-7., 2.5,6.0,  // eye
-                   0., 0., 0.,  // at
-                   0., 1., 0.); // up
-  mvpMatrix.multiply(modelMatrix);
+  mat4.translate(M, M, [0.0, 1.0, 0.0]);
+  mat4.rotate(M, M, deg_to_rad(90.0), [0.0, 0.0, 1.0]);
 
-  normalMatrix.setInverseOf(modelMatrix);
-  normalMatrix.transpose();
-
+  mat4.perspective(P, deg_to_rad(30), 1, 1, 100);
+  mat4.lookAt(V, [-7.0,  2.5,  6.0],
+                 [ 0.0,  0.0,  0.0],
+                 [ 0.0,  1.0,  0.0]);
+  mat4.multiply(VM, V, M);
+  mat4.multiply(PVM, P, VM);
+  mat4.invert(N, M);
+  mat4.transpose(N, N);
 
   const LOCATIONS = Shaders.getLocations(gl,
     ['a_Position', 'a_Color', 'a_Normal',
@@ -36,9 +40,9 @@
 
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
   gl.enable(gl.DEPTH_TEST);
-  gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, modelMatrix.elements);
-  gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, normalMatrix.elements);
-  gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, mvpMatrix.elements);
+  gl.uniformMatrix4fv(LOCATIONS.u_ModelMatrix, false, M);
+  gl.uniformMatrix4fv(LOCATIONS.u_NormalMatrix, false, N);
+  gl.uniformMatrix4fv(LOCATIONS.u_MvpMatrix, false, PVM);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
   // drawColorCube(gl, LOCATIONS);
   drawColorFacesCube(gl, LOCATIONS);
@@ -116,7 +120,7 @@
     // the triangles that represents the cube
     // (each face contains 6 vertices from 3
     // triangles).
-    const INDICES = new Uint8Array([
+    const INDICES = new Uint16Array([
       0, 1, 2,   0, 2, 3,    // front
       0, 3, 4,   0, 4, 5,    // right
       0, 5, 6,   0, 6, 1,    // up
@@ -153,6 +157,6 @@
     gl.enableVertexAttribArray(locations.a_Color);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);
-    gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_BYTE, 0);
+    gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_SHORT, 0);
   }
 })(window, document);
