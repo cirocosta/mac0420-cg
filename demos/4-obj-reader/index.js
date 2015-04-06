@@ -7,13 +7,16 @@
     ROTATE_Z: false
   };
   let _rotations = {
-    ROTATE_X: 0.0,
-    ROTATE_Y: 0.0,
+    ROTATE_X: 45.0,
+    ROTATE_Y: 45.0,
     ROTATE_Z: 0.0
   };
+
+  // commands config
+  let _meshGrid = false;
   let _looping = false;
+  let _smoothShading = false;
   let _pressed = null;
-  let _smoothShading = true;
 
   const deg_to_rad = (deg) => deg*Math.PI/180.0;
   const ObjParser = window.ObjParser;
@@ -47,15 +50,19 @@
     _rotations[which] += 2;
   }
 
+  ELEMS.toggleMeshgrid.addEventListener('click', (ev) => {
+    _meshGrid = !_meshGrid;
+  });
+
   ELEMS.toggleShading.addEventListener('click', (ev) => {
     _smoothShading = !_smoothShading;
     obj && (obj.new = true);
   });
 
   ELEMS.toggleRotation.addEventListener('click', (ev) => {
-    triggerRotation('ROTATE_X', true);
-    triggerRotation('ROTATE_Y', true);
-    triggerRotation('ROTATE_Z', true);
+    triggerRotation('ROTATE_X', _rotating['ROTATE_X'] = !_rotating['ROTATE_X']);
+    triggerRotation('ROTATE_Y', _rotating['ROTATE_Y'] = !_rotating['ROTATE_Y']);
+    triggerRotation('ROTATE_Z', _rotating['ROTATE_Z'] = !_rotating['ROTATE_Z']);
   });
 
   ELEMS.rotateX.addEventListener('mousedown', triggerRotation.bind(null, 'ROTATE_X', true));
@@ -165,7 +172,10 @@
     // shape in the specified 'mode' using the
     // indices specified in the buffer obj bound
     // to gl.ELEMENT_ARRAY_BUFFER.
-    gl.drawElements(gl.TRIANGLES, N_INDICES, gl.UNSIGNED_SHORT, 0);
+    if (!_meshGrid)
+      gl.drawElements(gl.TRIANGLES, N_INDICES, gl.UNSIGNED_SHORT, 0);
+    else
+      gl.drawElements(gl.LINES, N_INDICES, gl.UNSIGNED_SHORT, 0);
   }
 
   ELEMS.fileinput.addEventListener('change', (ev) => {

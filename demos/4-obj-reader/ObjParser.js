@@ -87,17 +87,17 @@
               facesType = FACES_TYPES.FACE;
           }
 
-          // trnasform quad faces into triang
+          // transform quad faces into triang
           // faces
-          if (faces.length === 4) {
-            if (facesType === FACES_TYPES.FACE)
-              throw new Error('TODO: FACES_TYPE.FACE w/ quad obj');
+          if (faces.length === 4)
             faces = [faces[0], faces[1], faces[2], faces[2], faces[3], faces[0]];
-          } else if (faces.length > 4) {
+          else if (faces.length > 4)
             throw new Error('can\'t deal with ' + faces.length + 'd faces');
-          }
 
-          // if no normals info, fix it
+          // if no normals info, fix it. ps: note
+          // that this will work even for quad
+          // faces as the result of the normal
+          // calculate won't vary.
           if (facesType === FACES_TYPES.FACE) {
             let facesI = faces.map(to_int_minus_1);
 
