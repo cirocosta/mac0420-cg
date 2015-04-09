@@ -1,105 +1,109 @@
-(function (root) {
-  'use strict';
+'use strict';
 
-  const deg_to_rad = (deg) => deg*Math.PI/180.0;
-  const canvas = document.querySelector('canvas');
+import {mat4} from 'gl-matrix';
+import 'babel/polyfill';
+import '../../assets/webgl-debug';
+import WebGLUtils from '../../assets/webgl-utils';
 
-  let gl = WebGLUtils.setupWebGL(canvas);
-  let angle = 30.0;
 
-  let M = mat4.create();
+const deg_to_rad = (deg) => deg*Math.PI/180.0;
+const canvas = document.querySelector('canvas');
 
-  const QUAD_VERTEX_SIZE = 3;
-  const resize = WebGLUtils.genResizeFun(canvas, gl);
+let gl = WebGLUtils.setupWebGL(canvas);
+let angle = 30.0;
 
-  Shaders.initFromElems(gl, document.getElementById('vshader'),
-                            document.getElementById('fshader'))
+let M = mat4.create();
 
-  /**
-   * A benefit that comes from using buffers is
-   * that the vertex shader is then able to
-   * access more than one vertice per time.
-   *
-   * 1. create a buffer object
-   * 2. bind the buffer to a target
-   * 3. write data into the buffer
-   * 4. assign the buffer to an attribute variable
-   * 5. enable the assignment
-   */
-  function initVertexBuffers (gl, locations) {
-    const VERTICES = new Float32Array([
-      //    x ,   y ,  z, PointSize , R, G, B
-          -0.5, 0.5 , .0, 20.0, 1.0, 0.0, 0.0,
-          -0.5, -0.5, .0, 30.0, 0.0, 1.0, 0.0,
-           0.5, 0.5 , .0, 40.0, 0.0, 0.0, 1.0,
-           0.5, -0.5, .0, 50.0, 1.0, 1.0, 1.0,
-    ]);
-    const FSIZE = VERTICES.BYTES_PER_ELEMENT;
-    const STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 1 + 3);
-    const OFFSET_POINT = FSIZE * QUAD_VERTEX_SIZE;
-    const OFFSET_COLOR = FSIZE * (QUAD_VERTEX_SIZE + 1);
-    const OFFSET_QUAD = 0;
+const QUAD_VERTEX_SIZE = 3;
+const resize = WebGLUtils.genResizeFun(canvas, gl);
 
-    const vertexBuffer = gl.createBuffer();
+WebGLUtils.Shaders.initFromElems(gl, document.getElementById('vshader'),
+                          document.getElementById('fshader'))
 
-    if (!vertexBuffer)
-      throw new Error('Failed to create colorBuffer');
+/**
+ * A benefit that comes from using buffers is
+ * that the vertex shader is then able to
+ * access more than one vertice per time.
+ *
+ * 1. create a buffer object
+ * 2. bind the buffer to a target
+ * 3. write data into the buffer
+ * 4. assign the buffer to an attribute variable
+ * 5. enable the assignment
+ */
+function initVertexBuffers (gl, locations) {
+  const VERTICES = new Float32Array([
+    //    x ,   y ,  z, PointSize , R, G, B
+        -0.5, 0.5 , .0, 20.0, 1.0, 0.0, 0.0,
+        -0.5, -0.5, .0, 30.0, 0.0, 1.0, 0.0,
+         0.5, 0.5 , .0, 40.0, 0.0, 0.0, 1.0,
+         0.5, -0.5, .0, 50.0, 1.0, 1.0, 1.0,
+  ]);
+  const FSIZE = VERTICES.BYTES_PER_ELEMENT;
+  const STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 1 + 3);
+  const OFFSET_POINT = FSIZE * QUAD_VERTEX_SIZE;
+  const OFFSET_COLOR = FSIZE * (QUAD_VERTEX_SIZE + 1);
+  const OFFSET_QUAD = 0;
 
-    // bindings for a_Position
-    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
-    gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false,
-                           STRIDE, OFFSET_QUAD);
-    gl.enableVertexAttribArray(locations.a_Position);
+  const vertexBuffer = gl.createBuffer();
 
-    // a_PointSize
-    gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false,
-                           STRIDE, OFFSET_POINT);
-    gl.enableVertexAttribArray(locations.a_PointSize);
+  if (!vertexBuffer)
+    throw new Error('Failed to create colorBuffer');
 
-    // a_Color
-    gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
-                           STRIDE, OFFSET_COLOR);
-    gl.enableVertexAttribArray(locations.a_Color);
+  // bindings for a_Position
+  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+  gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false,
+                         STRIDE, OFFSET_QUAD);
+  gl.enableVertexAttribArray(locations.a_Position);
 
-    // now that is enabled we CAN'T use
-    // gl.vertexAttrib to assign data to
-    // attribute. We must firstly disable what
-    // we've done.
+  // a_PointSize
+  gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false,
+                         STRIDE, OFFSET_POINT);
+  gl.enableVertexAttribArray(locations.a_PointSize);
 
-    return 4;
-  }
+  // a_Color
+  gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false,
+                         STRIDE, OFFSET_COLOR);
+  gl.enableVertexAttribArray(locations.a_Color);
 
-  const LOCATIONS = Shaders.getLocations(gl,
-    ['a_Position', 'a_PointSize', 'a_Color', 'u_xformMatrix']);
-  const N_VERTICES = initVertexBuffers(gl, LOCATIONS);
+  // now that is enabled we CAN'T use
+  // gl.vertexAttrib to assign data to
+  // attribute. We must firstly disable what
+  // we've done.
 
-  gl.clearColor(0.0, 0.0, 0.0, 1.0);
+  return 4;
+}
 
-  function render () {
-    angle += 1;
+const LOCATIONS = WebGLUtils.Shaders.getLocations(gl,
+  ['a_Position', 'a_PointSize', 'a_Color', 'u_xformMatrix']);
+const N_VERTICES = initVertexBuffers(gl, LOCATIONS);
 
-    // we always need to finish the transformation
-    // matrix by transposing it as opengl operater
-    // on column-major order.
-    mat4.identity(M);
-    mat4.rotateZ(M, M, deg_to_rad(angle));
+gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, M);
+function render () {
+  angle += 1;
 
-    // N_VERTICES tells how many times the vertex
-    // shader needs to be executed for drawing
-    // something.
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, N_VERTICES);
-    gl.drawArrays(gl.POINTS, 0, N_VERTICES);
-  }
+  // we always need to finish the transformation
+  // matrix by transposing it as opengl operater
+  // on column-major order.
+  mat4.identity(M);
+  mat4.rotateZ(M, M, deg_to_rad(angle));
 
-  resize();
-  root.addEventListener('resize', resize);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, M);
 
-  (function loop () {
-    root.requestAnimationFrame(loop);
-    render();
-  })();
-})(window);
+  // N_VERTICES tells how many times the vertex
+  // shader needs to be executed for drawing
+  // something.
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, N_VERTICES);
+  gl.drawArrays(gl.POINTS, 0, N_VERTICES);
+}
+
+resize();
+window.addEventListener('resize', resize);
+
+(function loop () {
+  window.requestAnimationFrame(loop);
+  render();
+})();
