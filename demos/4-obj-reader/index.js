@@ -1,8 +1,8 @@
 'use strict';
 
 import {mat4} from 'gl-matrix';
-import '../../assets/webgl-debug';
 import 'babel/polyfill';
+import '../../assets/webgl-debug';
 import WebGLUtils from '../../assets/webgl-utils';
 import ObjParser from './ObjParser.js';
 
