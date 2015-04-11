@@ -120,12 +120,12 @@ window.onload = function init() {
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     resize = genResizeFun(canvas, gl, function (w, h, shouldDraw) {
-      xleft = -w / scaleFactor;
-      xright = w / scaleFactor;
-      ytop = h / scaleFactor;
-      ybottom = -h / scaleFactor;
+      var ar = w/h;
 
-      scaleFactor = w;
+      xleft = -2 * ar;
+      xright = 2 * ar;
+      ybottom = -2.0;
+      ytop = 2.0;
 
       gl.viewport(0, 0, w, h);
     });
@@ -215,6 +215,7 @@ var render = function() {
                cradius * Math.cos(ctheta));
 
     modelViewMatrix = lookAt(eye, at, up);
+    // modelViewMatrix = mult(modelViewMatrix, scale([1.0, 1.0, 1.0]));
 
     if (obj) {
       numVertices = draw_obj();
