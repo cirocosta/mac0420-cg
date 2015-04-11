@@ -22,6 +22,7 @@ let _meshGrid = false;
 let _looping = false;
 let _smoothShading = false;
 let _pressed = null;
+let _perspective = true;
 
 const deg_to_rad = (deg) => deg*Math.PI/180.0;
 const ELEMS = {
@@ -63,6 +64,10 @@ ELEMS.toggleShading.addEventListener('click', (ev) => {
   obj && (obj.new = true);
 });
 
+ELEMS.toggleProjection.addEventListener('click', (ev) => {
+  _perspective = !_perspective;
+});
+
 ELEMS.toggleRotation.addEventListener('click', (ev) => {
   triggerRotation('ROTATE_X', _rotating['ROTATE_X'] = !_rotating['ROTATE_X']);
   triggerRotation('ROTATE_Y', _rotating['ROTATE_Y'] = !_rotating['ROTATE_Y']);
@@ -89,7 +94,7 @@ let VM = mat4.create();   // model-view
 let PVM = mat4.create();  // model-view-perspective
 
 const resize = WebGLUtils.genResizeFun(ELEMS.canvas, gl, (w, h, shouldDraw) => {
-  mat4.perspective(P, deg_to_rad(30.0), w/h, 0.1, 50.0);
+  updateProjection(w, h);
   shouldDraw && draw();
 });
 
@@ -149,6 +154,15 @@ function draw_obj (obj) {
   return INDICES.length;
 }
 
+function updateProjection (w, h) {
+  let ar = w/h;
+
+  if (_perspective)
+    mat4.perspective(P, deg_to_rad(30.0), ar, 0.1, 50.0);
+  else
+    mat4.ortho(P, -2.5 * ar, 2.5 * ar, -2.5, 2.5, 0.1, 50.0);
+}
+
 /**
  * Draws the entire scene.
  */
@@ -156,7 +170,7 @@ function draw () {
   mat4.identity(M);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-  mat4.perspective(P, deg_to_rad(30.0), ELEMS.canvas.width/ELEMS.canvas.height, 0.1, 50.0);
+  updateProjection(ELEMS.canvas.width, ELEMS.canvas.height);
   mat4.lookAt(V, [0.0, 0.0, 10.0],  // eye
                  [0.0, 0.0, 0.0],   // at
                  [0.0, 1.0, 0.0]);  // up
