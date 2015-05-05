@@ -141,7 +141,7 @@ function parse (text) {
             return result.indices.push(index_hashes[face]);
 
           // 0-index
-          let [verticeI, normalI] = face.split('//');
+          let [verticeI, textureI, normalI] = face.split('/');
           normalI = (+normalI) - 1;
           verticeI = (+verticeI) - 1;
 

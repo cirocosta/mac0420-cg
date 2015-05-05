@@ -1,4 +1,12034 @@
-!function(t){function e(r){if(n[r])return n[r].exports;var i=n[r]={exports:{},id:r,loaded:!1};return t[r].call(i.exports,i,i.exports,e),i.loaded=!0,i.exports}var n={};return e.m=t,e.c=n,e.p="",e(0)}([function(t,e,n){"use strict";function r(t,e){var n=new Float32Array([-.5,.5,0,20,1,0,0,-.5,-.5,0,30,0,1,0,.5,.5,0,40,0,0,1,.5,-.5,0,50,1,1,1]),r=n.BYTES_PER_ELEMENT,i=r*(g+1+3),o=r*g,u=r*(g+1),a=0,c=t.createBuffer();if(!c)throw new Error("Failed to create colorBuffer");return t.bindBuffer(t.ARRAY_BUFFER,c),t.bufferData(t.ARRAY_BUFFER,n,t.STATIC_DRAW),t.vertexAttribPointer(e.a_Position,g,t.FLOAT,!1,i,a),t.enableVertexAttribArray(e.a_Position),t.vertexAttribPointer(e.a_PointSize,1,t.FLOAT,!1,i,o),t.enableVertexAttribArray(e.a_PointSize),t.vertexAttribPointer(e.a_Color,3,t.FLOAT,!1,i,u),t.enableVertexAttribArray(e.a_Color),4}function i(){h+=1,u.mat4.identity(v),u.mat4.rotateZ(v,v,s(h)),l.clear(l.COLOR_BUFFER_BIT),l.uniformMatrix4fv(d.u_xformMatrix,!1,v),l.drawArrays(l.TRIANGLE_STRIP,0,m),l.drawArrays(l.POINTS,0,m)}var o=n(96)["default"],u=n(103);n(163),n(94);var a=n(95),c=o(a),s=function(t){return t*Math.PI/180},f=document.querySelector("canvas"),l=c["default"].setupWebGL(f),h=30,v=u.mat4.create(),g=3,p=c["default"].genResizeFun(f,l);c["default"].Shaders.initFromElems(l,document.getElementById("vshader"),document.getElementById("fshader"));var d=c["default"].Shaders.getLocations(l,["a_Position","a_PointSize","a_Color","u_xformMatrix"]),m=r(l,d);l.clearColor(0,0,0,1),p(),window.addEventListener("resize",p),function y(){window.requestAnimationFrame(y),i()}()},function(t,e,n){"use strict";function r(t){return isNaN(t=+t)?0:(t>0?p:g)(t)}function i(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}function o(t,e,n){return t[e]=n,t}function u(t){return y?function(e,n,r){return E.setDesc(e,n,i(t,r))}:o}function a(t){return null!==t&&("object"==typeof t||"function"==typeof t)}function c(t){return"function"==typeof t}function s(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}var f="undefined"!=typeof self?self:Function("return this")(),l={},h=Object.defineProperty,v={}.hasOwnProperty,g=Math.ceil,p=Math.floor,d=Math.max,m=Math.min,y=!!function(){try{return 2==h({},"a",{get:function(){return 2}}).a}catch(t){}}(),b=u(1),E=t.exports=n(37)({g:f,core:l,html:f.document&&document.documentElement,isObject:a,isFunction:c,it:function(t){return t},that:function(){return this},toInteger:r,toLength:function(t){return t>0?m(r(t),9007199254740991):0},toIndex:function(t,e){return t=r(t),0>t?d(t+e,0):m(t,e)},has:function(t,e){return v.call(t,e)},create:Object.create,getProto:Object.getPrototypeOf,DESC:y,desc:i,getDesc:Object.getOwnPropertyDescriptor,setDesc:h,getKeys:Object.keys,getNames:Object.getOwnPropertyNames,getSymbols:Object.getOwnPropertySymbols,assertDefined:s,ES5Object:Object,toObject:function(t){return E.ES5Object(s(t))},hide:b,def:u(0),set:f.Symbol?o:b,mix:function(t,e){for(var n in e)b(t,n,e[n]);return t},each:[].forEach});"undefined"!=typeof __e&&(__e=l),"undefined"!=typeof __g&&(__g=f)},function(t,e,n){function r(t,e){return function(){return t.apply(e,arguments)}}function i(t,e,n){var s,f,l,h,v=t&i.G,g=v?u:t&i.S?u[e]:(u[e]||{}).prototype,p=v?a:a[e]||(a[e]={});v&&(n=e);for(s in n)f=!(t&i.F)&&g&&s in g,f&&s in p||(l=f?g[s]:n[s],v&&!c(g[s])?h=n[s]:t&i.B&&f?h=r(l,u):t&i.W&&g[s]==l?!function(t){h=function(e){return this instanceof t?new t(e):t(e)},h.prototype=t.prototype}(l):h=t&i.P&&c(l)?r(Function.call,l):l,o.hide(p,s,h))}var o=n(1),u=o.g,a=o.core,c=o.isFunction;i.F=1,i.G=2,i.S=4,i.P=8,i.B=16,i.W=32,t.exports=i},function(t,e,n){function r(t,e,n){if(!t)throw TypeError(n?e+n:e)}var i=n(1);r.def=i.assertDefined,r.fn=function(t){if(!i.isFunction(t))throw TypeError(t+" is not a function!");return t},r.obj=function(t){if(!i.isObject(t))throw TypeError(t+" is not an object!");return t},r.inst=function(t,e,n){if(!(t instanceof e))throw TypeError(n+": use the 'new' operator!");return t},t.exports=r},function(t,e,n){"use strict";function r(t){return isNaN(t=+t)?0:(t>0?p:g)(t)}function i(t,e){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:e}}function o(t,e,n){return t[e]=n,t}function u(t){return y?function(e,n,r){return E.setDesc(e,n,i(t,r))}:o}function a(t){return null!==t&&("object"==typeof t||"function"==typeof t)}function c(t){return"function"==typeof t}function s(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}var f="undefined"!=typeof self?self:Function("return this")(),l={},h=Object.defineProperty,v={}.hasOwnProperty,g=Math.ceil,p=Math.floor,d=Math.max,m=Math.min,y=!!function(){try{return 2==h({},"a",{get:function(){return 2}}).a}catch(t){}}(),b=u(1),E=t.exports=n(113)({g:f,core:l,html:f.document&&document.documentElement,isObject:a,isFunction:c,it:function(t){return t},that:function(){return this},toInteger:r,toLength:function(t){return t>0?m(r(t),9007199254740991):0},toIndex:function(t,e){return t=r(t),0>t?d(t+e,0):m(t,e)},has:function(t,e){return v.call(t,e)},create:Object.create,getProto:Object.getPrototypeOf,DESC:y,desc:i,getDesc:Object.getOwnPropertyDescriptor,setDesc:h,getKeys:Object.keys,getNames:Object.getOwnPropertyNames,getSymbols:Object.getOwnPropertySymbols,assertDefined:s,ES5Object:Object,toObject:function(t){return E.ES5Object(s(t))},hide:b,def:u(0),set:f.Symbol?o:b,mix:function(t,e){for(var n in e)b(t,n,e[n]);return t},each:[].forEach});"undefined"!=typeof __e&&(__e=l),"undefined"!=typeof __g&&(__g=f)},function(t,e,n){"use strict";function r(t,e){c.hide(t,v,e),g in[]&&c.hide(t,g,e)}function i(t,e,n,i){var o=t.prototype,u=o[v]||o[g]||i&&o[i]||n;if(c.FW&&r(o,u),u!==n){var a=c.getProto(u.call(new t));f.set(a,e+" Iterator",!0),c.FW&&c.has(o,g)&&r(a,c.that)}return p[e]=u,p[e+" Iterator"]=c.that,u}function o(t){var e=c.g.Symbol,n=t[e&&e.iterator||g],r=n||t[v]||p[f.classof(t)];return h(r.call(t))}function u(t){var e=t["return"];void 0!==e&&h(e.call(t))}function a(t,e,n,r){try{return r?e(h(n)[0],n[1]):e(n)}catch(i){throw u(t),i}}var c=n(1),s=n(8),f=n(7),l=n(2),h=n(3).obj,v=n(10)("iterator"),g="@@iterator",p={},d={},m="keys"in[]&&!("next"in[].keys());r(d,c.that);var y=!0;!function(){try{var t=[1].keys();t["return"]=function(){y=!1},Array.from(t,function(){throw 2})}catch(e){}}();var b=t.exports={BUGGY:m,DANGER_CLOSING:y,fail:function(t){var e=!0;try{var n=[[{},1]],r=n[v](),i=r.next;r.next=function(){return e=!1,i.call(this)},n[v]=function(){return r},t(n)}catch(o){}return e},Iterators:p,prototype:d,step:function(t,e){return{value:e,done:!!t}},stepCall:a,close:u,is:function(t){var e=Object(t),n=c.g.Symbol,r=n&&n.iterator||g;return r in e||v in e||c.has(p,f.classof(e))},get:o,set:r,create:function(t,e,n,r){t.prototype=c.create(r||b.prototype,{next:c.desc(1,n)}),f.set(t,e+" Iterator")},define:i,std:function(t,e,n,r,o,u,a){function s(t){return function(){return new n(this,t)}}b.create(n,e,r);var f,h,v=s("key+value"),g=s("value"),p=t.prototype;if("value"==o?g=i(t,e,g,"values"):v=i(t,e,v,"entries"),o&&(f={entries:v,keys:u?g:s("key"),values:g},l(l.P+l.F*m,e,f),a))for(h in f)h in p||c.hide(p,h,f[h])},forOf:function(t,e,n,r){for(var i,c=o(t),f=s(n,r,e?2:1);!(i=c.next()).done;)if(a(c,f,i.value,e)===!1)return u(c)}}},function(t,e,n){function r(t){return"Symbol("+t+")_"+(++i+Math.random()).toString(36)}var i=0;r.safe=n(1).g.Symbol||r,t.exports=r},function(t,e,n){function r(t){return u.call(t).slice(8,-1)}var i=n(1),o=n(10)("toStringTag"),u={}.toString;r.classof=function(t){var e,n;return void 0==t?void 0===t?"Undefined":"Null":"string"==typeof(n=(e=Object(t))[o])?n:r(e)},r.set=function(t,e,n){t&&!i.has(t=n?t:t.prototype,o)&&i.hide(t,o,e)},t.exports=r},function(t,e,n){var r=n(3).fn;t.exports=function(t,e,n){if(r(t),~n&&void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,i){return t.call(e,n,r,i)}}return function(){return t.apply(e,arguments)}}},function(t,e,n){function r(t,e){return function(){return t.apply(e,arguments)}}function i(t,e,n){var s,f,l,h,v=t&i.G,g=v?u:t&i.S?u[e]:(u[e]||{}).prototype,p=v?a:a[e]||(a[e]={});v&&(n=e);for(s in n)f=!(t&i.F)&&g&&s in g,l=(f?g:n)[s],h=t&i.B&&f?r(l,u):t&i.P&&c(l)?r(Function.call,l):l,g&&!f&&(v?g[s]=l:delete g[s]&&o.hide(g,s,l)),p[s]!=l&&o.hide(p,s,h)}var o=n(4),u=o.g,a=o.core,c=o.isFunction;u.core=a,i.F=1,i.G=2,i.S=4,i.P=8,i.B=16,i.W=32,t.exports=i},function(t,e,n){var r=n(1).g,i={};t.exports=function(t){return i[t]||(i[t]=r.Symbol&&r.Symbol[t]||n(6).safe("Symbol."+t))}},function(t,e,n){var r=n(1),i=n(10)("unscopables");!r.FW||i in[]||r.hide(Array.prototype,i,{}),t.exports=function(t){r.FW&&([][i][t]=!0)}},function(t,e,n){t.exports=function(t,e,n){var r=void 0===n;switch(e.length){case 0:return r?t():t.call(n);case 1:return r?t(e[0]):t.call(n,e[0]);case 2:return r?t(e[0],e[1]):t.call(n,e[0],e[1]);case 3:return r?t(e[0],e[1],e[2]):t.call(n,e[0],e[1],e[2]);case 4:return r?t(e[0],e[1],e[2],e[3]):t.call(n,e[0],e[1],e[2],e[3]);case 5:return r?t(e[0],e[1],e[2],e[3],e[4]):t.call(n,e[0],e[1],e[2],e[3],e[4])}return t.apply(n,e)}},function(t,e,n){"use strict";var r=n(1),i=n(8);t.exports=function(t){var e=1==t,n=2==t,o=3==t,u=4==t,a=6==t,c=5==t||a;return function(s){for(var f,l,h=Object(r.assertDefined(this)),v=r.ES5Object(h),g=i(s,arguments[1],3),p=r.toLength(v.length),d=0,m=e?Array(p):n?[]:void 0;p>d;d++)if((c||d in v)&&(f=v[d],l=g(f,d,h),t))if(e)m[d]=l;else if(l)switch(t){case 3:return!0;case 5:return f;case 6:return d;case 2:m.push(f)}else if(u)return!1;return a?-1:o||u?u:m}}},function(t,e,n){"use strict";var r=n(1),i=n(2),o=n(5),u=n(3).inst;t.exports=function(t,e,a,c,s){function f(t,e){var n=g[t];r.FW&&(g[t]=function(t,r){var i=n.call(this,0===t?0:t,r);return e?this:i})}var l=r.g[t],h=l,v=c?"set":"add",g=h&&h.prototype,p={};if(r.isFunction(h)&&(s||!o.BUGGY&&g.forEach&&g.entries)){var d,m=new h,y=m[v](s?{}:-0,1);(o.fail(function(t){new h(t)})||o.DANGER_CLOSING)&&(h=function(e){u(this,h,t);var n=new l;return void 0!=e&&o.forOf(e,c,n[v],n),n},h.prototype=g,r.FW&&(g.constructor=h)),s||m.forEach(function(t,e){d=1/e===-(1/0)}),d&&(f("delete"),f("has"),c&&f("get")),(d||y!==m)&&f(v,!0)}else h=a.getConstructor(t,c,v),r.mix(h.prototype,e);return n(7).set(h,t),n(16)(h),p[t]=h,i(i.G+i.W+i.F*(h!=l),p),s||o.std(h,t,a.getIterConstructor(),a.next,c?"key+value":"value",!c,!0),h}},function(t,e,n){"use strict";t.exports=function(t,e,n){var r=e===Object(e)?function(t){return e[t]}:e;return function(e){return String(n?e:this).replace(t,r)}}},function(t,e,n){var r=n(1);t.exports=function(t){r.DESC&&r.FW&&r.setDesc(t,n(10)("species"),{configurable:!0,get:r.that})}},function(t,e,n){var r=n(1);t.exports=Object.assign||function(t,e){for(var n=Object(r.assertDefined(t)),i=arguments.length,o=1;i>o;)for(var u,a=r.ES5Object(arguments[o++]),c=r.getKeys(a),s=c.length,f=0;s>f;)n[u=c[f++]]=a[u];return n}},function(t,e,n){var r=n(1),i=n(3).obj;t.exports=function(t){return i(t),r.getSymbols?r.getNames(t).concat(r.getSymbols(t)):r.getNames(t)}},function(t,e,n){"use strict";var r=n(1),i=n(12),o=n(3).fn;t.exports=function(){for(var t=o(this),e=arguments.length,n=Array(e),u=0,a=r.path._,c=!1;e>u;)(n[u]=arguments[u++])===a&&(c=!0);return function(){var r,o=this,u=arguments.length,s=0,f=0;if(!c&&!u)return i(t,n,o);if(r=n.slice(),c)for(;e>s;s++)r[s]===a&&(r[s]=arguments[f++]);for(;u>f;)r.push(arguments[f++]);return i(t,r,o)}}},function(t,e,n){"use strict";var r=n(1);t.exports=function(t){return function(e){var n,i,o=String(r.assertDefined(this)),u=r.toInteger(e),a=o.length;return 0>u||u>=a?t?"":void 0:(n=o.charCodeAt(u),55296>n||n>56319||u+1===a||(i=o.charCodeAt(u+1))<56320||i>57343?t?o.charAt(u):n:t?o.slice(u,u+2):(n-55296<<10)+(i-56320)+65536)}}},function(t,e,n){t.exports={"default":n(36),__esModule:!0}},function(t,e,n){function r(t,e,n){if(!t)throw TypeError(n?e+n:e)}var i=n(4);r.def=i.assertDefined,r.fn=function(t){if(!i.isFunction(t))throw TypeError(t+" is not a function!");return t},r.obj=function(t){if(!i.isObject(t))throw TypeError(t+" is not an object!");return t},r.inst=function(t,e,n){if(!(t instanceof e))throw TypeError(n+": use the 'new' operator!");return t},t.exports=r},function(t,e,n){function r(t){return u.call(t).slice(8,-1)}var i=n(4),o=n(34)("toStringTag"),u={}.toString;r.classof=function(t){var e,n;return void 0==t?void 0===t?"Undefined":"Null":"string"==typeof(n=(e=Object(t))[o])?n:r(e)},r.set=function(t,e,n){t&&!i.has(t=n?t:t.prototype,o)&&i.hide(t,o,e)},t.exports=r},function(t,e,n){"use strict";var r=n(1);t.exports=function(t){return function(e){var n,i=r.toObject(this),o=r.toLength(i.length),u=r.toIndex(arguments[1],o);if(t&&e!=e){for(;o>u;)if(n=i[u++],n!=n)return!0}else for(;o>u;u++)if((t||u in i)&&i[u]===e)return t||u;return!t&&-1}}},function(t,e,n){"use strict";function r(t,e){if(!h(t))return("string"==typeof t?"S":"P")+t;if(p(t))return"F";if(!f(t,d)){if(!e)return"E";v(t,d,++O)}return"O"+t[d]}function i(t,e){var n,i=r(e);if("F"!=i)return t[m][i];for(n=t[b];n;n=n.n)if(n.k==e)return n}var o=n(1),u=n(8),a=n(6).safe,c=n(3),s=n(5),f=o.has,l=o.set,h=o.isObject,v=o.hide,g=s.step,p=Object.isFrozen||o.core.Object.isFrozen,d=a("id"),m=a("O1"),y=a("last"),b=a("first"),E=a("iter"),S=o.DESC?a("size"):"size",O=0;t.exports={getConstructor:function(t,e,n){function r(i){var u=c.inst(this,r,t);l(u,m,o.create(null)),l(u,S,0),l(u,y,void 0),l(u,b,void 0),void 0!=i&&s.forOf(i,e,u[n],u)}return o.mix(r.prototype,{clear:function(){for(var t=this,e=t[m],n=t[b];n;n=n.n)n.r=!0,n.p&&(n.p=n.p.n=void 0),delete e[n.i];t[b]=t[y]=void 0,t[S]=0},"delete":function(t){var e=this,n=i(e,t);if(n){var r=n.n,o=n.p;delete e[m][n.i],n.r=!0,o&&(o.n=r),r&&(r.p=o),e[b]==n&&(e[b]=r),e[y]==n&&(e[y]=o),e[S]--}return!!n},forEach:function(t){for(var e,n=u(t,arguments[1],3);e=e?e.n:this[b];)for(n(e.v,e.k,this);e&&e.r;)e=e.p},has:function(t){return!!i(this,t)}}),o.DESC&&o.setDesc(r.prototype,"size",{get:function(){return c.def(this[S])}}),r},def:function(t,e,n){var o,u,a=i(t,e);return a?a.v=n:(t[y]=a={i:u=r(e,!0),k:e,v:n,p:o=t[y],n:void 0,r:!1},t[b]||(t[b]=a),o&&(o.n=a),t[S]++,"F"!=u&&(t[m][u]=a)),t},getEntry:i,getIterConstructor:function(){return function(t,e){l(this,E,{o:t,k:e})}},next:function(){for(var t=this[E],e=t.k,n=t.l;n&&n.r;)n=n.p;return t.o&&(t.l=n=n?n.n:t.o[b])?"key"==e?g(0,n.k):"value"==e?g(0,n.v):g(0,[n.k,n.v]):(t.o=void 0,g(1))}}},function(t,e,n){"use strict";function r(t,e){return y.call(t.array,function(t){return t[0]===e})}function i(t){return t[d]||l(t,d,{array:[],get:function(t){var e=r(this,t);return e?e[1]:void 0},has:function(t){return!!r(this,t)},set:function(t,e){var n=r(this,t);n?n[1]=e:this.array.push([t,e])},"delete":function(t){var e=b.call(this.array,function(e){return e[0]===t});return~e&&this.array.splice(e,1),!!~e}})[d]}var o=n(1),u=n(6).safe,a=n(3),c=n(5).forOf,s=o.has,f=o.isObject,l=o.hide,h=Object.isFrozen||o.core.Object.isFrozen,v=0,g=u("id"),p=u("weak"),d=u("leak"),m=n(13),y=m(5),b=m(6);t.exports={getConstructor:function(t,e,n){function r(i){o.set(a.inst(this,r,t),g,v++),void 0!=i&&c(i,e,this[n],this)}return o.mix(r.prototype,{"delete":function(t){return f(t)?h(t)?i(this)["delete"](t):s(t,p)&&s(t[p],this[g])&&delete t[p][this[g]]:!1},has:function(t){return f(t)?h(t)?i(this).has(t):s(t,p)&&s(t[p],this[g]):!1}}),r},def:function(t,e,n){return h(a.obj(e))?i(t).set(e,n):(s(e,p)||l(e,p,{}),e[p][t[g]]=n),t},leakStore:i,WEAK:p,ID:g}},function(t,e,n){var r=n(1);t.exports=function(t,e){for(var n,i=r.toObject(t),o=r.getKeys(i),u=o.length,a=0;u>a;)if(i[n=o[a++]]===e)return n}},function(t,e,n){var r=n(1),i=n(3);t.exports=Object.setPrototypeOf||("__proto__"in{}?function(t,e){try{e=n(8)(Function.call,r.getDesc(Object.prototype,"__proto__").set,2),e({},[])}catch(o){t=!0}return function(n,o){return i.obj(n),i(null===o||r.isObject(o),o,": can't set as prototype!"),t?n.__proto__=o:e(n,o),n}}():void 0)},function(t,e,n){"use strict";function r(){var t=+this;if(c.has(E,t)){var e=E[t];delete E[t],e()}}function i(t){r.call(t.data)}var o,u,a,c=n(1),s=n(8),f=n(7),l=n(12),h=c.g,v=c.isFunction,g=h.setImmediate,p=h.clearImmediate,d=h.postMessage,m=h.addEventListener,y=h.MessageChannel,b=0,E={},S="onreadystatechange";v(g)&&v(p)||(g=function(t){for(var e=[],n=1;arguments.length>n;)e.push(arguments[n++]);return E[++b]=function(){l(v(t)?t:Function(t),e)},o(b),b},p=function(t){delete E[t]},"process"==f(h.process)?o=function(t){h.process.nextTick(s(r,t,1))}:m&&v(d)&&!c.g.importScripts?(o=function(t){d(t,"*")},m("message",i,!1)):v(y)?(u=new y,a=u.port2,u.port1.onmessage=i,o=s(a.postMessage,a,1)):o=c.g.document&&S in document.createElement("script")?function(t){c.html.appendChild(document.createElement("script"))[S]=function(){c.html.removeChild(this),r.call(t)}}:function(t){setTimeout(s(r,t,1),0)}),t.exports={set:g,clear:p}},function(t,e,n){var r=n(1),i=n(11),o=n(6).safe("iter"),u=n(5),a=u.step,c=u.Iterators;u.std(Array,"Array",function(t,e){r.set(this,o,{o:r.toObject(t),i:0,k:e})},function(){var t=this[o],e=t.o,n=t.k,r=t.i++;return!e||r>=e.length?(t.o=void 0,a(1)):"key"==n?a(0,r):"value"==n?a(0,e[r]):a(0,[r,e[r]])},"value"),c.Arguments=c.Array,i("keys"),i("values"),i("entries")},function(t,e,n){var r=n(22).fn;t.exports=function(t,e,n){if(r(t),~n&&void 0===e)return t;switch(n){case 1:return function(n){return t.call(e,n)};case 2:return function(n,r){return t.call(e,n,r)};case 3:return function(n,r,i){return t.call(e,n,r,i)}}return function(){return t.apply(e,arguments)}}},function(t,e,n){"use strict";function r(t,e){c.hide(t,v,e),g in[]&&c.hide(t,g,e)}function i(t,e,n,i){var o=t.prototype,u=o[v]||o[g]||i&&o[i]||n;if(c.FW&&r(o,u),u!==n){var a=c.getProto(u.call(new t));f.set(a,e+" Iterator",!0),c.FW&&c.has(o,g)&&r(a,c.that)}return p[e]=u,p[e+" Iterator"]=c.that,u}function o(t){var e=c.g.Symbol,n=t[e&&e.iterator||g],r=n||t[v]||p[f.classof(t)];return h(r.call(t))}function u(t){var e=t["return"];void 0!==e&&h(e.call(t))}function a(t,e,n,r){try{return r?e(h(n)[0],n[1]):e(n)}catch(i){throw u(t),i}}var c=n(4),s=n(31),f=n(23),l=n(9),h=n(22).obj,v=n(34)("iterator"),g="@@iterator",p={},d={},m="keys"in[]&&!("next"in[].keys());r(d,c.that);var y=!0;!function(){try{var t=[1].keys();t["return"]=function(){y=!1},Array.from(t,function(){throw 2})}catch(e){}}();var b=t.exports={BUGGY:m,DANGER_CLOSING:y,fail:function(t){var e=!0;try{var n=[[{},1]],r=n[v](),i=r.next;r.next=function(){return e=!1,i.call(this)},n[v]=function(){return r},t(n)}catch(o){}return e},Iterators:p,prototype:d,step:function(t,e){return{value:e,done:!!t}},stepCall:a,close:u,is:function(t){var e=Object(t),n=c.g.Symbol,r=n&&n.iterator||g;return r in e||v in e||c.has(p,f.classof(e))},get:o,set:r,create:function(t,e,n,r){t.prototype=c.create(r||b.prototype,{next:c.desc(1,n)}),f.set(t,e+" Iterator")},define:i,std:function(t,e,n,r,o,u,a){function s(t){return function(){return new n(this,t)}}b.create(n,e,r);var f,h,v=s("key+value"),g=s("value"),p=t.prototype;if("value"==o?g=i(t,e,g,"values"):v=i(t,e,v,"entries"),o&&(f={entries:v,keys:u?g:s("key"),values:g},l(l.P+l.F*m,e,f),a))for(h in f)h in p||c.hide(p,h,f[h])},forOf:function(t,e,n,r){for(var i,c=o(t),f=s(n,r,e?2:1);!(i=c.next()).done;)if(a(c,f,i.value,e)===!1)return u(c)}}},function(t,e,n){function r(t){return"Symbol("+t+")_"+(++i+Math.random()).toString(36)}var i=0;r.safe=n(4).g.Symbol||r,t.exports=r},function(t,e,n){var r=n(4).g,i={};t.exports=function(t){return i[t]||(i[t]=r.Symbol&&r.Symbol[t]||n(33).safe("Symbol."+t))}},function(t,e,n){var r=n(4),i=n(34)("unscopables");!r.FW||i in[]||r.hide(Array.prototype,i,{}),t.exports=function(t){r.FW&&([][i][t]=!0)}},function(t,e,n){n(93),n(43),n(45),n(38),n(42),n(40),n(49),n(39),n(47),n(48),n(50),n(41),n(44),n(46),t.exports=n(1).core},function(t,e,n){t.exports=function(t){return t.FW=!1,t.path=t.core,t}},function(t,e,n){"use strict";function r(t,e){return this instanceof r?(this[h]=p(t),void(this[f]=!!e)):new r(t,e)}function i(t){function e(t,e,n){this[h]=p(t),this[f]=t[f],this[l]=u(e,n,t[f]?2:1)}return m(e,"Chain",t,y),d(e.prototype,o.that),e}var o=n(1),u=n(8),a=n(6).safe,c=n(2),s=n(5),f=a("entries"),l=a("fn"),h=a("iter"),v=s.forOf,g=s.stepCall,p=s.get,d=s.set,m=s.create;m(r,"Wrapper",function(){return this[h].next()});var y=r.prototype;d(y,function(){return this[h]});var b=i(function(){var t=this[h].next();return t.done?t:s.step(0,g(this[h],this[l],t.value,this[f]))}),E=i(function(){for(;;){var t=this[h].next();if(t.done||g(this[h],this[l],t.value,this[f]))return t}});o.mix(y,{of:function(t,e){v(this,this[f],t,e)},array:function(t,e){var n=[];return v(void 0!=t?this.map(t,e):this,!1,n.push,n),n},filter:function(t,e){return new E(this,t,e)},map:function(t,e){return new b(this,t,e)}}),r.isIterable=s.is,r.getIterator=p,c(c.G+c.F,{$for:r})},function(t,e,n){"use strict";var r=n(1),i=n(2),o=n(3).fn;i(i.P+i.F,"Array",{turn:function(t,e){o(t);for(var n=void 0==e?[]:Object(e),i=r.ES5Object(this),u=r.toLength(i.length),a=0;u>a&&t(n,i[a],a++,this)!==!1;);return n}}),n(11)("turn")},function(t,e,n){"use strict";function r(t){var e=this,n={};return c(e,f,function(t){return void 0!==t&&t in e?i.has(n,t)?n[t]:n[t]=o(e[t],e,-1):l.call(e)})[f](t)}var i=n(1),o=n(8),u=n(2),a=n(12),c=i.hide,s=n(3).fn,f=i.DESC?n(6)("tie"):"toLocaleString",l={}.toLocaleString;i.core._=i.path._=i.path._||{},u(u.P+u.F,"Function",{part:n(19),only:function(t,e){var n=s(this),r=i.toLength(t),o=arguments.length>1;return function(){for(var t=Math.min(r,arguments.length),i=Array(t),u=0;t>u;)i[u]=arguments[u++];return a(n,i,o?e:this)}}}),c(i.path._,"toString",function(){return f}),c(Object.prototype,f,r),i.DESC||c(Array.prototype,f,r)},function(t,e,n){function r(t){return t>9?t:"0"+t}function i(t){return function(e,n){function i(e){return o[t+e]()}var o=this,a=l[u.has(l,n)?n:h];return String(e).replace(s,function(t){switch(t){case"s":return i(v);case"ss":return r(i(v));case"m":return i(g);case"mm":return r(i(g));case"h":return i(p);case"hh":return r(i(p));case"D":return i(d);case"DD":return r(i(d));case"W":return a[0][i("Day")];case"N":return i(m)+1;case"NN":return r(i(m)+1);case"M":return a[2][i(m)];case"MM":return a[1][i(m)];case"Y":return i(y);case"YY":return r(i(y)%100)}return t})}}function o(t,e){function n(t){var n=[];return u.each.call(e.months.split(","),function(e){n.push(e.replace(f,"$"+t))}),n}return l[t]=[e.weekdays.split(","),n(1),n(2)],c}var u=n(1),a=n(2),c=u.core,s=/\b\w\w?\b/g,f=/:(.*)\|(.*)$/,l={},h="en",v="Seconds",g="Minutes",p="Hours",d="Date",m="Month",y="FullYear";a(a.P+a.F,d,{format:i("get"),formatUTC:i("getUTC")}),o(h,{weekdays:"Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday",months:"January,February,March,April,May,June,July,August,September,October,November,December"}),o("ru",{weekdays:"Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота",months:"Январ:я|ь,Феврал:я|ь,Март:а|,Апрел:я|ь,Ма:я|й,Июн:я|ь,Июл:я|ь,Август:а|,Сентябр:я|ь,Октябр:я|ь,Ноябр:я|ь,Декабр:я|ь"}),c.locale=function(t){return u.has(l,t)?h=t:h},c.addLocale=o},function(t,e,n){var r=n(1),i=n(2),o=n(19);i(i.G+i.F,{delay:function(t){return new(r.core.Promise||r.g.Promise)(function(e){setTimeout(o.call(e,!0),t)})}})},function(t,e,n){function r(t){var e=s.create(null);return void 0!=t&&(d.is(t)?d.forOf(t,!0,function(t,n){e[t]=n}):h(e,t)),e}function i(t,e){s.set(this,g,{o:b(t),a:y(t),i:0,k:e})}function o(t){return function(e){return new i(e,t)}}function u(t,e){return"function"==typeof t?t:e}function a(t){var e=1==t,n=4==t;return function(i,o,a){var c,s,l,h=f(o,a,3),v=b(i),g=e||7==t||2==t?new(u(this,r)):void 0;for(c in v)if(E(v,c)&&(s=v[c],l=h(s,c,i),t))if(e)g[c]=l;else if(l)switch(t){case 2:g[c]=s;break;case 3:return!0;case 5:return s;case 6:return c;case 7:g[l[0]]=l[1]}else if(n)return!1;return 3==t||n?n:g}}function c(t){return function(e,n,i){p.fn(n);var o,a,c,s=b(e),f=y(s),l=f.length,h=0;for(t?o=void 0==i?new(u(this,r)):Object(i):arguments.length<3?(p(l,"Reduce of empty object with no initial value"),o=s[f[h++]]):o=Object(i);l>h;)if(E(s,a=f[h++]))if(c=n(o,s[a],a,e),t){if(c===!1)break}else o=c;return o}}var s=n(1),f=n(8),l=n(2),h=n(17),v=n(27),g=n(6).safe("iter"),p=n(3),d=n(5),m=d.step,y=s.getKeys,b=s.toObject,E=s.has;r.prototype=null,d.create(i,"Dict",function(){var t,e=this[g],n=e.o,r=e.a,i=e.k;do if(e.i>=r.length)return e.o=void 0,m(1);while(!E(n,t=r[e.i++]));return"key"==i?m(0,t):"value"==i?m(0,n[t]):m(0,[t,n[t]])});var S=a(6);l(l.G+l.F,{Dict:s.mix(r,{keys:o("key"),values:o("value"),entries:o("key+value"),forEach:a(0),map:a(1),filter:a(2),some:a(3),every:a(4),find:a(5),findKey:S,mapPairs:a(7),reduce:c(!1),turn:c(!0),keyOf:v,includes:function(t,e){return void 0!==(e==e?v(t,e):S(t,function(t){return t!=t}))},has:E,get:function(t,e){return E(t,e)?t[e]:void 0},set:s.def,isDict:function(t){return s.isObject(t)&&s.getProto(t)===r.prototype}})})},function(t,e,n){var r=n(2);r(r.G+r.F,{global:n(1).g})},function(t,e,n){var r=n(1).core,i=n(5);r.isIterable=i.is,r.getIterator=i.get},function(t,e,n){var r=n(1),i=n(2),o={},u=!0;r.each.call("assert,clear,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,isIndependentlyComposed,log,markTimeline,profile,profileEnd,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn".split(","),function(t){o[t]=function(){return u&&r.g.console&&r.isFunction(console[t])?Function.apply.call(console[t],console,arguments):void 0}}),i(i.G+i.F,{log:n(17)(o.log,o,{enable:function(){u=!0},disable:function(){u=!1}})})},function(t,e,n){"use strict";function r(t){i.set(this,o,{l:i.toLength(t),i:0})}var i=n(1),o=n(6).safe("iter"),u=n(5),a=u.step,c="Number";u.create(r,c,function(){var t=this[o],e=t.i++;return e<t.l?a(0,e):a(1)}),u.define(Number,c,function(){return new r(this)})},function(t,e,n){"use strict";var r=n(1),i=n(2),o=n(12),u={};u.random=function(t){var e=+this,n=void 0==t?0:+t,r=Math.min(e,n);return Math.random()*(Math.max(e,n)-r)+r},r.FW&&r.each.call("round,floor,ceil,abs,sin,asin,cos,acos,tan,atan,exp,sqrt,max,min,pow,atan2,acosh,asinh,atanh,cbrt,clz32,cosh,expm1,hypot,imul,log1p,log10,log2,sign,sinh,tanh,trunc".split(","),function(t){var e=Math[t];e&&(u[t]=function(){for(var t=[+this],n=0;arguments.length>n;)t.push(arguments[n++]);return o(e,t)})}),i(i.P+i.F,"Number",u)},function(t,e,n){function r(t,e){for(var n,r=u(i.toObject(e)),o=r.length,a=0;o>a;)i.setDesc(t,n=r[a++],i.getDesc(e,n));return t}var i=n(1),o=n(2),u=n(18);o(o.S+o.F,"Object",{isObject:i.isObject,classof:n(7).classof,define:r,make:function(t,e){return r(i.create(t),e)}})},function(t,e,n){var r,i=n(2),o=n(15),u={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"},a={};for(r in u)a[u[r]]=r;i(i.P+i.F,"String",{escapeHTML:o(/[&<>"']/g,u),unescapeHTML:o(/&(?:amp|lt|gt|quot|apos);/g,a)})},function(t,e,n){function r(t,e){return function(n){var r,i=A(n),o=0,u=[];for(r in i)r!=g&&x(i,r)&&u.push(r);for(;e>o;)x(i,r=t[o++])&&(~E.call(u,r)||u.push(r));return u}}function i(t){return!s.isObject(t)}function o(){}function u(t){return function(){return t.apply(s.ES5Object(this),arguments)}}function a(t){return function(e,n){p.fn(e);var r=A(this),i=j(r.length),o=t?i-1:0,u=t?-1:1;if(arguments.length<2)for(;;){if(o in r){n=r[o],o+=u;break}o+=u,p(t?o>=0:i>o,"Reduce of empty array with no initial value")}for(;t?o>=0:i>o;o+=u)o in r&&(n=e(n,r[o],o,this));return n}}function c(t){return t>9?t:"0"+t}var s=n(1),f=n(7),l=n(2),h=n(12),v=n(13),g=n(6).safe("__proto__"),p=n(3),d=p.obj,m=Object.prototype,y=[],b=y.slice,E=y.indexOf,S=f.classof,O=Object.defineProperties,x=s.has,w=s.setDesc,F=s.getDesc,_=s.isFunction,A=s.toObject,j=s.toLength,M=!1;if(!s.DESC){try{M=8==w(document.createElement("div"),"x",{get:function(){return 8}}).x}catch(P){}s.setDesc=function(t,e,n){if(M)try{return w(t,e,n)}catch(r){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(d(t)[e]=n.value),t},s.getDesc=function(t,e){if(M)try{return F(t,e)}catch(n){}return x(t,e)?s.desc(!m.propertyIsEnumerable.call(t,e),t[e]):void 0},O=function(t,e){d(t);for(var n,r=s.getKeys(e),i=r.length,o=0;i>o;)s.setDesc(t,n=r[o++],e[n]);return t}}l(l.S+l.F*!s.DESC,"Object",{getOwnPropertyDescriptor:s.getDesc,defineProperty:s.setDesc,defineProperties:O});var T="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(","),I=T.concat("length","prototype"),D=T.length,L=function(){var t,e=document.createElement("iframe"),n=D;for(e.style.display="none",s.html.appendChild(e),e.src="javascript:",t=e.contentWindow.document,t.open(),t.write("<script>document.F=Object</script>"),t.close(),L=t.F;n--;)delete L.prototype[T[n]];return L()};l(l.S,"Object",{getPrototypeOf:s.getProto=s.getProto||function(t){return t=Object(p.def(t)),x(t,g)?t[g]:_(t.constructor)&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?m:null},getOwnPropertyNames:s.getNames=s.getNames||r(I,I.length,!0),create:s.create=s.create||function(t,e){var n;return null!==t?(o.prototype=d(t),n=new o,o.prototype=null,n[g]=t):n=L(),void 0===e?n:O(n,e)},keys:s.getKeys=s.getKeys||r(T,D,!1),seal:s.it,freeze:s.it,preventExtensions:s.it,isSealed:i,isFrozen:i,isExtensible:s.isObject}),l(l.P,"Function",{bind:function(t){function e(){var i=r.concat(b.call(arguments));return h(n,i,this instanceof e?s.create(n.prototype):t)}var n=p.fn(this),r=b.call(arguments,1);return n.prototype&&(e.prototype=n.prototype),e}}),0 in Object("z")&&"z"=="z"[0]||(s.ES5Object=function(t){return"String"==f(t)?t.split(""):Object(t)}),l(l.P+l.F*(s.ES5Object!=Object),"Array",{slice:u(b),join:u(y.join)}),l(l.S,"Array",{isArray:function(t){return"Array"==f(t)}}),l(l.P,"Array",{forEach:s.each=s.each||v(0),map:v(1),filter:v(2),some:v(3),every:v(4),reduce:a(!1),reduceRight:a(!0),indexOf:E=E||n(24)(!1),lastIndexOf:function(t,e){var n=A(this),r=j(n.length),i=r-1;for(arguments.length>1&&(i=Math.min(i,s.toInteger(e))),0>i&&(i=j(r+i));i>=0;i--)if(i in n&&n[i]===t)return i;return-1}}),l(l.P,"String",{trim:n(15)(/^\s*([\s\S]*\S)?\s*$/,"$1")}),l(l.S,"Date",{now:function(){return+new Date}}),l(l.P,"Date",{toISOString:function(){if(!isFinite(this))throw RangeError("Invalid time value");var t=this,e=t.getUTCFullYear(),n=t.getUTCMilliseconds(),r=0>e?"-":e>9999?"+":"";return r+("00000"+Math.abs(e)).slice(r?-6:-4)+"-"+c(t.getUTCMonth()+1)+"-"+c(t.getUTCDate())+"T"+c(t.getUTCHours())+":"+c(t.getUTCMinutes())+":"+c(t.getUTCSeconds())+"."+(n>99?n:"0"+c(n))+"Z"}}),"Object"==S(function(){return arguments}())&&(f.classof=function(t){var e=S(t);return"Object"==e&&_(t.callee)?"Arguments":e})},function(t,e,n){"use strict";var r=n(1),i=n(2),o=r.toIndex;i(i.P,"Array",{copyWithin:function(t,e){var n=Object(r.assertDefined(this)),i=r.toLength(n.length),u=o(t,i),a=o(e,i),c=arguments[2],s=void 0===c?i:o(c,i),f=Math.min(s-a,i-u),l=1;for(u>a&&a+f>u&&(l=-1,a=a+f-1,u=u+f-1);f-->0;)a in n?n[u]=n[a]:delete n[u],u+=l,a+=l;return n}}),n(11)("copyWithin")},function(t,e,n){"use strict";var r=n(1),i=n(2),o=r.toIndex;i(i.P,"Array",{fill:function(t){for(var e=Object(r.assertDefined(this)),n=r.toLength(e.length),i=o(arguments[1],n),u=arguments[2],a=void 0===u?n:o(u,n);a>i;)e[i++]=t;return e}}),n(11)("fill")},function(t,e,n){var r=n(2);r(r.P,"Array",{findIndex:n(13)(6)}),n(11)("findIndex")},function(t,e,n){var r=n(2);r(r.P,"Array",{find:n(13)(5)}),n(11)("find")},function(t,e,n){var r=n(1),i=n(8),o=n(2),u=n(5),a=u.stepCall;o(o.S+o.F*u.DANGER_CLOSING,"Array",{from:function(t){var e,n,o,c,s=Object(r.assertDefined(t)),f=arguments[1],l=void 0!==f,h=l?i(f,arguments[2],2):void 0,v=0;if(u.is(s))for(c=u.get(s),n=new("function"==typeof this?this:Array);!(o=c.next()).done;v++)n[v]=l?a(c,h,[o.value,v],!0):o.value;else for(n=new("function"==typeof this?this:Array)(e=r.toLength(s.length));e>v;v++)n[v]=l?h(s[v],v):s[v];return n.length=v,n}})},function(t,e,n){var r=n(2);r(r.S,"Array",{of:function(){for(var t=0,e=arguments.length,n=new("function"==typeof this?this:Array)(e);e>t;)n[t]=arguments[t++];return n.length=e,n}})},function(t,e,n){n(16)(Array)},function(t,e,n){"use strict";var r=n(1),i="name",o=r.setDesc,u=Function.prototype;i in u||r.FW&&r.DESC&&o(u,i,{configurable:!0,
-get:function(){var t=String(this).match(/^\s*function ([^ (]*)/),e=t?t[1]:"";return r.has(this,i)||o(this,i,r.desc(5,e)),e},set:function(t){r.has(this,i)||o(this,i,r.desc(0,t))}})},function(t,e,n){"use strict";var r=n(25);n(14)("Map",{get:function(t){var e=r.getEntry(this,t);return e&&e.v},set:function(t,e){return r.def(this,0===t?0:t,e)}},r,!0)},function(t,e,n){function r(t){return isFinite(t=+t)&&0!=t?0>t?-r(-t):l(t+h(t*t+1)):t}function i(t){return 0==(t=+t)?t:t>-1e-6&&1e-6>t?t+t*t/2:f(t)-1}var o=1/0,u=n(2),a=Math.E,c=Math.pow,s=Math.abs,f=Math.exp,l=Math.log,h=Math.sqrt,v=Math.ceil,g=Math.floor,p=Math.sign||function(t){return 0==(t=+t)||t!=t?t:0>t?-1:1};u(u.S,"Math",{acosh:function(t){return(t=+t)<1?0/0:isFinite(t)?l(t/a+h(t+1)*h(t-1)/a)+1:t},asinh:r,atanh:function(t){return 0==(t=+t)?t:l((1+t)/(1-t))/2},cbrt:function(t){return p(t=+t)*c(s(t),1/3)},clz32:function(t){return(t>>>=0)?32-t.toString(2).length:32},cosh:function(t){return(f(t=+t)+f(-t))/2},expm1:i,fround:function(t){return new Float32Array([t])[0]},hypot:function(t,e){for(var n,r=0,i=arguments.length,u=i,a=Array(i),s=-o;i--;){if(n=a[i]=+arguments[i],n==o||n==-o)return o;n>s&&(s=n)}for(s=n||1;u--;)r+=c(a[u]/s,2);return s*h(r)},imul:function(t,e){var n=65535,r=+t,i=+e,o=n&r,u=n&i;return 0|o*u+((n&r>>>16)*u+o*(n&i>>>16)<<16>>>0)},log1p:function(t){return(t=+t)>-1e-8&&1e-8>t?t-t*t/2:l(1+t)},log10:function(t){return l(t)/Math.LN10},log2:function(t){return l(t)/Math.LN2},sign:p,sinh:function(t){return s(t=+t)<1?(i(t)-i(-t))/2:(f(t-1)-f(-t-1))*(a/2)},tanh:function(t){var e=i(t=+t),n=i(-t);return e==o?1:n==o?-1:(e-n)/(f(t)+f(-t))},trunc:function(t){return(t>0?g:v)(t)}})},function(t,e,n){"use strict";function r(t){var e,n;if(a(e=t.valueOf)&&!u(n=e.call(t)))return n;if(a(e=t.toString)&&!u(n=e.call(t)))return n;throw TypeError("Can't convert object to number")}function i(t){if(u(t)&&(t=r(t)),"string"==typeof t&&t.length>2&&48==t.charCodeAt(0)){var e=!1;switch(t.charCodeAt(1)){case 66:case 98:e=!0;case 79:case 111:return parseInt(t.slice(2),e?2:8)}}return+t}var o=n(1),u=o.isObject,a=o.isFunction,c="Number",s=o.g[c],f=s,l=s.prototype;!o.FW||s("0o1")&&s("0b1")||(s=function h(t){return this instanceof h?new f(i(t)):i(t)},o.each.call(o.DESC?o.getNames(f):"MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger".split(","),function(t){o.has(f,t)&&!o.has(s,t)&&o.setDesc(s,t,o.getDesc(f,t))}),s.prototype=l,l.constructor=s,o.hide(o.g,c,s))},function(t,e,n){function r(t){return!i.isObject(t)&&isFinite(t)&&a(t)===t}var i=n(1),o=n(2),u=Math.abs,a=Math.floor,c=9007199254740991;o(o.S,"Number",{EPSILON:Math.pow(2,-52),isFinite:function(t){return"number"==typeof t&&isFinite(t)},isInteger:r,isNaN:function(t){return t!=t},isSafeInteger:function(t){return r(t)&&u(t)<=c},MAX_SAFE_INTEGER:c,MIN_SAFE_INTEGER:-c,parseFloat:parseFloat,parseInt:parseInt})},function(t,e,n){var r=n(2);r(r.S,"Object",{assign:n(17)})},function(t,e,n){var r=n(2);r(r.S,"Object",{is:function(t,e){return t===e?0!==t||1/t===1/e:t!=t&&e!=e}})},function(t,e,n){var r=n(2);r(r.S,"Object",{setPrototypeOf:n(28)})},function(t,e,n){function r(t,e){var n=(i.core.Object||{})[t]||Object[t],r=0,c={};c[t]=1==e?function(t){return u(t)?n(t):t}:2==e?function(t){return u(t)?n(t):!0}:3==e?function(t){return u(t)?n(t):!1}:4==e?function(t,e){return n(a(t),e)}:5==e?function(t){return n(Object(i.assertDefined(t)))}:function(t){return n(a(t))};try{n("z")}catch(s){r=1}o(o.S+o.F*r,"Object",c)}var i=n(1),o=n(2),u=i.isObject,a=i.toObject;r("freeze",1),r("seal",1),r("preventExtensions",1),r("isFrozen",2),r("isSealed",2),r("isExtensible",3),r("getOwnPropertyDescriptor",4),r("getPrototypeOf",5),r("keys"),r("getOwnPropertyNames")},function(t,e,n){"use strict";var r=n(1),i=n(7),o={};o[n(10)("toStringTag")]="z",r.FW&&"z"!=i(o)&&r.hide(Object.prototype,"toString",function(){return"[object "+i.classof(this)+"]"})},function(t,e,n){"use strict";function r(t){var e=x(t)[l];return void 0!=e?e:t}var i,o=n(1),u=n(8),a=n(7),c=n(2),s=n(3),f=n(5),l=n(10)("species"),h=n(6).safe("record"),v=f.forOf,g="Promise",p=o.g,d=p.process,m=d&&d.nextTick||n(29).set,y=p[g],b=y,E=o.isFunction,S=o.isObject,O=s.fn,x=s.obj;E(y)&&E(y.resolve)&&y.resolve(i=new y(function(){}))==i||function(){function t(t){var e;return S(t)&&(e=t.then),E(e)?e:!1}function e(t){var n,r=t[h],i=r.c,o=0;if(r.h)return!0;for(;i.length>o;)if(n=i[o++],n.fail||e(n.P))return!0}function n(n,r){var i=n.c;(r||i.length)&&m(function(){var o=n.p,u=n.v,c=1==n.s,s=0;if(r&&!e(o))setTimeout(function(){e(o)||("process"==a(d)?d.emit("unhandledRejection",u,o):p.console&&E(console.error)&&console.error("Unhandled promise rejection",u))},1e3);else for(;i.length>s;)!function(e){var r,i,o=c?e.ok:e.fail;try{o?(c||(n.h=!0),r=o===!0?u:o(u),r===e.P?e.rej(TypeError(g+"-chain cycle")):(i=t(r))?i.call(r,e.res,e.rej):e.res(r)):e.rej(u)}catch(a){e.rej(a)}}(i[s++]);i.length=0})}function r(t){var e=this;e.d||(e.d=!0,e=e.r||e,e.v=t,e.s=2,n(e,!0))}function i(e){var o,a,c=this;if(!c.d){c.d=!0,c=c.r||c;try{(o=t(e))?(a={r:c,d:!1},o.call(e,u(i,a,1),u(r,a,1))):(c.v=e,c.s=1,n(c))}catch(s){r.call(a||{r:c,d:!1},s)}}}y=function(t){O(t);var e={p:s.inst(this,y,g),c:[],s:0,d:!1,v:void 0,h:!1};o.hide(this,h,e);try{t(u(i,e,1),u(r,e,1))}catch(n){r.call(e,n)}},o.mix(y.prototype,{then:function(t,e){var r=x(x(this).constructor)[l],i={ok:E(t)?t:!0,fail:E(e)?e:!1},o=i.P=new(void 0!=r?r:y)(function(t,e){i.res=O(t),i.rej=O(e)}),u=this[h];return u.c.push(i),u.s&&n(u),o},"catch":function(t){return this.then(void 0,t)}})}(),c(c.G+c.W+c.F*(y!=b),{Promise:y}),c(c.S,g,{reject:function(t){return new(r(this))(function(e,n){n(t)})},resolve:function(t){return S(t)&&h in t&&o.getProto(t)===this.prototype?t:new(r(this))(function(e){e(t)})}}),c(c.S+c.F*(f.fail(function(t){y.all(t)["catch"](function(){})})||f.DANGER_CLOSING),g,{all:function(t){var e=r(this),n=[];return new e(function(r,i){v(t,!1,n.push,n);var u=n.length,a=Array(u);u?o.each.call(n,function(t,n){e.resolve(t).then(function(t){a[n]=t,--u||r(a)},i)}):r(a)})},race:function(t){var e=r(this);return new e(function(n,r){v(t,!1,function(t){e.resolve(t).then(n,r)})})}}),a.set(y,g),n(16)(y)},function(t,e,n){function r(t){var e,n=[];for(e in t)n.push(e);a.set(this,l,{o:t,a:n,i:0})}function i(t){return function(e){b(e);try{return t.apply(void 0,arguments),!0}catch(n){return!1}}}function o(t,e){var n,r=arguments.length<3?t:arguments[2],i=p(b(t),e);return i?a.has(i,"value")?i.value:void 0===i.get?void 0:i.get.call(r):g(n=m(t))?o(n,e,r):void 0}function u(t,e,n){var r,i,o=arguments.length<4?t:arguments[3],c=p(b(t),e);if(!c){if(g(i=m(t)))return u(i,e,n,o);c=a.desc(0)}return a.has(c,"value")?c.writable!==!1&&g(o)?(r=p(o,e)||a.desc(0),r.value=n,d(o,e,r),!0):!1:void 0===c.set?!1:(c.set.call(o,n),!0)}var a=n(1),c=n(2),s=n(28),f=n(5),l=n(6).safe("iter"),h=f.step,v=n(3),g=a.isObject,p=a.getDesc,d=a.setDesc,m=a.getProto,y=Function.apply,b=v.obj,E=Object.isExtensible||a.it;f.create(r,"Object",function(){var t,e=this[l],n=e.a;do if(e.i>=n.length)return h(1);while(!((t=n[e.i++])in e.o));return h(0,t)});var S={apply:n(8)(Function.call,y,3),construct:function(t,e){var n=v.fn(arguments.length<3?t:arguments[2]).prototype,r=a.create(g(n)?n:Object.prototype),i=y.call(t,r,e);return g(i)?i:r},defineProperty:i(d),deleteProperty:function(t,e){var n=p(b(t),e);return n&&!n.configurable?!1:delete t[e]},enumerate:function(t){return new r(b(t))},get:o,getOwnPropertyDescriptor:function(t,e){return p(b(t),e)},getPrototypeOf:function(t){return m(b(t))},has:function(t,e){return e in t},isExtensible:function(t){return!!E(b(t))},ownKeys:n(18),preventExtensions:i(Object.preventExtensions||a.it),set:u};s&&(S.setPrototypeOf=function(t,e){return s(b(t),e),!0}),c(c.G,{Reflect:{}}),c(c.S,"Reflect",S)},function(t,e,n){var r=n(1),i=n(7),o=r.g.RegExp,u=o,a=o.prototype;r.FW&&r.DESC&&(function(){try{return"/a/i"==o(/a/g,"i")}catch(t){}}()||(o=function(t,e){return new u("RegExp"==i(t)&&void 0!==e?t.source:t,e)},r.each.call(r.getNames(u),function(t){t in o||r.setDesc(o,t,{configurable:!0,get:function(){return u[t]},set:function(e){u[t]=e}})}),a.constructor=o,o.prototype=a,r.hide(r.g,"RegExp",o)),"g"!=/./g.flags&&r.setDesc(a,"flags",{configurable:!0,get:n(15)(/^.*\/(\w*)$/,"$1")})),n(16)(o)},function(t,e,n){"use strict";var r=n(25);n(14)("Set",{add:function(t){return r.def(this,t=0===t?0:t,t)}},r)},function(t,e,n){var r=n(2);r(r.P,"String",{codePointAt:n(20)(!1)})},function(t,e,n){"use strict";var r=n(1),i=n(7),o=n(2),u=r.toLength;o(o.P,"String",{endsWith:function(t){if("RegExp"==i(t))throw TypeError();var e=String(r.assertDefined(this)),n=arguments[1],o=u(e.length),a=void 0===n?o:Math.min(u(n),o);return t+="",e.slice(a-t.length,a)===t}})},function(t,e,n){var r=n(2),i=n(1).toIndex,o=String.fromCharCode;r(r.S,"String",{fromCodePoint:function(t){for(var e,n=[],r=arguments.length,u=0;r>u;){if(e=+arguments[u++],i(e,1114111)!==e)throw RangeError(e+" is not a valid code point");n.push(65536>e?o(e):o(((e-=65536)>>10)+55296,e%1024+56320))}return n.join("")}})},function(t,e,n){"use strict";var r=n(1),i=n(7),o=n(2);o(o.P,"String",{includes:function(t){if("RegExp"==i(t))throw TypeError();return!!~String(r.assertDefined(this)).indexOf(t,arguments[1])}})},function(t,e,n){var r=n(1).set,i=n(20)(!0),o=n(6).safe("iter"),u=n(5),a=u.step;u.std(String,"String",function(t){r(this,o,{o:String(t),i:0})},function(){var t,e=this[o],n=e.o,r=e.i;return r>=n.length?a(1):(t=i.call(n,r),e.i+=t.length,a(0,t))})},function(t,e,n){var r=n(1),i=n(2);i(i.S,"String",{raw:function(t){for(var e=r.toObject(t.raw),n=r.toLength(e.length),i=arguments.length,o=[],u=0;n>u;)o.push(String(e[u++])),i>u&&o.push(String(arguments[u]));return o.join("")}})},function(t,e,n){"use strict";var r=n(1),i=n(2);i(i.P,"String",{repeat:function(t){var e=String(r.assertDefined(this)),n="",i=r.toInteger(t);if(0>i||i==1/0)throw RangeError("Count can't be negative");for(;i>0;(i>>>=1)&&(e+=e))1&i&&(n+=e);return n}})},function(t,e,n){"use strict";var r=n(1),i=n(7),o=n(2);o(o.P,"String",{startsWith:function(t){if("RegExp"==i(t))throw TypeError();var e=String(r.assertDefined(this)),n=r.toLength(Math.min(arguments[1],e.length));return t+="",e.slice(n,n+t.length)===t}})},function(t,e,n){"use strict";function r(t){var e=y[t]=i.set(i.create(v.prototype),d,t);return i.DESC&&p&&i.setDesc(Object.prototype,t,{configurable:!0,set:function(e){f(this,t,e)}}),e}var i=n(1),o=n(7).set,u=n(6),a=n(2),c=n(27),s=i.has,f=i.hide,l=i.getNames,h=i.toObject,v=i.g.Symbol,g=v,p=!1,d=u.safe("tag"),m={},y={};i.isFunction(v)||(v=function(t){if(this instanceof v)throw TypeError("Symbol is not a constructor");return r(u(t))},f(v.prototype,"toString",function(){return this[d]})),a(a.G+a.W,{Symbol:v});var b={"for":function(t){return s(m,t+="")?m[t]:m[t]=v(t)},keyFor:function(t){return c(m,t)},pure:u.safe,set:i.set,useSetter:function(){p=!0},useSimple:function(){p=!1}};i.each.call("hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),function(t){var e=n(10)(t);b[t]=v===g?e:r(e)}),p=!0,a(a.S,"Symbol",b),a(a.S+a.F*(v!=g),"Object",{getOwnPropertyNames:function(t){for(var e,n=l(h(t)),r=[],i=0;n.length>i;)s(y,e=n[i++])||r.push(e);return r},getOwnPropertySymbols:function(t){for(var e,n=l(h(t)),r=[],i=0;n.length>i;)s(y,e=n[i++])&&r.push(y[e]);return r}}),o(v,"Symbol"),o(Math,"Math",!0),o(i.g.JSON,"JSON",!0)},function(t,e,n){"use strict";var r=n(1),i=n(26),o=i.leakStore,u=i.ID,a=i.WEAK,c=r.has,s=r.isObject,f=Object.isFrozen||r.core.Object.isFrozen,l={},h=n(14)("WeakMap",{get:function(t){if(s(t)){if(f(t))return o(this).get(t);if(c(t,a))return t[a][this[u]]}},set:function(t,e){return i.def(this,t,e)}},i,!0,!0);r.FW&&7!=(new h).set((Object.freeze||Object)(l),7).get(l)&&r.each.call(["delete","has","get","set"],function(t){var e=h.prototype[t];h.prototype[t]=function(n,r){if(s(n)&&f(n)){var i=o(this)[t](n,r);return"set"==t?this:i}return e.call(this,n,r)}})},function(t,e,n){"use strict";var r=n(26);n(14)("WeakSet",{add:function(t){return r.def(this,t,!0)}},r,!1,!0)},function(t,e,n){var r=n(2);r(r.P,"Array",{includes:n(24)(!0)}),n(11)("includes")},function(t,e,n){var r=n(1),i=n(2),o=n(18);i(i.S,"Object",{getOwnPropertyDescriptors:function(t){var e=r.toObject(t),n={};return r.each.call(o(e),function(t){r.setDesc(n,t,r.desc(0,r.getDesc(e,t)))}),n}})},function(t,e,n){function r(t){return function(e){var n,r=i.toObject(e),o=i.getKeys(e),u=o.length,a=0,c=Array(u);if(t)for(;u>a;)c[a]=[n=o[a++],r[n]];else for(;u>a;)c[a]=r[o[a++]];return c}}var i=n(1),o=n(2);o(o.S,"Object",{values:r(!1),entries:r(!0)})},function(t,e,n){var r=n(2);r(r.S,"RegExp",{escape:n(15)(/([\\\-[\]{}()*+?.,^$|])/g,"\\$1",!0)})},function(t,e,n){var r=n(2);r(r.P,"String",{at:n(20)(!0)})},function(t,e,n){function r(t,e){i.each.call(t.split(","),function(t){void 0==e&&t in u.Array?a[t]=u.Array[t]:t in[]&&(a[t]=n(8)(Function.call,[][t],e))})}var i=n(1),o=n(2),u=i.core,a={};r("pop,reverse,shift,keys,values,entries",1),r("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3),r("join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill,turn"),o(o.S,"Array",a)},function(t,e,n){n(30);var r=n(1),i=n(5).Iterators,o=n(10)("iterator"),u=r.g.NodeList;!r.FW||!u||o in u.prototype||r.hide(u.prototype,o,i.Array),i.NodeList=i.Array},function(t,e,n){var r=n(2),i=n(29);r(r.G+r.B,{setImmediate:i.set,clearImmediate:i.clear})},function(t,e,n){function r(t){return c?function(e,n){return t(u(a,[].slice.call(arguments,2),i.isFunction(e)?e:Function(e)),n)}:t}var i=n(1),o=n(2),u=n(12),a=n(19),c=!!i.g.navigator&&/MSIE .\./.test(navigator.userAgent);o(o.G+o.B+o.F*c,{setTimeout:r(i.g.setTimeout),setInterval:r(i.g.setInterval)})},function(t,e,n){n(51),n(81),n(64),n(65),n(66),n(68),n(67),n(59),n(62),n(63),n(61),n(75),n(78),n(77),n(73),n(74),n(76),n(79),n(80),n(56),n(57),n(30),n(58),n(52),n(53),n(55),n(54),n(71),n(69),n(60),n(72),n(82),n(83),n(70),n(84),n(88),n(87),n(85),n(86),n(89),n(92),n(91),n(90),t.exports=n(1).core},function(t,e,n){"use strict";{var r=n(21)["default"];!function(){function t(t){if(null==l){l={};for(var e in t)"number"==typeof t[e]&&(l[t[e]]=e)}}function e(){if(null==l)throw"WebGLDebugUtils.init(ctx) not called"}function n(t){return e(),void 0!==l[t]}function i(t){e();var n=l[t];return void 0!==n?n:"*UNKNOWN WebGL ENUM (0x"+t.toString(16)+")"}function o(t,e,n){var r=f[t];return void 0!==r&&r[e]?i(n):n.toString()}function u(e,n){function r(t,e){return function(){var r=t[e].apply(t,arguments),i=t.getError();return 0!=i&&(u[i]=!0,n(i,e,arguments)),r}}t(e),n=n||function(t,e,n){for(var r="",u=0;u<n.length;++u)r+=(0==u?"":", ")+o(e,u,n[u]);s("WebGL error "+i(t)+" in "+e+"("+r+")")};var u={},a={};for(var c in e)a[c]="function"==typeof e[c]?r(e,c):e[c];return a.getError=function(){for(var t in u)if(u[t])return u[t]=!1,t;return e.NO_ERROR},a}function a(t){var e=t.getParameter(t.MAX_VERTEX_ATTRIBS),n=t.createBuffer();t.bindBuffer(t.ARRAY_BUFFER,n);for(var r=0;e>r;++r)t.disableVertexAttribArray(r),t.vertexAttribPointer(r,4,t.FLOAT,!1,0,0),t.vertexAttrib1f(r,0);t.deleteBuffer(n);for(var i=t.getParameter(t.MAX_TEXTURE_IMAGE_UNITS),r=0;i>r;++r)t.activeTexture(t.TEXTURE0+r),t.bindTexture(t.TEXTURE_CUBE_MAP,null),t.bindTexture(t.TEXTURE_2D,null);for(t.activeTexture(t.TEXTURE0),t.useProgram(null),t.bindBuffer(t.ARRAY_BUFFER,null),t.bindBuffer(t.ELEMENT_ARRAY_BUFFER,null),t.bindFramebuffer(t.FRAMEBUFFER,null),t.bindRenderbuffer(t.RENDERBUFFER,null),t.disable(t.BLEND),t.disable(t.CULL_FACE),t.disable(t.DEPTH_TEST),t.disable(t.DITHER),t.disable(t.SCISSOR_TEST),t.blendColor(0,0,0,0),t.blendEquation(t.FUNC_ADD),t.blendFunc(t.ONE,t.ZERO),t.clearColor(0,0,0,0),t.clearDepth(1),t.clearStencil(-1),t.colorMask(!0,!0,!0,!0),t.cullFace(t.BACK),t.depthFunc(t.LESS),t.depthMask(!0),t.depthRange(0,1),t.frontFace(t.CCW),t.hint(t.GENERATE_MIPMAP_HINT,t.DONT_CARE),t.lineWidth(1),t.pixelStorei(t.PACK_ALIGNMENT,4),t.pixelStorei(t.UNPACK_ALIGNMENT,4),t.pixelStorei(t.UNPACK_FLIP_Y_WEBGL,!1),t.pixelStorei(t.UNPACK_PREMULTIPLY_ALPHA_WEBGL,!1),t.UNPACK_COLORSPACE_CONVERSION_WEBGL&&t.pixelStorei(t.UNPACK_COLORSPACE_CONVERSION_WEBGL,t.BROWSER_DEFAULT_WEBGL),t.polygonOffset(0,0),t.sampleCoverage(1,!1),t.scissor(0,0,t.canvas.width,t.canvas.height),t.stencilFunc(t.ALWAYS,0,4294967295),t.stencilMask(4294967295),t.stencilOp(t.KEEP,t.KEEP,t.KEEP),t.viewport(0,0,t.canvas.clientWidth,t.canvas.clientHeight),t.clear(t.COLOR_BUFFER_BIT|t.DEPTH_BUFFER_BIT|t.STENCIL_BUFFER_BIT);t.getError(););}function c(t){function e(t){return t instanceof WebGLBuffer||t instanceof WebGLFramebuffer||t instanceof WebGLProgram||t instanceof WebGLRenderbuffer||t instanceof WebGLShader||t instanceof WebGLTexture}function n(t){for(var n=0;n<t.length;++n){var r=t[n];if(e(r))return r.__webglDebugContextLostId__==l}return!0}function i(){for(var t=r.Object.keys(m),e=0;e<t.length;++e)delete glErrorShdow_[t]}function o(t,e){var r=t[e];return function(){if(!h){if(!n(arguments))return void(m[t.INVALID_OPERATION]=!0);var e=r.apply(t,arguments);return e}}}function u(t){return{statusMessage:t}}function c(){for(var e=0;e<v.length;++e){var n=v[e];n instanceof WebGLBuffer?t.deleteBuffer(n):n instanceof WebctxFramebuffer?t.deleteFramebuffer(n):n instanceof WebctxProgram?t.deleteProgram(n):n instanceof WebctxRenderbuffer?t.deleteRenderbuffer(n):n instanceof WebctxShader?t.deleteShader(n):n instanceof WebctxTexture&&t.deleteTexture(n)}}function s(t){return"function"==typeof t?t:function(e){t.handleEvent(e)}}var f={},l=1,h=!1,v=[],g=void 0,p=void 0,d=void 0,m={};for(var y in t)f[y]="function"==typeof t[y]?o(t,y):t[y];f.loseContext=function(){if(!h){for(h=!0,++l;t.getError(););i(),m[t.CONTEXT_LOST_WEBGL]=!0,setTimeout(function(){g&&g(u("context lost"))},0)}},f.restoreContext=function(){if(h){if(!p)throw"You can not restore the context without a listener";setTimeout(function(){if(c(),a(t),h=!1,p){var e=p;p=d,d=void 0,e(u("context restored"))}},0)}},f.getError=function(){if(!h)for(var e;e=t.getError();)m[e]=!0;for(var e in m)if(m[e])return delete m[e],e;return t.NO_ERROR};for(var b=["createBuffer","createFramebuffer","createProgram","createRenderbuffer","createShader","createTexture"],E=0;E<b.length;++E){var S=b[E];f[S]=function(e){return function(){if(h)return null;var n=e.apply(t,arguments);return n.__webglDebugContextLostId__=l,v.push(n),n}}(t[S])}for(var O=["getActiveAttrib","getActiveUniform","getBufferParameter","getContextAttributes","getAttachedShaders","getFramebufferAttachmentParameter","getParameter","getProgramParameter","getProgramInfoLog","getRenderbufferParameter","getShaderParameter","getShaderInfoLog","getShaderSource","getTexParameter","getUniform","getUniformLocation","getVertexAttrib"],E=0;E<O.length;++E){var S=O[E];f[S]=function(e){return function(){return h?null:e.apply(t,arguments)}}(f[S])}for(var x=["isBuffer","isEnabled","isFramebuffer","isProgram","isRenderbuffer","isShader","isTexture"],E=0;E<x.length;++E){var S=x[E];f[S]=function(e){return function(){return h?!1:e.apply(t,arguments)}}(f[S])}return f.checkFramebufferStatus=function(e){return function(){return h?t.FRAMEBUFFER_UNSUPPORTED:e.apply(t,arguments)}}(f.checkFramebufferStatus),f.getAttribLocation=function(e){return function(){return h?-1:e.apply(t,arguments)}}(f.getAttribLocation),f.getVertexAttribOffset=function(e){return function(){return h?0:e.apply(t,arguments)}}(f.getVertexAttribOffset),f.isContextLost=function(){return h},f.registerOnContextLostListener=function(t){g=s(t)},f.registerOnContextRestoredListener=function(t){h?d=s(t):p=s(t)},f}var s=function(t){window.console&&window.console.log&&window.console.log(t)},f={enable:{0:!0},disable:{0:!0},getParameter:{0:!0},drawArrays:{0:!0},drawElements:{0:!0,2:!0},createShader:{0:!0},getShaderParameter:{1:!0},getProgramParameter:{1:!0},getVertexAttrib:{1:!0},vertexAttribPointer:{2:!0},bindTexture:{0:!0},activeTexture:{0:!0},getTexParameter:{0:!0,1:!0},texParameterf:{0:!0,1:!0},texParameteri:{0:!0,1:!0,2:!0},texImage2D:{0:!0,2:!0,6:!0,7:!0},texSubImage2D:{0:!0,6:!0,7:!0},copyTexImage2D:{0:!0,2:!0},copyTexSubImage2D:{0:!0},generateMipmap:{0:!0},bindBuffer:{0:!0},bufferData:{0:!0,2:!0},bufferSubData:{0:!0},getBufferParameter:{0:!0,1:!0},pixelStorei:{0:!0,1:!0},readPixels:{4:!0,5:!0},bindRenderbuffer:{0:!0},bindFramebuffer:{0:!0},checkFramebufferStatus:{0:!0},framebufferRenderbuffer:{0:!0,1:!0,2:!0},framebufferTexture2D:{0:!0,1:!0,2:!0},getFramebufferAttachmentParameter:{0:!0,1:!0,2:!0},getRenderbufferParameter:{0:!0,1:!0},renderbufferStorage:{0:!0,1:!0},clear:{0:!0},depthFunc:{0:!0},blendFunc:{0:!0,1:!0},blendFuncSeparate:{0:!0,1:!0,2:!0,3:!0},blendEquation:{0:!0},blendEquationSeparate:{0:!0,1:!0},stencilFunc:{0:!0},stencilFuncSeparate:{0:!0,1:!0},stencilMaskSeparate:{0:!0},stencilOp:{0:!0,1:!0,2:!0},stencilOpSeparate:{0:!0,1:!0,2:!0,3:!0},cullFace:{0:!0},frontFace:{0:!0}},l=null;return{init:t,mightBeEnum:n,glEnumToString:i,glFunctionArgToString:o,makeDebugContext:u,makeLostContextSimulatingContext:c,resetToInitialState:a}}()}},function(t,e,n){"use strict";var r=n(21)["default"];r.Object.defineProperty(e,"__esModule",{value:!0});var i={_create3DContext:function(t,e){var n=["webgl","experimental-webgl","webkit-3d","moz-webgl"],i=void 0,o=!0,u=!1,a=void 0;try{for(var c,s=r.getIterator(n);!(o=(c=s.next()).done);o=!0){var f=c.value;try{i=t.getContext(f,e)}catch(l){}if(i)break}}catch(h){u=!0,a=h}finally{try{!o&&s["return"]&&s["return"]()}finally{if(u)throw a}}if(!i)throw new Error("GL instance coudl't be set.");return i},genResizeFun:function(t,e,n){return function(r){var i=t.clientWidth,o=t.clientHeight;(t.width!==i||t.height!==o)&&(t.width=i,t.height=o,e.viewport(0,0,t.width,t.height),n&&n.call(null,i,o,r))}},_loadTexture:function(t,e,n,r){t.pixelStorei(t.UNPACK_FLIP_Y_WEBGL,1),t.activeTexture(t.TEXTURE0),t.bindTexture(t.TEXTURE_2D,e),t.texParameteri(t.TEXTURE_2D,t.TEXTURE_MIN_FILTER,t.LINEAR),t.texImage2D(t.TEXTURE_2D,0,t.RGB,t.RGB,t.UNSIGNED_BYTE,r),t.uniform1i(n,0)},initTextures:function(t,e,n){var r=new Image,i=t.createTexture();if(!i)throw new Error("Couldnt create the texture.");if(!r)throw new Error("Couldnt create image");r.onload=this._loadTexture.bind(null,t,i,e,r),r.src=n},initBuffer:function(t,e,n,r,i,o){if(arguments.length<5)throw new Error("initSimpleArrayBuffer requires all args");var u=t.createBuffer();if(!u)throw new Error("Error while creating buffer");return o=o||t.ARRAY_BUFFER,t.bindBuffer(o,u),null!=e&&t.bufferData(o,e,t.STATIC_DRAW),null!=i&&null!=n&&t.vertexAttribPointer(i,n,r,!1,0,0),t.enableVertexAttribArray(i),u},setupWebGL:function(t,e){if(!window.WebGLRenderingContext)throw new Error("No WebGLRenderingContext in window.");var n=this._create3DContext(t,e);if(!n)throw new Error("Couldn't retrieve webgl context.");return n}},o={_createShader:function(t,e,n){var r=t.createShader(n);if(t.shaderSource(r,e),t.compileShader(r),!t.getShaderParameter(r,t.COMPILE_STATUS))throw new Error("Shader failed to compile: "+t.getShaderInfoLog(r));return r},_createVertShader:function(t,e){return this._createShader(t,e,t.VERTEX_SHADER)},_createFragShader:function(t,e){return this._createShader(t,e,t.FRAGMENT_SHADER)},_createProgram:function(t,e,n){var r=t.createProgram();if(!r)throw new Error("_createProgram: coult not create program.");if(t.attachShader(r,e),t.attachShader(r,n),t.linkProgram(r),!t.getProgramParameter(r,t.LINK_STATUS))throw new Error("Shader program failed to link: "+t.getProgramInfoLog(r));return r},getLocations:function(t,e){return e.reduce(function(e,n){var r=void 0;if(n.startsWith("a_"))r=t.getAttribLocation(t.program,n);else{if(!n.startsWith("u_"))throw new Error("Attrib/Unif/Var must start with u_, a_ or v_");r=t.getUniformLocation(t.program,n)}if(!~r)throw new Error("Failed to retrieve location of "+n);return e[n]=r,e},{})},initFromSrc:function(t,e,n){var r=void 0===arguments[3]?!0:arguments[3],i=this._createVertShader(t,e,t.VERTEX_SHADER),o=this._createFragShader(t,n,t.FRAGMENT_SHADER),u=this._createProgram(t,i,o);if(r&&(t.useProgram(u),t.program=u),!u)throw new Error("Failed to initialize shaders.");return u},initFromElems:function(t,e,n){var r=void 0===arguments[3]?!0:arguments[3];return this.initFromSrc(t,e.text,n.text,r)},initFromUrl:function(){}};i.Shaders=o,e["default"]=i,t.exports=e["default"]},function(t,e,n){"use strict";e["default"]=function(t){return t&&t.__esModule?t:{"default":t}},e.__esModule=!0},function(t,e,n){"use strict";var r=n(4),i=n(31);t.exports=function(t){var e=1==t,n=2==t,o=3==t,u=4==t,a=6==t,c=5==t||a;return function(s){for(var f,l,h=Object(r.assertDefined(this)),v=r.ES5Object(h),g=i(s,arguments[1],3),p=r.toLength(v.length),d=0,m=e?Array(p):n?[]:void 0;p>d;d++)if((c||d in v)&&(f=v[d],l=g(f,d,h),t))if(e)m[d]=l;else if(l)switch(t){case 3:return!0;case 5:return f;case 6:return d;case 2:m.push(f)}else if(u)return!1;return a?-1:o||u?u:m}}},function(t,e,n){"use strict";var r=n(4),i=n(9),o=n(32),u=n(22).inst;t.exports=function(t,e,a,c,s){function f(t,e){var n=g[t];r.FW&&(g[t]=function(t,r){var i=n.call(this,0===t?0:t,r);return e?this:i})}var l=r.g[t],h=l,v=c?"set":"add",g=h&&h.prototype,p={};if(r.isFunction(h)&&(s||!o.BUGGY&&g.forEach&&g.entries)){var d,m=new h,y=m[v](s?{}:-0,1);(o.fail(function(t){new h(t)})||o.DANGER_CLOSING)&&(h=function(e){u(this,h,t);var n=new l;return void 0!=e&&o.forOf(e,c,n[v],n),n},h.prototype=g,r.FW&&(g.constructor=h)),s||m.forEach(function(t,e){d=1/e===-(1/0)}),d&&(f("delete"),f("has"),c&&f("get")),(d||y!==m)&&f(v,!0)}else h=a.getConstructor(t,c,v),r.mix(h.prototype,e);return n(23).set(h,t),n(100)(h),p[t]=h,i(i.G+i.W+i.F*(h!=l),p),s||o.std(h,t,a.getIterConstructor(),a.next,c?"key+value":"value",!c,!0),h}},function(t,e,n){t.exports=function(t,e,n){var r=void 0===n;switch(e.length){case 0:return r?t():t.call(n);case 1:return r?t(e[0]):t.call(n,e[0]);case 2:return r?t(e[0],e[1]):t.call(n,e[0],e[1]);case 3:return r?t(e[0],e[1],e[2]):t.call(n,e[0],e[1],e[2]);case 4:return r?t(e[0],e[1],e[2],e[3]):t.call(n,e[0],e[1],e[2],e[3]);case 5:return r?t(e[0],e[1],e[2],e[3],e[4]):t.call(n,e[0],e[1],e[2],e[3],e[4])}return t.apply(n,e)}},function(t,e,n){var r=n(4);t.exports=function(t){r.DESC&&r.FW&&r.setDesc(t,n(34)("species"),{configurable:!0,get:r.that})}},function(t,e,n){"use strict";t.exports=function(t,e,n){var r=e===Object(e)?function(t){return e[t]}:e;return function(e){return String(n?e:this).replace(t,r)}}},function(t,e,n){"use strict";var r=n(4);t.exports=function(t){return function(e){var n,i,o=String(r.assertDefined(this)),u=r.toInteger(e),a=o.length;return 0>u||u>=a?t?"":void 0:(n=o.charCodeAt(u),55296>n||n>56319||u+1===a||(i=o.charCodeAt(u+1))<56320||i>57343?t?o.charAt(u):n:t?o.slice(u,u+2):(n-55296<<10)+(i-56320)+65536)}}},function(t,e,n){!function(){"use strict";var t={};t.exports=e,function(t){if(!e)var e=1e-6;if(!n)var n="undefined"!=typeof Float32Array?Float32Array:Array;var r={};r.setMatrixArrayType=function(t){n=t},"undefined"!=typeof t&&(t.glMatrix=r);var i={};i.create=function(){var t=new n(2);return t[0]=0,t[1]=0,t},i.clone=function(t){var e=new n(2);return e[0]=t[0],e[1]=t[1],e},i.fromValues=function(t,e){var r=new n(2);return r[0]=t,r[1]=e,r},i.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t},i.set=function(t,e,n){return t[0]=e,t[1]=n,t},i.add=function(t,e,n){return t[0]=e[0]+n[0],t[1]=e[1]+n[1],t},i.subtract=function(t,e,n){return t[0]=e[0]-n[0],t[1]=e[1]-n[1],t},i.sub=i.subtract,i.multiply=function(t,e,n){return t[0]=e[0]*n[0],t[1]=e[1]*n[1],t},i.mul=i.multiply,i.divide=function(t,e,n){return t[0]=e[0]/n[0],t[1]=e[1]/n[1],t},i.div=i.divide,i.min=function(t,e,n){return t[0]=Math.min(e[0],n[0]),t[1]=Math.min(e[1],n[1]),t},i.max=function(t,e,n){return t[0]=Math.max(e[0],n[0]),t[1]=Math.max(e[1],n[1]),t},i.scale=function(t,e,n){return t[0]=e[0]*n,t[1]=e[1]*n,t},i.distance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1];return Math.sqrt(n*n+r*r)},i.dist=i.distance,i.squaredDistance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1];return n*n+r*r},i.sqrDist=i.squaredDistance,i.length=function(t){var e=t[0],n=t[1];return Math.sqrt(e*e+n*n)},i.len=i.length,i.squaredLength=function(t){var e=t[0],n=t[1];return e*e+n*n},i.sqrLen=i.squaredLength,i.negate=function(t,e){return t[0]=-e[0],t[1]=-e[1],t},i.normalize=function(t,e){var n=e[0],r=e[1],i=n*n+r*r;return i>0&&(i=1/Math.sqrt(i),t[0]=e[0]*i,t[1]=e[1]*i),t},i.dot=function(t,e){return t[0]*e[0]+t[1]*e[1]},i.cross=function(t,e,n){var r=e[0]*n[1]-e[1]*n[0];return t[0]=t[1]=0,t[2]=r,t},i.lerp=function(t,e,n,r){var i=e[0],o=e[1];return t[0]=i+r*(n[0]-i),t[1]=o+r*(n[1]-o),t},i.transformMat2=function(t,e,n){var r=e[0],i=e[1];return t[0]=n[0]*r+n[2]*i,t[1]=n[1]*r+n[3]*i,t},i.transformMat2d=function(t,e,n){var r=e[0],i=e[1];return t[0]=n[0]*r+n[2]*i+n[4],t[1]=n[1]*r+n[3]*i+n[5],t},i.transformMat3=function(t,e,n){var r=e[0],i=e[1];return t[0]=n[0]*r+n[3]*i+n[6],t[1]=n[1]*r+n[4]*i+n[7],t},i.transformMat4=function(t,e,n){var r=e[0],i=e[1];return t[0]=n[0]*r+n[4]*i+n[12],t[1]=n[1]*r+n[5]*i+n[13],t},i.forEach=function(){var t=i.create();return function(e,n,r,i,o,u){var a,c;for(n||(n=2),r||(r=0),c=i?Math.min(i*n+r,e.length):e.length,a=r;c>a;a+=n)t[0]=e[a],t[1]=e[a+1],o(t,t,u),e[a]=t[0],e[a+1]=t[1];return e}}(),i.str=function(t){return"vec2("+t[0]+", "+t[1]+")"},"undefined"!=typeof t&&(t.vec2=i);var o={};o.create=function(){var t=new n(3);return t[0]=0,t[1]=0,t[2]=0,t},o.clone=function(t){var e=new n(3);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e},o.fromValues=function(t,e,r){var i=new n(3);return i[0]=t,i[1]=e,i[2]=r,i},o.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t},o.set=function(t,e,n,r){return t[0]=e,t[1]=n,t[2]=r,t},o.add=function(t,e,n){return t[0]=e[0]+n[0],t[1]=e[1]+n[1],t[2]=e[2]+n[2],t},o.subtract=function(t,e,n){return t[0]=e[0]-n[0],t[1]=e[1]-n[1],t[2]=e[2]-n[2],t},o.sub=o.subtract,o.multiply=function(t,e,n){return t[0]=e[0]*n[0],t[1]=e[1]*n[1],t[2]=e[2]*n[2],t},o.mul=o.multiply,o.divide=function(t,e,n){return t[0]=e[0]/n[0],t[1]=e[1]/n[1],t[2]=e[2]/n[2],t},o.div=o.divide,o.min=function(t,e,n){return t[0]=Math.min(e[0],n[0]),t[1]=Math.min(e[1],n[1]),t[2]=Math.min(e[2],n[2]),t},o.max=function(t,e,n){return t[0]=Math.max(e[0],n[0]),t[1]=Math.max(e[1],n[1]),t[2]=Math.max(e[2],n[2]),t},o.scale=function(t,e,n){return t[0]=e[0]*n,t[1]=e[1]*n,t[2]=e[2]*n,t},o.distance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1],i=e[2]-t[2];return Math.sqrt(n*n+r*r+i*i)},o.dist=o.distance,o.squaredDistance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1],i=e[2]-t[2];return n*n+r*r+i*i},o.sqrDist=o.squaredDistance,o.length=function(t){var e=t[0],n=t[1],r=t[2];return Math.sqrt(e*e+n*n+r*r)},o.len=o.length,o.squaredLength=function(t){var e=t[0],n=t[1],r=t[2];return e*e+n*n+r*r},o.sqrLen=o.squaredLength,o.negate=function(t,e){return t[0]=-e[0],t[1]=-e[1],t[2]=-e[2],t},o.normalize=function(t,e){var n=e[0],r=e[1],i=e[2],o=n*n+r*r+i*i;return o>0&&(o=1/Math.sqrt(o),t[0]=e[0]*o,t[1]=e[1]*o,t[2]=e[2]*o),t},o.dot=function(t,e){return t[0]*e[0]+t[1]*e[1]+t[2]*e[2]},o.cross=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=n[0],a=n[1],c=n[2];return t[0]=i*c-o*a,t[1]=o*u-r*c,t[2]=r*a-i*u,t},o.lerp=function(t,e,n,r){var i=e[0],o=e[1],u=e[2];return t[0]=i+r*(n[0]-i),t[1]=o+r*(n[1]-o),t[2]=u+r*(n[2]-u),t},o.transformMat4=function(t,e,n){var r=e[0],i=e[1],o=e[2];return t[0]=n[0]*r+n[4]*i+n[8]*o+n[12],t[1]=n[1]*r+n[5]*i+n[9]*o+n[13],t[2]=n[2]*r+n[6]*i+n[10]*o+n[14],t},o.transformQuat=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=n[0],a=n[1],c=n[2],s=n[3],f=s*r+a*o-c*i,l=s*i+c*r-u*o,h=s*o+u*i-a*r,v=-u*r-a*i-c*o;return t[0]=f*s+v*-u+l*-c-h*-a,t[1]=l*s+v*-a+h*-u-f*-c,t[2]=h*s+v*-c+f*-a-l*-u,t},o.forEach=function(){var t=o.create();return function(e,n,r,i,o,u){var a,c;for(n||(n=3),r||(r=0),c=i?Math.min(i*n+r,e.length):e.length,a=r;c>a;a+=n)t[0]=e[a],t[1]=e[a+1],t[2]=e[a+2],o(t,t,u),e[a]=t[0],e[a+1]=t[1],e[a+2]=t[2];return e}}(),o.str=function(t){return"vec3("+t[0]+", "+t[1]+", "+t[2]+")"},"undefined"!=typeof t&&(t.vec3=o);var u={};u.create=function(){var t=new n(4);return t[0]=0,t[1]=0,t[2]=0,
-t[3]=0,t},u.clone=function(t){var e=new n(4);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e},u.fromValues=function(t,e,r,i){var o=new n(4);return o[0]=t,o[1]=e,o[2]=r,o[3]=i,o},u.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t},u.set=function(t,e,n,r,i){return t[0]=e,t[1]=n,t[2]=r,t[3]=i,t},u.add=function(t,e,n){return t[0]=e[0]+n[0],t[1]=e[1]+n[1],t[2]=e[2]+n[2],t[3]=e[3]+n[3],t},u.subtract=function(t,e,n){return t[0]=e[0]-n[0],t[1]=e[1]-n[1],t[2]=e[2]-n[2],t[3]=e[3]-n[3],t},u.sub=u.subtract,u.multiply=function(t,e,n){return t[0]=e[0]*n[0],t[1]=e[1]*n[1],t[2]=e[2]*n[2],t[3]=e[3]*n[3],t},u.mul=u.multiply,u.divide=function(t,e,n){return t[0]=e[0]/n[0],t[1]=e[1]/n[1],t[2]=e[2]/n[2],t[3]=e[3]/n[3],t},u.div=u.divide,u.min=function(t,e,n){return t[0]=Math.min(e[0],n[0]),t[1]=Math.min(e[1],n[1]),t[2]=Math.min(e[2],n[2]),t[3]=Math.min(e[3],n[3]),t},u.max=function(t,e,n){return t[0]=Math.max(e[0],n[0]),t[1]=Math.max(e[1],n[1]),t[2]=Math.max(e[2],n[2]),t[3]=Math.max(e[3],n[3]),t},u.scale=function(t,e,n){return t[0]=e[0]*n,t[1]=e[1]*n,t[2]=e[2]*n,t[3]=e[3]*n,t},u.distance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1],i=e[2]-t[2],o=e[3]-t[3];return Math.sqrt(n*n+r*r+i*i+o*o)},u.dist=u.distance,u.squaredDistance=function(t,e){var n=e[0]-t[0],r=e[1]-t[1],i=e[2]-t[2],o=e[3]-t[3];return n*n+r*r+i*i+o*o},u.sqrDist=u.squaredDistance,u.length=function(t){var e=t[0],n=t[1],r=t[2],i=t[3];return Math.sqrt(e*e+n*n+r*r+i*i)},u.len=u.length,u.squaredLength=function(t){var e=t[0],n=t[1],r=t[2],i=t[3];return e*e+n*n+r*r+i*i},u.sqrLen=u.squaredLength,u.negate=function(t,e){return t[0]=-e[0],t[1]=-e[1],t[2]=-e[2],t[3]=-e[3],t},u.normalize=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=n*n+r*r+i*i+o*o;return u>0&&(u=1/Math.sqrt(u),t[0]=e[0]*u,t[1]=e[1]*u,t[2]=e[2]*u,t[3]=e[3]*u),t},u.dot=function(t,e){return t[0]*e[0]+t[1]*e[1]+t[2]*e[2]+t[3]*e[3]},u.lerp=function(t,e,n,r){var i=e[0],o=e[1],u=e[2],a=e[3];return t[0]=i+r*(n[0]-i),t[1]=o+r*(n[1]-o),t[2]=u+r*(n[2]-u),t[3]=a+r*(n[3]-a),t},u.transformMat4=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3];return t[0]=n[0]*r+n[4]*i+n[8]*o+n[12]*u,t[1]=n[1]*r+n[5]*i+n[9]*o+n[13]*u,t[2]=n[2]*r+n[6]*i+n[10]*o+n[14]*u,t[3]=n[3]*r+n[7]*i+n[11]*o+n[15]*u,t},u.transformQuat=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=n[0],a=n[1],c=n[2],s=n[3],f=s*r+a*o-c*i,l=s*i+c*r-u*o,h=s*o+u*i-a*r,v=-u*r-a*i-c*o;return t[0]=f*s+v*-u+l*-c-h*-a,t[1]=l*s+v*-a+h*-u-f*-c,t[2]=h*s+v*-c+f*-a-l*-u,t},u.forEach=function(){var t=u.create();return function(e,n,r,i,o,u){var a,c;for(n||(n=4),r||(r=0),c=i?Math.min(i*n+r,e.length):e.length,a=r;c>a;a+=n)t[0]=e[a],t[1]=e[a+1],t[2]=e[a+2],t[3]=e[a+3],o(t,t,u),e[a]=t[0],e[a+1]=t[1],e[a+2]=t[2],e[a+3]=t[3];return e}}(),u.str=function(t){return"vec4("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+")"},"undefined"!=typeof t&&(t.vec4=u);{var a={};new Float32Array([1,0,0,1])}a.create=function(){var t=new n(4);return t[0]=1,t[1]=0,t[2]=0,t[3]=1,t},a.clone=function(t){var e=new n(4);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e},a.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t},a.identity=function(t){return t[0]=1,t[1]=0,t[2]=0,t[3]=1,t},a.transpose=function(t,e){if(t===e){var n=e[1];t[1]=e[2],t[2]=n}else t[0]=e[0],t[1]=e[2],t[2]=e[1],t[3]=e[3];return t},a.invert=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=n*o-i*r;return u?(u=1/u,t[0]=o*u,t[1]=-r*u,t[2]=-i*u,t[3]=n*u,t):null},a.adjoint=function(t,e){var n=e[0];return t[0]=e[3],t[1]=-e[1],t[2]=-e[2],t[3]=n,t},a.determinant=function(t){return t[0]*t[3]-t[2]*t[1]},a.multiply=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=n[0],c=n[1],s=n[2],f=n[3];return t[0]=r*a+i*s,t[1]=r*c+i*f,t[2]=o*a+u*s,t[3]=o*c+u*f,t},a.mul=a.multiply,a.rotate=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=Math.sin(n),c=Math.cos(n);return t[0]=r*c+i*a,t[1]=r*-a+i*c,t[2]=o*c+u*a,t[3]=o*-a+u*c,t},a.scale=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=n[0],c=n[1];return t[0]=r*a,t[1]=i*c,t[2]=o*a,t[3]=u*c,t},a.str=function(t){return"mat2("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+")"},"undefined"!=typeof t&&(t.mat2=a);{var c={};new Float32Array([1,0,0,1,0,0])}c.create=function(){var t=new n(6);return t[0]=1,t[1]=0,t[2]=0,t[3]=1,t[4]=0,t[5]=0,t},c.clone=function(t){var e=new n(6);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e[4]=t[4],e[5]=t[5],e},c.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4],t[5]=e[5],t},c.identity=function(t){return t[0]=1,t[1]=0,t[2]=0,t[3]=1,t[4]=0,t[5]=0,t},c.invert=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=e[4],a=e[5],c=n*o-r*i;return c?(c=1/c,t[0]=o*c,t[1]=-r*c,t[2]=-i*c,t[3]=n*c,t[4]=(i*a-o*u)*c,t[5]=(r*u-n*a)*c,t):null},c.determinant=function(t){return t[0]*t[3]-t[1]*t[2]},c.multiply=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=n[0],f=n[1],l=n[2],h=n[3],v=n[4],g=n[5];return t[0]=r*s+i*l,t[1]=r*f+i*h,t[2]=o*s+u*l,t[3]=o*f+u*h,t[4]=s*a+l*c+v,t[5]=f*a+h*c+g,t},c.mul=c.multiply,c.rotate=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=Math.sin(n),f=Math.cos(n);return t[0]=r*f+i*s,t[1]=-r*s+i*f,t[2]=o*f+u*s,t[3]=-o*s+f*u,t[4]=f*a+s*c,t[5]=f*c-s*a,t},c.scale=function(t,e,n){var r=n[0],i=n[1];return t[0]=e[0]*r,t[1]=e[1]*i,t[2]=e[2]*r,t[3]=e[3]*i,t[4]=e[4]*r,t[5]=e[5]*i,t},c.translate=function(t,e,n){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4]+n[0],t[5]=e[5]+n[1],t},c.str=function(t){return"mat2d("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+", "+t[4]+", "+t[5]+")"},"undefined"!=typeof t&&(t.mat2d=c);{var s={};new Float32Array([1,0,0,0,1,0,0,0,1])}s.create=function(){var t=new n(9);return t[0]=1,t[1]=0,t[2]=0,t[3]=0,t[4]=1,t[5]=0,t[6]=0,t[7]=0,t[8]=1,t},s.clone=function(t){var e=new n(9);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e[4]=t[4],e[5]=t[5],e[6]=t[6],e[7]=t[7],e[8]=t[8],e},s.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4],t[5]=e[5],t[6]=e[6],t[7]=e[7],t[8]=e[8],t},s.identity=function(t){return t[0]=1,t[1]=0,t[2]=0,t[3]=0,t[4]=1,t[5]=0,t[6]=0,t[7]=0,t[8]=1,t},s.transpose=function(t,e){if(t===e){var n=e[1],r=e[2],i=e[5];t[1]=e[3],t[2]=e[6],t[3]=n,t[5]=e[7],t[6]=r,t[7]=i}else t[0]=e[0],t[1]=e[3],t[2]=e[6],t[3]=e[1],t[4]=e[4],t[5]=e[7],t[6]=e[2],t[7]=e[5],t[8]=e[8];return t},s.invert=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=e[4],a=e[5],c=e[6],s=e[7],f=e[8],l=f*u-a*s,h=-f*o+a*c,v=s*o-u*c,g=n*l+r*h+i*v;return g?(g=1/g,t[0]=l*g,t[1]=(-f*r+i*s)*g,t[2]=(a*r-i*u)*g,t[3]=h*g,t[4]=(f*n-i*c)*g,t[5]=(-a*n+i*o)*g,t[6]=v*g,t[7]=(-s*n+r*c)*g,t[8]=(u*n-r*o)*g,t):null},s.adjoint=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=e[4],a=e[5],c=e[6],s=e[7],f=e[8];return t[0]=u*f-a*s,t[1]=i*s-r*f,t[2]=r*a-i*u,t[3]=a*c-o*f,t[4]=n*f-i*c,t[5]=i*o-n*a,t[6]=o*s-u*c,t[7]=r*c-n*s,t[8]=n*u-r*o,t},s.determinant=function(t){var e=t[0],n=t[1],r=t[2],i=t[3],o=t[4],u=t[5],a=t[6],c=t[7],s=t[8];return e*(s*o-u*c)+n*(-s*i+u*a)+r*(c*i-o*a)},s.multiply=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=e[6],f=e[7],l=e[8],h=n[0],v=n[1],g=n[2],p=n[3],d=n[4],m=n[5],y=n[6],b=n[7],E=n[8];return t[0]=h*r+v*u+g*s,t[1]=h*i+v*a+g*f,t[2]=h*o+v*c+g*l,t[3]=p*r+d*u+m*s,t[4]=p*i+d*a+m*f,t[5]=p*o+d*c+m*l,t[6]=y*r+b*u+E*s,t[7]=y*i+b*a+E*f,t[8]=y*o+b*c+E*l,t},s.mul=s.multiply,s.translate=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=e[6],f=e[7],l=e[8],h=n[0],v=n[1];return t[0]=r,t[1]=i,t[2]=o,t[3]=u,t[4]=a,t[5]=c,t[6]=h*r+v*u+s,t[7]=h*i+v*a+f,t[8]=h*o+v*c+l,t},s.rotate=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=e[6],f=e[7],l=e[8],h=Math.sin(n),v=Math.cos(n);return t[0]=v*r+h*u,t[1]=v*i+h*a,t[2]=v*o+h*c,t[3]=v*u-h*r,t[4]=v*a-h*i,t[5]=v*c-h*o,t[6]=s,t[7]=f,t[8]=l,t},s.scale=function(t,e,n){var r=n[0],i=n[2];return t[0]=r*e[0],t[1]=r*e[1],t[2]=r*e[2],t[3]=i*e[3],t[4]=i*e[4],t[5]=i*e[5],t[6]=e[6],t[7]=e[7],t[8]=e[8],t},s.fromMat2d=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=0,t[3]=e[2],t[4]=e[3],t[5]=0,t[6]=e[4],t[7]=e[5],t[8]=1,t},s.fromQuat=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=n+n,a=r+r,c=i+i,s=n*u,f=n*a,l=n*c,h=r*a,v=r*c,g=i*c,p=o*u,d=o*a,m=o*c;return t[0]=1-(h+g),t[1]=f+m,t[2]=l-d,t[3]=f-m,t[4]=1-(s+g),t[5]=v+p,t[6]=l+d,t[7]=v-p,t[8]=1-(s+h),t},s.str=function(t){return"mat3("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+", "+t[4]+", "+t[5]+", "+t[6]+", "+t[7]+", "+t[8]+")"},"undefined"!=typeof t&&(t.mat3=s);{var f={};new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1])}f.create=function(){var t=new n(16);return t[0]=1,t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[5]=1,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[10]=1,t[11]=0,t[12]=0,t[13]=0,t[14]=0,t[15]=1,t},f.clone=function(t){var e=new n(16);return e[0]=t[0],e[1]=t[1],e[2]=t[2],e[3]=t[3],e[4]=t[4],e[5]=t[5],e[6]=t[6],e[7]=t[7],e[8]=t[8],e[9]=t[9],e[10]=t[10],e[11]=t[11],e[12]=t[12],e[13]=t[13],e[14]=t[14],e[15]=t[15],e},f.copy=function(t,e){return t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[4]=e[4],t[5]=e[5],t[6]=e[6],t[7]=e[7],t[8]=e[8],t[9]=e[9],t[10]=e[10],t[11]=e[11],t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15],t},f.identity=function(t){return t[0]=1,t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[5]=1,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[10]=1,t[11]=0,t[12]=0,t[13]=0,t[14]=0,t[15]=1,t},f.transpose=function(t,e){if(t===e){var n=e[1],r=e[2],i=e[3],o=e[6],u=e[7],a=e[11];t[1]=e[4],t[2]=e[8],t[3]=e[12],t[4]=n,t[6]=e[9],t[7]=e[13],t[8]=r,t[9]=o,t[11]=e[14],t[12]=i,t[13]=u,t[14]=a}else t[0]=e[0],t[1]=e[4],t[2]=e[8],t[3]=e[12],t[4]=e[1],t[5]=e[5],t[6]=e[9],t[7]=e[13],t[8]=e[2],t[9]=e[6],t[10]=e[10],t[11]=e[14],t[12]=e[3],t[13]=e[7],t[14]=e[11],t[15]=e[15];return t},f.invert=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=e[4],a=e[5],c=e[6],s=e[7],f=e[8],l=e[9],h=e[10],v=e[11],g=e[12],p=e[13],d=e[14],m=e[15],y=n*a-r*u,b=n*c-i*u,E=n*s-o*u,S=r*c-i*a,O=r*s-o*a,x=i*s-o*c,w=f*p-l*g,F=f*d-h*g,_=f*m-v*g,A=l*d-h*p,j=l*m-v*p,M=h*m-v*d,P=y*M-b*j+E*A+S*_-O*F+x*w;return P?(P=1/P,t[0]=(a*M-c*j+s*A)*P,t[1]=(i*j-r*M-o*A)*P,t[2]=(p*x-d*O+m*S)*P,t[3]=(h*O-l*x-v*S)*P,t[4]=(c*_-u*M-s*F)*P,t[5]=(n*M-i*_+o*F)*P,t[6]=(d*E-g*x-m*b)*P,t[7]=(f*x-h*E+v*b)*P,t[8]=(u*j-a*_+s*w)*P,t[9]=(r*_-n*j-o*w)*P,t[10]=(g*O-p*E+m*y)*P,t[11]=(l*E-f*O-v*y)*P,t[12]=(a*F-u*A-c*w)*P,t[13]=(n*A-r*F+i*w)*P,t[14]=(p*b-g*S-d*y)*P,t[15]=(f*S-l*b+h*y)*P,t):null},f.adjoint=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=e[4],a=e[5],c=e[6],s=e[7],f=e[8],l=e[9],h=e[10],v=e[11],g=e[12],p=e[13],d=e[14],m=e[15];return t[0]=a*(h*m-v*d)-l*(c*m-s*d)+p*(c*v-s*h),t[1]=-(r*(h*m-v*d)-l*(i*m-o*d)+p*(i*v-o*h)),t[2]=r*(c*m-s*d)-a*(i*m-o*d)+p*(i*s-o*c),t[3]=-(r*(c*v-s*h)-a*(i*v-o*h)+l*(i*s-o*c)),t[4]=-(u*(h*m-v*d)-f*(c*m-s*d)+g*(c*v-s*h)),t[5]=n*(h*m-v*d)-f*(i*m-o*d)+g*(i*v-o*h),t[6]=-(n*(c*m-s*d)-u*(i*m-o*d)+g*(i*s-o*c)),t[7]=n*(c*v-s*h)-u*(i*v-o*h)+f*(i*s-o*c),t[8]=u*(l*m-v*p)-f*(a*m-s*p)+g*(a*v-s*l),t[9]=-(n*(l*m-v*p)-f*(r*m-o*p)+g*(r*v-o*l)),t[10]=n*(a*m-s*p)-u*(r*m-o*p)+g*(r*s-o*a),t[11]=-(n*(a*v-s*l)-u*(r*v-o*l)+f*(r*s-o*a)),t[12]=-(u*(l*d-h*p)-f*(a*d-c*p)+g*(a*h-c*l)),t[13]=n*(l*d-h*p)-f*(r*d-i*p)+g*(r*h-i*l),t[14]=-(n*(a*d-c*p)-u*(r*d-i*p)+g*(r*c-i*a)),t[15]=n*(a*h-c*l)-u*(r*h-i*l)+f*(r*c-i*a),t},f.determinant=function(t){var e=t[0],n=t[1],r=t[2],i=t[3],o=t[4],u=t[5],a=t[6],c=t[7],s=t[8],f=t[9],l=t[10],h=t[11],v=t[12],g=t[13],p=t[14],d=t[15],m=e*u-n*o,y=e*a-r*o,b=e*c-i*o,E=n*a-r*u,S=n*c-i*u,O=r*c-i*a,x=s*g-f*v,w=s*p-l*v,F=s*d-h*v,_=f*p-l*g,A=f*d-h*g,j=l*d-h*p;return m*j-y*A+b*_+E*F-S*w+O*x},f.multiply=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=e[6],f=e[7],l=e[8],h=e[9],v=e[10],g=e[11],p=e[12],d=e[13],m=e[14],y=e[15],b=n[0],E=n[1],S=n[2],O=n[3];return t[0]=b*r+E*a+S*l+O*p,t[1]=b*i+E*c+S*h+O*d,t[2]=b*o+E*s+S*v+O*m,t[3]=b*u+E*f+S*g+O*y,b=n[4],E=n[5],S=n[6],O=n[7],t[4]=b*r+E*a+S*l+O*p,t[5]=b*i+E*c+S*h+O*d,t[6]=b*o+E*s+S*v+O*m,t[7]=b*u+E*f+S*g+O*y,b=n[8],E=n[9],S=n[10],O=n[11],t[8]=b*r+E*a+S*l+O*p,t[9]=b*i+E*c+S*h+O*d,t[10]=b*o+E*s+S*v+O*m,t[11]=b*u+E*f+S*g+O*y,b=n[12],E=n[13],S=n[14],O=n[15],t[12]=b*r+E*a+S*l+O*p,t[13]=b*i+E*c+S*h+O*d,t[14]=b*o+E*s+S*v+O*m,t[15]=b*u+E*f+S*g+O*y,t},f.mul=f.multiply,f.translate=function(t,e,n){var r,i,o,u,a,c,s,f,l,h,v,g,p=n[0],d=n[1],m=n[2];return e===t?(t[12]=e[0]*p+e[4]*d+e[8]*m+e[12],t[13]=e[1]*p+e[5]*d+e[9]*m+e[13],t[14]=e[2]*p+e[6]*d+e[10]*m+e[14],t[15]=e[3]*p+e[7]*d+e[11]*m+e[15]):(r=e[0],i=e[1],o=e[2],u=e[3],a=e[4],c=e[5],s=e[6],f=e[7],l=e[8],h=e[9],v=e[10],g=e[11],t[0]=r,t[1]=i,t[2]=o,t[3]=u,t[4]=a,t[5]=c,t[6]=s,t[7]=f,t[8]=l,t[9]=h,t[10]=v,t[11]=g,t[12]=r*p+a*d+l*m+e[12],t[13]=i*p+c*d+h*m+e[13],t[14]=o*p+s*d+v*m+e[14],t[15]=u*p+f*d+g*m+e[15]),t},f.scale=function(t,e,n){var r=n[0],i=n[1],o=n[2];return t[0]=e[0]*r,t[1]=e[1]*r,t[2]=e[2]*r,t[3]=e[3]*r,t[4]=e[4]*i,t[5]=e[5]*i,t[6]=e[6]*i,t[7]=e[7]*i,t[8]=e[8]*o,t[9]=e[9]*o,t[10]=e[10]*o,t[11]=e[11]*o,t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15],t},f.rotate=function(t,n,r,i){var o,u,a,c,s,f,l,h,v,g,p,d,m,y,b,E,S,O,x,w,F,_,A,j,M=i[0],P=i[1],T=i[2],I=Math.sqrt(M*M+P*P+T*T);return Math.abs(I)<e?null:(I=1/I,M*=I,P*=I,T*=I,o=Math.sin(r),u=Math.cos(r),a=1-u,c=n[0],s=n[1],f=n[2],l=n[3],h=n[4],v=n[5],g=n[6],p=n[7],d=n[8],m=n[9],y=n[10],b=n[11],E=M*M*a+u,S=P*M*a+T*o,O=T*M*a-P*o,x=M*P*a-T*o,w=P*P*a+u,F=T*P*a+M*o,_=M*T*a+P*o,A=P*T*a-M*o,j=T*T*a+u,t[0]=c*E+h*S+d*O,t[1]=s*E+v*S+m*O,t[2]=f*E+g*S+y*O,t[3]=l*E+p*S+b*O,t[4]=c*x+h*w+d*F,t[5]=s*x+v*w+m*F,t[6]=f*x+g*w+y*F,t[7]=l*x+p*w+b*F,t[8]=c*_+h*A+d*j,t[9]=s*_+v*A+m*j,t[10]=f*_+g*A+y*j,t[11]=l*_+p*A+b*j,n!==t&&(t[12]=n[12],t[13]=n[13],t[14]=n[14],t[15]=n[15]),t)},f.rotateX=function(t,e,n){var r=Math.sin(n),i=Math.cos(n),o=e[4],u=e[5],a=e[6],c=e[7],s=e[8],f=e[9],l=e[10],h=e[11];return e!==t&&(t[0]=e[0],t[1]=e[1],t[2]=e[2],t[3]=e[3],t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15]),t[4]=o*i+s*r,t[5]=u*i+f*r,t[6]=a*i+l*r,t[7]=c*i+h*r,t[8]=s*i-o*r,t[9]=f*i-u*r,t[10]=l*i-a*r,t[11]=h*i-c*r,t},f.rotateY=function(t,e,n){var r=Math.sin(n),i=Math.cos(n),o=e[0],u=e[1],a=e[2],c=e[3],s=e[8],f=e[9],l=e[10],h=e[11];return e!==t&&(t[4]=e[4],t[5]=e[5],t[6]=e[6],t[7]=e[7],t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15]),t[0]=o*i-s*r,t[1]=u*i-f*r,t[2]=a*i-l*r,t[3]=c*i-h*r,t[8]=o*r+s*i,t[9]=u*r+f*i,t[10]=a*r+l*i,t[11]=c*r+h*i,t},f.rotateZ=function(t,e,n){var r=Math.sin(n),i=Math.cos(n),o=e[0],u=e[1],a=e[2],c=e[3],s=e[4],f=e[5],l=e[6],h=e[7];return e!==t&&(t[8]=e[8],t[9]=e[9],t[10]=e[10],t[11]=e[11],t[12]=e[12],t[13]=e[13],t[14]=e[14],t[15]=e[15]),t[0]=o*i+s*r,t[1]=u*i+f*r,t[2]=a*i+l*r,t[3]=c*i+h*r,t[4]=s*i-o*r,t[5]=f*i-u*r,t[6]=l*i-a*r,t[7]=h*i-c*r,t},f.fromRotationTranslation=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=r+r,c=i+i,s=o+o,f=r*a,l=r*c,h=r*s,v=i*c,g=i*s,p=o*s,d=u*a,m=u*c,y=u*s;return t[0]=1-(v+p),t[1]=l+y,t[2]=h-m,t[3]=0,t[4]=l-y,t[5]=1-(f+p),t[6]=g+d,t[7]=0,t[8]=h+m,t[9]=g-d,t[10]=1-(f+v),t[11]=0,t[12]=n[0],t[13]=n[1],t[14]=n[2],t[15]=1,t},f.fromQuat=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=n+n,a=r+r,c=i+i,s=n*u,f=n*a,l=n*c,h=r*a,v=r*c,g=i*c,p=o*u,d=o*a,m=o*c;return t[0]=1-(h+g),t[1]=f+m,t[2]=l-d,t[3]=0,t[4]=f-m,t[5]=1-(s+g),t[6]=v+p,t[7]=0,t[8]=l+d,t[9]=v-p,t[10]=1-(s+h),t[11]=0,t[12]=0,t[13]=0,t[14]=0,t[15]=1,t},f.frustum=function(t,e,n,r,i,o,u){var a=1/(n-e),c=1/(i-r),s=1/(o-u);return t[0]=2*o*a,t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[5]=2*o*c,t[6]=0,t[7]=0,t[8]=(n+e)*a,t[9]=(i+r)*c,t[10]=(u+o)*s,t[11]=-1,t[12]=0,t[13]=0,t[14]=u*o*2*s,t[15]=0,t},f.perspective=function(t,e,n,r,i){var o=1/Math.tan(e/2),u=1/(r-i);return t[0]=o/n,t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[5]=o,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[10]=(i+r)*u,t[11]=-1,t[12]=0,t[13]=0,t[14]=2*i*r*u,t[15]=0,t},f.ortho=function(t,e,n,r,i,o,u){var a=1/(e-n),c=1/(r-i),s=1/(o-u);return t[0]=-2*a,t[1]=0,t[2]=0,t[3]=0,t[4]=0,t[5]=-2*c,t[6]=0,t[7]=0,t[8]=0,t[9]=0,t[10]=2*s,t[11]=0,t[12]=(e+n)*a,t[13]=(i+r)*c,t[14]=(u+o)*s,t[15]=1,t},f.lookAt=function(t,n,r,i){var o,u,a,c,s,l,h,v,g,p,d=n[0],m=n[1],y=n[2],b=i[0],E=i[1],S=i[2],O=r[0],x=r[1],w=r[2];return Math.abs(d-O)<e&&Math.abs(m-x)<e&&Math.abs(y-w)<e?f.identity(t):(h=d-O,v=m-x,g=y-w,p=1/Math.sqrt(h*h+v*v+g*g),h*=p,v*=p,g*=p,o=E*g-S*v,u=S*h-b*g,a=b*v-E*h,p=Math.sqrt(o*o+u*u+a*a),p?(p=1/p,o*=p,u*=p,a*=p):(o=0,u=0,a=0),c=v*a-g*u,s=g*o-h*a,l=h*u-v*o,p=Math.sqrt(c*c+s*s+l*l),p?(p=1/p,c*=p,s*=p,l*=p):(c=0,s=0,l=0),t[0]=o,t[1]=c,t[2]=h,t[3]=0,t[4]=u,t[5]=s,t[6]=v,t[7]=0,t[8]=a,t[9]=l,t[10]=g,t[11]=0,t[12]=-(o*d+u*m+a*y),t[13]=-(c*d+s*m+l*y),t[14]=-(h*d+v*m+g*y),t[15]=1,t)},f.str=function(t){return"mat4("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+", "+t[4]+", "+t[5]+", "+t[6]+", "+t[7]+", "+t[8]+", "+t[9]+", "+t[10]+", "+t[11]+", "+t[12]+", "+t[13]+", "+t[14]+", "+t[15]+")"},"undefined"!=typeof t&&(t.mat4=f);{var l={};new Float32Array([0,0,0,1])}l.create=function(){var t=new n(4);return t[0]=0,t[1]=0,t[2]=0,t[3]=1,t},l.clone=u.clone,l.fromValues=u.fromValues,l.copy=u.copy,l.set=u.set,l.identity=function(t){return t[0]=0,t[1]=0,t[2]=0,t[3]=1,t},l.setAxisAngle=function(t,e,n){n=.5*n;var r=Math.sin(n);return t[0]=r*e[0],t[1]=r*e[1],t[2]=r*e[2],t[3]=Math.cos(n),t},l.add=u.add,l.multiply=function(t,e,n){var r=e[0],i=e[1],o=e[2],u=e[3],a=n[0],c=n[1],s=n[2],f=n[3];return t[0]=r*f+u*a+i*s-o*c,t[1]=i*f+u*c+o*a-r*s,t[2]=o*f+u*s+r*c-i*a,t[3]=u*f-r*a-i*c-o*s,t},l.mul=l.multiply,l.scale=u.scale,l.rotateX=function(t,e,n){n*=.5;var r=e[0],i=e[1],o=e[2],u=e[3],a=Math.sin(n),c=Math.cos(n);return t[0]=r*c+u*a,t[1]=i*c+o*a,t[2]=o*c-i*a,t[3]=u*c-r*a,t},l.rotateY=function(t,e,n){n*=.5;var r=e[0],i=e[1],o=e[2],u=e[3],a=Math.sin(n),c=Math.cos(n);return t[0]=r*c-o*a,t[1]=i*c+u*a,t[2]=o*c+r*a,t[3]=u*c-i*a,t},l.rotateZ=function(t,e,n){n*=.5;var r=e[0],i=e[1],o=e[2],u=e[3],a=Math.sin(n),c=Math.cos(n);return t[0]=r*c+i*a,t[1]=i*c-r*a,t[2]=o*c+u*a,t[3]=u*c-o*a,t},l.calculateW=function(t,e){var n=e[0],r=e[1],i=e[2];return t[0]=n,t[1]=r,t[2]=i,t[3]=-Math.sqrt(Math.abs(1-n*n-r*r-i*i)),t},l.dot=u.dot,l.lerp=u.lerp,l.slerp=function(t,e,n,r){var i,o,u,a,c=e[0],s=e[1],f=e[2],l=e[3],h=n[0],v=n[1],g=n[2],p=n[3],d=c*h+s*v+f*g+l*p;return Math.abs(d)>=1?(t!==e&&(t[0]=c,t[1]=s,t[2]=f,t[3]=l),t):(i=Math.acos(d),o=Math.sqrt(1-d*d),Math.abs(o)<.001?(t[0]=.5*c+.5*h,t[1]=.5*s+.5*v,t[2]=.5*f+.5*g,t[3]=.5*l+.5*p,t):(u=Math.sin((1-r)*i)/o,a=Math.sin(r*i)/o,t[0]=c*u+h*a,t[1]=s*u+v*a,t[2]=f*u+g*a,t[3]=l*u+p*a,t))},l.invert=function(t,e){var n=e[0],r=e[1],i=e[2],o=e[3],u=n*n+r*r+i*i+o*o,a=u?1/u:0;return t[0]=-n*a,t[1]=-r*a,t[2]=-i*a,t[3]=o*a,t},l.conjugate=function(t,e){return t[0]=-e[0],t[1]=-e[1],t[2]=-e[2],t[3]=e[3],t},l.length=u.length,l.len=l.length,l.squaredLength=u.squaredLength,l.sqrLen=l.squaredLength,l.normalize=u.normalize,l.fromMat3=function(){var t=[1,2,0];return function(e,n){var r,i=n[0]+n[4]+n[8];if(i>0)r=Math.sqrt(i+1),e[3]=.5*r,r=.5/r,e[0]=(n[7]-n[5])*r,e[1]=(n[2]-n[6])*r,e[2]=(n[3]-n[1])*r;else{var o=0;n[4]>n[0]&&(o=1),n[8]>n[3*o+o]&&(o=2);var u=t[o],a=t[u];r=Math.sqrt(n[3*o+o]-n[3*u+u]-n[3*a+a]+1),e[o]=.5*r,r=.5/r,e[3]=(n[3*a+u]-n[3*u+a])*r,e[u]=(n[3*u+o]+n[3*o+u])*r,e[a]=(n[3*a+o]+n[3*o+a])*r}return e}}(),l.str=function(t){return"quat("+t[0]+", "+t[1]+", "+t[2]+", "+t[3]+")"},"undefined"!=typeof t&&(t.quat=l)}(t.exports)}()},function(t,e,n){"use strict";var r=n(4);t.exports=function(t){return function(e){var n,i=r.toObject(this),o=r.toLength(i.length),u=r.toIndex(arguments[1],o);if(t&&e!=e){for(;o>u;)if(n=i[u++],n!=n)return!0}else for(;o>u;u++)if((t||u in i)&&i[u]===e)return t||u;return!t&&-1}}},function(t,e,n){"use strict";function r(t,e){if(!h(t))return("string"==typeof t?"S":"P")+t;if(p(t))return"F";if(!f(t,d)){if(!e)return"E";v(t,d,++O)}return"O"+t[d]}function i(t,e){var n,i=r(e);if("F"!=i)return t[m][i];for(n=t[b];n;n=n.n)if(n.k==e)return n}var o=n(4),u=n(31),a=n(33).safe,c=n(22),s=n(32),f=o.has,l=o.set,h=o.isObject,v=o.hide,g=s.step,p=Object.isFrozen||o.core.Object.isFrozen,d=a("id"),m=a("O1"),y=a("last"),b=a("first"),E=a("iter"),S=o.DESC?a("size"):"size",O=0;t.exports={getConstructor:function(t,e,n){function r(i){var u=c.inst(this,r,t);l(u,m,o.create(null)),l(u,S,0),l(u,y,void 0),l(u,b,void 0),void 0!=i&&s.forOf(i,e,u[n],u)}return o.mix(r.prototype,{clear:function(){for(var t=this,e=t[m],n=t[b];n;n=n.n)n.r=!0,n.p&&(n.p=n.p.n=void 0),delete e[n.i];t[b]=t[y]=void 0,t[S]=0},"delete":function(t){var e=this,n=i(e,t);if(n){var r=n.n,o=n.p;delete e[m][n.i],n.r=!0,o&&(o.n=r),r&&(r.p=o),e[b]==n&&(e[b]=r),e[y]==n&&(e[y]=o),e[S]--}return!!n},forEach:function(t){for(var e,n=u(t,arguments[1],3);e=e?e.n:this[b];)for(n(e.v,e.k,this);e&&e.r;)e=e.p},has:function(t){return!!i(this,t)}}),o.DESC&&o.setDesc(r.prototype,"size",{get:function(){return c.def(this[S])}}),r},def:function(t,e,n){var o,u,a=i(t,e);return a?a.v=n:(t[y]=a={i:u=r(e,!0),k:e,v:n,p:o=t[y],n:void 0,r:!1},t[b]||(t[b]=a),o&&(o.n=a),t[S]++,"F"!=u&&(t[m][u]=a)),t},getEntry:i,getIterConstructor:function(){return function(t,e){l(this,E,{o:t,k:e})}},next:function(){for(var t=this[E],e=t.k,n=t.l;n&&n.r;)n=n.p;return t.o&&(t.l=n=n?n.n:t.o[b])?"key"==e?g(0,n.k):"value"==e?g(0,n.v):g(0,[n.k,n.v]):(t.o=void 0,g(1))}}},function(t,e,n){"use strict";function r(t,e){return y.call(t.array,function(t){return t[0]===e})}function i(t){return t[d]||l(t,d,{array:[],get:function(t){var e=r(this,t);return e?e[1]:void 0},has:function(t){return!!r(this,t)},set:function(t,e){var n=r(this,t);n?n[1]=e:this.array.push([t,e])},"delete":function(t){var e=b.call(this.array,function(e){return e[0]===t});return~e&&this.array.splice(e,1),!!~e}})[d]}var o=n(4),u=n(33).safe,a=n(22),c=n(32).forOf,s=o.has,f=o.isObject,l=o.hide,h=Object.isFrozen||o.core.Object.isFrozen,v=0,g=u("id"),p=u("weak"),d=u("leak"),m=n(97),y=m(5),b=m(6);t.exports={getConstructor:function(t,e,n){function r(i){o.set(a.inst(this,r,t),g,v++),void 0!=i&&c(i,e,this[n],this)}return o.mix(r.prototype,{"delete":function(t){return f(t)?h(t)?i(this)["delete"](t):s(t,p)&&s(t[p],this[g])&&delete t[p][this[g]]:!1},has:function(t){return f(t)?h(t)?i(this).has(t):s(t,p)&&s(t[p],this[g]):!1}}),r},def:function(t,e,n){return h(a.obj(e))?i(t).set(e,n):(s(e,p)||l(e,p,{}),e[p][t[g]]=n),t},leakStore:i,WEAK:p,ID:g}},function(t,e,n){var r=n(4),i=n(22).obj;t.exports=function(t){return i(t),r.getSymbols?r.getNames(t).concat(r.getSymbols(t)):r.getNames(t)}},function(t,e,n){var r=n(4),i=n(22);t.exports=Object.setPrototypeOf||("__proto__"in{}?function(t,e){try{e=n(31)(Function.call,r.getDesc(Object.prototype,"__proto__").set,2),e({},[])}catch(o){t=!0}return function(n,o){return i.obj(n),i(null===o||r.isObject(o),o,": can't set as prototype!"),t?n.__proto__=o:e(n,o),n}}():void 0)},function(t,e,n){"use strict";function r(){var t=+this;if(c.has(E,t)){var e=E[t];delete E[t],e()}}function i(t){r.call(t.data)}var o,u,a,c=n(4),s=n(31),f=n(23),l=n(99),h=c.g,v=c.isFunction,g=h.setImmediate,p=h.clearImmediate,d=h.postMessage,m=h.addEventListener,y=h.MessageChannel,b=0,E={},S="onreadystatechange";v(g)&&v(p)||(g=function(t){for(var e=[],n=1;arguments.length>n;)e.push(arguments[n++]);return E[++b]=function(){l(v(t)?t:Function(t),e)},o(b),b},p=function(t){delete E[t]},"process"==f(h.process)?o=function(t){h.process.nextTick(s(r,t,1))}:m&&v(d)&&!c.g.importScripts?(o=function(t){d(t,"*")},m("message",i,!1)):v(y)?(u=new y,a=u.port2,u.port1.onmessage=i,o=s(a.postMessage,a,1)):o=c.g.document&&S in document.createElement("script")?function(t){c.html.appendChild(document.createElement("script"))[S]=function(){c.html.removeChild(this),r.call(t)}}:function(t){setTimeout(s(r,t,1),0)}),t.exports={set:g,clear:p}},function(t,e,n){var r=n(4),i=n(35),o=n(33).safe("iter"),u=n(32),a=u.step,c=u.Iterators;u.std(Array,"Array",function(t,e){r.set(this,o,{o:r.toObject(t),i:0,k:e})},function(){var t=this[o],e=t.o,n=t.k,r=t.i++;return!e||r>=e.length?(t.o=void 0,a(1)):"key"==n?a(0,r):"value"==n?a(0,e[r]):a(0,[r,e[r]])},"value"),c.Arguments=c.Array,i("keys"),i("values"),i("entries")},function(t,e,n){(function(t){"use strict";if(t._babelPolyfill)throw new Error("only one instance of babel/polyfill is allowed");t._babelPolyfill=!0,n(158),n(159)}).call(e,function(){return this}())},function(t,e,n){var r=n(4);t.exports=Object.assign||function(t,e){for(var n=Object(r.assertDefined(t)),i=arguments.length,o=1;i>o;)for(var u,a=r.ES5Object(arguments[o++]),c=r.getKeys(a),s=c.length,f=0;s>f;)n[u=c[f++]]=a[u];return n}},function(t,e,n){t.exports=function(t){return t.FW=!0,t.path=t.g,t}},function(t,e,n){var r=n(4);t.exports=function(t,e){for(var n,i=r.toObject(t),o=r.getKeys(i),u=o.length,a=0;u>a;)if(i[n=o[a++]]===e)return n}},function(t,e,n){"use strict";var r=n(4),i=n(99),o=n(22).fn;t.exports=function(){for(var t=o(this),e=arguments.length,n=Array(e),u=0,a=r.path._,c=!1;e>u;)(n[u]=arguments[u++])===a&&(c=!0);return function(){var r,o=this,u=arguments.length,s=0,f=0;if(!c&&!u)return i(t,n,o);if(r=n.slice(),c)for(;e>s;s++)r[s]===a&&(r[s]=arguments[f++]);for(;u>f;)r.push(arguments[f++]);return i(t,r,o)}}},function(t,e,n){function r(t,e){return function(n){var r,i=A(n),o=0,u=[];for(r in i)r!=g&&x(i,r)&&u.push(r);for(;e>o;)x(i,r=t[o++])&&(~E.call(u,r)||u.push(r));return u}}function i(t){return!s.isObject(t)}function o(){}function u(t){return function(){return t.apply(s.ES5Object(this),arguments)}}function a(t){return function(e,n){p.fn(e);var r=A(this),i=j(r.length),o=t?i-1:0,u=t?-1:1;if(arguments.length<2)for(;;){if(o in r){n=r[o],o+=u;break}o+=u,p(t?o>=0:i>o,"Reduce of empty array with no initial value")}for(;t?o>=0:i>o;o+=u)o in r&&(n=e(n,r[o],o,this));return n}}function c(t){return t>9?t:"0"+t}var s=n(4),f=n(23),l=n(9),h=n(99),v=n(97),g=n(33).safe("__proto__"),p=n(22),d=p.obj,m=Object.prototype,y=[],b=y.slice,E=y.indexOf,S=f.classof,O=Object.defineProperties,x=s.has,w=s.setDesc,F=s.getDesc,_=s.isFunction,A=s.toObject,j=s.toLength,M=!1;if(!s.DESC){try{M=8==w(document.createElement("div"),"x",{get:function(){return 8}}).x}catch(P){}s.setDesc=function(t,e,n){if(M)try{return w(t,e,n)}catch(r){}if("get"in n||"set"in n)throw TypeError("Accessors not supported!");return"value"in n&&(d(t)[e]=n.value),t},s.getDesc=function(t,e){if(M)try{return F(t,e)}catch(n){}return x(t,e)?s.desc(!m.propertyIsEnumerable.call(t,e),t[e]):void 0},O=function(t,e){d(t);for(var n,r=s.getKeys(e),i=r.length,o=0;i>o;)s.setDesc(t,n=r[o++],e[n]);return t}}l(l.S+l.F*!s.DESC,"Object",{getOwnPropertyDescriptor:s.getDesc,defineProperty:s.setDesc,defineProperties:O});var T="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(","),I=T.concat("length","prototype"),D=T.length,L=function(){var t,e=document.createElement("iframe"),n=D;for(e.style.display="none",s.html.appendChild(e),e.src="javascript:",t=e.contentWindow.document,t.open(),t.write("<script>document.F=Object</script>"),t.close(),L=t.F;n--;)delete L.prototype[T[n]];return L()};l(l.S,"Object",{getPrototypeOf:s.getProto=s.getProto||function(t){return t=Object(p.def(t)),x(t,g)?t[g]:_(t.constructor)&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?m:null},getOwnPropertyNames:s.getNames=s.getNames||r(I,I.length,!0),create:s.create=s.create||function(t,e){var n;return null!==t?(o.prototype=d(t),n=new o,o.prototype=null,n[g]=t):n=L(),void 0===e?n:O(n,e)},keys:s.getKeys=s.getKeys||r(T,D,!1),seal:s.it,freeze:s.it,preventExtensions:s.it,isSealed:i,isFrozen:i,isExtensible:s.isObject}),l(l.P,"Function",{bind:function(t){function e(){var i=r.concat(b.call(arguments));return h(n,i,this instanceof e?s.create(n.prototype):t)}var n=p.fn(this),r=b.call(arguments,1);return n.prototype&&(e.prototype=n.prototype),e}}),0 in Object("z")&&"z"=="z"[0]||(s.ES5Object=function(t){return"String"==f(t)?t.split(""):Object(t)}),l(l.P+l.F*(s.ES5Object!=Object),"Array",{slice:u(b),join:u(y.join)}),l(l.S,"Array",{isArray:function(t){return"Array"==f(t)}}),l(l.P,"Array",{forEach:s.each=s.each||v(0),map:v(1),filter:v(2),some:v(3),every:v(4),reduce:a(!1),reduceRight:a(!0),indexOf:E=E||n(104)(!1),lastIndexOf:function(t,e){var n=A(this),r=j(n.length),i=r-1;for(arguments.length>1&&(i=Math.min(i,s.toInteger(e))),0>i&&(i=j(r+i));i>=0;i--)if(i in n&&n[i]===t)return i;return-1}}),l(l.P,"String",{trim:n(101)(/^\s*([\s\S]*\S)?\s*$/,"$1")}),l(l.S,"Date",{now:function(){return+new Date}}),l(l.P,"Date",{toISOString:function(){if(!isFinite(this))throw RangeError("Invalid time value");var t=this,e=t.getUTCFullYear(),n=t.getUTCMilliseconds(),r=0>e?"-":e>9999?"+":"";return r+("00000"+Math.abs(e)).slice(r?-6:-4)+"-"+c(t.getUTCMonth()+1)+"-"+c(t.getUTCDate())+"T"+c(t.getUTCHours())+":"+c(t.getUTCMinutes())+":"+c(t.getUTCSeconds())+"."+(n>99?n:"0"+c(n))+"Z"}}),"Object"==S(function(){return arguments}())&&(f.classof=function(t){var e=S(t);return"Object"==e&&_(t.callee)?"Arguments":e})},function(t,e,n){"use strict";var r=n(4),i=n(9),o=r.toIndex;i(i.P,"Array",{copyWithin:function(t,e){var n=Object(r.assertDefined(this)),i=r.toLength(n.length),u=o(t,i),a=o(e,i),c=arguments[2],s=void 0===c?i:o(c,i),f=Math.min(s-a,i-u),l=1;for(u>a&&a+f>u&&(l=-1,a=a+f-1,u=u+f-1);f-->0;)a in n?n[u]=n[a]:delete n[u],u+=l,a+=l;return n}}),n(35)("copyWithin")},function(t,e,n){"use strict";var r=n(4),i=n(9),o=r.toIndex;i(i.P,"Array",{fill:function(t){for(var e=Object(r.assertDefined(this)),n=r.toLength(e.length),i=o(arguments[1],n),u=arguments[2],a=void 0===u?n:o(u,n);a>i;)e[i++]=t;return e}}),n(35)("fill")},function(t,e,n){var r=n(9);r(r.P,"Array",{findIndex:n(97)(6)}),n(35)("findIndex")},function(t,e,n){var r=n(9);r(r.P,"Array",{find:n(97)(5)}),n(35)("find")},function(t,e,n){var r=n(4),i=n(31),o=n(9),u=n(32),a=u.stepCall;o(o.S+o.F*u.DANGER_CLOSING,"Array",{from:function(t){var e,n,o,c,s=Object(r.assertDefined(t)),f=arguments[1],l=void 0!==f,h=l?i(f,arguments[2],2):void 0,v=0;if(u.is(s))for(c=u.get(s),n=new("function"==typeof this?this:Array);!(o=c.next()).done;v++)n[v]=l?a(c,h,[o.value,v],!0):o.value;else for(n=new("function"==typeof this?this:Array)(e=r.toLength(s.length));e>v;v++)n[v]=l?h(s[v],v):s[v];return n.length=v,n}})},function(t,e,n){var r=n(9);r(r.S,"Array",{of:function(){for(var t=0,e=arguments.length,n=new("function"==typeof this?this:Array)(e);e>t;)n[t]=arguments[t++];return n.length=e,n}})},function(t,e,n){n(100)(Array)},function(t,e,n){"use strict";var r=n(4),i="name",o=r.setDesc,u=Function.prototype;i in u||r.FW&&r.DESC&&o(u,i,{configurable:!0,get:function(){var t=String(this).match(/^\s*function ([^ (]*)/),e=t?t[1]:"";return r.has(this,i)||o(this,i,r.desc(5,e)),e},set:function(t){r.has(this,i)||o(this,i,r.desc(0,t))}})},function(t,e,n){"use strict";var r=n(105);n(98)("Map",{get:function(t){var e=r.getEntry(this,t);return e&&e.v},set:function(t,e){return r.def(this,0===t?0:t,e)}},r,!0)},function(t,e,n){function r(t){return isFinite(t=+t)&&0!=t?0>t?-r(-t):l(t+h(t*t+1)):t}function i(t){return 0==(t=+t)?t:t>-1e-6&&1e-6>t?t+t*t/2:f(t)-1}var o=1/0,u=n(9),a=Math.E,c=Math.pow,s=Math.abs,f=Math.exp,l=Math.log,h=Math.sqrt,v=Math.ceil,g=Math.floor,p=Math.sign||function(t){return 0==(t=+t)||t!=t?t:0>t?-1:1};u(u.S,"Math",{acosh:function(t){return(t=+t)<1?0/0:isFinite(t)?l(t/a+h(t+1)*h(t-1)/a)+1:t},asinh:r,atanh:function(t){return 0==(t=+t)?t:l((1+t)/(1-t))/2},cbrt:function(t){return p(t=+t)*c(s(t),1/3)},clz32:function(t){return(t>>>=0)?32-t.toString(2).length:32},cosh:function(t){return(f(t=+t)+f(-t))/2},expm1:i,fround:function(t){return new Float32Array([t])[0]},hypot:function(t,e){for(var n,r=0,i=arguments.length,u=i,a=Array(i),s=-o;i--;){if(n=a[i]=+arguments[i],n==o||n==-o)return o;n>s&&(s=n)}for(s=n||1;u--;)r+=c(a[u]/s,2);return s*h(r)},imul:function(t,e){var n=65535,r=+t,i=+e,o=n&r,u=n&i;return 0|o*u+((n&r>>>16)*u+o*(n&i>>>16)<<16>>>0)},log1p:function(t){return(t=+t)>-1e-8&&1e-8>t?t-t*t/2:l(1+t)},log10:function(t){return l(t)/Math.LN10},log2:function(t){return l(t)/Math.LN2},sign:p,sinh:function(t){return s(t=+t)<1?(i(t)-i(-t))/2:(f(t-1)-f(-t-1))*(a/2)},tanh:function(t){var e=i(t=+t),n=i(-t);return e==o?1:n==o?-1:(e-n)/(f(t)+f(-t))},trunc:function(t){return(t>0?g:v)(t)}})},function(t,e,n){"use strict";function r(t){var e,n;if(a(e=t.valueOf)&&!u(n=e.call(t)))return n;if(a(e=t.toString)&&!u(n=e.call(t)))return n;throw TypeError("Can't convert object to number")}function i(t){if(u(t)&&(t=r(t)),"string"==typeof t&&t.length>2&&48==t.charCodeAt(0)){var e=!1;switch(t.charCodeAt(1)){case 66:case 98:e=!0;case 79:case 111:return parseInt(t.slice(2),e?2:8)}}return+t}var o=n(4),u=o.isObject,a=o.isFunction,c="Number",s=o.g[c],f=s,l=s.prototype;!o.FW||s("0o1")&&s("0b1")||(s=function h(t){
-return this instanceof h?new f(i(t)):i(t)},o.each.call(o.DESC?o.getNames(f):"MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger".split(","),function(t){o.has(f,t)&&!o.has(s,t)&&o.setDesc(s,t,o.getDesc(f,t))}),s.prototype=l,l.constructor=s,o.hide(o.g,c,s))},function(t,e,n){function r(t){return!i.isObject(t)&&isFinite(t)&&a(t)===t}var i=n(4),o=n(9),u=Math.abs,a=Math.floor,c=9007199254740991;o(o.S,"Number",{EPSILON:Math.pow(2,-52),isFinite:function(t){return"number"==typeof t&&isFinite(t)},isInteger:r,isNaN:function(t){return t!=t},isSafeInteger:function(t){return r(t)&&u(t)<=c},MAX_SAFE_INTEGER:c,MIN_SAFE_INTEGER:-c,parseFloat:parseFloat,parseInt:parseInt})},function(t,e,n){var r=n(9);r(r.S,"Object",{assign:n(112)})},function(t,e,n){var r=n(9);r(r.S,"Object",{is:function(t,e){return t===e?0!==t||1/t===1/e:t!=t&&e!=e}})},function(t,e,n){var r=n(9);r(r.S,"Object",{setPrototypeOf:n(108)})},function(t,e,n){function r(t,e){var n=(i.core.Object||{})[t]||Object[t],r=0,c={};c[t]=1==e?function(t){return u(t)?n(t):t}:2==e?function(t){return u(t)?n(t):!0}:3==e?function(t){return u(t)?n(t):!1}:4==e?function(t,e){return n(a(t),e)}:5==e?function(t){return n(Object(i.assertDefined(t)))}:function(t){return n(a(t))};try{n("z")}catch(s){r=1}o(o.S+o.F*r,"Object",c)}var i=n(4),o=n(9),u=i.isObject,a=i.toObject;r("freeze",1),r("seal",1),r("preventExtensions",1),r("isFrozen",2),r("isSealed",2),r("isExtensible",3),r("getOwnPropertyDescriptor",4),r("getPrototypeOf",5),r("keys"),r("getOwnPropertyNames")},function(t,e,n){"use strict";var r=n(4),i=n(23),o={};o[n(34)("toStringTag")]="z",r.FW&&"z"!=i(o)&&r.hide(Object.prototype,"toString",function(){return"[object "+i.classof(this)+"]"})},function(t,e,n){"use strict";function r(t){var e=x(t)[l];return void 0!=e?e:t}var i,o=n(4),u=n(31),a=n(23),c=n(9),s=n(22),f=n(32),l=n(34)("species"),h=n(33).safe("record"),v=f.forOf,g="Promise",p=o.g,d=p.process,m=d&&d.nextTick||n(109).set,y=p[g],b=y,E=o.isFunction,S=o.isObject,O=s.fn,x=s.obj;E(y)&&E(y.resolve)&&y.resolve(i=new y(function(){}))==i||function(){function t(t){var e;return S(t)&&(e=t.then),E(e)?e:!1}function e(t){var n,r=t[h],i=r.c,o=0;if(r.h)return!0;for(;i.length>o;)if(n=i[o++],n.fail||e(n.P))return!0}function n(n,r){var i=n.c;(r||i.length)&&m(function(){var o=n.p,u=n.v,c=1==n.s,s=0;if(r&&!e(o))setTimeout(function(){e(o)||("process"==a(d)?d.emit("unhandledRejection",u,o):p.console&&E(console.error)&&console.error("Unhandled promise rejection",u))},1e3);else for(;i.length>s;)!function(e){var r,i,o=c?e.ok:e.fail;try{o?(c||(n.h=!0),r=o===!0?u:o(u),r===e.P?e.rej(TypeError(g+"-chain cycle")):(i=t(r))?i.call(r,e.res,e.rej):e.res(r)):e.rej(u)}catch(a){e.rej(a)}}(i[s++]);i.length=0})}function r(t){var e=this;e.d||(e.d=!0,e=e.r||e,e.v=t,e.s=2,n(e,!0))}function i(e){var o,a,c=this;if(!c.d){c.d=!0,c=c.r||c;try{(o=t(e))?(a={r:c,d:!1},o.call(e,u(i,a,1),u(r,a,1))):(c.v=e,c.s=1,n(c))}catch(s){r.call(a||{r:c,d:!1},s)}}}y=function(t){O(t);var e={p:s.inst(this,y,g),c:[],s:0,d:!1,v:void 0,h:!1};o.hide(this,h,e);try{t(u(i,e,1),u(r,e,1))}catch(n){r.call(e,n)}},o.mix(y.prototype,{then:function(t,e){var r=x(x(this).constructor)[l],i={ok:E(t)?t:!0,fail:E(e)?e:!1},o=i.P=new(void 0!=r?r:y)(function(t,e){i.res=O(t),i.rej=O(e)}),u=this[h];return u.c.push(i),u.s&&n(u),o},"catch":function(t){return this.then(void 0,t)}})}(),c(c.G+c.W+c.F*(y!=b),{Promise:y}),c(c.S,g,{reject:function(t){return new(r(this))(function(e,n){n(t)})},resolve:function(t){return S(t)&&h in t&&o.getProto(t)===this.prototype?t:new(r(this))(function(e){e(t)})}}),c(c.S+c.F*(f.fail(function(t){y.all(t)["catch"](function(){})})||f.DANGER_CLOSING),g,{all:function(t){var e=r(this),n=[];return new e(function(r,i){v(t,!1,n.push,n);var u=n.length,a=Array(u);u?o.each.call(n,function(t,n){e.resolve(t).then(function(t){a[n]=t,--u||r(a)},i)}):r(a)})},race:function(t){var e=r(this);return new e(function(n,r){v(t,!1,function(t){e.resolve(t).then(n,r)})})}}),a.set(y,g),n(100)(y)},function(t,e,n){function r(t){var e,n=[];for(e in t)n.push(e);a.set(this,l,{o:t,a:n,i:0})}function i(t){return function(e){b(e);try{return t.apply(void 0,arguments),!0}catch(n){return!1}}}function o(t,e){var n,r=arguments.length<3?t:arguments[2],i=p(b(t),e);return i?a.has(i,"value")?i.value:void 0===i.get?void 0:i.get.call(r):g(n=m(t))?o(n,e,r):void 0}function u(t,e,n){var r,i,o=arguments.length<4?t:arguments[3],c=p(b(t),e);if(!c){if(g(i=m(t)))return u(i,e,n,o);c=a.desc(0)}return a.has(c,"value")?c.writable!==!1&&g(o)?(r=p(o,e)||a.desc(0),r.value=n,d(o,e,r),!0):!1:void 0===c.set?!1:(c.set.call(o,n),!0)}var a=n(4),c=n(9),s=n(108),f=n(32),l=n(33).safe("iter"),h=f.step,v=n(22),g=a.isObject,p=a.getDesc,d=a.setDesc,m=a.getProto,y=Function.apply,b=v.obj,E=Object.isExtensible||a.it;f.create(r,"Object",function(){var t,e=this[l],n=e.a;do if(e.i>=n.length)return h(1);while(!((t=n[e.i++])in e.o));return h(0,t)});var S={apply:n(31)(Function.call,y,3),construct:function(t,e){var n=v.fn(arguments.length<3?t:arguments[2]).prototype,r=a.create(g(n)?n:Object.prototype),i=y.call(t,r,e);return g(i)?i:r},defineProperty:i(d),deleteProperty:function(t,e){var n=p(b(t),e);return n&&!n.configurable?!1:delete t[e]},enumerate:function(t){return new r(b(t))},get:o,getOwnPropertyDescriptor:function(t,e){return p(b(t),e)},getPrototypeOf:function(t){return m(b(t))},has:function(t,e){return e in t},isExtensible:function(t){return!!E(b(t))},ownKeys:n(107),preventExtensions:i(Object.preventExtensions||a.it),set:u};s&&(S.setPrototypeOf=function(t,e){return s(b(t),e),!0}),c(c.G,{Reflect:{}}),c(c.S,"Reflect",S)},function(t,e,n){var r=n(4),i=n(23),o=r.g.RegExp,u=o,a=o.prototype;r.FW&&r.DESC&&(function(){try{return"/a/i"==o(/a/g,"i")}catch(t){}}()||(o=function(t,e){return new u("RegExp"==i(t)&&void 0!==e?t.source:t,e)},r.each.call(r.getNames(u),function(t){t in o||r.setDesc(o,t,{configurable:!0,get:function(){return u[t]},set:function(e){u[t]=e}})}),a.constructor=o,o.prototype=a,r.hide(r.g,"RegExp",o)),"g"!=/./g.flags&&r.setDesc(a,"flags",{configurable:!0,get:n(101)(/^.*\/(\w*)$/,"$1")})),n(100)(o)},function(t,e,n){"use strict";var r=n(105);n(98)("Set",{add:function(t){return r.def(this,t=0===t?0:t,t)}},r)},function(t,e,n){var r=n(9);r(r.P,"String",{codePointAt:n(102)(!1)})},function(t,e,n){"use strict";var r=n(4),i=n(23),o=n(9),u=r.toLength;o(o.P,"String",{endsWith:function(t){if("RegExp"==i(t))throw TypeError();var e=String(r.assertDefined(this)),n=arguments[1],o=u(e.length),a=void 0===n?o:Math.min(u(n),o);return t+="",e.slice(a-t.length,a)===t}})},function(t,e,n){var r=n(9),i=n(4).toIndex,o=String.fromCharCode;r(r.S,"String",{fromCodePoint:function(t){for(var e,n=[],r=arguments.length,u=0;r>u;){if(e=+arguments[u++],i(e,1114111)!==e)throw RangeError(e+" is not a valid code point");n.push(65536>e?o(e):o(((e-=65536)>>10)+55296,e%1024+56320))}return n.join("")}})},function(t,e,n){"use strict";var r=n(4),i=n(23),o=n(9);o(o.P,"String",{includes:function(t){if("RegExp"==i(t))throw TypeError();return!!~String(r.assertDefined(this)).indexOf(t,arguments[1])}})},function(t,e,n){var r=n(4).set,i=n(102)(!0),o=n(33).safe("iter"),u=n(32),a=u.step;u.std(String,"String",function(t){r(this,o,{o:String(t),i:0})},function(){var t,e=this[o],n=e.o,r=e.i;return r>=n.length?a(1):(t=i.call(n,r),e.i+=t.length,a(0,t))})},function(t,e,n){var r=n(4),i=n(9);i(i.S,"String",{raw:function(t){for(var e=r.toObject(t.raw),n=r.toLength(e.length),i=arguments.length,o=[],u=0;n>u;)o.push(String(e[u++])),i>u&&o.push(String(arguments[u]));return o.join("")}})},function(t,e,n){"use strict";var r=n(4),i=n(9);i(i.P,"String",{repeat:function(t){var e=String(r.assertDefined(this)),n="",i=r.toInteger(t);if(0>i||i==1/0)throw RangeError("Count can't be negative");for(;i>0;(i>>>=1)&&(e+=e))1&i&&(n+=e);return n}})},function(t,e,n){"use strict";var r=n(4),i=n(23),o=n(9);o(o.P,"String",{startsWith:function(t){if("RegExp"==i(t))throw TypeError();var e=String(r.assertDefined(this)),n=r.toLength(Math.min(arguments[1],e.length));return t+="",e.slice(n,n+t.length)===t}})},function(t,e,n){"use strict";function r(t){var e=y[t]=i.set(i.create(v.prototype),d,t);return i.DESC&&p&&i.setDesc(Object.prototype,t,{configurable:!0,set:function(e){f(this,t,e)}}),e}var i=n(4),o=n(23).set,u=n(33),a=n(9),c=n(114),s=i.has,f=i.hide,l=i.getNames,h=i.toObject,v=i.g.Symbol,g=v,p=!1,d=u.safe("tag"),m={},y={};i.isFunction(v)||(v=function(t){if(this instanceof v)throw TypeError("Symbol is not a constructor");return r(u(t))},f(v.prototype,"toString",function(){return this[d]})),a(a.G+a.W,{Symbol:v});var b={"for":function(t){return s(m,t+="")?m[t]:m[t]=v(t)},keyFor:function(t){return c(m,t)},pure:u.safe,set:i.set,useSetter:function(){p=!0},useSimple:function(){p=!1}};i.each.call("hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),function(t){var e=n(34)(t);b[t]=v===g?e:r(e)}),p=!0,a(a.S,"Symbol",b),a(a.S+a.F*(v!=g),"Object",{getOwnPropertyNames:function(t){for(var e,n=l(h(t)),r=[],i=0;n.length>i;)s(y,e=n[i++])||r.push(e);return r},getOwnPropertySymbols:function(t){for(var e,n=l(h(t)),r=[],i=0;n.length>i;)s(y,e=n[i++])&&r.push(y[e]);return r}}),o(v,"Symbol"),o(Math,"Math",!0),o(i.g.JSON,"JSON",!0)},function(t,e,n){"use strict";var r=n(4),i=n(106),o=i.leakStore,u=i.ID,a=i.WEAK,c=r.has,s=r.isObject,f=Object.isFrozen||r.core.Object.isFrozen,l={},h=n(98)("WeakMap",{get:function(t){if(s(t)){if(f(t))return o(this).get(t);if(c(t,a))return t[a][this[u]]}},set:function(t,e){return i.def(this,t,e)}},i,!0,!0);r.FW&&7!=(new h).set((Object.freeze||Object)(l),7).get(l)&&r.each.call(["delete","has","get","set"],function(t){var e=h.prototype[t];h.prototype[t]=function(n,r){if(s(n)&&f(n)){var i=o(this)[t](n,r);return"set"==t?this:i}return e.call(this,n,r)}})},function(t,e,n){"use strict";var r=n(106);n(98)("WeakSet",{add:function(t){return r.def(this,t,!0)}},r,!1,!0)},function(t,e,n){var r=n(9);r(r.P,"Array",{includes:n(104)(!0)}),n(35)("includes")},function(t,e,n){var r=n(4),i=n(9),o=n(107);i(i.S,"Object",{getOwnPropertyDescriptors:function(t){var e=r.toObject(t),n={};return r.each.call(o(e),function(t){r.setDesc(n,t,r.desc(0,r.getDesc(e,t)))}),n}})},function(t,e,n){function r(t){return function(e){var n,r=i.toObject(e),o=i.getKeys(e),u=o.length,a=0,c=Array(u);if(t)for(;u>a;)c[a]=[n=o[a++],r[n]];else for(;u>a;)c[a]=r[o[a++]];return c}}var i=n(4),o=n(9);o(o.S,"Object",{values:r(!1),entries:r(!0)})},function(t,e,n){var r=n(9);r(r.S,"RegExp",{escape:n(101)(/([\\\-[\]{}()*+?.,^$|])/g,"\\$1",!0)})},function(t,e,n){var r=n(9);r(r.P,"String",{at:n(102)(!0)})},function(t,e,n){function r(t,e){i.each.call(t.split(","),function(t){void 0==e&&t in u.Array?a[t]=u.Array[t]:t in[]&&(a[t]=n(31)(Function.call,[][t],e))})}var i=n(4),o=n(9),u=i.core,a={};r("pop,reverse,shift,keys,values,entries",1),r("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3),r("join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill,turn"),o(o.S,"Array",a)},function(t,e,n){n(110);var r=n(4),i=n(32).Iterators,o=n(34)("iterator"),u=r.g.NodeList;!r.FW||!u||o in u.prototype||r.hide(u.prototype,o,i.Array),i.NodeList=i.Array},function(t,e,n){var r=n(9),i=n(109);r(r.G+r.B,{setImmediate:i.set,clearImmediate:i.clear})},function(t,e,n){function r(t){return c?function(e,n){return t(u(a,[].slice.call(arguments,2),i.isFunction(e)?e:Function(e)),n)}:t}var i=n(4),o=n(9),u=n(99),a=n(115),c=!!i.g.navigator&&/MSIE .\./.test(navigator.userAgent);o(o.G+o.B+o.F*c,{setTimeout:r(i.g.setTimeout),setInterval:r(i.g.setInterval)})},function(t,e,n){n(116),n(146),n(129),n(130),n(131),n(133),n(132),n(124),n(127),n(128),n(126),n(140),n(143),n(142),n(138),n(139),n(141),n(144),n(145),n(121),n(122),n(110),n(123),n(117),n(118),n(120),n(119),n(136),n(134),n(125),n(137),n(147),n(148),n(135),n(149),n(153),n(152),n(150),n(151),n(154),n(157),n(156),n(155),t.exports=n(4).core},function(t,e,n){(function(e){!function(e){"use strict";function n(t,e,n,r){return new u(t,e,n||null,r||[])}function r(t,e,n){try{return{type:"normal",arg:t.call(e,n)}}catch(r){return{type:"throw",arg:r}}}function i(){}function o(){}function u(t,e,n,i){function o(e,i){if(c===b)throw new Error("Generator is already running");if(c===E)return l();for(;;){var o=a.delegate;if(o){var u=r(o.iterator[e],o.iterator,i);if("throw"===u.type){a.delegate=null,e="throw",i=u.arg;continue}e="next",i=h;var s=u.arg;if(!s.done)return c=y,s;a[o.resultName]=s.value,a.next=o.nextLoc,a.delegate=null}if("next"===e){if(c===m&&"undefined"!=typeof i)throw new TypeError("attempt to send "+JSON.stringify(i)+" to newborn generator");c===y?a.sent=i:delete a.sent}else if("throw"===e){if(c===m)throw c=E,i;a.dispatchException(i)&&(e="next",i=h)}else"return"===e&&a.abrupt("return",i);c=b;var u=r(t,n,a);if("normal"===u.type){c=a.done?E:y;var s={value:u.arg,done:a.done};if(u.arg!==S)return s;a.delegate&&"next"===e&&(i=h)}else"throw"===u.type&&(c=E,"next"===e?a.dispatchException(u.arg):i=u.arg)}}var u=e?Object.create(e.prototype):this,a=new s(i),c=m;return u.next=o.bind(u,"next"),u["throw"]=o.bind(u,"throw"),u["return"]=o.bind(u,"return"),u}function a(t){var e={tryLoc:t[0]};1 in t&&(e.catchLoc=t[1]),2 in t&&(e.finallyLoc=t[2],e.afterLoc=t[3]),this.tryEntries.push(e)}function c(t){var e=t.completion||{};e.type="normal",delete e.arg,t.completion=e}function s(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(a,this),this.reset()}function f(t){if(t){var e=t[g];if(e)return e.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var n=-1,r=function i(){for(;++n<t.length;)if(v.call(t,n))return i.value=t[n],i.done=!1,i;return i.value=h,i.done=!0,i};return r.next=r}}return{next:l}}function l(){return{value:h,done:!0}}var h,v=Object.prototype.hasOwnProperty,g="function"==typeof Symbol&&Symbol.iterator||"@@iterator",p="object"==typeof t,d=e.regeneratorRuntime;if(d)return void(p&&(t.exports=d));d=e.regeneratorRuntime=p?t.exports:{},d.wrap=n;var m="suspendedStart",y="suspendedYield",b="executing",E="completed",S={},O=o.prototype=u.prototype;i.prototype=O.constructor=o,o.constructor=i,i.displayName="GeneratorFunction",d.isGeneratorFunction=function(t){var e="function"==typeof t&&t.constructor;return e?e===i||"GeneratorFunction"===(e.displayName||e.name):!1},d.mark=function(t){return t.__proto__=o,t.prototype=Object.create(O),t},d.async=function(t,e,i,o){return new Promise(function(u,a){function c(t){var e=r(this,null,t);if("throw"===e.type)return void a(e.arg);var n=e.arg;n.done?u(n.value):Promise.resolve(n.value).then(f,l)}var s=n(t,e,i,o),f=c.bind(s.next),l=c.bind(s["throw"]);f()})},O[g]=function(){return this},O.toString=function(){return"[object Generator]"},d.keys=function(t){var e=[];for(var n in t)e.push(n);return e.reverse(),function r(){for(;e.length;){var n=e.pop();if(n in t)return r.value=n,r.done=!1,r}return r.done=!0,r}},d.values=f,s.prototype={constructor:s,reset:function(){this.prev=0,this.next=0,this.sent=h,this.done=!1,this.delegate=null,this.tryEntries.forEach(c);for(var t,e=0;v.call(this,t="t"+e)||20>e;++e)this[t]=null},stop:function(){this.done=!0;var t=this.tryEntries[0],e=t.completion;if("throw"===e.type)throw e.arg;return this.rval},dispatchException:function(t){function e(e,r){return o.type="throw",o.arg=t,n.next=e,!!r}if(this.done)throw t;for(var n=this,r=this.tryEntries.length-1;r>=0;--r){var i=this.tryEntries[r],o=i.completion;if("root"===i.tryLoc)return e("end");if(i.tryLoc<=this.prev){var u=v.call(i,"catchLoc"),a=v.call(i,"finallyLoc");if(u&&a){if(this.prev<i.catchLoc)return e(i.catchLoc,!0);if(this.prev<i.finallyLoc)return e(i.finallyLoc)}else if(u){if(this.prev<i.catchLoc)return e(i.catchLoc,!0)}else{if(!a)throw new Error("try statement without catch or finally");if(this.prev<i.finallyLoc)return e(i.finallyLoc)}}}},abrupt:function(t,e){for(var n=this.tryEntries.length-1;n>=0;--n){var r=this.tryEntries[n];if(r.tryLoc<=this.prev&&v.call(r,"finallyLoc")&&this.prev<r.finallyLoc){var i=r;break}}i&&("break"===t||"continue"===t)&&i.tryLoc<=e&&e<i.finallyLoc&&(i=null);var o=i?i.completion:{};return o.type=t,o.arg=e,i?this.next=i.finallyLoc:this.complete(o),S},complete:function(t,e){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=t.arg,this.next="end"):"normal"===t.type&&e&&(this.next=e),S},finish:function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.finallyLoc===t)return this.complete(n.completion,n.afterLoc)}},"catch":function(t){for(var e=this.tryEntries.length-1;e>=0;--e){var n=this.tryEntries[e];if(n.tryLoc===t){var r=n.completion;if("throw"===r.type){var i=r.arg;c(n)}return i}}throw new Error("illegal catch attempt")},delegateYield:function(t,e,n){return this.delegate={iterator:f(t),resultName:e,nextLoc:n},S}}}("object"==typeof e?e:"object"==typeof window?window:this)}).call(e,function(){return this}())},function(t,e,n){t.exports=n(111)},,,function(t,e,n){t.exports=n(160)}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/*!************************************!*\
+  !*** ./demos/3-triangles/index.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _interopRequireWildcard = __webpack_require__(/*! babel-runtime/helpers/interop-require-wildcard */ 5)['default'];
+	
+	var _mat4 = __webpack_require__(/*! gl-matrix */ 9);
+	
+	__webpack_require__(/*! babel/polyfill */ 8);
+	
+	__webpack_require__(/*! ../../assets/webgl-debug */ 1);
+	
+	var _WebGLUtils = __webpack_require__(/*! ../../assets/webgl-utils */ 2);
+	
+	var _WebGLUtils2 = _interopRequireWildcard(_WebGLUtils);
+	
+	var deg_to_rad = function deg_to_rad(deg) {
+	  return deg * Math.PI / 180;
+	};
+	var canvas = document.querySelector('canvas');
+	
+	var gl = _WebGLUtils2['default'].setupWebGL(canvas);
+	var angle = 30;
+	
+	var M = _mat4.mat4.create();
+	
+	var QUAD_VERTEX_SIZE = 3;
+	var resize = _WebGLUtils2['default'].genResizeFun(canvas, gl);
+	
+	_WebGLUtils2['default'].Shaders.initFromElems(gl, document.getElementById('vshader'), document.getElementById('fshader'));
+	
+	/**
+	 * A benefit that comes from using buffers is
+	 * that the vertex shader is then able to
+	 * access more than one vertice per time.
+	 *
+	 * 1. create a buffer object
+	 * 2. bind the buffer to a target
+	 * 3. write data into the buffer
+	 * 4. assign the buffer to an attribute variable
+	 * 5. enable the assignment
+	 */
+	function initVertexBuffers(gl, locations) {
+	  var VERTICES = new Float32Array([
+	  //    x ,   y ,  z, PointSize , R, G, B
+	  -0.5, 0.5, 0, 20, 1, 0, 0, -0.5, -0.5, 0, 30, 0, 1, 0, 0.5, 0.5, 0, 40, 0, 0, 1, 0.5, -0.5, 0, 50, 1, 1, 1]);
+	  var FSIZE = VERTICES.BYTES_PER_ELEMENT;
+	  var STRIDE = FSIZE * (QUAD_VERTEX_SIZE + 1 + 3);
+	  var OFFSET_POINT = FSIZE * QUAD_VERTEX_SIZE;
+	  var OFFSET_COLOR = FSIZE * (QUAD_VERTEX_SIZE + 1);
+	  var OFFSET_QUAD = 0;
+	
+	  var vertexBuffer = gl.createBuffer();
+	
+	  if (!vertexBuffer) throw new Error('Failed to create colorBuffer');
+	
+	  // bindings for a_Position
+	  gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+	  gl.bufferData(gl.ARRAY_BUFFER, VERTICES, gl.STATIC_DRAW);
+	  gl.vertexAttribPointer(locations.a_Position, QUAD_VERTEX_SIZE, gl.FLOAT, false, STRIDE, OFFSET_QUAD);
+	  gl.enableVertexAttribArray(locations.a_Position);
+	
+	  // a_PointSize
+	  gl.vertexAttribPointer(locations.a_PointSize, 1, gl.FLOAT, false, STRIDE, OFFSET_POINT);
+	  gl.enableVertexAttribArray(locations.a_PointSize);
+	
+	  // a_Color
+	  gl.vertexAttribPointer(locations.a_Color, 3, gl.FLOAT, false, STRIDE, OFFSET_COLOR);
+	  gl.enableVertexAttribArray(locations.a_Color);
+	
+	  // now that is enabled we CAN'T use
+	  // gl.vertexAttrib to assign data to
+	  // attribute. We must firstly disable what
+	  // we've done.
+	
+	  return 4;
+	}
+	
+	var LOCATIONS = _WebGLUtils2['default'].Shaders.getLocations(gl, ['a_Position', 'a_PointSize', 'a_Color', 'u_xformMatrix']);
+	var N_VERTICES = initVertexBuffers(gl, LOCATIONS);
+	
+	gl.clearColor(0, 0, 0, 1);
+	
+	function render() {
+	  angle += 1;
+	
+	  // we always need to finish the transformation
+	  // matrix by transposing it as opengl operater
+	  // on column-major order.
+	  _mat4.mat4.identity(M);
+	  _mat4.mat4.rotateZ(M, M, deg_to_rad(angle));
+	
+	  gl.clear(gl.COLOR_BUFFER_BIT);
+	  gl.uniformMatrix4fv(LOCATIONS.u_xformMatrix, false, M);
+	
+	  // N_VERTICES tells how many times the vertex
+	  // shader needs to be executed for drawing
+	  // something.
+	  gl.drawArrays(gl.TRIANGLE_STRIP, 0, N_VERTICES);
+	  gl.drawArrays(gl.POINTS, 0, N_VERTICES);
+	}
+	
+	resize();
+	window.addEventListener('resize', resize);
+	
+	(function loop() {
+	  window.requestAnimationFrame(loop);
+	  render();
+	})();
+
+/***/ },
+/* 1 */
+/*!*******************************!*\
+  !*** ./assets/webgl-debug.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	//Copyright (c) 2009 The Chromium Authors. All rights reserved.
+	//Use of this source code is governed by a BSD-style license that can be
+	//found in the LICENSE file.
+	
+	// Various functions for helping debug WebGL apps.
+	
+	'use strict';
+	
+	var _core = __webpack_require__(/*! babel-runtime/core-js */ 4)['default'];
+	
+	var WebGLDebugUtils = (function () {
+	
+	  /**
+	   * Wrapped logging function.
+	   * @param {string} msg Message to log.
+	   */
+	  var log = function log(msg) {
+	    if (window.console && window.console.log) {
+	      window.console.log(msg);
+	    }
+	  };
+	
+	  /**
+	   * Which arguements are enums.
+	   * @type {!Object.<number, string>}
+	   */
+	  var glValidEnumContexts = {
+	
+	    // Generic setters and getters
+	
+	    enable: { 0: true },
+	    disable: { 0: true },
+	    getParameter: { 0: true },
+	
+	    // Rendering
+	
+	    drawArrays: { 0: true },
+	    drawElements: { 0: true, 2: true },
+	
+	    // Shaders
+	
+	    createShader: { 0: true },
+	    getShaderParameter: { 1: true },
+	    getProgramParameter: { 1: true },
+	
+	    // Vertex attributes
+	
+	    getVertexAttrib: { 1: true },
+	    vertexAttribPointer: { 2: true },
+	
+	    // Textures
+	
+	    bindTexture: { 0: true },
+	    activeTexture: { 0: true },
+	    getTexParameter: { 0: true, 1: true },
+	    texParameterf: { 0: true, 1: true },
+	    texParameteri: { 0: true, 1: true, 2: true },
+	    texImage2D: { 0: true, 2: true, 6: true, 7: true },
+	    texSubImage2D: { 0: true, 6: true, 7: true },
+	    copyTexImage2D: { 0: true, 2: true },
+	    copyTexSubImage2D: { 0: true },
+	    generateMipmap: { 0: true },
+	
+	    // Buffer objects
+	
+	    bindBuffer: { 0: true },
+	    bufferData: { 0: true, 2: true },
+	    bufferSubData: { 0: true },
+	    getBufferParameter: { 0: true, 1: true },
+	
+	    // Renderbuffers and framebuffers
+	
+	    pixelStorei: { 0: true, 1: true },
+	    readPixels: { 4: true, 5: true },
+	    bindRenderbuffer: { 0: true },
+	    bindFramebuffer: { 0: true },
+	    checkFramebufferStatus: { 0: true },
+	    framebufferRenderbuffer: { 0: true, 1: true, 2: true },
+	    framebufferTexture2D: { 0: true, 1: true, 2: true },
+	    getFramebufferAttachmentParameter: { 0: true, 1: true, 2: true },
+	    getRenderbufferParameter: { 0: true, 1: true },
+	    renderbufferStorage: { 0: true, 1: true },
+	
+	    // Frame buffer operations (clear, blend, depth test, stencil)
+	
+	    clear: { 0: true },
+	    depthFunc: { 0: true },
+	    blendFunc: { 0: true, 1: true },
+	    blendFuncSeparate: { 0: true, 1: true, 2: true, 3: true },
+	    blendEquation: { 0: true },
+	    blendEquationSeparate: { 0: true, 1: true },
+	    stencilFunc: { 0: true },
+	    stencilFuncSeparate: { 0: true, 1: true },
+	    stencilMaskSeparate: { 0: true },
+	    stencilOp: { 0: true, 1: true, 2: true },
+	    stencilOpSeparate: { 0: true, 1: true, 2: true, 3: true },
+	
+	    // Culling
+	
+	    cullFace: { 0: true },
+	    frontFace: { 0: true } };
+	
+	  /**
+	   * Map of numbers to names.
+	   * @type {Object}
+	   */
+	  var glEnums = null;
+	
+	  /**
+	   * Initializes this module. Safe to call more than once.
+	   * @param {!WebGLRenderingContext} ctx A WebGL context. If
+	   *    you have more than one context it doesn't matter which one
+	   *    you pass in, it is only used to pull out constants.
+	   */
+	  function init(ctx) {
+	    if (glEnums == null) {
+	      glEnums = {};
+	      for (var propertyName in ctx) {
+	        if (typeof ctx[propertyName] == 'number') {
+	          glEnums[ctx[propertyName]] = propertyName;
+	        }
+	      }
+	    }
+	  }
+	
+	  /**
+	   * Checks the utils have been initialized.
+	   */
+	  function checkInit() {
+	    if (glEnums == null) {
+	      throw 'WebGLDebugUtils.init(ctx) not called';
+	    }
+	  }
+	
+	  /**
+	   * Returns true or false if value matches any WebGL enum
+	   * @param {*} value Value to check if it might be an enum.
+	   * @return {boolean} True if value matches one of the WebGL defined enums
+	   */
+	  function mightBeEnum(value) {
+	    checkInit();
+	    return glEnums[value] !== undefined;
+	  }
+	
+	  /**
+	   * Gets an string version of an WebGL enum.
+	   *
+	   * Example:
+	   *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
+	   *
+	   * @param {number} value Value to return an enum for
+	   * @return {string} The string version of the enum.
+	   */
+	  function glEnumToString(value) {
+	    checkInit();
+	    var name = glEnums[value];
+	    return name !== undefined ? name : '*UNKNOWN WebGL ENUM (0x' + value.toString(16) + ')';
+	  }
+	
+	  /**
+	   * Returns the string version of a WebGL argument.
+	   * Attempts to convert enum arguments to strings.
+	   * @param {string} functionName the name of the WebGL function.
+	   * @param {number} argumentIndx the index of the argument.
+	   * @param {*} value The value of the argument.
+	   * @return {string} The value as a string.
+	   */
+	  function glFunctionArgToString(functionName, argumentIndex, value) {
+	    var funcInfo = glValidEnumContexts[functionName];
+	    if (funcInfo !== undefined) {
+	      if (funcInfo[argumentIndex]) {
+	        return glEnumToString(value);
+	      }
+	    }
+	    return value.toString();
+	  }
+	
+	  /**
+	   * Given a WebGL context returns a wrapped context that calls
+	   * gl.getError after every command and calls a function if the
+	   * result is not gl.NO_ERROR.
+	   *
+	   * @param {!WebGLRenderingContext} ctx The webgl context to
+	   *        wrap.
+	   * @param {!function(err, funcName, args): void} opt_onErrorFunc
+	   *        The function to call when gl.getError returns an
+	   *        error. If not specified the default function calls
+	   *        console.log with a message.
+	   */
+	  function makeDebugContext(ctx, opt_onErrorFunc) {
+	    init(ctx);
+	    opt_onErrorFunc = opt_onErrorFunc || function (err, functionName, args) {
+	      // apparently we can't do args.join(",");
+	      var argStr = '';
+	      for (var ii = 0; ii < args.length; ++ii) {
+	        argStr += (ii == 0 ? '' : ', ') + glFunctionArgToString(functionName, ii, args[ii]);
+	      }
+	      log('WebGL error ' + glEnumToString(err) + ' in ' + functionName + '(' + argStr + ')');
+	    };
+	
+	    // Holds booleans for each GL error so after we get the error ourselves
+	    // we can still return it to the client app.
+	    var glErrorShadow = {};
+	
+	    // Makes a function that calls a WebGL function and then calls getError.
+	    function makeErrorWrapper(ctx, functionName) {
+	      return function () {
+	        var result = ctx[functionName].apply(ctx, arguments);
+	        var err = ctx.getError();
+	        if (err != 0) {
+	          glErrorShadow[err] = true;
+	          opt_onErrorFunc(err, functionName, arguments);
+	        }
+	        return result;
+	      };
+	    }
+	
+	    // Make a an object that has a copy of every property of the WebGL context
+	    // but wraps all functions.
+	    var wrapper = {};
+	    for (var propertyName in ctx) {
+	      if (typeof ctx[propertyName] == 'function') {
+	        wrapper[propertyName] = makeErrorWrapper(ctx, propertyName);
+	      } else {
+	        wrapper[propertyName] = ctx[propertyName];
+	      }
+	    }
+	
+	    // Override the getError function with one that returns our saved results.
+	    wrapper.getError = function () {
+	      for (var err in glErrorShadow) {
+	        if (glErrorShadow[err]) {
+	          glErrorShadow[err] = false;
+	          return err;
+	        }
+	      }
+	      return ctx.NO_ERROR;
+	    };
+	
+	    return wrapper;
+	  }
+	
+	  function resetToInitialState(ctx) {
+	    var numAttribs = ctx.getParameter(ctx.MAX_VERTEX_ATTRIBS);
+	    var tmp = ctx.createBuffer();
+	    ctx.bindBuffer(ctx.ARRAY_BUFFER, tmp);
+	    for (var ii = 0; ii < numAttribs; ++ii) {
+	      ctx.disableVertexAttribArray(ii);
+	      ctx.vertexAttribPointer(ii, 4, ctx.FLOAT, false, 0, 0);
+	      ctx.vertexAttrib1f(ii, 0);
+	    }
+	    ctx.deleteBuffer(tmp);
+	
+	    var numTextureUnits = ctx.getParameter(ctx.MAX_TEXTURE_IMAGE_UNITS);
+	    for (var ii = 0; ii < numTextureUnits; ++ii) {
+	      ctx.activeTexture(ctx.TEXTURE0 + ii);
+	      ctx.bindTexture(ctx.TEXTURE_CUBE_MAP, null);
+	      ctx.bindTexture(ctx.TEXTURE_2D, null);
+	    }
+	
+	    ctx.activeTexture(ctx.TEXTURE0);
+	    ctx.useProgram(null);
+	    ctx.bindBuffer(ctx.ARRAY_BUFFER, null);
+	    ctx.bindBuffer(ctx.ELEMENT_ARRAY_BUFFER, null);
+	    ctx.bindFramebuffer(ctx.FRAMEBUFFER, null);
+	    ctx.bindRenderbuffer(ctx.RENDERBUFFER, null);
+	    ctx.disable(ctx.BLEND);
+	    ctx.disable(ctx.CULL_FACE);
+	    ctx.disable(ctx.DEPTH_TEST);
+	    ctx.disable(ctx.DITHER);
+	    ctx.disable(ctx.SCISSOR_TEST);
+	    ctx.blendColor(0, 0, 0, 0);
+	    ctx.blendEquation(ctx.FUNC_ADD);
+	    ctx.blendFunc(ctx.ONE, ctx.ZERO);
+	    ctx.clearColor(0, 0, 0, 0);
+	    ctx.clearDepth(1);
+	    ctx.clearStencil(-1);
+	    ctx.colorMask(true, true, true, true);
+	    ctx.cullFace(ctx.BACK);
+	    ctx.depthFunc(ctx.LESS);
+	    ctx.depthMask(true);
+	    ctx.depthRange(0, 1);
+	    ctx.frontFace(ctx.CCW);
+	    ctx.hint(ctx.GENERATE_MIPMAP_HINT, ctx.DONT_CARE);
+	    ctx.lineWidth(1);
+	    ctx.pixelStorei(ctx.PACK_ALIGNMENT, 4);
+	    ctx.pixelStorei(ctx.UNPACK_ALIGNMENT, 4);
+	    ctx.pixelStorei(ctx.UNPACK_FLIP_Y_WEBGL, false);
+	    ctx.pixelStorei(ctx.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+	    // TODO: Delete this IF.
+	    if (ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL) {
+	      ctx.pixelStorei(ctx.UNPACK_COLORSPACE_CONVERSION_WEBGL, ctx.BROWSER_DEFAULT_WEBGL);
+	    }
+	    ctx.polygonOffset(0, 0);
+	    ctx.sampleCoverage(1, false);
+	    ctx.scissor(0, 0, ctx.canvas.width, ctx.canvas.height);
+	    ctx.stencilFunc(ctx.ALWAYS, 0, 4294967295);
+	    ctx.stencilMask(4294967295);
+	    ctx.stencilOp(ctx.KEEP, ctx.KEEP, ctx.KEEP);
+	    ctx.viewport(0, 0, ctx.canvas.clientWidth, ctx.canvas.clientHeight);
+	    ctx.clear(ctx.COLOR_BUFFER_BIT | ctx.DEPTH_BUFFER_BIT | ctx.STENCIL_BUFFER_BIT);
+	
+	    // TODO: This should NOT be needed but Firefox fails with 'hint'
+	    while (ctx.getError());
+	  }
+	
+	  function makeLostContextSimulatingContext(ctx) {
+	    var wrapper_ = {};
+	    var contextId_ = 1;
+	    var contextLost_ = false;
+	    var resourceId_ = 0;
+	    var resourceDb_ = [];
+	    var onLost_ = undefined;
+	    var onRestored_ = undefined;
+	    var nextOnRestored_ = undefined;
+	
+	    // Holds booleans for each GL error so can simulate errors.
+	    var glErrorShadow_ = {};
+	
+	    function isWebGLObject(obj) {
+	      //return false;
+	      return obj instanceof WebGLBuffer || obj instanceof WebGLFramebuffer || obj instanceof WebGLProgram || obj instanceof WebGLRenderbuffer || obj instanceof WebGLShader || obj instanceof WebGLTexture;
+	    }
+	
+	    function checkResources(args) {
+	      for (var ii = 0; ii < args.length; ++ii) {
+	        var arg = args[ii];
+	        if (isWebGLObject(arg)) {
+	          return arg.__webglDebugContextLostId__ == contextId_;
+	        }
+	      }
+	      return true;
+	    }
+	
+	    function clearErrors() {
+	      var k = _core.Object.keys(glErrorShadow_);
+	      for (var ii = 0; ii < k.length; ++ii) {
+	        delete glErrorShdow_[k];
+	      }
+	    }
+	
+	    // Makes a function that simulates WebGL when out of context.
+	    function makeLostContextWrapper(ctx, functionName) {
+	      var f = ctx[functionName];
+	      return function () {
+	        // Only call the functions if the context is not lost.
+	        if (!contextLost_) {
+	          if (!checkResources(arguments)) {
+	            glErrorShadow_[ctx.INVALID_OPERATION] = true;
+	            return;
+	          }
+	          var result = f.apply(ctx, arguments);
+	          return result;
+	        }
+	      };
+	    }
+	
+	    for (var propertyName in ctx) {
+	      if (typeof ctx[propertyName] == 'function') {
+	        wrapper_[propertyName] = makeLostContextWrapper(ctx, propertyName);
+	      } else {
+	        wrapper_[propertyName] = ctx[propertyName];
+	      }
+	    }
+	
+	    function makeWebGLContextEvent(statusMessage) {
+	      return { statusMessage: statusMessage };
+	    }
+	
+	    function freeResources() {
+	      for (var ii = 0; ii < resourceDb_.length; ++ii) {
+	        var resource = resourceDb_[ii];
+	        if (resource instanceof WebGLBuffer) {
+	          ctx.deleteBuffer(resource);
+	        } else if (resource instanceof WebctxFramebuffer) {
+	          ctx.deleteFramebuffer(resource);
+	        } else if (resource instanceof WebctxProgram) {
+	          ctx.deleteProgram(resource);
+	        } else if (resource instanceof WebctxRenderbuffer) {
+	          ctx.deleteRenderbuffer(resource);
+	        } else if (resource instanceof WebctxShader) {
+	          ctx.deleteShader(resource);
+	        } else if (resource instanceof WebctxTexture) {
+	          ctx.deleteTexture(resource);
+	        }
+	      }
+	    }
+	
+	    wrapper_.loseContext = function () {
+	      if (!contextLost_) {
+	        contextLost_ = true;
+	        ++contextId_;
+	        while (ctx.getError());
+	        clearErrors();
+	        glErrorShadow_[ctx.CONTEXT_LOST_WEBGL] = true;
+	        setTimeout(function () {
+	          if (onLost_) {
+	            onLost_(makeWebGLContextEvent('context lost'));
+	          }
+	        }, 0);
+	      }
+	    };
+	
+	    wrapper_.restoreContext = function () {
+	      if (contextLost_) {
+	        if (onRestored_) {
+	          setTimeout(function () {
+	            freeResources();
+	            resetToInitialState(ctx);
+	            contextLost_ = false;
+	            if (onRestored_) {
+	              var callback = onRestored_;
+	              onRestored_ = nextOnRestored_;
+	              nextOnRestored_ = undefined;
+	              callback(makeWebGLContextEvent('context restored'));
+	            }
+	          }, 0);
+	        } else {
+	          throw 'You can not restore the context without a listener';
+	        }
+	      }
+	    };
+	
+	    // Wrap a few functions specially.
+	    wrapper_.getError = function () {
+	      if (!contextLost_) {
+	        var err;
+	        while (err = ctx.getError()) {
+	          glErrorShadow_[err] = true;
+	        }
+	      }
+	      for (var err in glErrorShadow_) {
+	        if (glErrorShadow_[err]) {
+	          delete glErrorShadow_[err];
+	          return err;
+	        }
+	      }
+	      return ctx.NO_ERROR;
+	    };
+	
+	    var creationFunctions = ['createBuffer', 'createFramebuffer', 'createProgram', 'createRenderbuffer', 'createShader', 'createTexture'];
+	    for (var ii = 0; ii < creationFunctions.length; ++ii) {
+	      var functionName = creationFunctions[ii];
+	      wrapper_[functionName] = (function (f) {
+	        return function () {
+	          if (contextLost_) {
+	            return null;
+	          }
+	          var obj = f.apply(ctx, arguments);
+	          obj.__webglDebugContextLostId__ = contextId_;
+	          resourceDb_.push(obj);
+	          return obj;
+	        };
+	      })(ctx[functionName]);
+	    }
+	
+	    var functionsThatShouldReturnNull = ['getActiveAttrib', 'getActiveUniform', 'getBufferParameter', 'getContextAttributes', 'getAttachedShaders', 'getFramebufferAttachmentParameter', 'getParameter', 'getProgramParameter', 'getProgramInfoLog', 'getRenderbufferParameter', 'getShaderParameter', 'getShaderInfoLog', 'getShaderSource', 'getTexParameter', 'getUniform', 'getUniformLocation', 'getVertexAttrib'];
+	    for (var ii = 0; ii < functionsThatShouldReturnNull.length; ++ii) {
+	      var functionName = functionsThatShouldReturnNull[ii];
+	      wrapper_[functionName] = (function (f) {
+	        return function () {
+	          if (contextLost_) {
+	            return null;
+	          }
+	          return f.apply(ctx, arguments);
+	        };
+	      })(wrapper_[functionName]);
+	    }
+	
+	    var isFunctions = ['isBuffer', 'isEnabled', 'isFramebuffer', 'isProgram', 'isRenderbuffer', 'isShader', 'isTexture'];
+	    for (var ii = 0; ii < isFunctions.length; ++ii) {
+	      var functionName = isFunctions[ii];
+	      wrapper_[functionName] = (function (f) {
+	        return function () {
+	          if (contextLost_) {
+	            return false;
+	          }
+	          return f.apply(ctx, arguments);
+	        };
+	      })(wrapper_[functionName]);
+	    }
+	
+	    wrapper_.checkFramebufferStatus = (function (f) {
+	      return function () {
+	        if (contextLost_) {
+	          return ctx.FRAMEBUFFER_UNSUPPORTED;
+	        }
+	        return f.apply(ctx, arguments);
+	      };
+	    })(wrapper_.checkFramebufferStatus);
+	
+	    wrapper_.getAttribLocation = (function (f) {
+	      return function () {
+	        if (contextLost_) {
+	          return -1;
+	        }
+	        return f.apply(ctx, arguments);
+	      };
+	    })(wrapper_.getAttribLocation);
+	
+	    wrapper_.getVertexAttribOffset = (function (f) {
+	      return function () {
+	        if (contextLost_) {
+	          return 0;
+	        }
+	        return f.apply(ctx, arguments);
+	      };
+	    })(wrapper_.getVertexAttribOffset);
+	
+	    wrapper_.isContextLost = function () {
+	      return contextLost_;
+	    };
+	
+	    function wrapEvent(listener) {
+	      if (typeof listener == 'function') {
+	        return listener;
+	      } else {
+	        return function (info) {
+	          listener.handleEvent(info);
+	        };
+	      }
+	    }
+	
+	    wrapper_.registerOnContextLostListener = function (listener) {
+	      onLost_ = wrapEvent(listener);
+	    };
+	
+	    wrapper_.registerOnContextRestoredListener = function (listener) {
+	      if (contextLost_) {
+	        nextOnRestored_ = wrapEvent(listener);
+	      } else {
+	        onRestored_ = wrapEvent(listener);
+	      }
+	    };
+	
+	    return wrapper_;
+	  }
+	
+	  return {
+	    /**
+	     * Initializes this module. Safe to call more than once.
+	     * @param {!WebGLRenderingContext} ctx A WebGL context. If
+	     *    you have more than one context it doesn't matter which one
+	     *    you pass in, it is only used to pull out constants.
+	     */
+	    init: init,
+	
+	    /**
+	     * Returns true or false if value matches any WebGL enum
+	     * @param {*} value Value to check if it might be an enum.
+	     * @return {boolean} True if value matches one of the WebGL defined enums
+	     */
+	    mightBeEnum: mightBeEnum,
+	
+	    /**
+	     * Gets an string version of an WebGL enum.
+	     *
+	     * Example:
+	     *   WebGLDebugUtil.init(ctx);
+	     *   var str = WebGLDebugUtil.glEnumToString(ctx.getError());
+	     *
+	     * @param {number} value Value to return an enum for
+	     * @return {string} The string version of the enum.
+	     */
+	    glEnumToString: glEnumToString,
+	
+	    /**
+	     * Converts the argument of a WebGL function to a string.
+	     * Attempts to convert enum arguments to strings.
+	     *
+	     * Example:
+	     *   WebGLDebugUtil.init(ctx);
+	     *   var str = WebGLDebugUtil.glFunctionArgToString('bindTexture', 0, gl.TEXTURE_2D);
+	     *
+	     * would return 'TEXTURE_2D'
+	     *
+	     * @param {string} functionName the name of the WebGL function.
+	     * @param {number} argumentIndx the index of the argument.
+	     * @param {*} value The value of the argument.
+	     * @return {string} The value as a string.
+	     */
+	    glFunctionArgToString: glFunctionArgToString,
+	
+	    /**
+	     * Given a WebGL context returns a wrapped context that calls
+	     * gl.getError after every command and calls a function if the
+	     * result is not NO_ERROR.
+	     *
+	     * You can supply your own function if you want. For example, if you'd like
+	     * an exception thrown on any GL error you could do this
+	     *
+	     *    function throwOnGLError(err, funcName, args) {
+	     *      throw WebGLDebugUtils.glEnumToString(err) + " was caused by call to" +
+	     *            funcName;
+	     *    };
+	     *
+	     *    ctx = WebGLDebugUtils.makeDebugContext(
+	     *        canvas.getContext("webgl"), throwOnGLError);
+	     *
+	     * @param {!WebGLRenderingContext} ctx The webgl context to wrap.
+	     * @param {!function(err, funcName, args): void} opt_onErrorFunc The function
+	     *     to call when gl.getError returns an error. If not specified the default
+	     *     function calls console.log with a message.
+	     */
+	    makeDebugContext: makeDebugContext,
+	
+	    /**
+	     * Given a WebGL context returns a wrapped context that adds 4
+	     * functions.
+	     *
+	     * ctx.loseContext:
+	     *   simulates a lost context event.
+	     *
+	     * ctx.restoreContext:
+	     *   simulates the context being restored.
+	     *
+	     * ctx.registerOnContextLostListener(listener):
+	     *   lets you register a listener for context lost. Use instead
+	     *   of addEventListener('webglcontextlostevent', listener);
+	     *
+	     * ctx.registerOnContextRestoredListener(listener):
+	     *   lets you register a listener for context restored. Use
+	     *   instead of addEventListener('webglcontextrestored',
+	     *   listener);
+	     *
+	     * @param {!WebGLRenderingContext} ctx The webgl context to wrap.
+	     */
+	    makeLostContextSimulatingContext: makeLostContextSimulatingContext,
+	
+	    /**
+	     * Resets a context to the initial state.
+	     * @param {!WebGLRenderingContext} ctx The webgl context to
+	     *     reset.
+	     */
+	    resetToInitialState: resetToInitialState
+	  };
+	})();
+
+/***/ },
+/* 2 */
+/*!*******************************!*\
+  !*** ./assets/webgl-utils.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var _core = __webpack_require__(/*! babel-runtime/core-js */ 4)["default"];
+	
+	_core.Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	/**
+	 * Setup utilities for WebGL
+	 * @type {Object}
+	 */
+	var WebGLUtils = {
+	  _create3DContext: function _create3DContext(canvas, opt_attribs) {
+	    var names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
+	    var ctx = undefined;
+	
+	    // try all the different names associated
+	    // with the retrieval of the 3d context from
+	    // the various browser implementors.
+	    var _iteratorNormalCompletion = true;
+	    var _didIteratorError = false;
+	    var _iteratorError = undefined;
+	
+	    try {
+	      for (var _iterator = _core.getIterator(names), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	        var i = _step.value;
+	
+	        try {
+	          ctx = canvas.getContext(i, opt_attribs);
+	        } catch (e) {}
+	
+	        if (ctx) break;
+	      }
+	    } catch (err) {
+	      _didIteratorError = true;
+	      _iteratorError = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion && _iterator["return"]) {
+	          _iterator["return"]();
+	        }
+	      } finally {
+	        if (_didIteratorError) {
+	          throw _iteratorError;
+	        }
+	      }
+	    }
+	
+	    if (!ctx) throw new Error("GL instance coudl't be set.");
+	
+	    return ctx;
+	  },
+	
+	  /**
+	   * Generates a resize function that keeps
+	   * canvas in sync with window resizing.
+	   *
+	   * Note: perspective matrix must be handled
+	   *       elsewhere.
+	   *
+	   * @param  {HTMLElement} canvas
+	   * @param  {gl} gl
+	   * @param {Function} fun callback (width,
+	   * height)
+	   * @return {Function} resize function
+	   */
+	  genResizeFun: function genResizeFun(canvas, gl, fun) {
+	    return function (shouldDraw) {
+	      var clientWidth = canvas.clientWidth;
+	      var clientHeight = canvas.clientHeight;
+	
+	      if (canvas.width !== clientWidth || canvas.height !== clientHeight) {
+	        canvas.width = clientWidth;
+	        canvas.height = clientHeight;
+	
+	        gl.viewport(0, 0, canvas.width, canvas.height);
+	        fun && fun.call(null, clientWidth, clientHeight, shouldDraw);
+	      }
+	    };
+	  },
+	
+	  _loadTexture: function _loadTexture(gl, texture, u_Sampler, image) {
+	    // Flip the image's y axis so that it
+	    // matches webgl's coordinate system.
+	    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+	    // Enable texture unit0
+	    gl.activeTexture(gl.TEXTURE0);
+	    // Bind the texture object to the target
+	    // (we're specifying the nature of the
+	    // texture itself, not the nature of what is
+	    // going to be attached to)
+	    gl.bindTexture(gl.TEXTURE_2D, texture);
+	
+	    // Set the texture parameters: tells to
+	    // opengl how the image will be processed
+	    // when the texture image is mapped to
+	    // shapes.
+	    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+	    // Set the texture image
+	    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
+	
+	    // Set the texture unit 0 to the sampler
+	    gl.uniform1i(u_Sampler, 0);
+	    // gl.clear(gl.COLOR_BUFFER_BIT);
+	    // gl.drawArrays(gl.TRIANGLE_STRIP, 0, n_vertices);
+	  },
+	
+	  initTextures: function initTextures(gl, u_Sampler, url) {
+	    var image = new Image();
+	    var texture = gl.createTexture();
+	
+	    if (!texture) throw new Error("Couldnt create the texture.");
+	    if (!image) throw new Error("Couldnt create image");
+	
+	    image.onload = this._loadTexture.bind(null, gl, texture, u_Sampler, image);
+	    image.src = url;
+	  },
+	
+	  initBuffer: function initBuffer(gl, data, num, type, attrib_location, buffer_type) {
+	    if (arguments.length < 5) throw new Error("initSimpleArrayBuffer requires all args");
+	
+	    var buff = gl.createBuffer();
+	    if (!buff) throw new Error("Error while creating buffer");
+	
+	    buffer_type = buffer_type || gl.ARRAY_BUFFER;
+	
+	    gl.bindBuffer(buffer_type, buff);
+	    if (data != null) gl.bufferData(buffer_type, data, gl.STATIC_DRAW);
+	    if (attrib_location != null && num != null) gl.vertexAttribPointer(attrib_location, num, type, false, 0, 0);
+	    gl.enableVertexAttribArray(attrib_location);
+	
+	    return buff;
+	  },
+	
+	  /**
+	   * Prepares the WebGL context.
+	   * @param  {HTMLElement} canvas
+	   * @param  {(Object|undefined)} opt_attribs
+	   * @return {WebGLContext}
+	   */
+	  setupWebGL: function setupWebGL(canvas, opt_attribs) {
+	    // WebGLRenderingContext exposes the
+	    // principal interface in WebGL which
+	    // provides special properties and methods
+	    // to manipulate 3D content.
+	    if (!window.WebGLRenderingContext) throw new Error("No WebGLRenderingContext in window.");
+	
+	    var ctx = this._create3DContext(canvas, opt_attribs);
+	    if (!ctx) throw new Error("Couldn't retrieve webgl context.");
+	
+	    return ctx;
+	  } };
+	
+	var Shaders = {
+	  _createShader: function _createShader(gl, source, type) {
+	    var shader = gl.createShader(type);
+	
+	    gl.shaderSource(shader, source);
+	    gl.compileShader(shader);
+	
+	    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) throw new Error("Shader failed to compile: " + gl.getShaderInfoLog(shader));
+	
+	    return shader;
+	  },
+	
+	  _createVertShader: function _createVertShader(gl, source) {
+	    return this._createShader(gl, source, gl.VERTEX_SHADER);
+	  },
+	
+	  _createFragShader: function _createFragShader(gl, source) {
+	    return this._createShader(gl, source, gl.FRAGMENT_SHADER);
+	  },
+	
+	  _createProgram: function _createProgram(gl, vshader, fshader) {
+	    var program = gl.createProgram();
+	
+	    if (!program) throw new Error("_createProgram: coult not create program.");
+	
+	    gl.attachShader(program, vshader);
+	    gl.attachShader(program, fshader);
+	    gl.linkProgram(program);
+	
+	    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error("Shader program failed to link: " + gl.getProgramInfoLog(program));
+	
+	    return program;
+	  },
+	
+	  /**
+	   * Get attribute/uniform location from
+	   * shaders considering the consistent
+	   * notation of a_, u_, v_
+	   * @param  {WebGLContext} gl
+	   * @param  {Array} names
+	   * @return {Array}
+	   */
+	  getLocations: function getLocations(gl, names) {
+	    return names.reduce(function (mem, name) {
+	      var location = undefined;
+	
+	      if (name.startsWith("a_")) location = gl.getAttribLocation(gl.program, name);else if (name.startsWith("u_")) location = gl.getUniformLocation(gl.program, name);else // enforcing name consistency
+	        throw new Error("Attrib/Unif/Var must start with u_, a_ or v_");
+	
+	      if (! ~location) throw new Error("Failed to retrieve location of " + name);
+	
+	      mem[name] = location;
+	
+	      return mem;
+	    }, {});
+	  },
+	
+	  initFromSrc: function initFromSrc(gl, vsrc, fsrc) {
+	    var use = arguments[3] === undefined ? true : arguments[3];
+	
+	    var v = this._createVertShader(gl, vsrc, gl.VERTEX_SHADER);
+	    var f = this._createFragShader(gl, fsrc, gl.FRAGMENT_SHADER);
+	    var program = this._createProgram(gl, v, f);
+	
+	    if (use) {
+	      gl.useProgram(program);
+	      gl.program = program;
+	    }
+	
+	    if (!program) throw new Error("Failed to initialize shaders.");
+	
+	    return program;
+	  },
+	
+	  initFromElems: function initFromElems(gl, vElem, fElem) {
+	    var use = arguments[3] === undefined ? true : arguments[3];
+	
+	    return this.initFromSrc(gl, vElem.text, fElem.text, use);
+	  },
+	
+	  // TODO
+	  initFromUrl: function initFromUrl() {
+	    return;
+	  }
+	};
+	
+	WebGLUtils.Shaders = Shaders;
+	
+	exports["default"] = WebGLUtils;
+	module.exports = exports["default"];
+
+/***/ },
+/* 3 */,
+/* 4 */
+/*!************************************!*\
+  !*** ./~/babel-runtime/core-js.js ***!
+  \************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  "default": __webpack_require__(/*! core-js/library */ 10),
+	  __esModule: true
+	};
+
+
+/***/ },
+/* 5 */
+/*!*************************************************************!*\
+  !*** ./~/babel-runtime/helpers/interop-require-wildcard.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	exports["default"] = function (obj) {
+	  return obj && obj.__esModule ? obj : {
+	    "default": obj
+	  };
+	};
+	
+	exports.__esModule = true;
+
+/***/ },
+/* 6 */,
+/* 7 */,
+/* 8 */
+/*!*****************************!*\
+  !*** ./~/babel/polyfill.js ***!
+  \*****************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! babel-core/polyfill */ 11);
+
+
+/***/ },
+/* 9 */
+/*!***************************************!*\
+  !*** ./~/gl-matrix/dist/gl-matrix.js ***!
+  \***************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * @fileoverview gl-matrix - High performance matrix and vector operations
+	 * @author Brandon Jones
+	 * @author Colin MacKenzie IV
+	 * @version 2.1.0
+	 */
+	
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	
+	(function() {
+	  "use strict";
+	
+	  var shim = {};
+	  if (false) {
+	    if(typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+	      shim.exports = {};
+	      define(function() {
+	        return shim.exports;
+	      });
+	    } else {
+	      // gl-matrix lives in a browser, define its namespaces in global
+	      shim.exports = window;
+	    }    
+	  }
+	  else {
+	    // gl-matrix lives in commonjs, define its namespaces in exports
+	    shim.exports = exports;
+	  }
+	
+	  (function(exports) {
+	    /* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	
+	if(!GLMAT_EPSILON) {
+	    var GLMAT_EPSILON = 0.000001;
+	}
+	
+	if(!GLMAT_ARRAY_TYPE) {
+	    var GLMAT_ARRAY_TYPE = (typeof Float32Array !== 'undefined') ? Float32Array : Array;
+	}
+	
+	/**
+	 * @class Common utilities
+	 * @name glMatrix
+	 */
+	var glMatrix = {};
+	
+	/**
+	 * Sets the type of array used when creating new vectors and matricies
+	 *
+	 * @param {Type} type Array type, such as Float32Array or Array
+	 */
+	glMatrix.setMatrixArrayType = function(type) {
+	    GLMAT_ARRAY_TYPE = type;
+	}
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.glMatrix = glMatrix;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 2 Dimensional Vector
+	 * @name vec2
+	 */
+	
+	var vec2 = {};
+	
+	/**
+	 * Creates a new, empty vec2
+	 *
+	 * @returns {vec2} a new 2D vector
+	 */
+	vec2.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(2);
+	    out[0] = 0;
+	    out[1] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec2 initialized with values from an existing vector
+	 *
+	 * @param {vec2} a vector to clone
+	 * @returns {vec2} a new 2D vector
+	 */
+	vec2.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(2);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec2 initialized with the given values
+	 *
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @returns {vec2} a new 2D vector
+	 */
+	vec2.fromValues = function(x, y) {
+	    var out = new GLMAT_ARRAY_TYPE(2);
+	    out[0] = x;
+	    out[1] = y;
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one vec2 to another
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the source vector
+	 * @returns {vec2} out
+	 */
+	vec2.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    return out;
+	};
+	
+	/**
+	 * Set the components of a vec2 to the given values
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @returns {vec2} out
+	 */
+	vec2.set = function(out, x, y) {
+	    out[0] = x;
+	    out[1] = y;
+	    return out;
+	};
+	
+	/**
+	 * Adds two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.add = function(out, a, b) {
+	    out[0] = a[0] + b[0];
+	    out[1] = a[1] + b[1];
+	    return out;
+	};
+	
+	/**
+	 * Subtracts two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.subtract = function(out, a, b) {
+	    out[0] = a[0] - b[0];
+	    out[1] = a[1] - b[1];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec2.subtract}
+	 * @function
+	 */
+	vec2.sub = vec2.subtract;
+	
+	/**
+	 * Multiplies two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.multiply = function(out, a, b) {
+	    out[0] = a[0] * b[0];
+	    out[1] = a[1] * b[1];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec2.multiply}
+	 * @function
+	 */
+	vec2.mul = vec2.multiply;
+	
+	/**
+	 * Divides two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.divide = function(out, a, b) {
+	    out[0] = a[0] / b[0];
+	    out[1] = a[1] / b[1];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec2.divide}
+	 * @function
+	 */
+	vec2.div = vec2.divide;
+	
+	/**
+	 * Returns the minimum of two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.min = function(out, a, b) {
+	    out[0] = Math.min(a[0], b[0]);
+	    out[1] = Math.min(a[1], b[1]);
+	    return out;
+	};
+	
+	/**
+	 * Returns the maximum of two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec2} out
+	 */
+	vec2.max = function(out, a, b) {
+	    out[0] = Math.max(a[0], b[0]);
+	    out[1] = Math.max(a[1], b[1]);
+	    return out;
+	};
+	
+	/**
+	 * Scales a vec2 by a scalar number
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the vector to scale
+	 * @param {Number} b amount to scale the vector by
+	 * @returns {vec2} out
+	 */
+	vec2.scale = function(out, a, b) {
+	    out[0] = a[0] * b;
+	    out[1] = a[1] * b;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the euclidian distance between two vec2's
+	 *
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {Number} distance between a and b
+	 */
+	vec2.distance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1];
+	    return Math.sqrt(x*x + y*y);
+	};
+	
+	/**
+	 * Alias for {@link vec2.distance}
+	 * @function
+	 */
+	vec2.dist = vec2.distance;
+	
+	/**
+	 * Calculates the squared euclidian distance between two vec2's
+	 *
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {Number} squared distance between a and b
+	 */
+	vec2.squaredDistance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1];
+	    return x*x + y*y;
+	};
+	
+	/**
+	 * Alias for {@link vec2.squaredDistance}
+	 * @function
+	 */
+	vec2.sqrDist = vec2.squaredDistance;
+	
+	/**
+	 * Calculates the length of a vec2
+	 *
+	 * @param {vec2} a vector to calculate length of
+	 * @returns {Number} length of a
+	 */
+	vec2.length = function (a) {
+	    var x = a[0],
+	        y = a[1];
+	    return Math.sqrt(x*x + y*y);
+	};
+	
+	/**
+	 * Alias for {@link vec2.length}
+	 * @function
+	 */
+	vec2.len = vec2.length;
+	
+	/**
+	 * Calculates the squared length of a vec2
+	 *
+	 * @param {vec2} a vector to calculate squared length of
+	 * @returns {Number} squared length of a
+	 */
+	vec2.squaredLength = function (a) {
+	    var x = a[0],
+	        y = a[1];
+	    return x*x + y*y;
+	};
+	
+	/**
+	 * Alias for {@link vec2.squaredLength}
+	 * @function
+	 */
+	vec2.sqrLen = vec2.squaredLength;
+	
+	/**
+	 * Negates the components of a vec2
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a vector to negate
+	 * @returns {vec2} out
+	 */
+	vec2.negate = function(out, a) {
+	    out[0] = -a[0];
+	    out[1] = -a[1];
+	    return out;
+	};
+	
+	/**
+	 * Normalize a vec2
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a vector to normalize
+	 * @returns {vec2} out
+	 */
+	vec2.normalize = function(out, a) {
+	    var x = a[0],
+	        y = a[1];
+	    var len = x*x + y*y;
+	    if (len > 0) {
+	        //TODO: evaluate use of glm_invsqrt here?
+	        len = 1 / Math.sqrt(len);
+	        out[0] = a[0] * len;
+	        out[1] = a[1] * len;
+	    }
+	    return out;
+	};
+	
+	/**
+	 * Calculates the dot product of two vec2's
+	 *
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {Number} dot product of a and b
+	 */
+	vec2.dot = function (a, b) {
+	    return a[0] * b[0] + a[1] * b[1];
+	};
+	
+	/**
+	 * Computes the cross product of two vec2's
+	 * Note that the cross product must by definition produce a 3D vector
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec2.cross = function(out, a, b) {
+	    var z = a[0] * b[1] - a[1] * b[0];
+	    out[0] = out[1] = 0;
+	    out[2] = z;
+	    return out;
+	};
+	
+	/**
+	 * Performs a linear interpolation between two vec2's
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the first operand
+	 * @param {vec2} b the second operand
+	 * @param {Number} t interpolation amount between the two inputs
+	 * @returns {vec2} out
+	 */
+	vec2.lerp = function (out, a, b, t) {
+	    var ax = a[0],
+	        ay = a[1];
+	    out[0] = ax + t * (b[0] - ax);
+	    out[1] = ay + t * (b[1] - ay);
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec2 with a mat2
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the vector to transform
+	 * @param {mat2} m matrix to transform with
+	 * @returns {vec2} out
+	 */
+	vec2.transformMat2 = function(out, a, m) {
+	    var x = a[0],
+	        y = a[1];
+	    out[0] = m[0] * x + m[2] * y;
+	    out[1] = m[1] * x + m[3] * y;
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec2 with a mat2d
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the vector to transform
+	 * @param {mat2d} m matrix to transform with
+	 * @returns {vec2} out
+	 */
+	vec2.transformMat2d = function(out, a, m) {
+	    var x = a[0],
+	        y = a[1];
+	    out[0] = m[0] * x + m[2] * y + m[4];
+	    out[1] = m[1] * x + m[3] * y + m[5];
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec2 with a mat3
+	 * 3rd vector component is implicitly '1'
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the vector to transform
+	 * @param {mat3} m matrix to transform with
+	 * @returns {vec2} out
+	 */
+	vec2.transformMat3 = function(out, a, m) {
+	    var x = a[0],
+	        y = a[1];
+	    out[0] = m[0] * x + m[3] * y + m[6];
+	    out[1] = m[1] * x + m[4] * y + m[7];
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec2 with a mat4
+	 * 3rd vector component is implicitly '0'
+	 * 4th vector component is implicitly '1'
+	 *
+	 * @param {vec2} out the receiving vector
+	 * @param {vec2} a the vector to transform
+	 * @param {mat4} m matrix to transform with
+	 * @returns {vec2} out
+	 */
+	vec2.transformMat4 = function(out, a, m) {
+	    var x = a[0], 
+	        y = a[1];
+	    out[0] = m[0] * x + m[4] * y + m[12];
+	    out[1] = m[1] * x + m[5] * y + m[13];
+	    return out;
+	};
+	
+	/**
+	 * Perform some operation over an array of vec2s.
+	 *
+	 * @param {Array} a the array of vectors to iterate over
+	 * @param {Number} stride Number of elements between the start of each vec2. If 0 assumes tightly packed
+	 * @param {Number} offset Number of elements to skip at the beginning of the array
+	 * @param {Number} count Number of vec2s to iterate over. If 0 iterates over entire array
+	 * @param {Function} fn Function to call for each vector in the array
+	 * @param {Object} [arg] additional argument to pass to fn
+	 * @returns {Array} a
+	 * @function
+	 */
+	vec2.forEach = (function() {
+	    var vec = vec2.create();
+	
+	    return function(a, stride, offset, count, fn, arg) {
+	        var i, l;
+	        if(!stride) {
+	            stride = 2;
+	        }
+	
+	        if(!offset) {
+	            offset = 0;
+	        }
+	        
+	        if(count) {
+	            l = Math.min((count * stride) + offset, a.length);
+	        } else {
+	            l = a.length;
+	        }
+	
+	        for(i = offset; i < l; i += stride) {
+	            vec[0] = a[i]; vec[1] = a[i+1];
+	            fn(vec, vec, arg);
+	            a[i] = vec[0]; a[i+1] = vec[1];
+	        }
+	        
+	        return a;
+	    };
+	})();
+	
+	/**
+	 * Returns a string representation of a vector
+	 *
+	 * @param {vec2} vec vector to represent as a string
+	 * @returns {String} string representation of the vector
+	 */
+	vec2.str = function (a) {
+	    return 'vec2(' + a[0] + ', ' + a[1] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.vec2 = vec2;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 3 Dimensional Vector
+	 * @name vec3
+	 */
+	
+	var vec3 = {};
+	
+	/**
+	 * Creates a new, empty vec3
+	 *
+	 * @returns {vec3} a new 3D vector
+	 */
+	vec3.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(3);
+	    out[0] = 0;
+	    out[1] = 0;
+	    out[2] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec3 initialized with values from an existing vector
+	 *
+	 * @param {vec3} a vector to clone
+	 * @returns {vec3} a new 3D vector
+	 */
+	vec3.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(3);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec3 initialized with the given values
+	 *
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @returns {vec3} a new 3D vector
+	 */
+	vec3.fromValues = function(x, y, z) {
+	    var out = new GLMAT_ARRAY_TYPE(3);
+	    out[0] = x;
+	    out[1] = y;
+	    out[2] = z;
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one vec3 to another
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the source vector
+	 * @returns {vec3} out
+	 */
+	vec3.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    return out;
+	};
+	
+	/**
+	 * Set the components of a vec3 to the given values
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @returns {vec3} out
+	 */
+	vec3.set = function(out, x, y, z) {
+	    out[0] = x;
+	    out[1] = y;
+	    out[2] = z;
+	    return out;
+	};
+	
+	/**
+	 * Adds two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.add = function(out, a, b) {
+	    out[0] = a[0] + b[0];
+	    out[1] = a[1] + b[1];
+	    out[2] = a[2] + b[2];
+	    return out;
+	};
+	
+	/**
+	 * Subtracts two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.subtract = function(out, a, b) {
+	    out[0] = a[0] - b[0];
+	    out[1] = a[1] - b[1];
+	    out[2] = a[2] - b[2];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec3.subtract}
+	 * @function
+	 */
+	vec3.sub = vec3.subtract;
+	
+	/**
+	 * Multiplies two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.multiply = function(out, a, b) {
+	    out[0] = a[0] * b[0];
+	    out[1] = a[1] * b[1];
+	    out[2] = a[2] * b[2];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec3.multiply}
+	 * @function
+	 */
+	vec3.mul = vec3.multiply;
+	
+	/**
+	 * Divides two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.divide = function(out, a, b) {
+	    out[0] = a[0] / b[0];
+	    out[1] = a[1] / b[1];
+	    out[2] = a[2] / b[2];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec3.divide}
+	 * @function
+	 */
+	vec3.div = vec3.divide;
+	
+	/**
+	 * Returns the minimum of two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.min = function(out, a, b) {
+	    out[0] = Math.min(a[0], b[0]);
+	    out[1] = Math.min(a[1], b[1]);
+	    out[2] = Math.min(a[2], b[2]);
+	    return out;
+	};
+	
+	/**
+	 * Returns the maximum of two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.max = function(out, a, b) {
+	    out[0] = Math.max(a[0], b[0]);
+	    out[1] = Math.max(a[1], b[1]);
+	    out[2] = Math.max(a[2], b[2]);
+	    return out;
+	};
+	
+	/**
+	 * Scales a vec3 by a scalar number
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the vector to scale
+	 * @param {Number} b amount to scale the vector by
+	 * @returns {vec3} out
+	 */
+	vec3.scale = function(out, a, b) {
+	    out[0] = a[0] * b;
+	    out[1] = a[1] * b;
+	    out[2] = a[2] * b;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the euclidian distance between two vec3's
+	 *
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {Number} distance between a and b
+	 */
+	vec3.distance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1],
+	        z = b[2] - a[2];
+	    return Math.sqrt(x*x + y*y + z*z);
+	};
+	
+	/**
+	 * Alias for {@link vec3.distance}
+	 * @function
+	 */
+	vec3.dist = vec3.distance;
+	
+	/**
+	 * Calculates the squared euclidian distance between two vec3's
+	 *
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {Number} squared distance between a and b
+	 */
+	vec3.squaredDistance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1],
+	        z = b[2] - a[2];
+	    return x*x + y*y + z*z;
+	};
+	
+	/**
+	 * Alias for {@link vec3.squaredDistance}
+	 * @function
+	 */
+	vec3.sqrDist = vec3.squaredDistance;
+	
+	/**
+	 * Calculates the length of a vec3
+	 *
+	 * @param {vec3} a vector to calculate length of
+	 * @returns {Number} length of a
+	 */
+	vec3.length = function (a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2];
+	    return Math.sqrt(x*x + y*y + z*z);
+	};
+	
+	/**
+	 * Alias for {@link vec3.length}
+	 * @function
+	 */
+	vec3.len = vec3.length;
+	
+	/**
+	 * Calculates the squared length of a vec3
+	 *
+	 * @param {vec3} a vector to calculate squared length of
+	 * @returns {Number} squared length of a
+	 */
+	vec3.squaredLength = function (a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2];
+	    return x*x + y*y + z*z;
+	};
+	
+	/**
+	 * Alias for {@link vec3.squaredLength}
+	 * @function
+	 */
+	vec3.sqrLen = vec3.squaredLength;
+	
+	/**
+	 * Negates the components of a vec3
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a vector to negate
+	 * @returns {vec3} out
+	 */
+	vec3.negate = function(out, a) {
+	    out[0] = -a[0];
+	    out[1] = -a[1];
+	    out[2] = -a[2];
+	    return out;
+	};
+	
+	/**
+	 * Normalize a vec3
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a vector to normalize
+	 * @returns {vec3} out
+	 */
+	vec3.normalize = function(out, a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2];
+	    var len = x*x + y*y + z*z;
+	    if (len > 0) {
+	        //TODO: evaluate use of glm_invsqrt here?
+	        len = 1 / Math.sqrt(len);
+	        out[0] = a[0] * len;
+	        out[1] = a[1] * len;
+	        out[2] = a[2] * len;
+	    }
+	    return out;
+	};
+	
+	/**
+	 * Calculates the dot product of two vec3's
+	 *
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {Number} dot product of a and b
+	 */
+	vec3.dot = function (a, b) {
+	    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+	};
+	
+	/**
+	 * Computes the cross product of two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @returns {vec3} out
+	 */
+	vec3.cross = function(out, a, b) {
+	    var ax = a[0], ay = a[1], az = a[2],
+	        bx = b[0], by = b[1], bz = b[2];
+	
+	    out[0] = ay * bz - az * by;
+	    out[1] = az * bx - ax * bz;
+	    out[2] = ax * by - ay * bx;
+	    return out;
+	};
+	
+	/**
+	 * Performs a linear interpolation between two vec3's
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the first operand
+	 * @param {vec3} b the second operand
+	 * @param {Number} t interpolation amount between the two inputs
+	 * @returns {vec3} out
+	 */
+	vec3.lerp = function (out, a, b, t) {
+	    var ax = a[0],
+	        ay = a[1],
+	        az = a[2];
+	    out[0] = ax + t * (b[0] - ax);
+	    out[1] = ay + t * (b[1] - ay);
+	    out[2] = az + t * (b[2] - az);
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec3 with a mat4.
+	 * 4th vector component is implicitly '1'
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the vector to transform
+	 * @param {mat4} m matrix to transform with
+	 * @returns {vec3} out
+	 */
+	vec3.transformMat4 = function(out, a, m) {
+	    var x = a[0], y = a[1], z = a[2];
+	    out[0] = m[0] * x + m[4] * y + m[8] * z + m[12];
+	    out[1] = m[1] * x + m[5] * y + m[9] * z + m[13];
+	    out[2] = m[2] * x + m[6] * y + m[10] * z + m[14];
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec3 with a quat
+	 *
+	 * @param {vec3} out the receiving vector
+	 * @param {vec3} a the vector to transform
+	 * @param {quat} q quaternion to transform with
+	 * @returns {vec3} out
+	 */
+	vec3.transformQuat = function(out, a, q) {
+	    var x = a[0], y = a[1], z = a[2],
+	        qx = q[0], qy = q[1], qz = q[2], qw = q[3],
+	
+	        // calculate quat * vec
+	        ix = qw * x + qy * z - qz * y,
+	        iy = qw * y + qz * x - qx * z,
+	        iz = qw * z + qx * y - qy * x,
+	        iw = -qx * x - qy * y - qz * z;
+	
+	    // calculate result * inverse quat
+	    out[0] = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+	    out[1] = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+	    out[2] = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+	    return out;
+	};
+	
+	/**
+	 * Perform some operation over an array of vec3s.
+	 *
+	 * @param {Array} a the array of vectors to iterate over
+	 * @param {Number} stride Number of elements between the start of each vec3. If 0 assumes tightly packed
+	 * @param {Number} offset Number of elements to skip at the beginning of the array
+	 * @param {Number} count Number of vec3s to iterate over. If 0 iterates over entire array
+	 * @param {Function} fn Function to call for each vector in the array
+	 * @param {Object} [arg] additional argument to pass to fn
+	 * @returns {Array} a
+	 * @function
+	 */
+	vec3.forEach = (function() {
+	    var vec = vec3.create();
+	
+	    return function(a, stride, offset, count, fn, arg) {
+	        var i, l;
+	        if(!stride) {
+	            stride = 3;
+	        }
+	
+	        if(!offset) {
+	            offset = 0;
+	        }
+	        
+	        if(count) {
+	            l = Math.min((count * stride) + offset, a.length);
+	        } else {
+	            l = a.length;
+	        }
+	
+	        for(i = offset; i < l; i += stride) {
+	            vec[0] = a[i]; vec[1] = a[i+1]; vec[2] = a[i+2];
+	            fn(vec, vec, arg);
+	            a[i] = vec[0]; a[i+1] = vec[1]; a[i+2] = vec[2];
+	        }
+	        
+	        return a;
+	    };
+	})();
+	
+	/**
+	 * Returns a string representation of a vector
+	 *
+	 * @param {vec3} vec vector to represent as a string
+	 * @returns {String} string representation of the vector
+	 */
+	vec3.str = function (a) {
+	    return 'vec3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.vec3 = vec3;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 4 Dimensional Vector
+	 * @name vec4
+	 */
+	
+	var vec4 = {};
+	
+	/**
+	 * Creates a new, empty vec4
+	 *
+	 * @returns {vec4} a new 4D vector
+	 */
+	vec4.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = 0;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec4 initialized with values from an existing vector
+	 *
+	 * @param {vec4} a vector to clone
+	 * @returns {vec4} a new 4D vector
+	 */
+	vec4.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    return out;
+	};
+	
+	/**
+	 * Creates a new vec4 initialized with the given values
+	 *
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @param {Number} w W component
+	 * @returns {vec4} a new 4D vector
+	 */
+	vec4.fromValues = function(x, y, z, w) {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = x;
+	    out[1] = y;
+	    out[2] = z;
+	    out[3] = w;
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one vec4 to another
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the source vector
+	 * @returns {vec4} out
+	 */
+	vec4.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    return out;
+	};
+	
+	/**
+	 * Set the components of a vec4 to the given values
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @param {Number} w W component
+	 * @returns {vec4} out
+	 */
+	vec4.set = function(out, x, y, z, w) {
+	    out[0] = x;
+	    out[1] = y;
+	    out[2] = z;
+	    out[3] = w;
+	    return out;
+	};
+	
+	/**
+	 * Adds two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.add = function(out, a, b) {
+	    out[0] = a[0] + b[0];
+	    out[1] = a[1] + b[1];
+	    out[2] = a[2] + b[2];
+	    out[3] = a[3] + b[3];
+	    return out;
+	};
+	
+	/**
+	 * Subtracts two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.subtract = function(out, a, b) {
+	    out[0] = a[0] - b[0];
+	    out[1] = a[1] - b[1];
+	    out[2] = a[2] - b[2];
+	    out[3] = a[3] - b[3];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec4.subtract}
+	 * @function
+	 */
+	vec4.sub = vec4.subtract;
+	
+	/**
+	 * Multiplies two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.multiply = function(out, a, b) {
+	    out[0] = a[0] * b[0];
+	    out[1] = a[1] * b[1];
+	    out[2] = a[2] * b[2];
+	    out[3] = a[3] * b[3];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec4.multiply}
+	 * @function
+	 */
+	vec4.mul = vec4.multiply;
+	
+	/**
+	 * Divides two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.divide = function(out, a, b) {
+	    out[0] = a[0] / b[0];
+	    out[1] = a[1] / b[1];
+	    out[2] = a[2] / b[2];
+	    out[3] = a[3] / b[3];
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link vec4.divide}
+	 * @function
+	 */
+	vec4.div = vec4.divide;
+	
+	/**
+	 * Returns the minimum of two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.min = function(out, a, b) {
+	    out[0] = Math.min(a[0], b[0]);
+	    out[1] = Math.min(a[1], b[1]);
+	    out[2] = Math.min(a[2], b[2]);
+	    out[3] = Math.min(a[3], b[3]);
+	    return out;
+	};
+	
+	/**
+	 * Returns the maximum of two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {vec4} out
+	 */
+	vec4.max = function(out, a, b) {
+	    out[0] = Math.max(a[0], b[0]);
+	    out[1] = Math.max(a[1], b[1]);
+	    out[2] = Math.max(a[2], b[2]);
+	    out[3] = Math.max(a[3], b[3]);
+	    return out;
+	};
+	
+	/**
+	 * Scales a vec4 by a scalar number
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the vector to scale
+	 * @param {Number} b amount to scale the vector by
+	 * @returns {vec4} out
+	 */
+	vec4.scale = function(out, a, b) {
+	    out[0] = a[0] * b;
+	    out[1] = a[1] * b;
+	    out[2] = a[2] * b;
+	    out[3] = a[3] * b;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the euclidian distance between two vec4's
+	 *
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {Number} distance between a and b
+	 */
+	vec4.distance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1],
+	        z = b[2] - a[2],
+	        w = b[3] - a[3];
+	    return Math.sqrt(x*x + y*y + z*z + w*w);
+	};
+	
+	/**
+	 * Alias for {@link vec4.distance}
+	 * @function
+	 */
+	vec4.dist = vec4.distance;
+	
+	/**
+	 * Calculates the squared euclidian distance between two vec4's
+	 *
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {Number} squared distance between a and b
+	 */
+	vec4.squaredDistance = function(a, b) {
+	    var x = b[0] - a[0],
+	        y = b[1] - a[1],
+	        z = b[2] - a[2],
+	        w = b[3] - a[3];
+	    return x*x + y*y + z*z + w*w;
+	};
+	
+	/**
+	 * Alias for {@link vec4.squaredDistance}
+	 * @function
+	 */
+	vec4.sqrDist = vec4.squaredDistance;
+	
+	/**
+	 * Calculates the length of a vec4
+	 *
+	 * @param {vec4} a vector to calculate length of
+	 * @returns {Number} length of a
+	 */
+	vec4.length = function (a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2],
+	        w = a[3];
+	    return Math.sqrt(x*x + y*y + z*z + w*w);
+	};
+	
+	/**
+	 * Alias for {@link vec4.length}
+	 * @function
+	 */
+	vec4.len = vec4.length;
+	
+	/**
+	 * Calculates the squared length of a vec4
+	 *
+	 * @param {vec4} a vector to calculate squared length of
+	 * @returns {Number} squared length of a
+	 */
+	vec4.squaredLength = function (a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2],
+	        w = a[3];
+	    return x*x + y*y + z*z + w*w;
+	};
+	
+	/**
+	 * Alias for {@link vec4.squaredLength}
+	 * @function
+	 */
+	vec4.sqrLen = vec4.squaredLength;
+	
+	/**
+	 * Negates the components of a vec4
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a vector to negate
+	 * @returns {vec4} out
+	 */
+	vec4.negate = function(out, a) {
+	    out[0] = -a[0];
+	    out[1] = -a[1];
+	    out[2] = -a[2];
+	    out[3] = -a[3];
+	    return out;
+	};
+	
+	/**
+	 * Normalize a vec4
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a vector to normalize
+	 * @returns {vec4} out
+	 */
+	vec4.normalize = function(out, a) {
+	    var x = a[0],
+	        y = a[1],
+	        z = a[2],
+	        w = a[3];
+	    var len = x*x + y*y + z*z + w*w;
+	    if (len > 0) {
+	        len = 1 / Math.sqrt(len);
+	        out[0] = a[0] * len;
+	        out[1] = a[1] * len;
+	        out[2] = a[2] * len;
+	        out[3] = a[3] * len;
+	    }
+	    return out;
+	};
+	
+	/**
+	 * Calculates the dot product of two vec4's
+	 *
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @returns {Number} dot product of a and b
+	 */
+	vec4.dot = function (a, b) {
+	    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+	};
+	
+	/**
+	 * Performs a linear interpolation between two vec4's
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the first operand
+	 * @param {vec4} b the second operand
+	 * @param {Number} t interpolation amount between the two inputs
+	 * @returns {vec4} out
+	 */
+	vec4.lerp = function (out, a, b, t) {
+	    var ax = a[0],
+	        ay = a[1],
+	        az = a[2],
+	        aw = a[3];
+	    out[0] = ax + t * (b[0] - ax);
+	    out[1] = ay + t * (b[1] - ay);
+	    out[2] = az + t * (b[2] - az);
+	    out[3] = aw + t * (b[3] - aw);
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec4 with a mat4.
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the vector to transform
+	 * @param {mat4} m matrix to transform with
+	 * @returns {vec4} out
+	 */
+	vec4.transformMat4 = function(out, a, m) {
+	    var x = a[0], y = a[1], z = a[2], w = a[3];
+	    out[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
+	    out[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
+	    out[2] = m[2] * x + m[6] * y + m[10] * z + m[14] * w;
+	    out[3] = m[3] * x + m[7] * y + m[11] * z + m[15] * w;
+	    return out;
+	};
+	
+	/**
+	 * Transforms the vec4 with a quat
+	 *
+	 * @param {vec4} out the receiving vector
+	 * @param {vec4} a the vector to transform
+	 * @param {quat} q quaternion to transform with
+	 * @returns {vec4} out
+	 */
+	vec4.transformQuat = function(out, a, q) {
+	    var x = a[0], y = a[1], z = a[2],
+	        qx = q[0], qy = q[1], qz = q[2], qw = q[3],
+	
+	        // calculate quat * vec
+	        ix = qw * x + qy * z - qz * y,
+	        iy = qw * y + qz * x - qx * z,
+	        iz = qw * z + qx * y - qy * x,
+	        iw = -qx * x - qy * y - qz * z;
+	
+	    // calculate result * inverse quat
+	    out[0] = ix * qw + iw * -qx + iy * -qz - iz * -qy;
+	    out[1] = iy * qw + iw * -qy + iz * -qx - ix * -qz;
+	    out[2] = iz * qw + iw * -qz + ix * -qy - iy * -qx;
+	    return out;
+	};
+	
+	/**
+	 * Perform some operation over an array of vec4s.
+	 *
+	 * @param {Array} a the array of vectors to iterate over
+	 * @param {Number} stride Number of elements between the start of each vec4. If 0 assumes tightly packed
+	 * @param {Number} offset Number of elements to skip at the beginning of the array
+	 * @param {Number} count Number of vec2s to iterate over. If 0 iterates over entire array
+	 * @param {Function} fn Function to call for each vector in the array
+	 * @param {Object} [arg] additional argument to pass to fn
+	 * @returns {Array} a
+	 * @function
+	 */
+	vec4.forEach = (function() {
+	    var vec = vec4.create();
+	
+	    return function(a, stride, offset, count, fn, arg) {
+	        var i, l;
+	        if(!stride) {
+	            stride = 4;
+	        }
+	
+	        if(!offset) {
+	            offset = 0;
+	        }
+	        
+	        if(count) {
+	            l = Math.min((count * stride) + offset, a.length);
+	        } else {
+	            l = a.length;
+	        }
+	
+	        for(i = offset; i < l; i += stride) {
+	            vec[0] = a[i]; vec[1] = a[i+1]; vec[2] = a[i+2]; vec[3] = a[i+3];
+	            fn(vec, vec, arg);
+	            a[i] = vec[0]; a[i+1] = vec[1]; a[i+2] = vec[2]; a[i+3] = vec[3];
+	        }
+	        
+	        return a;
+	    };
+	})();
+	
+	/**
+	 * Returns a string representation of a vector
+	 *
+	 * @param {vec4} vec vector to represent as a string
+	 * @returns {String} string representation of the vector
+	 */
+	vec4.str = function (a) {
+	    return 'vec4(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.vec4 = vec4;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 2x2 Matrix
+	 * @name mat2
+	 */
+	
+	var mat2 = {};
+	
+	var mat2Identity = new Float32Array([
+	    1, 0,
+	    0, 1
+	]);
+	
+	/**
+	 * Creates a new identity mat2
+	 *
+	 * @returns {mat2} a new 2x2 matrix
+	 */
+	mat2.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new mat2 initialized with values from an existing matrix
+	 *
+	 * @param {mat2} a matrix to clone
+	 * @returns {mat2} a new 2x2 matrix
+	 */
+	mat2.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one mat2 to another
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the source matrix
+	 * @returns {mat2} out
+	 */
+	mat2.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    return out;
+	};
+	
+	/**
+	 * Set a mat2 to the identity matrix
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @returns {mat2} out
+	 */
+	mat2.identity = function(out) {
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Transpose the values of a mat2
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the source matrix
+	 * @returns {mat2} out
+	 */
+	mat2.transpose = function(out, a) {
+	    // If we are transposing ourselves we can skip a few steps but have to cache some values
+	    if (out === a) {
+	        var a1 = a[1];
+	        out[1] = a[2];
+	        out[2] = a1;
+	    } else {
+	        out[0] = a[0];
+	        out[1] = a[2];
+	        out[2] = a[1];
+	        out[3] = a[3];
+	    }
+	    
+	    return out;
+	};
+	
+	/**
+	 * Inverts a mat2
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the source matrix
+	 * @returns {mat2} out
+	 */
+	mat2.invert = function(out, a) {
+	    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3],
+	
+	        // Calculate the determinant
+	        det = a0 * a3 - a2 * a1;
+	
+	    if (!det) {
+	        return null;
+	    }
+	    det = 1.0 / det;
+	    
+	    out[0] =  a3 * det;
+	    out[1] = -a1 * det;
+	    out[2] = -a2 * det;
+	    out[3] =  a0 * det;
+	
+	    return out;
+	};
+	
+	/**
+	 * Calculates the adjugate of a mat2
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the source matrix
+	 * @returns {mat2} out
+	 */
+	mat2.adjoint = function(out, a) {
+	    // Caching this value is nessecary if out == a
+	    var a0 = a[0];
+	    out[0] =  a[3];
+	    out[1] = -a[1];
+	    out[2] = -a[2];
+	    out[3] =  a0;
+	
+	    return out;
+	};
+	
+	/**
+	 * Calculates the determinant of a mat2
+	 *
+	 * @param {mat2} a the source matrix
+	 * @returns {Number} determinant of a
+	 */
+	mat2.determinant = function (a) {
+	    return a[0] * a[3] - a[2] * a[1];
+	};
+	
+	/**
+	 * Multiplies two mat2's
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the first operand
+	 * @param {mat2} b the second operand
+	 * @returns {mat2} out
+	 */
+	mat2.multiply = function (out, a, b) {
+	    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3];
+	    var b0 = b[0], b1 = b[1], b2 = b[2], b3 = b[3];
+	    out[0] = a0 * b0 + a1 * b2;
+	    out[1] = a0 * b1 + a1 * b3;
+	    out[2] = a2 * b0 + a3 * b2;
+	    out[3] = a2 * b1 + a3 * b3;
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link mat2.multiply}
+	 * @function
+	 */
+	mat2.mul = mat2.multiply;
+	
+	/**
+	 * Rotates a mat2 by the given angle
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat2} out
+	 */
+	mat2.rotate = function (out, a, rad) {
+	    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3],
+	        s = Math.sin(rad),
+	        c = Math.cos(rad);
+	    out[0] = a0 *  c + a1 * s;
+	    out[1] = a0 * -s + a1 * c;
+	    out[2] = a2 *  c + a3 * s;
+	    out[3] = a2 * -s + a3 * c;
+	    return out;
+	};
+	
+	/**
+	 * Scales the mat2 by the dimensions in the given vec2
+	 *
+	 * @param {mat2} out the receiving matrix
+	 * @param {mat2} a the matrix to rotate
+	 * @param {vec2} v the vec2 to scale the matrix by
+	 * @returns {mat2} out
+	 **/
+	mat2.scale = function(out, a, v) {
+	    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3],
+	        v0 = v[0], v1 = v[1];
+	    out[0] = a0 * v0;
+	    out[1] = a1 * v1;
+	    out[2] = a2 * v0;
+	    out[3] = a3 * v1;
+	    return out;
+	};
+	
+	/**
+	 * Returns a string representation of a mat2
+	 *
+	 * @param {mat2} mat matrix to represent as a string
+	 * @returns {String} string representation of the matrix
+	 */
+	mat2.str = function (a) {
+	    return 'mat2(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.mat2 = mat2;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 2x3 Matrix
+	 * @name mat2d
+	 * 
+	 * @description 
+	 * A mat2d contains six elements defined as:
+	 * <pre>
+	 * [a, b,
+	 *  c, d,
+	 *  tx,ty]
+	 * </pre>
+	 * This is a short form for the 3x3 matrix:
+	 * <pre>
+	 * [a, b, 0
+	 *  c, d, 0
+	 *  tx,ty,1]
+	 * </pre>
+	 * The last column is ignored so the array is shorter and operations are faster.
+	 */
+	
+	var mat2d = {};
+	
+	var mat2dIdentity = new Float32Array([
+	    1, 0,
+	    0, 1,
+	    0, 0
+	]);
+	
+	/**
+	 * Creates a new identity mat2d
+	 *
+	 * @returns {mat2d} a new 2x3 matrix
+	 */
+	mat2d.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(6);
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    out[4] = 0;
+	    out[5] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new mat2d initialized with values from an existing matrix
+	 *
+	 * @param {mat2d} a matrix to clone
+	 * @returns {mat2d} a new 2x3 matrix
+	 */
+	mat2d.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(6);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one mat2d to another
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the source matrix
+	 * @returns {mat2d} out
+	 */
+	mat2d.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    return out;
+	};
+	
+	/**
+	 * Set a mat2d to the identity matrix
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @returns {mat2d} out
+	 */
+	mat2d.identity = function(out) {
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    out[4] = 0;
+	    out[5] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Inverts a mat2d
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the source matrix
+	 * @returns {mat2d} out
+	 */
+	mat2d.invert = function(out, a) {
+	    var aa = a[0], ab = a[1], ac = a[2], ad = a[3],
+	        atx = a[4], aty = a[5];
+	
+	    var det = aa * ad - ab * ac;
+	    if(!det){
+	        return null;
+	    }
+	    det = 1.0 / det;
+	
+	    out[0] = ad * det;
+	    out[1] = -ab * det;
+	    out[2] = -ac * det;
+	    out[3] = aa * det;
+	    out[4] = (ac * aty - ad * atx) * det;
+	    out[5] = (ab * atx - aa * aty) * det;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the determinant of a mat2d
+	 *
+	 * @param {mat2d} a the source matrix
+	 * @returns {Number} determinant of a
+	 */
+	mat2d.determinant = function (a) {
+	    return a[0] * a[3] - a[1] * a[2];
+	};
+	
+	/**
+	 * Multiplies two mat2d's
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the first operand
+	 * @param {mat2d} b the second operand
+	 * @returns {mat2d} out
+	 */
+	mat2d.multiply = function (out, a, b) {
+	    var aa = a[0], ab = a[1], ac = a[2], ad = a[3],
+	        atx = a[4], aty = a[5],
+	        ba = b[0], bb = b[1], bc = b[2], bd = b[3],
+	        btx = b[4], bty = b[5];
+	
+	    out[0] = aa*ba + ab*bc;
+	    out[1] = aa*bb + ab*bd;
+	    out[2] = ac*ba + ad*bc;
+	    out[3] = ac*bb + ad*bd;
+	    out[4] = ba*atx + bc*aty + btx;
+	    out[5] = bb*atx + bd*aty + bty;
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link mat2d.multiply}
+	 * @function
+	 */
+	mat2d.mul = mat2d.multiply;
+	
+	
+	/**
+	 * Rotates a mat2d by the given angle
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat2d} out
+	 */
+	mat2d.rotate = function (out, a, rad) {
+	    var aa = a[0],
+	        ab = a[1],
+	        ac = a[2],
+	        ad = a[3],
+	        atx = a[4],
+	        aty = a[5],
+	        st = Math.sin(rad),
+	        ct = Math.cos(rad);
+	
+	    out[0] = aa*ct + ab*st;
+	    out[1] = -aa*st + ab*ct;
+	    out[2] = ac*ct + ad*st;
+	    out[3] = -ac*st + ct*ad;
+	    out[4] = ct*atx + st*aty;
+	    out[5] = ct*aty - st*atx;
+	    return out;
+	};
+	
+	/**
+	 * Scales the mat2d by the dimensions in the given vec2
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the matrix to translate
+	 * @param {mat2d} v the vec2 to scale the matrix by
+	 * @returns {mat2d} out
+	 **/
+	mat2d.scale = function(out, a, v) {
+	    var vx = v[0], vy = v[1];
+	    out[0] = a[0] * vx;
+	    out[1] = a[1] * vy;
+	    out[2] = a[2] * vx;
+	    out[3] = a[3] * vy;
+	    out[4] = a[4] * vx;
+	    out[5] = a[5] * vy;
+	    return out;
+	};
+	
+	/**
+	 * Translates the mat2d by the dimensions in the given vec2
+	 *
+	 * @param {mat2d} out the receiving matrix
+	 * @param {mat2d} a the matrix to translate
+	 * @param {mat2d} v the vec2 to translate the matrix by
+	 * @returns {mat2d} out
+	 **/
+	mat2d.translate = function(out, a, v) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4] + v[0];
+	    out[5] = a[5] + v[1];
+	    return out;
+	};
+	
+	/**
+	 * Returns a string representation of a mat2d
+	 *
+	 * @param {mat2d} a matrix to represent as a string
+	 * @returns {String} string representation of the matrix
+	 */
+	mat2d.str = function (a) {
+	    return 'mat2d(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + 
+	                    a[3] + ', ' + a[4] + ', ' + a[5] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.mat2d = mat2d;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 3x3 Matrix
+	 * @name mat3
+	 */
+	
+	var mat3 = {};
+	
+	var mat3Identity = new Float32Array([
+	    1, 0, 0,
+	    0, 1, 0,
+	    0, 0, 1
+	]);
+	
+	/**
+	 * Creates a new identity mat3
+	 *
+	 * @returns {mat3} a new 3x3 matrix
+	 */
+	mat3.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(9);
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 1;
+	    out[5] = 0;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new mat3 initialized with values from an existing matrix
+	 *
+	 * @param {mat3} a matrix to clone
+	 * @returns {mat3} a new 3x3 matrix
+	 */
+	mat3.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(9);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    out[6] = a[6];
+	    out[7] = a[7];
+	    out[8] = a[8];
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one mat3 to another
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the source matrix
+	 * @returns {mat3} out
+	 */
+	mat3.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    out[6] = a[6];
+	    out[7] = a[7];
+	    out[8] = a[8];
+	    return out;
+	};
+	
+	/**
+	 * Set a mat3 to the identity matrix
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @returns {mat3} out
+	 */
+	mat3.identity = function(out) {
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 1;
+	    out[5] = 0;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Transpose the values of a mat3
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the source matrix
+	 * @returns {mat3} out
+	 */
+	mat3.transpose = function(out, a) {
+	    // If we are transposing ourselves we can skip a few steps but have to cache some values
+	    if (out === a) {
+	        var a01 = a[1], a02 = a[2], a12 = a[5];
+	        out[1] = a[3];
+	        out[2] = a[6];
+	        out[3] = a01;
+	        out[5] = a[7];
+	        out[6] = a02;
+	        out[7] = a12;
+	    } else {
+	        out[0] = a[0];
+	        out[1] = a[3];
+	        out[2] = a[6];
+	        out[3] = a[1];
+	        out[4] = a[4];
+	        out[5] = a[7];
+	        out[6] = a[2];
+	        out[7] = a[5];
+	        out[8] = a[8];
+	    }
+	    
+	    return out;
+	};
+	
+	/**
+	 * Inverts a mat3
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the source matrix
+	 * @returns {mat3} out
+	 */
+	mat3.invert = function(out, a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8],
+	
+	        b01 = a22 * a11 - a12 * a21,
+	        b11 = -a22 * a10 + a12 * a20,
+	        b21 = a21 * a10 - a11 * a20,
+	
+	        // Calculate the determinant
+	        det = a00 * b01 + a01 * b11 + a02 * b21;
+	
+	    if (!det) { 
+	        return null; 
+	    }
+	    det = 1.0 / det;
+	
+	    out[0] = b01 * det;
+	    out[1] = (-a22 * a01 + a02 * a21) * det;
+	    out[2] = (a12 * a01 - a02 * a11) * det;
+	    out[3] = b11 * det;
+	    out[4] = (a22 * a00 - a02 * a20) * det;
+	    out[5] = (-a12 * a00 + a02 * a10) * det;
+	    out[6] = b21 * det;
+	    out[7] = (-a21 * a00 + a01 * a20) * det;
+	    out[8] = (a11 * a00 - a01 * a10) * det;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the adjugate of a mat3
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the source matrix
+	 * @returns {mat3} out
+	 */
+	mat3.adjoint = function(out, a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8];
+	
+	    out[0] = (a11 * a22 - a12 * a21);
+	    out[1] = (a02 * a21 - a01 * a22);
+	    out[2] = (a01 * a12 - a02 * a11);
+	    out[3] = (a12 * a20 - a10 * a22);
+	    out[4] = (a00 * a22 - a02 * a20);
+	    out[5] = (a02 * a10 - a00 * a12);
+	    out[6] = (a10 * a21 - a11 * a20);
+	    out[7] = (a01 * a20 - a00 * a21);
+	    out[8] = (a00 * a11 - a01 * a10);
+	    return out;
+	};
+	
+	/**
+	 * Calculates the determinant of a mat3
+	 *
+	 * @param {mat3} a the source matrix
+	 * @returns {Number} determinant of a
+	 */
+	mat3.determinant = function (a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8];
+	
+	    return a00 * (a22 * a11 - a12 * a21) + a01 * (-a22 * a10 + a12 * a20) + a02 * (a21 * a10 - a11 * a20);
+	};
+	
+	/**
+	 * Multiplies two mat3's
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the first operand
+	 * @param {mat3} b the second operand
+	 * @returns {mat3} out
+	 */
+	mat3.multiply = function (out, a, b) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8],
+	
+	        b00 = b[0], b01 = b[1], b02 = b[2],
+	        b10 = b[3], b11 = b[4], b12 = b[5],
+	        b20 = b[6], b21 = b[7], b22 = b[8];
+	
+	    out[0] = b00 * a00 + b01 * a10 + b02 * a20;
+	    out[1] = b00 * a01 + b01 * a11 + b02 * a21;
+	    out[2] = b00 * a02 + b01 * a12 + b02 * a22;
+	
+	    out[3] = b10 * a00 + b11 * a10 + b12 * a20;
+	    out[4] = b10 * a01 + b11 * a11 + b12 * a21;
+	    out[5] = b10 * a02 + b11 * a12 + b12 * a22;
+	
+	    out[6] = b20 * a00 + b21 * a10 + b22 * a20;
+	    out[7] = b20 * a01 + b21 * a11 + b22 * a21;
+	    out[8] = b20 * a02 + b21 * a12 + b22 * a22;
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link mat3.multiply}
+	 * @function
+	 */
+	mat3.mul = mat3.multiply;
+	
+	/**
+	 * Translate a mat3 by the given vector
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the matrix to translate
+	 * @param {vec2} v vector to translate by
+	 * @returns {mat3} out
+	 */
+	mat3.translate = function(out, a, v) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8],
+	        x = v[0], y = v[1];
+	
+	    out[0] = a00;
+	    out[1] = a01;
+	    out[2] = a02;
+	
+	    out[3] = a10;
+	    out[4] = a11;
+	    out[5] = a12;
+	
+	    out[6] = x * a00 + y * a10 + a20;
+	    out[7] = x * a01 + y * a11 + a21;
+	    out[8] = x * a02 + y * a12 + a22;
+	    return out;
+	};
+	
+	/**
+	 * Rotates a mat3 by the given angle
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat3} out
+	 */
+	mat3.rotate = function (out, a, rad) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2],
+	        a10 = a[3], a11 = a[4], a12 = a[5],
+	        a20 = a[6], a21 = a[7], a22 = a[8],
+	
+	        s = Math.sin(rad),
+	        c = Math.cos(rad);
+	
+	    out[0] = c * a00 + s * a10;
+	    out[1] = c * a01 + s * a11;
+	    out[2] = c * a02 + s * a12;
+	
+	    out[3] = c * a10 - s * a00;
+	    out[4] = c * a11 - s * a01;
+	    out[5] = c * a12 - s * a02;
+	
+	    out[6] = a20;
+	    out[7] = a21;
+	    out[8] = a22;
+	    return out;
+	};
+	
+	/**
+	 * Scales the mat3 by the dimensions in the given vec2
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the matrix to rotate
+	 * @param {vec2} v the vec2 to scale the matrix by
+	 * @returns {mat3} out
+	 **/
+	mat3.scale = function(out, a, v) {
+	    var x = v[0], y = v[2];
+	
+	    out[0] = x * a[0];
+	    out[1] = x * a[1];
+	    out[2] = x * a[2];
+	
+	    out[3] = y * a[3];
+	    out[4] = y * a[4];
+	    out[5] = y * a[5];
+	
+	    out[6] = a[6];
+	    out[7] = a[7];
+	    out[8] = a[8];
+	    return out;
+	};
+	
+	/**
+	 * Copies the values from a mat2d into a mat3
+	 *
+	 * @param {mat3} out the receiving matrix
+	 * @param {mat3} a the matrix to rotate
+	 * @param {vec2} v the vec2 to scale the matrix by
+	 * @returns {mat3} out
+	 **/
+	mat3.fromMat2d = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = 0;
+	
+	    out[3] = a[2];
+	    out[4] = a[3];
+	    out[5] = 0;
+	
+	    out[6] = a[4];
+	    out[7] = a[5];
+	    out[8] = 1;
+	    return out;
+	};
+	
+	/**
+	* Calculates a 3x3 matrix from the given quaternion
+	*
+	* @param {mat3} out mat3 receiving operation result
+	* @param {quat} q Quaternion to create matrix from
+	*
+	* @returns {mat3} out
+	*/
+	mat3.fromQuat = function (out, q) {
+	    var x = q[0], y = q[1], z = q[2], w = q[3],
+	        x2 = x + x,
+	        y2 = y + y,
+	        z2 = z + z,
+	
+	        xx = x * x2,
+	        xy = x * y2,
+	        xz = x * z2,
+	        yy = y * y2,
+	        yz = y * z2,
+	        zz = z * z2,
+	        wx = w * x2,
+	        wy = w * y2,
+	        wz = w * z2;
+	
+	    out[0] = 1 - (yy + zz);
+	    out[1] = xy + wz;
+	    out[2] = xz - wy;
+	
+	    out[3] = xy - wz;
+	    out[4] = 1 - (xx + zz);
+	    out[5] = yz + wx;
+	
+	    out[6] = xz + wy;
+	    out[7] = yz - wx;
+	    out[8] = 1 - (xx + yy);
+	
+	    return out;
+	};
+	
+	/**
+	 * Returns a string representation of a mat3
+	 *
+	 * @param {mat3} mat matrix to represent as a string
+	 * @returns {String} string representation of the matrix
+	 */
+	mat3.str = function (a) {
+	    return 'mat3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + 
+	                    a[3] + ', ' + a[4] + ', ' + a[5] + ', ' + 
+	                    a[6] + ', ' + a[7] + ', ' + a[8] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.mat3 = mat3;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class 4x4 Matrix
+	 * @name mat4
+	 */
+	
+	var mat4 = {};
+	
+	var mat4Identity = new Float32Array([
+	    1, 0, 0, 0,
+	    0, 1, 0, 0,
+	    0, 0, 1, 0,
+	    0, 0, 0, 1
+	]);
+	
+	/**
+	 * Creates a new identity mat4
+	 *
+	 * @returns {mat4} a new 4x4 matrix
+	 */
+	mat4.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(16);
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 0;
+	    out[5] = 1;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 0;
+	    out[9] = 0;
+	    out[10] = 1;
+	    out[11] = 0;
+	    out[12] = 0;
+	    out[13] = 0;
+	    out[14] = 0;
+	    out[15] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new mat4 initialized with values from an existing matrix
+	 *
+	 * @param {mat4} a matrix to clone
+	 * @returns {mat4} a new 4x4 matrix
+	 */
+	mat4.clone = function(a) {
+	    var out = new GLMAT_ARRAY_TYPE(16);
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    out[6] = a[6];
+	    out[7] = a[7];
+	    out[8] = a[8];
+	    out[9] = a[9];
+	    out[10] = a[10];
+	    out[11] = a[11];
+	    out[12] = a[12];
+	    out[13] = a[13];
+	    out[14] = a[14];
+	    out[15] = a[15];
+	    return out;
+	};
+	
+	/**
+	 * Copy the values from one mat4 to another
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the source matrix
+	 * @returns {mat4} out
+	 */
+	mat4.copy = function(out, a) {
+	    out[0] = a[0];
+	    out[1] = a[1];
+	    out[2] = a[2];
+	    out[3] = a[3];
+	    out[4] = a[4];
+	    out[5] = a[5];
+	    out[6] = a[6];
+	    out[7] = a[7];
+	    out[8] = a[8];
+	    out[9] = a[9];
+	    out[10] = a[10];
+	    out[11] = a[11];
+	    out[12] = a[12];
+	    out[13] = a[13];
+	    out[14] = a[14];
+	    out[15] = a[15];
+	    return out;
+	};
+	
+	/**
+	 * Set a mat4 to the identity matrix
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @returns {mat4} out
+	 */
+	mat4.identity = function(out) {
+	    out[0] = 1;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 0;
+	    out[5] = 1;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 0;
+	    out[9] = 0;
+	    out[10] = 1;
+	    out[11] = 0;
+	    out[12] = 0;
+	    out[13] = 0;
+	    out[14] = 0;
+	    out[15] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Transpose the values of a mat4
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the source matrix
+	 * @returns {mat4} out
+	 */
+	mat4.transpose = function(out, a) {
+	    // If we are transposing ourselves we can skip a few steps but have to cache some values
+	    if (out === a) {
+	        var a01 = a[1], a02 = a[2], a03 = a[3],
+	            a12 = a[6], a13 = a[7],
+	            a23 = a[11];
+	
+	        out[1] = a[4];
+	        out[2] = a[8];
+	        out[3] = a[12];
+	        out[4] = a01;
+	        out[6] = a[9];
+	        out[7] = a[13];
+	        out[8] = a02;
+	        out[9] = a12;
+	        out[11] = a[14];
+	        out[12] = a03;
+	        out[13] = a13;
+	        out[14] = a23;
+	    } else {
+	        out[0] = a[0];
+	        out[1] = a[4];
+	        out[2] = a[8];
+	        out[3] = a[12];
+	        out[4] = a[1];
+	        out[5] = a[5];
+	        out[6] = a[9];
+	        out[7] = a[13];
+	        out[8] = a[2];
+	        out[9] = a[6];
+	        out[10] = a[10];
+	        out[11] = a[14];
+	        out[12] = a[3];
+	        out[13] = a[7];
+	        out[14] = a[11];
+	        out[15] = a[15];
+	    }
+	    
+	    return out;
+	};
+	
+	/**
+	 * Inverts a mat4
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the source matrix
+	 * @returns {mat4} out
+	 */
+	mat4.invert = function(out, a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+	        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+	        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+	        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
+	
+	        b00 = a00 * a11 - a01 * a10,
+	        b01 = a00 * a12 - a02 * a10,
+	        b02 = a00 * a13 - a03 * a10,
+	        b03 = a01 * a12 - a02 * a11,
+	        b04 = a01 * a13 - a03 * a11,
+	        b05 = a02 * a13 - a03 * a12,
+	        b06 = a20 * a31 - a21 * a30,
+	        b07 = a20 * a32 - a22 * a30,
+	        b08 = a20 * a33 - a23 * a30,
+	        b09 = a21 * a32 - a22 * a31,
+	        b10 = a21 * a33 - a23 * a31,
+	        b11 = a22 * a33 - a23 * a32,
+	
+	        // Calculate the determinant
+	        det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+	
+	    if (!det) { 
+	        return null; 
+	    }
+	    det = 1.0 / det;
+	
+	    out[0] = (a11 * b11 - a12 * b10 + a13 * b09) * det;
+	    out[1] = (a02 * b10 - a01 * b11 - a03 * b09) * det;
+	    out[2] = (a31 * b05 - a32 * b04 + a33 * b03) * det;
+	    out[3] = (a22 * b04 - a21 * b05 - a23 * b03) * det;
+	    out[4] = (a12 * b08 - a10 * b11 - a13 * b07) * det;
+	    out[5] = (a00 * b11 - a02 * b08 + a03 * b07) * det;
+	    out[6] = (a32 * b02 - a30 * b05 - a33 * b01) * det;
+	    out[7] = (a20 * b05 - a22 * b02 + a23 * b01) * det;
+	    out[8] = (a10 * b10 - a11 * b08 + a13 * b06) * det;
+	    out[9] = (a01 * b08 - a00 * b10 - a03 * b06) * det;
+	    out[10] = (a30 * b04 - a31 * b02 + a33 * b00) * det;
+	    out[11] = (a21 * b02 - a20 * b04 - a23 * b00) * det;
+	    out[12] = (a11 * b07 - a10 * b09 - a12 * b06) * det;
+	    out[13] = (a00 * b09 - a01 * b07 + a02 * b06) * det;
+	    out[14] = (a31 * b01 - a30 * b03 - a32 * b00) * det;
+	    out[15] = (a20 * b03 - a21 * b01 + a22 * b00) * det;
+	
+	    return out;
+	};
+	
+	/**
+	 * Calculates the adjugate of a mat4
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the source matrix
+	 * @returns {mat4} out
+	 */
+	mat4.adjoint = function(out, a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+	        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+	        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+	        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+	
+	    out[0]  =  (a11 * (a22 * a33 - a23 * a32) - a21 * (a12 * a33 - a13 * a32) + a31 * (a12 * a23 - a13 * a22));
+	    out[1]  = -(a01 * (a22 * a33 - a23 * a32) - a21 * (a02 * a33 - a03 * a32) + a31 * (a02 * a23 - a03 * a22));
+	    out[2]  =  (a01 * (a12 * a33 - a13 * a32) - a11 * (a02 * a33 - a03 * a32) + a31 * (a02 * a13 - a03 * a12));
+	    out[3]  = -(a01 * (a12 * a23 - a13 * a22) - a11 * (a02 * a23 - a03 * a22) + a21 * (a02 * a13 - a03 * a12));
+	    out[4]  = -(a10 * (a22 * a33 - a23 * a32) - a20 * (a12 * a33 - a13 * a32) + a30 * (a12 * a23 - a13 * a22));
+	    out[5]  =  (a00 * (a22 * a33 - a23 * a32) - a20 * (a02 * a33 - a03 * a32) + a30 * (a02 * a23 - a03 * a22));
+	    out[6]  = -(a00 * (a12 * a33 - a13 * a32) - a10 * (a02 * a33 - a03 * a32) + a30 * (a02 * a13 - a03 * a12));
+	    out[7]  =  (a00 * (a12 * a23 - a13 * a22) - a10 * (a02 * a23 - a03 * a22) + a20 * (a02 * a13 - a03 * a12));
+	    out[8]  =  (a10 * (a21 * a33 - a23 * a31) - a20 * (a11 * a33 - a13 * a31) + a30 * (a11 * a23 - a13 * a21));
+	    out[9]  = -(a00 * (a21 * a33 - a23 * a31) - a20 * (a01 * a33 - a03 * a31) + a30 * (a01 * a23 - a03 * a21));
+	    out[10] =  (a00 * (a11 * a33 - a13 * a31) - a10 * (a01 * a33 - a03 * a31) + a30 * (a01 * a13 - a03 * a11));
+	    out[11] = -(a00 * (a11 * a23 - a13 * a21) - a10 * (a01 * a23 - a03 * a21) + a20 * (a01 * a13 - a03 * a11));
+	    out[12] = -(a10 * (a21 * a32 - a22 * a31) - a20 * (a11 * a32 - a12 * a31) + a30 * (a11 * a22 - a12 * a21));
+	    out[13] =  (a00 * (a21 * a32 - a22 * a31) - a20 * (a01 * a32 - a02 * a31) + a30 * (a01 * a22 - a02 * a21));
+	    out[14] = -(a00 * (a11 * a32 - a12 * a31) - a10 * (a01 * a32 - a02 * a31) + a30 * (a01 * a12 - a02 * a11));
+	    out[15] =  (a00 * (a11 * a22 - a12 * a21) - a10 * (a01 * a22 - a02 * a21) + a20 * (a01 * a12 - a02 * a11));
+	    return out;
+	};
+	
+	/**
+	 * Calculates the determinant of a mat4
+	 *
+	 * @param {mat4} a the source matrix
+	 * @returns {Number} determinant of a
+	 */
+	mat4.determinant = function (a) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+	        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+	        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+	        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15],
+	
+	        b00 = a00 * a11 - a01 * a10,
+	        b01 = a00 * a12 - a02 * a10,
+	        b02 = a00 * a13 - a03 * a10,
+	        b03 = a01 * a12 - a02 * a11,
+	        b04 = a01 * a13 - a03 * a11,
+	        b05 = a02 * a13 - a03 * a12,
+	        b06 = a20 * a31 - a21 * a30,
+	        b07 = a20 * a32 - a22 * a30,
+	        b08 = a20 * a33 - a23 * a30,
+	        b09 = a21 * a32 - a22 * a31,
+	        b10 = a21 * a33 - a23 * a31,
+	        b11 = a22 * a33 - a23 * a32;
+	
+	    // Calculate the determinant
+	    return b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
+	};
+	
+	/**
+	 * Multiplies two mat4's
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the first operand
+	 * @param {mat4} b the second operand
+	 * @returns {mat4} out
+	 */
+	mat4.multiply = function (out, a, b) {
+	    var a00 = a[0], a01 = a[1], a02 = a[2], a03 = a[3],
+	        a10 = a[4], a11 = a[5], a12 = a[6], a13 = a[7],
+	        a20 = a[8], a21 = a[9], a22 = a[10], a23 = a[11],
+	        a30 = a[12], a31 = a[13], a32 = a[14], a33 = a[15];
+	
+	    // Cache only the current line of the second matrix
+	    var b0  = b[0], b1 = b[1], b2 = b[2], b3 = b[3];  
+	    out[0] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+	    out[1] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+	    out[2] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+	    out[3] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+	
+	    b0 = b[4]; b1 = b[5]; b2 = b[6]; b3 = b[7];
+	    out[4] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+	    out[5] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+	    out[6] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+	    out[7] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+	
+	    b0 = b[8]; b1 = b[9]; b2 = b[10]; b3 = b[11];
+	    out[8] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+	    out[9] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+	    out[10] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+	    out[11] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+	
+	    b0 = b[12]; b1 = b[13]; b2 = b[14]; b3 = b[15];
+	    out[12] = b0*a00 + b1*a10 + b2*a20 + b3*a30;
+	    out[13] = b0*a01 + b1*a11 + b2*a21 + b3*a31;
+	    out[14] = b0*a02 + b1*a12 + b2*a22 + b3*a32;
+	    out[15] = b0*a03 + b1*a13 + b2*a23 + b3*a33;
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link mat4.multiply}
+	 * @function
+	 */
+	mat4.mul = mat4.multiply;
+	
+	/**
+	 * Translate a mat4 by the given vector
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to translate
+	 * @param {vec3} v vector to translate by
+	 * @returns {mat4} out
+	 */
+	mat4.translate = function (out, a, v) {
+	    var x = v[0], y = v[1], z = v[2],
+	        a00, a01, a02, a03,
+	        a10, a11, a12, a13,
+	        a20, a21, a22, a23;
+	
+	    if (a === out) {
+	        out[12] = a[0] * x + a[4] * y + a[8] * z + a[12];
+	        out[13] = a[1] * x + a[5] * y + a[9] * z + a[13];
+	        out[14] = a[2] * x + a[6] * y + a[10] * z + a[14];
+	        out[15] = a[3] * x + a[7] * y + a[11] * z + a[15];
+	    } else {
+	        a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
+	        a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
+	        a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+	
+	        out[0] = a00; out[1] = a01; out[2] = a02; out[3] = a03;
+	        out[4] = a10; out[5] = a11; out[6] = a12; out[7] = a13;
+	        out[8] = a20; out[9] = a21; out[10] = a22; out[11] = a23;
+	
+	        out[12] = a00 * x + a10 * y + a20 * z + a[12];
+	        out[13] = a01 * x + a11 * y + a21 * z + a[13];
+	        out[14] = a02 * x + a12 * y + a22 * z + a[14];
+	        out[15] = a03 * x + a13 * y + a23 * z + a[15];
+	    }
+	
+	    return out;
+	};
+	
+	/**
+	 * Scales the mat4 by the dimensions in the given vec3
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to scale
+	 * @param {vec3} v the vec3 to scale the matrix by
+	 * @returns {mat4} out
+	 **/
+	mat4.scale = function(out, a, v) {
+	    var x = v[0], y = v[1], z = v[2];
+	
+	    out[0] = a[0] * x;
+	    out[1] = a[1] * x;
+	    out[2] = a[2] * x;
+	    out[3] = a[3] * x;
+	    out[4] = a[4] * y;
+	    out[5] = a[5] * y;
+	    out[6] = a[6] * y;
+	    out[7] = a[7] * y;
+	    out[8] = a[8] * z;
+	    out[9] = a[9] * z;
+	    out[10] = a[10] * z;
+	    out[11] = a[11] * z;
+	    out[12] = a[12];
+	    out[13] = a[13];
+	    out[14] = a[14];
+	    out[15] = a[15];
+	    return out;
+	};
+	
+	/**
+	 * Rotates a mat4 by the given angle
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @param {vec3} axis the axis to rotate around
+	 * @returns {mat4} out
+	 */
+	mat4.rotate = function (out, a, rad, axis) {
+	    var x = axis[0], y = axis[1], z = axis[2],
+	        len = Math.sqrt(x * x + y * y + z * z),
+	        s, c, t,
+	        a00, a01, a02, a03,
+	        a10, a11, a12, a13,
+	        a20, a21, a22, a23,
+	        b00, b01, b02,
+	        b10, b11, b12,
+	        b20, b21, b22;
+	
+	    if (Math.abs(len) < GLMAT_EPSILON) { return null; }
+	    
+	    len = 1 / len;
+	    x *= len;
+	    y *= len;
+	    z *= len;
+	
+	    s = Math.sin(rad);
+	    c = Math.cos(rad);
+	    t = 1 - c;
+	
+	    a00 = a[0]; a01 = a[1]; a02 = a[2]; a03 = a[3];
+	    a10 = a[4]; a11 = a[5]; a12 = a[6]; a13 = a[7];
+	    a20 = a[8]; a21 = a[9]; a22 = a[10]; a23 = a[11];
+	
+	    // Construct the elements of the rotation matrix
+	    b00 = x * x * t + c; b01 = y * x * t + z * s; b02 = z * x * t - y * s;
+	    b10 = x * y * t - z * s; b11 = y * y * t + c; b12 = z * y * t + x * s;
+	    b20 = x * z * t + y * s; b21 = y * z * t - x * s; b22 = z * z * t + c;
+	
+	    // Perform rotation-specific matrix multiplication
+	    out[0] = a00 * b00 + a10 * b01 + a20 * b02;
+	    out[1] = a01 * b00 + a11 * b01 + a21 * b02;
+	    out[2] = a02 * b00 + a12 * b01 + a22 * b02;
+	    out[3] = a03 * b00 + a13 * b01 + a23 * b02;
+	    out[4] = a00 * b10 + a10 * b11 + a20 * b12;
+	    out[5] = a01 * b10 + a11 * b11 + a21 * b12;
+	    out[6] = a02 * b10 + a12 * b11 + a22 * b12;
+	    out[7] = a03 * b10 + a13 * b11 + a23 * b12;
+	    out[8] = a00 * b20 + a10 * b21 + a20 * b22;
+	    out[9] = a01 * b20 + a11 * b21 + a21 * b22;
+	    out[10] = a02 * b20 + a12 * b21 + a22 * b22;
+	    out[11] = a03 * b20 + a13 * b21 + a23 * b22;
+	
+	    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+	        out[12] = a[12];
+	        out[13] = a[13];
+	        out[14] = a[14];
+	        out[15] = a[15];
+	    }
+	    return out;
+	};
+	
+	/**
+	 * Rotates a matrix by the given angle around the X axis
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat4} out
+	 */
+	mat4.rotateX = function (out, a, rad) {
+	    var s = Math.sin(rad),
+	        c = Math.cos(rad),
+	        a10 = a[4],
+	        a11 = a[5],
+	        a12 = a[6],
+	        a13 = a[7],
+	        a20 = a[8],
+	        a21 = a[9],
+	        a22 = a[10],
+	        a23 = a[11];
+	
+	    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+	        out[0]  = a[0];
+	        out[1]  = a[1];
+	        out[2]  = a[2];
+	        out[3]  = a[3];
+	        out[12] = a[12];
+	        out[13] = a[13];
+	        out[14] = a[14];
+	        out[15] = a[15];
+	    }
+	
+	    // Perform axis-specific matrix multiplication
+	    out[4] = a10 * c + a20 * s;
+	    out[5] = a11 * c + a21 * s;
+	    out[6] = a12 * c + a22 * s;
+	    out[7] = a13 * c + a23 * s;
+	    out[8] = a20 * c - a10 * s;
+	    out[9] = a21 * c - a11 * s;
+	    out[10] = a22 * c - a12 * s;
+	    out[11] = a23 * c - a13 * s;
+	    return out;
+	};
+	
+	/**
+	 * Rotates a matrix by the given angle around the Y axis
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat4} out
+	 */
+	mat4.rotateY = function (out, a, rad) {
+	    var s = Math.sin(rad),
+	        c = Math.cos(rad),
+	        a00 = a[0],
+	        a01 = a[1],
+	        a02 = a[2],
+	        a03 = a[3],
+	        a20 = a[8],
+	        a21 = a[9],
+	        a22 = a[10],
+	        a23 = a[11];
+	
+	    if (a !== out) { // If the source and destination differ, copy the unchanged rows
+	        out[4]  = a[4];
+	        out[5]  = a[5];
+	        out[6]  = a[6];
+	        out[7]  = a[7];
+	        out[12] = a[12];
+	        out[13] = a[13];
+	        out[14] = a[14];
+	        out[15] = a[15];
+	    }
+	
+	    // Perform axis-specific matrix multiplication
+	    out[0] = a00 * c - a20 * s;
+	    out[1] = a01 * c - a21 * s;
+	    out[2] = a02 * c - a22 * s;
+	    out[3] = a03 * c - a23 * s;
+	    out[8] = a00 * s + a20 * c;
+	    out[9] = a01 * s + a21 * c;
+	    out[10] = a02 * s + a22 * c;
+	    out[11] = a03 * s + a23 * c;
+	    return out;
+	};
+	
+	/**
+	 * Rotates a matrix by the given angle around the Z axis
+	 *
+	 * @param {mat4} out the receiving matrix
+	 * @param {mat4} a the matrix to rotate
+	 * @param {Number} rad the angle to rotate the matrix by
+	 * @returns {mat4} out
+	 */
+	mat4.rotateZ = function (out, a, rad) {
+	    var s = Math.sin(rad),
+	        c = Math.cos(rad),
+	        a00 = a[0],
+	        a01 = a[1],
+	        a02 = a[2],
+	        a03 = a[3],
+	        a10 = a[4],
+	        a11 = a[5],
+	        a12 = a[6],
+	        a13 = a[7];
+	
+	    if (a !== out) { // If the source and destination differ, copy the unchanged last row
+	        out[8]  = a[8];
+	        out[9]  = a[9];
+	        out[10] = a[10];
+	        out[11] = a[11];
+	        out[12] = a[12];
+	        out[13] = a[13];
+	        out[14] = a[14];
+	        out[15] = a[15];
+	    }
+	
+	    // Perform axis-specific matrix multiplication
+	    out[0] = a00 * c + a10 * s;
+	    out[1] = a01 * c + a11 * s;
+	    out[2] = a02 * c + a12 * s;
+	    out[3] = a03 * c + a13 * s;
+	    out[4] = a10 * c - a00 * s;
+	    out[5] = a11 * c - a01 * s;
+	    out[6] = a12 * c - a02 * s;
+	    out[7] = a13 * c - a03 * s;
+	    return out;
+	};
+	
+	/**
+	 * Creates a matrix from a quaternion rotation and vector translation
+	 * This is equivalent to (but much faster than):
+	 *
+	 *     mat4.identity(dest);
+	 *     mat4.translate(dest, vec);
+	 *     var quatMat = mat4.create();
+	 *     quat4.toMat4(quat, quatMat);
+	 *     mat4.multiply(dest, quatMat);
+	 *
+	 * @param {mat4} out mat4 receiving operation result
+	 * @param {quat4} q Rotation quaternion
+	 * @param {vec3} v Translation vector
+	 * @returns {mat4} out
+	 */
+	mat4.fromRotationTranslation = function (out, q, v) {
+	    // Quaternion math
+	    var x = q[0], y = q[1], z = q[2], w = q[3],
+	        x2 = x + x,
+	        y2 = y + y,
+	        z2 = z + z,
+	
+	        xx = x * x2,
+	        xy = x * y2,
+	        xz = x * z2,
+	        yy = y * y2,
+	        yz = y * z2,
+	        zz = z * z2,
+	        wx = w * x2,
+	        wy = w * y2,
+	        wz = w * z2;
+	
+	    out[0] = 1 - (yy + zz);
+	    out[1] = xy + wz;
+	    out[2] = xz - wy;
+	    out[3] = 0;
+	    out[4] = xy - wz;
+	    out[5] = 1 - (xx + zz);
+	    out[6] = yz + wx;
+	    out[7] = 0;
+	    out[8] = xz + wy;
+	    out[9] = yz - wx;
+	    out[10] = 1 - (xx + yy);
+	    out[11] = 0;
+	    out[12] = v[0];
+	    out[13] = v[1];
+	    out[14] = v[2];
+	    out[15] = 1;
+	    
+	    return out;
+	};
+	
+	/**
+	* Calculates a 4x4 matrix from the given quaternion
+	*
+	* @param {mat4} out mat4 receiving operation result
+	* @param {quat} q Quaternion to create matrix from
+	*
+	* @returns {mat4} out
+	*/
+	mat4.fromQuat = function (out, q) {
+	    var x = q[0], y = q[1], z = q[2], w = q[3],
+	        x2 = x + x,
+	        y2 = y + y,
+	        z2 = z + z,
+	
+	        xx = x * x2,
+	        xy = x * y2,
+	        xz = x * z2,
+	        yy = y * y2,
+	        yz = y * z2,
+	        zz = z * z2,
+	        wx = w * x2,
+	        wy = w * y2,
+	        wz = w * z2;
+	
+	    out[0] = 1 - (yy + zz);
+	    out[1] = xy + wz;
+	    out[2] = xz - wy;
+	    out[3] = 0;
+	
+	    out[4] = xy - wz;
+	    out[5] = 1 - (xx + zz);
+	    out[6] = yz + wx;
+	    out[7] = 0;
+	
+	    out[8] = xz + wy;
+	    out[9] = yz - wx;
+	    out[10] = 1 - (xx + yy);
+	    out[11] = 0;
+	
+	    out[12] = 0;
+	    out[13] = 0;
+	    out[14] = 0;
+	    out[15] = 1;
+	
+	    return out;
+	};
+	
+	/**
+	 * Generates a frustum matrix with the given bounds
+	 *
+	 * @param {mat4} out mat4 frustum matrix will be written into
+	 * @param {Number} left Left bound of the frustum
+	 * @param {Number} right Right bound of the frustum
+	 * @param {Number} bottom Bottom bound of the frustum
+	 * @param {Number} top Top bound of the frustum
+	 * @param {Number} near Near bound of the frustum
+	 * @param {Number} far Far bound of the frustum
+	 * @returns {mat4} out
+	 */
+	mat4.frustum = function (out, left, right, bottom, top, near, far) {
+	    var rl = 1 / (right - left),
+	        tb = 1 / (top - bottom),
+	        nf = 1 / (near - far);
+	    out[0] = (near * 2) * rl;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 0;
+	    out[5] = (near * 2) * tb;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = (right + left) * rl;
+	    out[9] = (top + bottom) * tb;
+	    out[10] = (far + near) * nf;
+	    out[11] = -1;
+	    out[12] = 0;
+	    out[13] = 0;
+	    out[14] = (far * near * 2) * nf;
+	    out[15] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Generates a perspective projection matrix with the given bounds
+	 *
+	 * @param {mat4} out mat4 frustum matrix will be written into
+	 * @param {number} fovy Vertical field of view in radians
+	 * @param {number} aspect Aspect ratio. typically viewport width/height
+	 * @param {number} near Near bound of the frustum
+	 * @param {number} far Far bound of the frustum
+	 * @returns {mat4} out
+	 */
+	mat4.perspective = function (out, fovy, aspect, near, far) {
+	    var f = 1.0 / Math.tan(fovy / 2),
+	        nf = 1 / (near - far);
+	    out[0] = f / aspect;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 0;
+	    out[5] = f;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 0;
+	    out[9] = 0;
+	    out[10] = (far + near) * nf;
+	    out[11] = -1;
+	    out[12] = 0;
+	    out[13] = 0;
+	    out[14] = (2 * far * near) * nf;
+	    out[15] = 0;
+	    return out;
+	};
+	
+	/**
+	 * Generates a orthogonal projection matrix with the given bounds
+	 *
+	 * @param {mat4} out mat4 frustum matrix will be written into
+	 * @param {number} left Left bound of the frustum
+	 * @param {number} right Right bound of the frustum
+	 * @param {number} bottom Bottom bound of the frustum
+	 * @param {number} top Top bound of the frustum
+	 * @param {number} near Near bound of the frustum
+	 * @param {number} far Far bound of the frustum
+	 * @returns {mat4} out
+	 */
+	mat4.ortho = function (out, left, right, bottom, top, near, far) {
+	    var lr = 1 / (left - right),
+	        bt = 1 / (bottom - top),
+	        nf = 1 / (near - far);
+	    out[0] = -2 * lr;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 0;
+	    out[4] = 0;
+	    out[5] = -2 * bt;
+	    out[6] = 0;
+	    out[7] = 0;
+	    out[8] = 0;
+	    out[9] = 0;
+	    out[10] = 2 * nf;
+	    out[11] = 0;
+	    out[12] = (left + right) * lr;
+	    out[13] = (top + bottom) * bt;
+	    out[14] = (far + near) * nf;
+	    out[15] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Generates a look-at matrix with the given eye position, focal point, and up axis
+	 *
+	 * @param {mat4} out mat4 frustum matrix will be written into
+	 * @param {vec3} eye Position of the viewer
+	 * @param {vec3} center Point the viewer is looking at
+	 * @param {vec3} up vec3 pointing up
+	 * @returns {mat4} out
+	 */
+	mat4.lookAt = function (out, eye, center, up) {
+	    var x0, x1, x2, y0, y1, y2, z0, z1, z2, len,
+	        eyex = eye[0],
+	        eyey = eye[1],
+	        eyez = eye[2],
+	        upx = up[0],
+	        upy = up[1],
+	        upz = up[2],
+	        centerx = center[0],
+	        centery = center[1],
+	        centerz = center[2];
+	
+	    if (Math.abs(eyex - centerx) < GLMAT_EPSILON &&
+	        Math.abs(eyey - centery) < GLMAT_EPSILON &&
+	        Math.abs(eyez - centerz) < GLMAT_EPSILON) {
+	        return mat4.identity(out);
+	    }
+	
+	    z0 = eyex - centerx;
+	    z1 = eyey - centery;
+	    z2 = eyez - centerz;
+	
+	    len = 1 / Math.sqrt(z0 * z0 + z1 * z1 + z2 * z2);
+	    z0 *= len;
+	    z1 *= len;
+	    z2 *= len;
+	
+	    x0 = upy * z2 - upz * z1;
+	    x1 = upz * z0 - upx * z2;
+	    x2 = upx * z1 - upy * z0;
+	    len = Math.sqrt(x0 * x0 + x1 * x1 + x2 * x2);
+	    if (!len) {
+	        x0 = 0;
+	        x1 = 0;
+	        x2 = 0;
+	    } else {
+	        len = 1 / len;
+	        x0 *= len;
+	        x1 *= len;
+	        x2 *= len;
+	    }
+	
+	    y0 = z1 * x2 - z2 * x1;
+	    y1 = z2 * x0 - z0 * x2;
+	    y2 = z0 * x1 - z1 * x0;
+	
+	    len = Math.sqrt(y0 * y0 + y1 * y1 + y2 * y2);
+	    if (!len) {
+	        y0 = 0;
+	        y1 = 0;
+	        y2 = 0;
+	    } else {
+	        len = 1 / len;
+	        y0 *= len;
+	        y1 *= len;
+	        y2 *= len;
+	    }
+	
+	    out[0] = x0;
+	    out[1] = y0;
+	    out[2] = z0;
+	    out[3] = 0;
+	    out[4] = x1;
+	    out[5] = y1;
+	    out[6] = z1;
+	    out[7] = 0;
+	    out[8] = x2;
+	    out[9] = y2;
+	    out[10] = z2;
+	    out[11] = 0;
+	    out[12] = -(x0 * eyex + x1 * eyey + x2 * eyez);
+	    out[13] = -(y0 * eyex + y1 * eyey + y2 * eyez);
+	    out[14] = -(z0 * eyex + z1 * eyey + z2 * eyez);
+	    out[15] = 1;
+	
+	    return out;
+	};
+	
+	/**
+	 * Returns a string representation of a mat4
+	 *
+	 * @param {mat4} mat matrix to represent as a string
+	 * @returns {String} string representation of the matrix
+	 */
+	mat4.str = function (a) {
+	    return 'mat4(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ', ' +
+	                    a[4] + ', ' + a[5] + ', ' + a[6] + ', ' + a[7] + ', ' +
+	                    a[8] + ', ' + a[9] + ', ' + a[10] + ', ' + a[11] + ', ' + 
+	                    a[12] + ', ' + a[13] + ', ' + a[14] + ', ' + a[15] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.mat4 = mat4;
+	}
+	;
+	/* Copyright (c) 2013, Brandon Jones, Colin MacKenzie IV. All rights reserved.
+	
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
+	
+	  * Redistributions of source code must retain the above copyright notice, this
+	    list of conditions and the following disclaimer.
+	  * Redistributions in binary form must reproduce the above copyright notice,
+	    this list of conditions and the following disclaimer in the documentation 
+	    and/or other materials provided with the distribution.
+	
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+	ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+	DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+	ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+	ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
+	
+	/**
+	 * @class Quaternion
+	 * @name quat
+	 */
+	
+	var quat = {};
+	
+	var quatIdentity = new Float32Array([0, 0, 0, 1]);
+	
+	/**
+	 * Creates a new identity quat
+	 *
+	 * @returns {quat} a new quaternion
+	 */
+	quat.create = function() {
+	    var out = new GLMAT_ARRAY_TYPE(4);
+	    out[0] = 0;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Creates a new quat initialized with values from an existing quaternion
+	 *
+	 * @param {quat} a quaternion to clone
+	 * @returns {quat} a new quaternion
+	 * @function
+	 */
+	quat.clone = vec4.clone;
+	
+	/**
+	 * Creates a new quat initialized with the given values
+	 *
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @param {Number} w W component
+	 * @returns {quat} a new quaternion
+	 * @function
+	 */
+	quat.fromValues = vec4.fromValues;
+	
+	/**
+	 * Copy the values from one quat to another
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a the source quaternion
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.copy = vec4.copy;
+	
+	/**
+	 * Set the components of a quat to the given values
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {Number} x X component
+	 * @param {Number} y Y component
+	 * @param {Number} z Z component
+	 * @param {Number} w W component
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.set = vec4.set;
+	
+	/**
+	 * Set a quat to the identity quaternion
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @returns {quat} out
+	 */
+	quat.identity = function(out) {
+	    out[0] = 0;
+	    out[1] = 0;
+	    out[2] = 0;
+	    out[3] = 1;
+	    return out;
+	};
+	
+	/**
+	 * Sets a quat from the given angle and rotation axis,
+	 * then returns it.
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {vec3} axis the axis around which to rotate
+	 * @param {Number} rad the angle in radians
+	 * @returns {quat} out
+	 **/
+	quat.setAxisAngle = function(out, axis, rad) {
+	    rad = rad * 0.5;
+	    var s = Math.sin(rad);
+	    out[0] = s * axis[0];
+	    out[1] = s * axis[1];
+	    out[2] = s * axis[2];
+	    out[3] = Math.cos(rad);
+	    return out;
+	};
+	
+	/**
+	 * Adds two quat's
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a the first operand
+	 * @param {quat} b the second operand
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.add = vec4.add;
+	
+	/**
+	 * Multiplies two quat's
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a the first operand
+	 * @param {quat} b the second operand
+	 * @returns {quat} out
+	 */
+	quat.multiply = function(out, a, b) {
+	    var ax = a[0], ay = a[1], az = a[2], aw = a[3],
+	        bx = b[0], by = b[1], bz = b[2], bw = b[3];
+	
+	    out[0] = ax * bw + aw * bx + ay * bz - az * by;
+	    out[1] = ay * bw + aw * by + az * bx - ax * bz;
+	    out[2] = az * bw + aw * bz + ax * by - ay * bx;
+	    out[3] = aw * bw - ax * bx - ay * by - az * bz;
+	    return out;
+	};
+	
+	/**
+	 * Alias for {@link quat.multiply}
+	 * @function
+	 */
+	quat.mul = quat.multiply;
+	
+	/**
+	 * Scales a quat by a scalar number
+	 *
+	 * @param {quat} out the receiving vector
+	 * @param {quat} a the vector to scale
+	 * @param {Number} b amount to scale the vector by
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.scale = vec4.scale;
+	
+	/**
+	 * Rotates a quaternion by the given angle around the X axis
+	 *
+	 * @param {quat} out quat receiving operation result
+	 * @param {quat} a quat to rotate
+	 * @param {number} rad angle (in radians) to rotate
+	 * @returns {quat} out
+	 */
+	quat.rotateX = function (out, a, rad) {
+	    rad *= 0.5; 
+	
+	    var ax = a[0], ay = a[1], az = a[2], aw = a[3],
+	        bx = Math.sin(rad), bw = Math.cos(rad);
+	
+	    out[0] = ax * bw + aw * bx;
+	    out[1] = ay * bw + az * bx;
+	    out[2] = az * bw - ay * bx;
+	    out[3] = aw * bw - ax * bx;
+	    return out;
+	};
+	
+	/**
+	 * Rotates a quaternion by the given angle around the Y axis
+	 *
+	 * @param {quat} out quat receiving operation result
+	 * @param {quat} a quat to rotate
+	 * @param {number} rad angle (in radians) to rotate
+	 * @returns {quat} out
+	 */
+	quat.rotateY = function (out, a, rad) {
+	    rad *= 0.5; 
+	
+	    var ax = a[0], ay = a[1], az = a[2], aw = a[3],
+	        by = Math.sin(rad), bw = Math.cos(rad);
+	
+	    out[0] = ax * bw - az * by;
+	    out[1] = ay * bw + aw * by;
+	    out[2] = az * bw + ax * by;
+	    out[3] = aw * bw - ay * by;
+	    return out;
+	};
+	
+	/**
+	 * Rotates a quaternion by the given angle around the Z axis
+	 *
+	 * @param {quat} out quat receiving operation result
+	 * @param {quat} a quat to rotate
+	 * @param {number} rad angle (in radians) to rotate
+	 * @returns {quat} out
+	 */
+	quat.rotateZ = function (out, a, rad) {
+	    rad *= 0.5; 
+	
+	    var ax = a[0], ay = a[1], az = a[2], aw = a[3],
+	        bz = Math.sin(rad), bw = Math.cos(rad);
+	
+	    out[0] = ax * bw + ay * bz;
+	    out[1] = ay * bw - ax * bz;
+	    out[2] = az * bw + aw * bz;
+	    out[3] = aw * bw - az * bz;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the W component of a quat from the X, Y, and Z components.
+	 * Assumes that quaternion is 1 unit in length.
+	 * Any existing W component will be ignored.
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a quat to calculate W component of
+	 * @returns {quat} out
+	 */
+	quat.calculateW = function (out, a) {
+	    var x = a[0], y = a[1], z = a[2];
+	
+	    out[0] = x;
+	    out[1] = y;
+	    out[2] = z;
+	    out[3] = -Math.sqrt(Math.abs(1.0 - x * x - y * y - z * z));
+	    return out;
+	};
+	
+	/**
+	 * Calculates the dot product of two quat's
+	 *
+	 * @param {quat} a the first operand
+	 * @param {quat} b the second operand
+	 * @returns {Number} dot product of a and b
+	 * @function
+	 */
+	quat.dot = vec4.dot;
+	
+	/**
+	 * Performs a linear interpolation between two quat's
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a the first operand
+	 * @param {quat} b the second operand
+	 * @param {Number} t interpolation amount between the two inputs
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.lerp = vec4.lerp;
+	
+	/**
+	 * Performs a spherical linear interpolation between two quat
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a the first operand
+	 * @param {quat} b the second operand
+	 * @param {Number} t interpolation amount between the two inputs
+	 * @returns {quat} out
+	 */
+	quat.slerp = function (out, a, b, t) {
+	    var ax = a[0], ay = a[1], az = a[2], aw = a[3],
+	        bx = b[0], by = b[1], bz = b[2], bw = b[3];
+	
+	    var cosHalfTheta = ax * bx + ay * by + az * bz + aw * bw,
+	        halfTheta,
+	        sinHalfTheta,
+	        ratioA,
+	        ratioB;
+	
+	    if (Math.abs(cosHalfTheta) >= 1.0) {
+	        if (out !== a) {
+	            out[0] = ax;
+	            out[1] = ay;
+	            out[2] = az;
+	            out[3] = aw;
+	        }
+	        return out;
+	    }
+	
+	    halfTheta = Math.acos(cosHalfTheta);
+	    sinHalfTheta = Math.sqrt(1.0 - cosHalfTheta * cosHalfTheta);
+	
+	    if (Math.abs(sinHalfTheta) < 0.001) {
+	        out[0] = (ax * 0.5 + bx * 0.5);
+	        out[1] = (ay * 0.5 + by * 0.5);
+	        out[2] = (az * 0.5 + bz * 0.5);
+	        out[3] = (aw * 0.5 + bw * 0.5);
+	        return out;
+	    }
+	
+	    ratioA = Math.sin((1 - t) * halfTheta) / sinHalfTheta;
+	    ratioB = Math.sin(t * halfTheta) / sinHalfTheta;
+	
+	    out[0] = (ax * ratioA + bx * ratioB);
+	    out[1] = (ay * ratioA + by * ratioB);
+	    out[2] = (az * ratioA + bz * ratioB);
+	    out[3] = (aw * ratioA + bw * ratioB);
+	
+	    return out;
+	};
+	
+	/**
+	 * Calculates the inverse of a quat
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a quat to calculate inverse of
+	 * @returns {quat} out
+	 */
+	quat.invert = function(out, a) {
+	    var a0 = a[0], a1 = a[1], a2 = a[2], a3 = a[3],
+	        dot = a0*a0 + a1*a1 + a2*a2 + a3*a3,
+	        invDot = dot ? 1.0/dot : 0;
+	    
+	    // TODO: Would be faster to return [0,0,0,0] immediately if dot == 0
+	
+	    out[0] = -a0*invDot;
+	    out[1] = -a1*invDot;
+	    out[2] = -a2*invDot;
+	    out[3] = a3*invDot;
+	    return out;
+	};
+	
+	/**
+	 * Calculates the conjugate of a quat
+	 * If the quaternion is normalized, this function is faster than quat.inverse and produces the same result.
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a quat to calculate conjugate of
+	 * @returns {quat} out
+	 */
+	quat.conjugate = function (out, a) {
+	    out[0] = -a[0];
+	    out[1] = -a[1];
+	    out[2] = -a[2];
+	    out[3] = a[3];
+	    return out;
+	};
+	
+	/**
+	 * Calculates the length of a quat
+	 *
+	 * @param {quat} a vector to calculate length of
+	 * @returns {Number} length of a
+	 * @function
+	 */
+	quat.length = vec4.length;
+	
+	/**
+	 * Alias for {@link quat.length}
+	 * @function
+	 */
+	quat.len = quat.length;
+	
+	/**
+	 * Calculates the squared length of a quat
+	 *
+	 * @param {quat} a vector to calculate squared length of
+	 * @returns {Number} squared length of a
+	 * @function
+	 */
+	quat.squaredLength = vec4.squaredLength;
+	
+	/**
+	 * Alias for {@link quat.squaredLength}
+	 * @function
+	 */
+	quat.sqrLen = quat.squaredLength;
+	
+	/**
+	 * Normalize a quat
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {quat} a quaternion to normalize
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.normalize = vec4.normalize;
+	
+	/**
+	 * Creates a quaternion from the given 3x3 rotation matrix.
+	 *
+	 * @param {quat} out the receiving quaternion
+	 * @param {mat3} m rotation matrix
+	 * @returns {quat} out
+	 * @function
+	 */
+	quat.fromMat3 = (function() {
+	    var s_iNext = [1,2,0];
+	    return function(out, m) {
+	        // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
+	        // article "Quaternion Calculus and Fast Animation".
+	        var fTrace = m[0] + m[4] + m[8];
+	        var fRoot;
+	
+	        if ( fTrace > 0.0 ) {
+	            // |w| > 1/2, may as well choose w > 1/2
+	            fRoot = Math.sqrt(fTrace + 1.0);  // 2w
+	            out[3] = 0.5 * fRoot;
+	            fRoot = 0.5/fRoot;  // 1/(4w)
+	            out[0] = (m[7]-m[5])*fRoot;
+	            out[1] = (m[2]-m[6])*fRoot;
+	            out[2] = (m[3]-m[1])*fRoot;
+	        } else {
+	            // |w| <= 1/2
+	            var i = 0;
+	            if ( m[4] > m[0] )
+	              i = 1;
+	            if ( m[8] > m[i*3+i] )
+	              i = 2;
+	            var j = s_iNext[i];
+	            var k = s_iNext[j];
+	            
+	            fRoot = Math.sqrt(m[i*3+i]-m[j*3+j]-m[k*3+k] + 1.0);
+	            out[i] = 0.5 * fRoot;
+	            fRoot = 0.5 / fRoot;
+	            out[3] = (m[k*3+j] - m[j*3+k]) * fRoot;
+	            out[j] = (m[j*3+i] + m[i*3+j]) * fRoot;
+	            out[k] = (m[k*3+i] + m[i*3+k]) * fRoot;
+	        }
+	        
+	        return out;
+	    };
+	})();
+	
+	/**
+	 * Returns a string representation of a quatenion
+	 *
+	 * @param {quat} vec vector to represent as a string
+	 * @returns {String} string representation of the vector
+	 */
+	quat.str = function (a) {
+	    return 'quat(' + a[0] + ', ' + a[1] + ', ' + a[2] + ', ' + a[3] + ')';
+	};
+	
+	if(typeof(exports) !== 'undefined') {
+	    exports.quat = quat;
+	}
+	;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	  })(shim.exports);
+	})();
+
+
+/***/ },
+/* 10 */
+/*!****************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/index.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./shim */ 12);
+	__webpack_require__(/*! ./modules/core.dict */ 26);
+	__webpack_require__(/*! ./modules/core.iter-helpers */ 13);
+	__webpack_require__(/*! ./modules/core.$for */ 14);
+	__webpack_require__(/*! ./modules/core.delay */ 15);
+	__webpack_require__(/*! ./modules/core.binding */ 16);
+	__webpack_require__(/*! ./modules/core.object */ 17);
+	__webpack_require__(/*! ./modules/core.array.turn */ 18);
+	__webpack_require__(/*! ./modules/core.number.iterator */ 19);
+	__webpack_require__(/*! ./modules/core.number.math */ 20);
+	__webpack_require__(/*! ./modules/core.string.escape-html */ 21);
+	__webpack_require__(/*! ./modules/core.date */ 22);
+	__webpack_require__(/*! ./modules/core.global */ 23);
+	__webpack_require__(/*! ./modules/core.log */ 24);
+	module.exports = __webpack_require__(/*! ./modules/$ */ 25).core;
+
+/***/ },
+/* 11 */
+/*!**********************************!*\
+  !*** ./~/babel-core/polyfill.js ***!
+  \**********************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(/*! ./lib/babel/polyfill */ 27);
+
+
+/***/ },
+/* 12 */
+/*!***************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/shim.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./modules/es5 */ 28);
+	__webpack_require__(/*! ./modules/es6.symbol */ 29);
+	__webpack_require__(/*! ./modules/es6.object.assign */ 30);
+	__webpack_require__(/*! ./modules/es6.object.is */ 31);
+	__webpack_require__(/*! ./modules/es6.object.set-prototype-of */ 32);
+	__webpack_require__(/*! ./modules/es6.object.to-string */ 33);
+	__webpack_require__(/*! ./modules/es6.object.statics-accept-primitives */ 34);
+	__webpack_require__(/*! ./modules/es6.function.name */ 35);
+	__webpack_require__(/*! ./modules/es6.number.constructor */ 36);
+	__webpack_require__(/*! ./modules/es6.number.statics */ 37);
+	__webpack_require__(/*! ./modules/es6.math */ 38);
+	__webpack_require__(/*! ./modules/es6.string.from-code-point */ 39);
+	__webpack_require__(/*! ./modules/es6.string.raw */ 40);
+	__webpack_require__(/*! ./modules/es6.string.iterator */ 41);
+	__webpack_require__(/*! ./modules/es6.string.code-point-at */ 42);
+	__webpack_require__(/*! ./modules/es6.string.ends-with */ 43);
+	__webpack_require__(/*! ./modules/es6.string.includes */ 44);
+	__webpack_require__(/*! ./modules/es6.string.repeat */ 45);
+	__webpack_require__(/*! ./modules/es6.string.starts-with */ 46);
+	__webpack_require__(/*! ./modules/es6.array.from */ 47);
+	__webpack_require__(/*! ./modules/es6.array.of */ 48);
+	__webpack_require__(/*! ./modules/es6.array.iterator */ 49);
+	__webpack_require__(/*! ./modules/es6.array.species */ 50);
+	__webpack_require__(/*! ./modules/es6.array.copy-within */ 51);
+	__webpack_require__(/*! ./modules/es6.array.fill */ 52);
+	__webpack_require__(/*! ./modules/es6.array.find */ 53);
+	__webpack_require__(/*! ./modules/es6.array.find-index */ 54);
+	__webpack_require__(/*! ./modules/es6.regexp */ 55);
+	__webpack_require__(/*! ./modules/es6.promise */ 56);
+	__webpack_require__(/*! ./modules/es6.map */ 57);
+	__webpack_require__(/*! ./modules/es6.set */ 58);
+	__webpack_require__(/*! ./modules/es6.weak-map */ 59);
+	__webpack_require__(/*! ./modules/es6.weak-set */ 60);
+	__webpack_require__(/*! ./modules/es6.reflect */ 61);
+	__webpack_require__(/*! ./modules/es7.array.includes */ 62);
+	__webpack_require__(/*! ./modules/es7.string.at */ 63);
+	__webpack_require__(/*! ./modules/es7.regexp.escape */ 64);
+	__webpack_require__(/*! ./modules/es7.object.get-own-property-descriptors */ 65);
+	__webpack_require__(/*! ./modules/es7.object.to-array */ 66);
+	__webpack_require__(/*! ./modules/js.array.statics */ 67);
+	__webpack_require__(/*! ./modules/web.timers */ 68);
+	__webpack_require__(/*! ./modules/web.immediate */ 69);
+	__webpack_require__(/*! ./modules/web.dom.iterable */ 70);
+	module.exports = __webpack_require__(/*! ./modules/$ */ 25).core;
+
+/***/ },
+/* 13 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.iter-helpers.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(/*! ./$ */ 25).core
+	  , $iter = __webpack_require__(/*! ./$.iter */ 71);
+	core.isIterable  = $iter.is;
+	core.getIterator = $iter.get;
+
+/***/ },
+/* 14 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.$for.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , ctx     = __webpack_require__(/*! ./$.ctx */ 74)
+	  , safe    = __webpack_require__(/*! ./$.uid */ 77).safe
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , $iter   = __webpack_require__(/*! ./$.iter */ 71)
+	  , ENTRIES = safe('entries')
+	  , FN      = safe('fn')
+	  , ITER    = safe('iter')
+	  , forOf          = $iter.forOf
+	  , stepCall       = $iter.stepCall
+	  , getIterator    = $iter.get
+	  , setIterator    = $iter.set
+	  , createIterator = $iter.create;
+	function $for(iterable, entries){
+	  if(!(this instanceof $for))return new $for(iterable, entries);
+	  this[ITER]    = getIterator(iterable);
+	  this[ENTRIES] = !!entries;
+	}
+	
+	createIterator($for, 'Wrapper', function(){
+	  return this[ITER].next();
+	});
+	var $forProto = $for.prototype;
+	setIterator($forProto, function(){
+	  return this[ITER]; // unwrap
+	});
+	
+	function createChainIterator(next){
+	  function Iterator(iter, fn, that){
+	    this[ITER]    = getIterator(iter);
+	    this[ENTRIES] = iter[ENTRIES];
+	    this[FN]      = ctx(fn, that, iter[ENTRIES] ? 2 : 1);
+	  }
+	  createIterator(Iterator, 'Chain', next, $forProto);
+	  setIterator(Iterator.prototype, $.that); // override $forProto iterator
+	  return Iterator;
+	}
+	
+	var MapIter = createChainIterator(function(){
+	  var step = this[ITER].next();
+	  return step.done
+	    ? step
+	    : $iter.step(0, stepCall(this[ITER], this[FN], step.value, this[ENTRIES]));
+	});
+	
+	var FilterIter = createChainIterator(function(){
+	  for(;;){
+	    var step = this[ITER].next();
+	    if(step.done || stepCall(this[ITER], this[FN], step.value, this[ENTRIES]))return step;
+	  }
+	});
+	
+	$.mix($forProto, {
+	  of: function(fn, that){
+	    forOf(this, this[ENTRIES], fn, that);
+	  },
+	  array: function(fn, that){
+	    var result = [];
+	    forOf(fn != undefined ? this.map(fn, that) : this, false, result.push, result);
+	    return result;
+	  },
+	  filter: function(fn, that){
+	    return new FilterIter(this, fn, that);
+	  },
+	  map: function(fn, that){
+	    return new MapIter(this, fn, that);
+	  }
+	});
+	
+	$for.isIterable  = $iter.is;
+	$for.getIterator = getIterator;
+	
+	$def($def.G + $def.F, {$for: $for});
+
+/***/ },
+/* 15 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.delay.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , partial = __webpack_require__(/*! ./$.partial */ 73);
+	// https://esdiscuss.org/topic/promise-returning-delay-function
+	$def($def.G + $def.F, {
+	  delay: function(time){
+	    return new ($.core.Promise || $.g.Promise)(function(resolve){
+	      setTimeout(partial.call(resolve, true), time);
+	    });
+	  }
+	});
+
+/***/ },
+/* 16 */
+/*!*******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.binding.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $      = __webpack_require__(/*! ./$ */ 25)
+	  , ctx    = __webpack_require__(/*! ./$.ctx */ 74)
+	  , $def   = __webpack_require__(/*! ./$.def */ 72)
+	  , invoke = __webpack_require__(/*! ./$.invoke */ 75)
+	  , hide   = $.hide
+	  , assertFunction = __webpack_require__(/*! ./$.assert */ 76).fn
+	  // IE8- dirty hack - redefined toLocaleString is not enumerable
+	  , _ = $.DESC ? __webpack_require__(/*! ./$.uid */ 77)('tie') : 'toLocaleString'
+	  , toLocaleString = {}.toLocaleString;
+	
+	// Placeholder
+	$.core._ = $.path._ = $.path._ || {};
+	
+	$def($def.P + $def.F, 'Function', {
+	  part: __webpack_require__(/*! ./$.partial */ 73),
+	  only: function(numberArguments, that /* = @ */){
+	    var fn     = assertFunction(this)
+	      , n      = $.toLength(numberArguments)
+	      , isThat = arguments.length > 1;
+	    return function(/* ...args */){
+	      var length = Math.min(n, arguments.length)
+	        , args   = Array(length)
+	        , i      = 0;
+	      while(length > i)args[i] = arguments[i++];
+	      return invoke(fn, args, isThat ? that : this);
+	    };
+	  }
+	});
+	
+	function tie(key){
+	  var that  = this
+	    , bound = {};
+	  return hide(that, _, function(key){ // eslint-disable-line no-shadow
+	    if(key === undefined || !(key in that))return toLocaleString.call(that);
+	    return $.has(bound, key) ? bound[key] : bound[key] = ctx(that[key], that, -1);
+	  })[_](key);
+	}
+	
+	hide($.path._, 'toString', function(){
+	  return _;
+	});
+	
+	hide(Object.prototype, _, tie);
+	$.DESC || hide(Array.prototype, _, tie);
+
+/***/ },
+/* 17 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.object.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , ownKeys = __webpack_require__(/*! ./$.own-keys */ 78);
+	function define(target, mixin){
+	  var keys   = ownKeys($.toObject(mixin))
+	    , length = keys.length
+	    , i = 0, key;
+	  while(length > i)$.setDesc(target, key = keys[i++], $.getDesc(mixin, key));
+	  return target;
+	}
+	$def($def.S + $def.F, 'Object', {
+	  isObject: $.isObject,
+	  classof: __webpack_require__(/*! ./$.cof */ 79).classof,
+	  define: define,
+	  make: function(proto, mixin){
+	    return define($.create(proto), mixin);
+	  }
+	});
+
+/***/ },
+/* 18 */
+/*!**********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.array.turn.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $              = __webpack_require__(/*! ./$ */ 25)
+	  , $def           = __webpack_require__(/*! ./$.def */ 72)
+	  , assertFunction = __webpack_require__(/*! ./$.assert */ 76).fn;
+	$def($def.P + $def.F, 'Array', {
+	  turn: function(fn, target /* = [] */){
+	    assertFunction(fn);
+	    var memo   = target == undefined ? [] : Object(target)
+	      , O      = $.ES5Object(this)
+	      , length = $.toLength(O.length)
+	      , index  = 0;
+	    while(length > index)if(fn(memo, O[index], index++, this) === false)break;
+	    return memo;
+	  }
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('turn');
+
+/***/ },
+/* 19 */
+/*!***************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.number.iterator.js ***!
+  \***************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , ITER    = __webpack_require__(/*! ./$.uid */ 77).safe('iter')
+	  , $iter   = __webpack_require__(/*! ./$.iter */ 71)
+	  , step    = $iter.step
+	  , NUMBER  = 'Number';
+	function NumberIterator(iterated){
+	  $.set(this, ITER, {l: $.toLength(iterated), i: 0});
+	}
+	$iter.create(NumberIterator, NUMBER, function(){
+	  var iter = this[ITER]
+	    , i    = iter.i++;
+	  return i < iter.l ? step(0, i) : step(1);
+	});
+	$iter.define(Number, NUMBER, function(){
+	  return new NumberIterator(this);
+	});
+
+/***/ },
+/* 20 */
+/*!***********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.number.math.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , invoke  = __webpack_require__(/*! ./$.invoke */ 75)
+	  , methods = {};
+	
+	methods.random = function(lim /* = 0 */){
+	  var a = +this
+	    , b = lim == undefined ? 0 : +lim
+	    , m = Math.min(a, b);
+	  return Math.random() * (Math.max(a, b) - m) + m;
+	};
+	
+	if($.FW)$.each.call((
+	    // ES3:
+	    'round,floor,ceil,abs,sin,asin,cos,acos,tan,atan,exp,sqrt,max,min,pow,atan2,' +
+	    // ES6:
+	    'acosh,asinh,atanh,cbrt,clz32,cosh,expm1,hypot,imul,log1p,log10,log2,sign,sinh,tanh,trunc'
+	  ).split(','), function(key){
+	    var fn = Math[key];
+	    if(fn)methods[key] = function(/* ...args */){
+	      // ie9- dont support strict mode & convert `this` to object -> convert it to number
+	      var args = [+this]
+	        , i    = 0;
+	      while(arguments.length > i)args.push(arguments[i++]);
+	      return invoke(fn, args);
+	    };
+	  }
+	);
+	
+	$def($def.P + $def.F, 'Number', methods);
+
+/***/ },
+/* 21 */
+/*!******************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.string.escape-html.js ***!
+  \******************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def     = __webpack_require__(/*! ./$.def */ 72)
+	  , replacer = __webpack_require__(/*! ./$.replacer */ 81);
+	var escapeHTMLDict = {
+	  '&': '&amp;',
+	  '<': '&lt;',
+	  '>': '&gt;',
+	  '"': '&quot;',
+	  "'": '&apos;'
+	}, unescapeHTMLDict = {}, key;
+	for(key in escapeHTMLDict)unescapeHTMLDict[escapeHTMLDict[key]] = key;
+	$def($def.P + $def.F, 'String', {
+	  escapeHTML:   replacer(/[&<>"']/g, escapeHTMLDict),
+	  unescapeHTML: replacer(/&(?:amp|lt|gt|quot|apos);/g, unescapeHTMLDict)
+	});
+
+/***/ },
+/* 22 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.date.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $            = __webpack_require__(/*! ./$ */ 25)
+	  , $def         = __webpack_require__(/*! ./$.def */ 72)
+	  , core         = $.core
+	  , formatRegExp = /\b\w\w?\b/g
+	  , flexioRegExp = /:(.*)\|(.*)$/
+	  , locales      = {}
+	  , current      = 'en'
+	  , SECONDS      = 'Seconds'
+	  , MINUTES      = 'Minutes'
+	  , HOURS        = 'Hours'
+	  , DATE         = 'Date'
+	  , MONTH        = 'Month'
+	  , YEAR         = 'FullYear';
+	function lz(num){
+	  return num > 9 ? num : '0' + num;
+	}
+	function createFormat(prefix){
+	  return function(template, locale /* = current */){
+	    var that = this
+	      , dict = locales[$.has(locales, locale) ? locale : current];
+	    function get(unit){
+	      return that[prefix + unit]();
+	    }
+	    return String(template).replace(formatRegExp, function(part){
+	      switch(part){
+	        case 's'  : return get(SECONDS);                  // Seconds : 0-59
+	        case 'ss' : return lz(get(SECONDS));              // Seconds : 00-59
+	        case 'm'  : return get(MINUTES);                  // Minutes : 0-59
+	        case 'mm' : return lz(get(MINUTES));              // Minutes : 00-59
+	        case 'h'  : return get(HOURS);                    // Hours   : 0-23
+	        case 'hh' : return lz(get(HOURS));                // Hours   : 00-23
+	        case 'D'  : return get(DATE);                     // Date    : 1-31
+	        case 'DD' : return lz(get(DATE));                 // Date    : 01-31
+	        case 'W'  : return dict[0][get('Day')];           // Day     : Понедельник
+	        case 'N'  : return get(MONTH) + 1;                // Month   : 1-12
+	        case 'NN' : return lz(get(MONTH) + 1);            // Month   : 01-12
+	        case 'M'  : return dict[2][get(MONTH)];           // Month   : Январь
+	        case 'MM' : return dict[1][get(MONTH)];           // Month   : Января
+	        case 'Y'  : return get(YEAR);                     // Year    : 2014
+	        case 'YY' : return lz(get(YEAR) % 100);           // Year    : 14
+	      } return part;
+	    });
+	  };
+	}
+	function addLocale(lang, locale){
+	  function split(index){
+	    var result = [];
+	    $.each.call(locale.months.split(','), function(it){
+	      result.push(it.replace(flexioRegExp, '$' + index));
+	    });
+	    return result;
+	  }
+	  locales[lang] = [locale.weekdays.split(','), split(1), split(2)];
+	  return core;
+	}
+	$def($def.P + $def.F, DATE, {
+	  format:    createFormat('get'),
+	  formatUTC: createFormat('getUTC')
+	});
+	addLocale(current, {
+	  weekdays: 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+	  months: 'January,February,March,April,May,June,July,August,September,October,November,December'
+	});
+	addLocale('ru', {
+	  weekdays: 'Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота',
+	  months: 'Январ:я|ь,Феврал:я|ь,Март:а|,Апрел:я|ь,Ма:я|й,Июн:я|ь,' +
+	          'Июл:я|ь,Август:а|,Сентябр:я|ь,Октябр:я|ь,Ноябр:я|ь,Декабр:я|ь'
+	});
+	core.locale = function(locale){
+	  return $.has(locales, locale) ? current = locale : current;
+	};
+	core.addLocale = addLocale;
+
+/***/ },
+/* 23 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.global.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.G + $def.F, {global: __webpack_require__(/*! ./$ */ 25).g});
+
+/***/ },
+/* 24 */
+/*!***************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.log.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , $def = __webpack_require__(/*! ./$.def */ 72)
+	  , log  = {}
+	  , enabled = true;
+	// Methods from https://github.com/DeveloperToolsWG/console-object/blob/master/api.md
+	$.each.call(('assert,clear,count,debug,dir,dirxml,error,exception,' +
+	    'group,groupCollapsed,groupEnd,info,isIndependentlyComposed,log,' +
+	    'markTimeline,profile,profileEnd,table,time,timeEnd,timeline,' +
+	    'timelineEnd,timeStamp,trace,warn').split(','), function(key){
+	  log[key] = function(){
+	    if(enabled && $.g.console && $.isFunction(console[key])){
+	      return Function.apply.call(console[key], console, arguments);
+	    }
+	  };
+	});
+	$def($def.G + $def.F, {log: __webpack_require__(/*! ./$.assign */ 82)(log.log, log, {
+	  enable: function(){
+	    enabled = true;
+	  },
+	  disable: function(){
+	    enabled = false;
+	  }
+	})});
+
+/***/ },
+/* 25 */
+/*!********************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var global = typeof self != 'undefined' ? self : Function('return this')()
+	  , core   = {}
+	  , defineProperty = Object.defineProperty
+	  , hasOwnProperty = {}.hasOwnProperty
+	  , ceil  = Math.ceil
+	  , floor = Math.floor
+	  , max   = Math.max
+	  , min   = Math.min;
+	// The engine works fine with descriptors? Thank's IE8 for his funny defineProperty.
+	var DESC = !!function(){
+	  try {
+	    return defineProperty({}, 'a', {get: function(){ return 2; }}).a == 2;
+	  } catch(e){ /* empty */ }
+	}();
+	var hide = createDefiner(1);
+	// 7.1.4 ToInteger
+	function toInteger(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	}
+	function desc(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	}
+	function simpleSet(object, key, value){
+	  object[key] = value;
+	  return object;
+	}
+	function createDefiner(bitmap){
+	  return DESC ? function(object, key, value){
+	    return $.setDesc(object, key, desc(bitmap, value)); // eslint-disable-line no-use-before-define
+	  } : simpleSet;
+	}
+	
+	function isObject(it){
+	  return it !== null && (typeof it == 'object' || typeof it == 'function');
+	}
+	function isFunction(it){
+	  return typeof it == 'function';
+	}
+	function assertDefined(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	}
+	
+	var $ = module.exports = __webpack_require__(/*! ./$.fw */ 84)({
+	  g: global,
+	  core: core,
+	  html: global.document && document.documentElement,
+	  // http://jsperf.com/core-js-isobject
+	  isObject:   isObject,
+	  isFunction: isFunction,
+	  it: function(it){
+	    return it;
+	  },
+	  that: function(){
+	    return this;
+	  },
+	  // 7.1.4 ToInteger
+	  toInteger: toInteger,
+	  // 7.1.15 ToLength
+	  toLength: function(it){
+	    return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	  },
+	  toIndex: function(index, length){
+	    index = toInteger(index);
+	    return index < 0 ? max(index + length, 0) : min(index, length);
+	  },
+	  has: function(it, key){
+	    return hasOwnProperty.call(it, key);
+	  },
+	  create:     Object.create,
+	  getProto:   Object.getPrototypeOf,
+	  DESC:       DESC,
+	  desc:       desc,
+	  getDesc:    Object.getOwnPropertyDescriptor,
+	  setDesc:    defineProperty,
+	  getKeys:    Object.keys,
+	  getNames:   Object.getOwnPropertyNames,
+	  getSymbols: Object.getOwnPropertySymbols,
+	  // Dummy, fix for not array-like ES3 string in es5 module
+	  assertDefined: assertDefined,
+	  ES5Object: Object,
+	  toObject: function(it){
+	    return $.ES5Object(assertDefined(it));
+	  },
+	  hide: hide,
+	  def: createDefiner(0),
+	  set: global.Symbol ? simpleSet : hide,
+	  mix: function(target, src){
+	    for(var key in src)hide(target, key, src[key]);
+	    return target;
+	  },
+	  each: [].forEach
+	});
+	if(typeof __e != 'undefined')__e = core;
+	if(typeof __g != 'undefined')__g = global;
+
+/***/ },
+/* 26 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/core.dict.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(/*! ./$ */ 25)
+	  , ctx      = __webpack_require__(/*! ./$.ctx */ 74)
+	  , $def     = __webpack_require__(/*! ./$.def */ 72)
+	  , assign   = __webpack_require__(/*! ./$.assign */ 82)
+	  , keyOf    = __webpack_require__(/*! ./$.keyof */ 83)
+	  , ITER     = __webpack_require__(/*! ./$.uid */ 77).safe('iter')
+	  , assert   = __webpack_require__(/*! ./$.assert */ 76)
+	  , $iter    = __webpack_require__(/*! ./$.iter */ 71)
+	  , step     = $iter.step
+	  , getKeys  = $.getKeys
+	  , toObject = $.toObject
+	  , has      = $.has;
+	
+	function Dict(iterable){
+	  var dict = $.create(null);
+	  if(iterable != undefined){
+	    if($iter.is(iterable)){
+	      $iter.forOf(iterable, true, function(key, value){
+	        dict[key] = value;
+	      });
+	    } else assign(dict, iterable);
+	  }
+	  return dict;
+	}
+	Dict.prototype = null;
+	
+	function DictIterator(iterated, kind){
+	  $.set(this, ITER, {o: toObject(iterated), a: getKeys(iterated), i: 0, k: kind});
+	}
+	$iter.create(DictIterator, 'Dict', function(){
+	  var iter = this[ITER]
+	    , O    = iter.o
+	    , keys = iter.a
+	    , kind = iter.k
+	    , key;
+	  do {
+	    if(iter.i >= keys.length){
+	      iter.o = undefined;
+	      return step(1);
+	    }
+	  } while(!has(O, key = keys[iter.i++]));
+	  if(kind == 'key'  )return step(0, key);
+	  if(kind == 'value')return step(0, O[key]);
+	  return step(0, [key, O[key]]);
+	});
+	function createDictIter(kind){
+	  return function(it){
+	    return new DictIterator(it, kind);
+	  };
+	}
+	function generic(A, B){
+	  // strange IE quirks mode bug -> use typeof instead of isFunction
+	  return typeof A == 'function' ? A : B;
+	}
+	
+	// 0 -> Dict.forEach
+	// 1 -> Dict.map
+	// 2 -> Dict.filter
+	// 3 -> Dict.some
+	// 4 -> Dict.every
+	// 5 -> Dict.find
+	// 6 -> Dict.findKey
+	// 7 -> Dict.mapPairs
+	function createDictMethod(TYPE){
+	  var IS_MAP   = TYPE == 1
+	    , IS_EVERY = TYPE == 4;
+	  return function(object, callbackfn, that /* = undefined */){
+	    var f      = ctx(callbackfn, that, 3)
+	      , O      = toObject(object)
+	      , result = IS_MAP || TYPE == 7 || TYPE == 2 ? new (generic(this, Dict)) : undefined
+	      , key, val, res;
+	    for(key in O)if(has(O, key)){
+	      val = O[key];
+	      res = f(val, key, object);
+	      if(TYPE){
+	        if(IS_MAP)result[key] = res;            // map
+	        else if(res)switch(TYPE){
+	          case 2: result[key] = val; break;     // filter
+	          case 3: return true;                  // some
+	          case 5: return val;                   // find
+	          case 6: return key;                   // findKey
+	          case 7: result[res[0]] = res[1];      // mapPairs
+	        } else if(IS_EVERY)return false;        // every
+	      }
+	    }
+	    return TYPE == 3 || IS_EVERY ? IS_EVERY : result;
+	  };
+	}
+	
+	// true  -> Dict.turn
+	// false -> Dict.reduce
+	function createDictReduce(IS_TURN){
+	  return function(object, mapfn, init){
+	    assert.fn(mapfn);
+	    var O      = toObject(object)
+	      , keys   = getKeys(O)
+	      , length = keys.length
+	      , i      = 0
+	      , memo, key, result;
+	    if(IS_TURN){
+	      memo = init == undefined ? new (generic(this, Dict)) : Object(init);
+	    } else if(arguments.length < 3){
+	      assert(length, 'Reduce of empty object with no initial value');
+	      memo = O[keys[i++]];
+	    } else memo = Object(init);
+	    while(length > i)if(has(O, key = keys[i++])){
+	      result = mapfn(memo, O[key], key, object);
+	      if(IS_TURN){
+	        if(result === false)break;
+	      } else memo = result;
+	    }
+	    return memo;
+	  };
+	}
+	var findKey = createDictMethod(6);
+	
+	$def($def.G + $def.F, {Dict: $.mix(Dict, {
+	  keys:     createDictIter('key'),
+	  values:   createDictIter('value'),
+	  entries:  createDictIter('key+value'),
+	  forEach:  createDictMethod(0),
+	  map:      createDictMethod(1),
+	  filter:   createDictMethod(2),
+	  some:     createDictMethod(3),
+	  every:    createDictMethod(4),
+	  find:     createDictMethod(5),
+	  findKey:  findKey,
+	  mapPairs: createDictMethod(7),
+	  reduce:   createDictReduce(false),
+	  turn:     createDictReduce(true),
+	  keyOf:    keyOf,
+	  includes: function(object, el){
+	    return (el == el ? keyOf(object, el) : findKey(object, function(it){
+	      return it != it;
+	    })) !== undefined;
+	  },
+	  // Has / get / set own property
+	  has: has,
+	  get: function(object, key){
+	    if(has(object, key))return object[key];
+	  },
+	  set: $.def,
+	  isDict: function(it){
+	    return $.isObject(it) && $.getProto(it) === Dict.prototype;
+	  }
+	})});
+
+/***/ },
+/* 27 */
+/*!********************************************!*\
+  !*** ./~/babel-core/lib/babel/polyfill.js ***!
+  \********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+	
+	if (global._babelPolyfill) {
+	  throw new Error("only one instance of babel/polyfill is allowed");
+	}
+	global._babelPolyfill = true;
+	
+	__webpack_require__(/*! core-js/shim */ 96);
+	
+	__webpack_require__(/*! regenerator-babel/runtime */ 95);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 28 */
+/*!**********************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es5.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $                = __webpack_require__(/*! ./$ */ 25)
+	  , cof              = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def             = __webpack_require__(/*! ./$.def */ 72)
+	  , invoke           = __webpack_require__(/*! ./$.invoke */ 75)
+	  , arrayMethod      = __webpack_require__(/*! ./$.array-methods */ 86)
+	  , IE_PROTO         = __webpack_require__(/*! ./$.uid */ 77).safe('__proto__')
+	  , assert           = __webpack_require__(/*! ./$.assert */ 76)
+	  , assertObject     = assert.obj
+	  , ObjectProto      = Object.prototype
+	  , A                = []
+	  , slice            = A.slice
+	  , indexOf          = A.indexOf
+	  , classof          = cof.classof
+	  , defineProperties = Object.defineProperties
+	  , has              = $.has
+	  , defineProperty   = $.setDesc
+	  , getOwnDescriptor = $.getDesc
+	  , isFunction       = $.isFunction
+	  , toObject         = $.toObject
+	  , toLength         = $.toLength
+	  , IE8_DOM_DEFINE   = false;
+	
+	if(!$.DESC){
+	  try {
+	    IE8_DOM_DEFINE = defineProperty(document.createElement('div'), 'x',
+	      {get: function(){ return 8; }}
+	    ).x == 8;
+	  } catch(e){ /* empty */ }
+	  $.setDesc = function(O, P, Attributes){
+	    if(IE8_DOM_DEFINE)try {
+	      return defineProperty(O, P, Attributes);
+	    } catch(e){ /* empty */ }
+	    if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	    if('value' in Attributes)assertObject(O)[P] = Attributes.value;
+	    return O;
+	  };
+	  $.getDesc = function(O, P){
+	    if(IE8_DOM_DEFINE)try {
+	      return getOwnDescriptor(O, P);
+	    } catch(e){ /* empty */ }
+	    if(has(O, P))return $.desc(!ObjectProto.propertyIsEnumerable.call(O, P), O[P]);
+	  };
+	  defineProperties = function(O, Properties){
+	    assertObject(O);
+	    var keys   = $.getKeys(Properties)
+	      , length = keys.length
+	      , i = 0
+	      , P;
+	    while(length > i)$.setDesc(O, P = keys[i++], Properties[P]);
+	    return O;
+	  };
+	}
+	$def($def.S + $def.F * !$.DESC, 'Object', {
+	  // 19.1.2.6 / 15.2.3.3 Object.getOwnPropertyDescriptor(O, P)
+	  getOwnPropertyDescriptor: $.getDesc,
+	  // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	  defineProperty: $.setDesc,
+	  // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
+	  defineProperties: defineProperties
+	});
+	
+	  // IE 8- don't enum bug keys
+	var keys1 = ('constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,' +
+	            'toLocaleString,toString,valueOf').split(',')
+	  // Additional keys for getOwnPropertyNames
+	  , keys2 = keys1.concat('length', 'prototype')
+	  , keysLen1 = keys1.length;
+	
+	// Create object with `null` prototype: use iframe Object with cleared prototype
+	var createDict = function(){
+	  // Thrash, waste and sodomy: IE GC bug
+	  var iframe = document.createElement('iframe')
+	    , i      = keysLen1
+	    , iframeDocument;
+	  iframe.style.display = 'none';
+	  $.html.appendChild(iframe);
+	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+	  // createDict = iframe.contentWindow.Object;
+	  // html.removeChild(iframe);
+	  iframeDocument = iframe.contentWindow.document;
+	  iframeDocument.open();
+	  iframeDocument.write('<script>document.F=Object</script>');
+	  iframeDocument.close();
+	  createDict = iframeDocument.F;
+	  while(i--)delete createDict.prototype[keys1[i]];
+	  return createDict();
+	};
+	function createGetKeys(names, length){
+	  return function(object){
+	    var O      = toObject(object)
+	      , i      = 0
+	      , result = []
+	      , key;
+	    for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	    // Don't enum bug & hidden keys
+	    while(length > i)if(has(O, key = names[i++])){
+	      ~indexOf.call(result, key) || result.push(key);
+	    }
+	    return result;
+	  };
+	}
+	function isPrimitive(it){ return !$.isObject(it); }
+	function Empty(){}
+	$def($def.S, 'Object', {
+	  // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	  getPrototypeOf: $.getProto = $.getProto || function(O){
+	    O = Object(assert.def(O));
+	    if(has(O, IE_PROTO))return O[IE_PROTO];
+	    if(isFunction(O.constructor) && O instanceof O.constructor){
+	      return O.constructor.prototype;
+	    } return O instanceof Object ? ObjectProto : null;
+	  },
+	  // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+	  getOwnPropertyNames: $.getNames = $.getNames || createGetKeys(keys2, keys2.length, true),
+	  // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	  create: $.create = $.create || function(O, /*?*/Properties){
+	    var result;
+	    if(O !== null){
+	      Empty.prototype = assertObject(O);
+	      result = new Empty();
+	      Empty.prototype = null;
+	      // add "__proto__" for Object.getPrototypeOf shim
+	      result[IE_PROTO] = O;
+	    } else result = createDict();
+	    return Properties === undefined ? result : defineProperties(result, Properties);
+	  },
+	  // 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	  keys: $.getKeys = $.getKeys || createGetKeys(keys1, keysLen1, false),
+	  // 19.1.2.17 / 15.2.3.8 Object.seal(O)
+	  seal: $.it, // <- cap
+	  // 19.1.2.5 / 15.2.3.9 Object.freeze(O)
+	  freeze: $.it, // <- cap
+	  // 19.1.2.15 / 15.2.3.10 Object.preventExtensions(O)
+	  preventExtensions: $.it, // <- cap
+	  // 19.1.2.13 / 15.2.3.11 Object.isSealed(O)
+	  isSealed: isPrimitive, // <- cap
+	  // 19.1.2.12 / 15.2.3.12 Object.isFrozen(O)
+	  isFrozen: isPrimitive, // <- cap
+	  // 19.1.2.11 / 15.2.3.13 Object.isExtensible(O)
+	  isExtensible: $.isObject // <- cap
+	});
+	
+	// 19.2.3.2 / 15.3.4.5 Function.prototype.bind(thisArg, args...)
+	$def($def.P, 'Function', {
+	  bind: function(that /*, args... */){
+	    var fn       = assert.fn(this)
+	      , partArgs = slice.call(arguments, 1);
+	    function bound(/* args... */){
+	      var args = partArgs.concat(slice.call(arguments));
+	      return invoke(fn, args, this instanceof bound ? $.create(fn.prototype) : that);
+	    }
+	    if(fn.prototype)bound.prototype = fn.prototype;
+	    return bound;
+	  }
+	});
+	
+	// Fix for not array-like ES3 string
+	function arrayMethodFix(fn){
+	  return function(){
+	    return fn.apply($.ES5Object(this), arguments);
+	  };
+	}
+	if(!(0 in Object('z') && 'z'[0] == 'z')){
+	  $.ES5Object = function(it){
+	    return cof(it) == 'String' ? it.split('') : Object(it);
+	  };
+	}
+	$def($def.P + $def.F * ($.ES5Object != Object), 'Array', {
+	  slice: arrayMethodFix(slice),
+	  join: arrayMethodFix(A.join)
+	});
+	
+	// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
+	$def($def.S, 'Array', {
+	  isArray: function(arg){
+	    return cof(arg) == 'Array';
+	  }
+	});
+	function createArrayReduce(isRight){
+	  return function(callbackfn, memo){
+	    assert.fn(callbackfn);
+	    var O      = toObject(this)
+	      , length = toLength(O.length)
+	      , index  = isRight ? length - 1 : 0
+	      , i      = isRight ? -1 : 1;
+	    if(arguments.length < 2)for(;;){
+	      if(index in O){
+	        memo = O[index];
+	        index += i;
+	        break;
+	      }
+	      index += i;
+	      assert(isRight ? index >= 0 : length > index, 'Reduce of empty array with no initial value');
+	    }
+	    for(;isRight ? index >= 0 : length > index; index += i)if(index in O){
+	      memo = callbackfn(memo, O[index], index, this);
+	    }
+	    return memo;
+	  };
+	}
+	$def($def.P, 'Array', {
+	  // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
+	  forEach: $.each = $.each || arrayMethod(0),
+	  // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
+	  map: arrayMethod(1),
+	  // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
+	  filter: arrayMethod(2),
+	  // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
+	  some: arrayMethod(3),
+	  // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
+	  every: arrayMethod(4),
+	  // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
+	  reduce: createArrayReduce(false),
+	  // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
+	  reduceRight: createArrayReduce(true),
+	  // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
+	  indexOf: indexOf = indexOf || __webpack_require__(/*! ./$.array-includes */ 87)(false),
+	  // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
+	  lastIndexOf: function(el, fromIndex /* = @[*-1] */){
+	    var O      = toObject(this)
+	      , length = toLength(O.length)
+	      , index  = length - 1;
+	    if(arguments.length > 1)index = Math.min(index, $.toInteger(fromIndex));
+	    if(index < 0)index = toLength(length + index);
+	    for(;index >= 0; index--)if(index in O)if(O[index] === el)return index;
+	    return -1;
+	  }
+	});
+	
+	// 21.1.3.25 / 15.5.4.20 String.prototype.trim()
+	$def($def.P, 'String', {trim: __webpack_require__(/*! ./$.replacer */ 81)(/^\s*([\s\S]*\S)?\s*$/, '$1')});
+	
+	// 20.3.3.1 / 15.9.4.4 Date.now()
+	$def($def.S, 'Date', {now: function(){
+	  return +new Date;
+	}});
+	
+	function lz(num){
+	  return num > 9 ? num : '0' + num;
+	}
+	// 20.3.4.36 / 15.9.5.43 Date.prototype.toISOString()
+	$def($def.P, 'Date', {toISOString: function(){
+	  if(!isFinite(this))throw RangeError('Invalid time value');
+	  var d = this
+	    , y = d.getUTCFullYear()
+	    , m = d.getUTCMilliseconds()
+	    , s = y < 0 ? '-' : y > 9999 ? '+' : '';
+	  return s + ('00000' + Math.abs(y)).slice(s ? -6 : -4) +
+	    '-' + lz(d.getUTCMonth() + 1) + '-' + lz(d.getUTCDate()) +
+	    'T' + lz(d.getUTCHours()) + ':' + lz(d.getUTCMinutes()) +
+	    ':' + lz(d.getUTCSeconds()) + '.' + (m > 99 ? m : '0' + lz(m)) + 'Z';
+	}});
+	
+	if(classof(function(){ return arguments; }()) == 'Object')cof.classof = function(it){
+	  var tag = classof(it);
+	  return tag == 'Object' && isFunction(it.callee) ? 'Arguments' : tag;
+	};
+
+/***/ },
+/* 29 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.symbol.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// ECMAScript 6 symbols shim
+	var $        = __webpack_require__(/*! ./$ */ 25)
+	  , setTag   = __webpack_require__(/*! ./$.cof */ 79).set
+	  , uid      = __webpack_require__(/*! ./$.uid */ 77)
+	  , $def     = __webpack_require__(/*! ./$.def */ 72)
+	  , keyOf    = __webpack_require__(/*! ./$.keyof */ 83)
+	  , has      = $.has
+	  , hide     = $.hide
+	  , getNames = $.getNames
+	  , toObject = $.toObject
+	  , Symbol   = $.g.Symbol
+	  , Base     = Symbol
+	  , setter   = false
+	  , TAG      = uid.safe('tag')
+	  , SymbolRegistry = {}
+	  , AllSymbols     = {};
+	
+	function wrap(tag){
+	  var sym = AllSymbols[tag] = $.set($.create(Symbol.prototype), TAG, tag);
+	  $.DESC && setter && $.setDesc(Object.prototype, tag, {
+	    configurable: true,
+	    set: function(value){
+	      hide(this, tag, value);
+	    }
+	  });
+	  return sym;
+	}
+	
+	// 19.4.1.1 Symbol([description])
+	if(!$.isFunction(Symbol)){
+	  Symbol = function(description){
+	    if(this instanceof Symbol)throw TypeError('Symbol is not a constructor');
+	    return wrap(uid(description));
+	  };
+	  hide(Symbol.prototype, 'toString', function(){
+	    return this[TAG];
+	  });
+	}
+	$def($def.G + $def.W, {Symbol: Symbol});
+	
+	var symbolStatics = {
+	  // 19.4.2.1 Symbol.for(key)
+	  'for': function(key){
+	    return has(SymbolRegistry, key += '')
+	      ? SymbolRegistry[key]
+	      : SymbolRegistry[key] = Symbol(key);
+	  },
+	  // 19.4.2.5 Symbol.keyFor(sym)
+	  keyFor: function(key){
+	    return keyOf(SymbolRegistry, key);
+	  },
+	  pure: uid.safe,
+	  set: $.set,
+	  useSetter: function(){ setter = true; },
+	  useSimple: function(){ setter = false; }
+	};
+	// 19.4.2.2 Symbol.hasInstance
+	// 19.4.2.3 Symbol.isConcatSpreadable
+	// 19.4.2.4 Symbol.iterator
+	// 19.4.2.6 Symbol.match
+	// 19.4.2.8 Symbol.replace
+	// 19.4.2.9 Symbol.search
+	// 19.4.2.10 Symbol.species
+	// 19.4.2.11 Symbol.split
+	// 19.4.2.12 Symbol.toPrimitive
+	// 19.4.2.13 Symbol.toStringTag
+	// 19.4.2.14 Symbol.unscopables
+	$.each.call((
+	    'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
+	    'species,split,toPrimitive,toStringTag,unscopables'
+	  ).split(','), function(it){
+	    var sym = __webpack_require__(/*! ./$.wks */ 85)(it);
+	    symbolStatics[it] = Symbol === Base ? sym : wrap(sym);
+	  }
+	);
+	
+	setter = true;
+	
+	$def($def.S, 'Symbol', symbolStatics);
+	
+	$def($def.S + $def.F * (Symbol != Base), 'Object', {
+	  // 19.1.2.7 Object.getOwnPropertyNames(O)
+	  getOwnPropertyNames: function(it){
+	    var names = getNames(toObject(it)), result = [], key, i = 0;
+	    while(names.length > i)has(AllSymbols, key = names[i++]) || result.push(key);
+	    return result;
+	  },
+	  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+	  getOwnPropertySymbols: function(it){
+	    var names = getNames(toObject(it)), result = [], key, i = 0;
+	    while(names.length > i)has(AllSymbols, key = names[i++]) && result.push(AllSymbols[key]);
+	    return result;
+	  }
+	});
+	
+	setTag(Symbol, 'Symbol');
+	// 20.2.1.9 Math[@@toStringTag]
+	setTag(Math, 'Math', true);
+	// 24.3.3 JSON[@@toStringTag]
+	setTag($.g.JSON, 'JSON', true);
+
+/***/ },
+/* 30 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.object.assign.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.S, 'Object', {assign: __webpack_require__(/*! ./$.assign */ 82)});
+
+/***/ },
+/* 31 */
+/*!********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.object.is.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.10 Object.is(value1, value2)
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.S, 'Object', {
+	  is: function(x, y){
+	    return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+	  }
+	});
+
+/***/ },
+/* 32 */
+/*!**********************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.object.set-prototype-of.js ***!
+  \**********************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.S, 'Object', {setPrototypeOf: __webpack_require__(/*! ./$.set-proto */ 88)});
+
+/***/ },
+/* 33 */
+/*!***************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.object.to-string.js ***!
+  \***************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.3.6 Object.prototype.toString()
+	var $   = __webpack_require__(/*! ./$ */ 25)
+	  , cof = __webpack_require__(/*! ./$.cof */ 79)
+	  , tmp = {};
+	tmp[__webpack_require__(/*! ./$.wks */ 85)('toStringTag')] = 'z';
+	if($.FW && cof(tmp) != 'z')$.hide(Object.prototype, 'toString', function(){
+	  return '[object ' + cof.classof(this) + ']';
+	});
+
+/***/ },
+/* 34 */
+/*!*******************************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.object.statics-accept-primitives.js ***!
+  \*******************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(/*! ./$ */ 25)
+	  , $def     = __webpack_require__(/*! ./$.def */ 72)
+	  , isObject = $.isObject
+	  , toObject = $.toObject;
+	function wrapObjectMethod(METHOD, MODE){
+	  var fn  = ($.core.Object || {})[METHOD] || Object[METHOD]
+	    , f   = 0
+	    , o   = {};
+	  o[METHOD] = MODE == 1 ? function(it){
+	    return isObject(it) ? fn(it) : it;
+	  } : MODE == 2 ? function(it){
+	    return isObject(it) ? fn(it) : true;
+	  } : MODE == 3 ? function(it){
+	    return isObject(it) ? fn(it) : false;
+	  } : MODE == 4 ? function(it, key){
+	    return fn(toObject(it), key);
+	  } : MODE == 5 ? function(it){
+	    return fn(Object($.assertDefined(it)));
+	  } : function(it){
+	    return fn(toObject(it));
+	  };
+	  try {
+	    fn('z');
+	  } catch(e){
+	    f = 1;
+	  }
+	  $def($def.S + $def.F * f, 'Object', o);
+	}
+	wrapObjectMethod('freeze', 1);
+	wrapObjectMethod('seal', 1);
+	wrapObjectMethod('preventExtensions', 1);
+	wrapObjectMethod('isFrozen', 2);
+	wrapObjectMethod('isSealed', 2);
+	wrapObjectMethod('isExtensible', 3);
+	wrapObjectMethod('getOwnPropertyDescriptor', 4);
+	wrapObjectMethod('getPrototypeOf', 5);
+	wrapObjectMethod('keys');
+	wrapObjectMethod('getOwnPropertyNames');
+
+/***/ },
+/* 35 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.function.name.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , NAME = 'name'
+	  , setDesc = $.setDesc
+	  , FunctionProto = Function.prototype;
+	// 19.2.4.2 name
+	NAME in FunctionProto || $.FW && $.DESC && setDesc(FunctionProto, NAME, {
+	  configurable: true,
+	  get: function(){
+	    var match = String(this).match(/^\s*function ([^ (]*)/)
+	      , name  = match ? match[1] : '';
+	    $.has(this, NAME) || setDesc(this, NAME, $.desc(5, name));
+	    return name;
+	  },
+	  set: function(value){
+	    $.has(this, NAME) || setDesc(this, NAME, $.desc(0, value));
+	  }
+	});
+
+/***/ },
+/* 36 */
+/*!*****************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.number.constructor.js ***!
+  \*****************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $          = __webpack_require__(/*! ./$ */ 25)
+	  , isObject   = $.isObject
+	  , isFunction = $.isFunction
+	  , NUMBER     = 'Number'
+	  , Number     = $.g[NUMBER]
+	  , Base       = Number
+	  , proto      = Number.prototype;
+	function toPrimitive(it){
+	  var fn, val;
+	  if(isFunction(fn = it.valueOf) && !isObject(val = fn.call(it)))return val;
+	  if(isFunction(fn = it.toString) && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to number");
+	}
+	function toNumber(it){
+	  if(isObject(it))it = toPrimitive(it);
+	  if(typeof it == 'string' && it.length > 2 && it.charCodeAt(0) == 48){
+	    var binary = false;
+	    switch(it.charCodeAt(1)){
+	      case 66 : case 98  : binary = true;
+	      case 79 : case 111 : return parseInt(it.slice(2), binary ? 2 : 8);
+	    }
+	  } return +it;
+	}
+	if($.FW && !(Number('0o1') && Number('0b1'))){
+	  Number = function Number(it){
+	    return this instanceof Number ? new Base(toNumber(it)) : toNumber(it);
+	  };
+	  $.each.call($.DESC ? $.getNames(Base) : (
+	      // ES3:
+	      'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
+	      // ES6 (in case, if modules with ES6 Number statics required before):
+	      'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
+	      'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger'
+	    ).split(','), function(key){
+	      if($.has(Base, key) && !$.has(Number, key)){
+	        $.setDesc(Number, key, $.getDesc(Base, key));
+	      }
+	    }
+	  );
+	  Number.prototype = proto;
+	  proto.constructor = Number;
+	  $.hide($.g, NUMBER, Number);
+	}
+
+/***/ },
+/* 37 */
+/*!*************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.number.statics.js ***!
+  \*************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $     = __webpack_require__(/*! ./$ */ 25)
+	  , $def  = __webpack_require__(/*! ./$.def */ 72)
+	  , abs   = Math.abs
+	  , floor = Math.floor
+	  , MAX_SAFE_INTEGER = 0x1fffffffffffff; // pow(2, 53) - 1 == 9007199254740991;
+	function isInteger(it){
+	  return !$.isObject(it) && isFinite(it) && floor(it) === it;
+	}
+	$def($def.S, 'Number', {
+	  // 20.1.2.1 Number.EPSILON
+	  EPSILON: Math.pow(2, -52),
+	  // 20.1.2.2 Number.isFinite(number)
+	  isFinite: function(it){
+	    return typeof it == 'number' && isFinite(it);
+	  },
+	  // 20.1.2.3 Number.isInteger(number)
+	  isInteger: isInteger,
+	  // 20.1.2.4 Number.isNaN(number)
+	  isNaN: function(number){
+	    return number != number;
+	  },
+	  // 20.1.2.5 Number.isSafeInteger(number)
+	  isSafeInteger: function(number){
+	    return isInteger(number) && abs(number) <= MAX_SAFE_INTEGER;
+	  },
+	  // 20.1.2.6 Number.MAX_SAFE_INTEGER
+	  MAX_SAFE_INTEGER: MAX_SAFE_INTEGER,
+	  // 20.1.2.10 Number.MIN_SAFE_INTEGER
+	  MIN_SAFE_INTEGER: -MAX_SAFE_INTEGER,
+	  // 20.1.2.12 Number.parseFloat(string)
+	  parseFloat: parseFloat,
+	  // 20.1.2.13 Number.parseInt(string, radix)
+	  parseInt: parseInt
+	});
+
+/***/ },
+/* 38 */
+/*!***************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.math.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var Infinity = 1 / 0
+	  , $def  = __webpack_require__(/*! ./$.def */ 72)
+	  , E     = Math.E
+	  , pow   = Math.pow
+	  , abs   = Math.abs
+	  , exp   = Math.exp
+	  , log   = Math.log
+	  , sqrt  = Math.sqrt
+	  , ceil  = Math.ceil
+	  , floor = Math.floor
+	  , sign  = Math.sign || function(x){
+	      return (x = +x) == 0 || x != x ? x : x < 0 ? -1 : 1;
+	    };
+	
+	// 20.2.2.5 Math.asinh(x)
+	function asinh(x){
+	  return !isFinite(x = +x) || x == 0 ? x : x < 0 ? -asinh(-x) : log(x + sqrt(x * x + 1));
+	}
+	// 20.2.2.14 Math.expm1(x)
+	function expm1(x){
+	  return (x = +x) == 0 ? x : x > -1e-6 && x < 1e-6 ? x + x * x / 2 : exp(x) - 1;
+	}
+	
+	$def($def.S, 'Math', {
+	  // 20.2.2.3 Math.acosh(x)
+	  acosh: function(x){
+	    return (x = +x) < 1 ? NaN : isFinite(x) ? log(x / E + sqrt(x + 1) * sqrt(x - 1) / E) + 1 : x;
+	  },
+	  // 20.2.2.5 Math.asinh(x)
+	  asinh: asinh,
+	  // 20.2.2.7 Math.atanh(x)
+	  atanh: function(x){
+	    return (x = +x) == 0 ? x : log((1 + x) / (1 - x)) / 2;
+	  },
+	  // 20.2.2.9 Math.cbrt(x)
+	  cbrt: function(x){
+	    return sign(x = +x) * pow(abs(x), 1 / 3);
+	  },
+	  // 20.2.2.11 Math.clz32(x)
+	  clz32: function(x){
+	    return (x >>>= 0) ? 32 - x.toString(2).length : 32;
+	  },
+	  // 20.2.2.12 Math.cosh(x)
+	  cosh: function(x){
+	    return (exp(x = +x) + exp(-x)) / 2;
+	  },
+	  // 20.2.2.14 Math.expm1(x)
+	  expm1: expm1,
+	  // 20.2.2.16 Math.fround(x)
+	  // TODO: fallback for IE9-
+	  fround: function(x){
+	    return new Float32Array([x])[0];
+	  },
+	  // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
+	  hypot: function(value1, value2){ // eslint-disable-line no-unused-vars
+	    var sum  = 0
+	      , len1 = arguments.length
+	      , len2 = len1
+	      , args = Array(len1)
+	      , larg = -Infinity
+	      , arg;
+	    while(len1--){
+	      arg = args[len1] = +arguments[len1];
+	      if(arg == Infinity || arg == -Infinity)return Infinity;
+	      if(arg > larg)larg = arg;
+	    }
+	    larg = arg || 1;
+	    while(len2--)sum += pow(args[len2] / larg, 2);
+	    return larg * sqrt(sum);
+	  },
+	  // 20.2.2.18 Math.imul(x, y)
+	  imul: function(x, y){
+	    var UInt16 = 0xffff
+	      , xn = +x
+	      , yn = +y
+	      , xl = UInt16 & xn
+	      , yl = UInt16 & yn;
+	    return 0 | xl * yl + ((UInt16 & xn >>> 16) * yl + xl * (UInt16 & yn >>> 16) << 16 >>> 0);
+	  },
+	  // 20.2.2.20 Math.log1p(x)
+	  log1p: function(x){
+	    return (x = +x) > -1e-8 && x < 1e-8 ? x - x * x / 2 : log(1 + x);
+	  },
+	  // 20.2.2.21 Math.log10(x)
+	  log10: function(x){
+	    return log(x) / Math.LN10;
+	  },
+	  // 20.2.2.22 Math.log2(x)
+	  log2: function(x){
+	    return log(x) / Math.LN2;
+	  },
+	  // 20.2.2.28 Math.sign(x)
+	  sign: sign,
+	  // 20.2.2.30 Math.sinh(x)
+	  sinh: function(x){
+	    return abs(x = +x) < 1 ? (expm1(x) - expm1(-x)) / 2 : (exp(x - 1) - exp(-x - 1)) * (E / 2);
+	  },
+	  // 20.2.2.33 Math.tanh(x)
+	  tanh: function(x){
+	    var a = expm1(x = +x)
+	      , b = expm1(-x);
+	    return a == Infinity ? 1 : b == Infinity ? -1 : (a - b) / (exp(x) + exp(-x));
+	  },
+	  // 20.2.2.34 Math.trunc(x)
+	  trunc: function(it){
+	    return (it > 0 ? floor : ceil)(it);
+	  }
+	});
+
+/***/ },
+/* 39 */
+/*!*********************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.from-code-point.js ***!
+  \*********************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , toIndex = __webpack_require__(/*! ./$ */ 25).toIndex
+	  , fromCharCode = String.fromCharCode;
+	
+	$def($def.S, 'String', {
+	  // 21.1.2.2 String.fromCodePoint(...codePoints)
+	  fromCodePoint: function(x){ // eslint-disable-line no-unused-vars
+	    var res = []
+	      , len = arguments.length
+	      , i   = 0
+	      , code;
+	    while(len > i){
+	      code = +arguments[i++];
+	      if(toIndex(code, 0x10ffff) !== code)throw RangeError(code + ' is not a valid code point');
+	      res.push(code < 0x10000
+	        ? fromCharCode(code)
+	        : fromCharCode(((code -= 0x10000) >> 10) + 0xd800, code % 0x400 + 0xdc00)
+	      );
+	    } return res.join('');
+	  }
+	});
+
+/***/ },
+/* 40 */
+/*!*********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.raw.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , $def = __webpack_require__(/*! ./$.def */ 72);
+	
+	$def($def.S, 'String', {
+	  // 21.1.2.4 String.raw(callSite, ...substitutions)
+	  raw: function(callSite){
+	    var raw = $.toObject(callSite.raw)
+	      , len = $.toLength(raw.length)
+	      , sln = arguments.length
+	      , res = []
+	      , i   = 0;
+	    while(len > i){
+	      res.push(String(raw[i++]));
+	      if(i < sln)res.push(String(arguments[i]));
+	    } return res.join('');
+	  }
+	});
+
+/***/ },
+/* 41 */
+/*!**************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.iterator.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var set   = __webpack_require__(/*! ./$ */ 25).set
+	  , at    = __webpack_require__(/*! ./$.string-at */ 89)(true)
+	  , ITER  = __webpack_require__(/*! ./$.uid */ 77).safe('iter')
+	  , $iter = __webpack_require__(/*! ./$.iter */ 71)
+	  , step  = $iter.step;
+	
+	// 21.1.3.27 String.prototype[@@iterator]()
+	$iter.std(String, 'String', function(iterated){
+	  set(this, ITER, {o: String(iterated), i: 0});
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var iter  = this[ITER]
+	    , O     = iter.o
+	    , index = iter.i
+	    , point;
+	  if(index >= O.length)return step(1);
+	  point = at.call(O, index);
+	  iter.i += point.length;
+	  return step(0, point);
+	});
+
+/***/ },
+/* 42 */
+/*!*******************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.code-point-at.js ***!
+  \*******************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.P, 'String', {
+	  // 21.1.3.3 String.prototype.codePointAt(pos)
+	  codePointAt: __webpack_require__(/*! ./$.string-at */ 89)(false)
+	});
+
+/***/ },
+/* 43 */
+/*!***************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.ends-with.js ***!
+  \***************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def = __webpack_require__(/*! ./$.def */ 72)
+	  , toLength = $.toLength;
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.6 String.prototype.endsWith(searchString [, endPosition])
+	  endsWith: function(searchString /*, endPosition = @length */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    var that = String($.assertDefined(this))
+	      , endPosition = arguments[1]
+	      , len = toLength(that.length)
+	      , end = endPosition === undefined ? len : Math.min(toLength(endPosition), len);
+	    searchString += '';
+	    return that.slice(end - searchString.length, end) === searchString;
+	  }
+	});
+
+/***/ },
+/* 44 */
+/*!**************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.includes.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def = __webpack_require__(/*! ./$.def */ 72);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.7 String.prototype.includes(searchString, position = 0)
+	  includes: function(searchString /*, position = 0 */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    return !!~String($.assertDefined(this)).indexOf(searchString, arguments[1]);
+	  }
+	});
+
+/***/ },
+/* 45 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.repeat.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , $def = __webpack_require__(/*! ./$.def */ 72);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.13 String.prototype.repeat(count)
+	  repeat: function(count){
+	    var str = String($.assertDefined(this))
+	      , res = ''
+	      , n   = $.toInteger(count);
+	    if(n < 0 || n == Infinity)throw RangeError("Count can't be negative");
+	    for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
+	    return res;
+	  }
+	});
+
+/***/ },
+/* 46 */
+/*!*****************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.string.starts-with.js ***!
+  \*****************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def = __webpack_require__(/*! ./$.def */ 72);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.18 String.prototype.startsWith(searchString [, position ])
+	  startsWith: function(searchString /*, position = 0 */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    var that  = String($.assertDefined(this))
+	      , index = $.toLength(Math.min(arguments[1], that.length));
+	    searchString += '';
+	    return that.slice(index, index + searchString.length) === searchString;
+	  }
+	});
+
+/***/ },
+/* 47 */
+/*!*********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.from.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $     = __webpack_require__(/*! ./$ */ 25)
+	  , ctx   = __webpack_require__(/*! ./$.ctx */ 74)
+	  , $def  = __webpack_require__(/*! ./$.def */ 72)
+	  , $iter = __webpack_require__(/*! ./$.iter */ 71)
+	  , stepCall = $iter.stepCall;
+	$def($def.S + $def.F * $iter.DANGER_CLOSING, 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = Object($.assertDefined(arrayLike))
+	      , mapfn   = arguments[1]
+	      , mapping = mapfn !== undefined
+	      , f       = mapping ? ctx(mapfn, arguments[2], 2) : undefined
+	      , index   = 0
+	      , length, result, step, iterator;
+	    if($iter.is(O)){
+	      iterator = $iter.get(O);
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      result   = new (typeof this == 'function' ? this : Array);
+	      for(; !(step = iterator.next()).done; index++){
+	        result[index] = mapping ? stepCall(iterator, f, [step.value, index], true) : step.value;
+	      }
+	    } else {
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      result = new (typeof this == 'function' ? this : Array)(length = $.toLength(O.length));
+	      for(; length > index; index++){
+	        result[index] = mapping ? f(O[index], index) : O[index];
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 48 */
+/*!*******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.of.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.S, 'Array', {
+	  // 22.1.2.3 Array.of( ...items)
+	  of: function(/* ...args */){
+	    var index  = 0
+	      , length = arguments.length
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      , result = new (typeof this == 'function' ? this : Array)(length);
+	    while(length > index)result[index] = arguments[index++];
+	    result.length = length;
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 49 */
+/*!*************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.iterator.js ***!
+  \*************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(/*! ./$ */ 25)
+	  , setUnscope = __webpack_require__(/*! ./$.unscope */ 80)
+	  , ITER       = __webpack_require__(/*! ./$.uid */ 77).safe('iter')
+	  , $iter      = __webpack_require__(/*! ./$.iter */ 71)
+	  , step       = $iter.step
+	  , Iterators  = $iter.Iterators;
+	
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	$iter.std(Array, 'Array', function(iterated, kind){
+	  $.set(this, ITER, {o: $.toObject(iterated), i: 0, k: kind});
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var iter  = this[ITER]
+	    , O     = iter.o
+	    , kind  = iter.k
+	    , index = iter.i++;
+	  if(!O || index >= O.length){
+	    iter.o = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'key'  )return step(0, index);
+	  if(kind == 'value')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'value');
+	
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+	
+	setUnscope('keys');
+	setUnscope('values');
+	setUnscope('entries');
+
+/***/ },
+/* 50 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.species.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./$.species */ 90)(Array);
+
+/***/ },
+/* 51 */
+/*!****************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.copy-within.js ***!
+  \****************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , toIndex = $.toIndex;
+	$def($def.P, 'Array', {
+	  // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
+	  copyWithin: function(target/* = 0 */, start /* = 0, end = @length */){
+	    var O     = Object($.assertDefined(this))
+	      , len   = $.toLength(O.length)
+	      , to    = toIndex(target, len)
+	      , from  = toIndex(start, len)
+	      , end   = arguments[2]
+	      , fin   = end === undefined ? len : toIndex(end, len)
+	      , count = Math.min(fin - from, len - to)
+	      , inc   = 1;
+	    if(from < to && to < from + count){
+	      inc  = -1;
+	      from = from + count - 1;
+	      to   = to   + count - 1;
+	    }
+	    while(count-- > 0){
+	      if(from in O)O[to] = O[from];
+	      else delete O[to];
+	      to   += inc;
+	      from += inc;
+	    } return O;
+	  }
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('copyWithin');
+
+/***/ },
+/* 52 */
+/*!*********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.fill.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , toIndex = $.toIndex;
+	$def($def.P, 'Array', {
+	  // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
+	  fill: function(value /*, start = 0, end = @length */){
+	    var O      = Object($.assertDefined(this))
+	      , length = $.toLength(O.length)
+	      , index  = toIndex(arguments[1], length)
+	      , end    = arguments[2]
+	      , endPos = end === undefined ? length : toIndex(end, length);
+	    while(endPos > index)O[index++] = value;
+	    return O;
+	  }
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('fill');
+
+/***/ },
+/* 53 */
+/*!*********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.find.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.P, 'Array', {
+	  // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
+	  find: __webpack_require__(/*! ./$.array-methods */ 86)(5)
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('find');
+
+/***/ },
+/* 54 */
+/*!***************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.array.find-index.js ***!
+  \***************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.P, 'Array', {
+	  // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
+	  findIndex: __webpack_require__(/*! ./$.array-methods */ 86)(6)
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('findIndex');
+
+/***/ },
+/* 55 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.regexp.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $      = __webpack_require__(/*! ./$ */ 25)
+	  , cof    = __webpack_require__(/*! ./$.cof */ 79)
+	  , RegExp = $.g.RegExp
+	  , Base   = RegExp
+	  , proto  = RegExp.prototype;
+	if($.FW && $.DESC){
+	  // RegExp allows a regex with flags as the pattern
+	  if(!function(){try{ return RegExp(/a/g, 'i') == '/a/i'; }catch(e){ /* empty */ }}()){
+	    RegExp = function RegExp(pattern, flags){
+	      return new Base(cof(pattern) == 'RegExp' && flags !== undefined
+	        ? pattern.source : pattern, flags);
+	    };
+	    $.each.call($.getNames(Base), function(key){
+	      key in RegExp || $.setDesc(RegExp, key, {
+	        configurable: true,
+	        get: function(){ return Base[key]; },
+	        set: function(it){ Base[key] = it; }
+	      });
+	    });
+	    proto.constructor = RegExp;
+	    RegExp.prototype = proto;
+	    $.hide($.g, 'RegExp', RegExp);
+	  }
+	  // 21.2.5.3 get RegExp.prototype.flags()
+	  if(/./g.flags != 'g')$.setDesc(proto, 'flags', {
+	    configurable: true,
+	    get: __webpack_require__(/*! ./$.replacer */ 81)(/^.*\/(\w*)$/, '$1')
+	  });
+	}
+	__webpack_require__(/*! ./$.species */ 90)(RegExp);
+
+/***/ },
+/* 56 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.promise.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , ctx     = __webpack_require__(/*! ./$.ctx */ 74)
+	  , cof     = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , assert  = __webpack_require__(/*! ./$.assert */ 76)
+	  , $iter   = __webpack_require__(/*! ./$.iter */ 71)
+	  , SPECIES = __webpack_require__(/*! ./$.wks */ 85)('species')
+	  , RECORD  = __webpack_require__(/*! ./$.uid */ 77).safe('record')
+	  , forOf   = $iter.forOf
+	  , PROMISE = 'Promise'
+	  , global  = $.g
+	  , process = global.process
+	  , asap    = process && process.nextTick || __webpack_require__(/*! ./$.task */ 91).set
+	  , Promise = global[PROMISE]
+	  , Base    = Promise
+	  , isFunction     = $.isFunction
+	  , isObject       = $.isObject
+	  , assertFunction = assert.fn
+	  , assertObject   = assert.obj
+	  , test;
+	function getConstructor(C){
+	  var S = assertObject(C)[SPECIES];
+	  return S != undefined ? S : C;
+	}
+	isFunction(Promise) && isFunction(Promise.resolve)
+	&& Promise.resolve(test = new Promise(function(){})) == test
+	|| function(){
+	  function isThenable(it){
+	    var then;
+	    if(isObject(it))then = it.then;
+	    return isFunction(then) ? then : false;
+	  }
+	  function handledRejectionOrHasOnRejected(promise){
+	    var record = promise[RECORD]
+	      , chain  = record.c
+	      , i      = 0
+	      , react;
+	    if(record.h)return true;
+	    while(chain.length > i){
+	      react = chain[i++];
+	      if(react.fail || handledRejectionOrHasOnRejected(react.P))return true;
+	    }
+	  }
+	  function notify(record, isReject){
+	    var chain = record.c;
+	    if(isReject || chain.length)asap(function(){
+	      var promise = record.p
+	        , value   = record.v
+	        , ok      = record.s == 1
+	        , i       = 0;
+	      if(isReject && !handledRejectionOrHasOnRejected(promise)){
+	        setTimeout(function(){
+	          if(!handledRejectionOrHasOnRejected(promise)){
+	            if(cof(process) == 'process'){
+	              process.emit('unhandledRejection', value, promise);
+	            } else if(global.console && isFunction(console.error)){
+	              console.error('Unhandled promise rejection', value);
+	            }
+	          }
+	        }, 1e3);
+	      } else while(chain.length > i)!function(react){
+	        var cb = ok ? react.ok : react.fail
+	          , ret, then;
+	        try {
+	          if(cb){
+	            if(!ok)record.h = true;
+	            ret = cb === true ? value : cb(value);
+	            if(ret === react.P){
+	              react.rej(TypeError(PROMISE + '-chain cycle'));
+	            } else if(then = isThenable(ret)){
+	              then.call(ret, react.res, react.rej);
+	            } else react.res(ret);
+	          } else react.rej(value);
+	        } catch(err){
+	          react.rej(err);
+	        }
+	      }(chain[i++]);
+	      chain.length = 0;
+	    });
+	  }
+	  function reject(value){
+	    var record = this;
+	    if(record.d)return;
+	    record.d = true;
+	    record = record.r || record; // unwrap
+	    record.v = value;
+	    record.s = 2;
+	    notify(record, true);
+	  }
+	  function resolve(value){
+	    var record = this
+	      , then, wrapper;
+	    if(record.d)return;
+	    record.d = true;
+	    record = record.r || record; // unwrap
+	    try {
+	      if(then = isThenable(value)){
+	        wrapper = {r: record, d: false}; // wrap
+	        then.call(value, ctx(resolve, wrapper, 1), ctx(reject, wrapper, 1));
+	      } else {
+	        record.v = value;
+	        record.s = 1;
+	        notify(record);
+	      }
+	    } catch(err){
+	      reject.call(wrapper || {r: record, d: false}, err); // wrap
+	    }
+	  }
+	  // 25.4.3.1 Promise(executor)
+	  Promise = function(executor){
+	    assertFunction(executor);
+	    var record = {
+	      p: assert.inst(this, Promise, PROMISE), // <- promise
+	      c: [],                                  // <- chain
+	      s: 0,                                   // <- state
+	      d: false,                               // <- done
+	      v: undefined,                           // <- value
+	      h: false                                // <- handled rejection
+	    };
+	    $.hide(this, RECORD, record);
+	    try {
+	      executor(ctx(resolve, record, 1), ctx(reject, record, 1));
+	    } catch(err){
+	      reject.call(record, err);
+	    }
+	  };
+	  $.mix(Promise.prototype, {
+	    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+	    then: function(onFulfilled, onRejected){
+	      var S = assertObject(assertObject(this).constructor)[SPECIES];
+	      var react = {
+	        ok:   isFunction(onFulfilled) ? onFulfilled : true,
+	        fail: isFunction(onRejected)  ? onRejected  : false
+	      };
+	      var P = react.P = new (S != undefined ? S : Promise)(function(res, rej){
+	        react.res = assertFunction(res);
+	        react.rej = assertFunction(rej);
+	      });
+	      var record = this[RECORD];
+	      record.c.push(react);
+	      record.s && notify(record);
+	      return P;
+	    },
+	    // 25.4.5.1 Promise.prototype.catch(onRejected)
+	    'catch': function(onRejected){
+	      return this.then(undefined, onRejected);
+	    }
+	  });
+	}();
+	$def($def.G + $def.W + $def.F * (Promise != Base), {Promise: Promise});
+	$def($def.S, PROMISE, {
+	  // 25.4.4.5 Promise.reject(r)
+	  reject: function(r){
+	    return new (getConstructor(this))(function(res, rej){
+	      rej(r);
+	    });
+	  },
+	  // 25.4.4.6 Promise.resolve(x)
+	  resolve: function(x){
+	    return isObject(x) && RECORD in x && $.getProto(x) === this.prototype
+	      ? x : new (getConstructor(this))(function(res){
+	        res(x);
+	      });
+	  }
+	});
+	$def($def.S + $def.F * ($iter.fail(function(iter){
+	  Promise.all(iter)['catch'](function(){});
+	}) || $iter.DANGER_CLOSING), PROMISE, {
+	  // 25.4.4.1 Promise.all(iterable)
+	  all: function(iterable){
+	    var C      = getConstructor(this)
+	      , values = [];
+	    return new C(function(resolve, reject){
+	      forOf(iterable, false, values.push, values);
+	      var remaining = values.length
+	        , results   = Array(remaining);
+	      if(remaining)$.each.call(values, function(promise, index){
+	        C.resolve(promise).then(function(value){
+	          results[index] = value;
+	          --remaining || resolve(results);
+	        }, reject);
+	      });
+	      else resolve(results);
+	    });
+	  },
+	  // 25.4.4.4 Promise.race(iterable)
+	  race: function(iterable){
+	    var C = getConstructor(this);
+	    return new C(function(resolve, reject){
+	      forOf(iterable, false, function(promise){
+	        C.resolve(promise).then(resolve, reject);
+	      });
+	    });
+	  }
+	});
+	cof.set(Promise, PROMISE);
+	__webpack_require__(/*! ./$.species */ 90)(Promise);
+
+/***/ },
+/* 57 */
+/*!**************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.map.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strong = __webpack_require__(/*! ./$.collection-strong */ 92);
+	
+	// 23.1 Map Objects
+	__webpack_require__(/*! ./$.collection */ 93)('Map', {
+	  // 23.1.3.6 Map.prototype.get(key)
+	  get: function(key){
+	    var entry = strong.getEntry(this, key);
+	    return entry && entry.v;
+	  },
+	  // 23.1.3.9 Map.prototype.set(key, value)
+	  set: function(key, value){
+	    return strong.def(this, key === 0 ? 0 : key, value);
+	  }
+	}, strong, true);
+
+/***/ },
+/* 58 */
+/*!**************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.set.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strong = __webpack_require__(/*! ./$.collection-strong */ 92);
+	
+	// 23.2 Set Objects
+	__webpack_require__(/*! ./$.collection */ 93)('Set', {
+	  // 23.2.3.1 Set.prototype.add(value)
+	  add: function(value){
+	    return strong.def(this, value = value === 0 ? 0 : value, value);
+	  }
+	}, strong);
+
+/***/ },
+/* 59 */
+/*!*******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.weak-map.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $         = __webpack_require__(/*! ./$ */ 25)
+	  , weak      = __webpack_require__(/*! ./$.collection-weak */ 94)
+	  , leakStore = weak.leakStore
+	  , ID        = weak.ID
+	  , WEAK      = weak.WEAK
+	  , has       = $.has
+	  , isObject  = $.isObject
+	  , isFrozen  = Object.isFrozen || $.core.Object.isFrozen
+	  , tmp       = {};
+	
+	// 23.3 WeakMap Objects
+	var WeakMap = __webpack_require__(/*! ./$.collection */ 93)('WeakMap', {
+	  // 23.3.3.3 WeakMap.prototype.get(key)
+	  get: function(key){
+	    if(isObject(key)){
+	      if(isFrozen(key))return leakStore(this).get(key);
+	      if(has(key, WEAK))return key[WEAK][this[ID]];
+	    }
+	  },
+	  // 23.3.3.5 WeakMap.prototype.set(key, value)
+	  set: function(key, value){
+	    return weak.def(this, key, value);
+	  }
+	}, weak, true, true);
+	
+	// IE11 WeakMap frozen keys fix
+	if($.FW && new WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
+	  $.each.call(['delete', 'has', 'get', 'set'], function(key){
+	    var method = WeakMap.prototype[key];
+	    WeakMap.prototype[key] = function(a, b){
+	      // store frozen objects on leaky map
+	      if(isObject(a) && isFrozen(a)){
+	        var result = leakStore(this)[key](a, b);
+	        return key == 'set' ? this : result;
+	      // store all the rest on native weakmap
+	      } return method.call(this, a, b);
+	    };
+	  });
+	}
+
+/***/ },
+/* 60 */
+/*!*******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.weak-set.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var weak = __webpack_require__(/*! ./$.collection-weak */ 94);
+	
+	// 23.4 WeakSet Objects
+	__webpack_require__(/*! ./$.collection */ 93)('WeakSet', {
+	  // 23.4.3.1 WeakSet.prototype.add(value)
+	  add: function(value){
+	    return weak.def(this, value, true);
+	  }
+	}, weak, false, true);
+
+/***/ },
+/* 61 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es6.reflect.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $         = __webpack_require__(/*! ./$ */ 25)
+	  , $def      = __webpack_require__(/*! ./$.def */ 72)
+	  , setProto  = __webpack_require__(/*! ./$.set-proto */ 88)
+	  , $iter     = __webpack_require__(/*! ./$.iter */ 71)
+	  , ITER      = __webpack_require__(/*! ./$.uid */ 77).safe('iter')
+	  , step      = $iter.step
+	  , assert    = __webpack_require__(/*! ./$.assert */ 76)
+	  , isObject  = $.isObject
+	  , getDesc   = $.getDesc
+	  , setDesc   = $.setDesc
+	  , getProto  = $.getProto
+	  , apply     = Function.apply
+	  , assertObject = assert.obj
+	  , isExtensible = Object.isExtensible || $.it;
+	function Enumerate(iterated){
+	  var keys = [], key;
+	  for(key in iterated)keys.push(key);
+	  $.set(this, ITER, {o: iterated, a: keys, i: 0});
+	}
+	$iter.create(Enumerate, 'Object', function(){
+	  var iter = this[ITER]
+	    , keys = iter.a
+	    , key;
+	  do {
+	    if(iter.i >= keys.length)return step(1);
+	  } while(!((key = keys[iter.i++]) in iter.o));
+	  return step(0, key);
+	});
+	
+	function wrap(fn){
+	  return function(it){
+	    assertObject(it);
+	    try {
+	      fn.apply(undefined, arguments);
+	      return true;
+	    } catch(e){
+	      return false;
+	    }
+	  };
+	}
+	
+	function reflectGet(target, propertyKey/*, receiver*/){
+	  var receiver = arguments.length < 3 ? target : arguments[2]
+	    , desc = getDesc(assertObject(target), propertyKey), proto;
+	  if(desc)return $.has(desc, 'value')
+	    ? desc.value
+	    : desc.get === undefined
+	      ? undefined
+	      : desc.get.call(receiver);
+	  return isObject(proto = getProto(target))
+	    ? reflectGet(proto, propertyKey, receiver)
+	    : undefined;
+	}
+	function reflectSet(target, propertyKey, V/*, receiver*/){
+	  var receiver = arguments.length < 4 ? target : arguments[3]
+	    , ownDesc  = getDesc(assertObject(target), propertyKey)
+	    , existingDescriptor, proto;
+	  if(!ownDesc){
+	    if(isObject(proto = getProto(target))){
+	      return reflectSet(proto, propertyKey, V, receiver);
+	    }
+	    ownDesc = $.desc(0);
+	  }
+	  if($.has(ownDesc, 'value')){
+	    if(ownDesc.writable === false || !isObject(receiver))return false;
+	    existingDescriptor = getDesc(receiver, propertyKey) || $.desc(0);
+	    existingDescriptor.value = V;
+	    setDesc(receiver, propertyKey, existingDescriptor);
+	    return true;
+	  }
+	  return ownDesc.set === undefined ? false : (ownDesc.set.call(receiver, V), true);
+	}
+	
+	var reflect = {
+	  // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
+	  apply: __webpack_require__(/*! ./$.ctx */ 74)(Function.call, apply, 3),
+	  // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
+	  construct: function(target, argumentsList /*, newTarget*/){
+	    var proto    = assert.fn(arguments.length < 3 ? target : arguments[2]).prototype
+	      , instance = $.create(isObject(proto) ? proto : Object.prototype)
+	      , result   = apply.call(target, instance, argumentsList);
+	    return isObject(result) ? result : instance;
+	  },
+	  // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
+	  defineProperty: wrap(setDesc),
+	  // 26.1.4 Reflect.deleteProperty(target, propertyKey)
+	  deleteProperty: function(target, propertyKey){
+	    var desc = getDesc(assertObject(target), propertyKey);
+	    return desc && !desc.configurable ? false : delete target[propertyKey];
+	  },
+	  // 26.1.5 Reflect.enumerate(target)
+	  enumerate: function(target){
+	    return new Enumerate(assertObject(target));
+	  },
+	  // 26.1.6 Reflect.get(target, propertyKey [, receiver])
+	  get: reflectGet,
+	  // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
+	  getOwnPropertyDescriptor: function(target, propertyKey){
+	    return getDesc(assertObject(target), propertyKey);
+	  },
+	  // 26.1.8 Reflect.getPrototypeOf(target)
+	  getPrototypeOf: function(target){
+	    return getProto(assertObject(target));
+	  },
+	  // 26.1.9 Reflect.has(target, propertyKey)
+	  has: function(target, propertyKey){
+	    return propertyKey in target;
+	  },
+	  // 26.1.10 Reflect.isExtensible(target)
+	  isExtensible: function(target){
+	    return !!isExtensible(assertObject(target));
+	  },
+	  // 26.1.11 Reflect.ownKeys(target)
+	  ownKeys: __webpack_require__(/*! ./$.own-keys */ 78),
+	  // 26.1.12 Reflect.preventExtensions(target)
+	  preventExtensions: wrap(Object.preventExtensions || $.it),
+	  // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
+	  set: reflectSet
+	};
+	// 26.1.14 Reflect.setPrototypeOf(target, proto)
+	if(setProto)reflect.setPrototypeOf = function(target, proto){
+	  setProto(assertObject(target), proto);
+	  return true;
+	};
+	
+	$def($def.G, {Reflect: {}});
+	$def($def.S, 'Reflect', reflect);
+
+/***/ },
+/* 62 */
+/*!*************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es7.array.includes.js ***!
+  \*************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://github.com/domenic/Array.prototype.includes
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.P, 'Array', {
+	  includes: __webpack_require__(/*! ./$.array-includes */ 87)(true)
+	});
+	__webpack_require__(/*! ./$.unscope */ 80)('includes');
+
+/***/ },
+/* 63 */
+/*!********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es7.string.at.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://github.com/mathiasbynens/String.prototype.at
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.P, 'String', {
+	  at: __webpack_require__(/*! ./$.string-at */ 89)(true)
+	});
+
+/***/ },
+/* 64 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es7.regexp.escape.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://gist.github.com/kangax/9698100
+	var $def = __webpack_require__(/*! ./$.def */ 72);
+	$def($def.S, 'RegExp', {
+	  escape: __webpack_require__(/*! ./$.replacer */ 81)(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)
+	});
+
+/***/ },
+/* 65 */
+/*!**********************************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es7.object.get-own-property-descriptors.js ***!
+  \**********************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://gist.github.com/WebReflection/9353781
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , ownKeys = __webpack_require__(/*! ./$.own-keys */ 78);
+	
+	$def($def.S, 'Object', {
+	  getOwnPropertyDescriptors: function(object){
+	    var O      = $.toObject(object)
+	      , result = {};
+	    $.each.call(ownKeys(O), function(key){
+	      $.setDesc(result, key, $.desc(0, $.getDesc(O, key)));
+	    });
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 66 */
+/*!**************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/es7.object.to-array.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// http://goo.gl/XkBrjD
+	var $    = __webpack_require__(/*! ./$ */ 25)
+	  , $def = __webpack_require__(/*! ./$.def */ 72);
+	function createObjectToArray(isEntries){
+	  return function(object){
+	    var O      = $.toObject(object)
+	      , keys   = $.getKeys(object)
+	      , length = keys.length
+	      , i      = 0
+	      , result = Array(length)
+	      , key;
+	    if(isEntries)while(length > i)result[i] = [key = keys[i++], O[key]];
+	    else while(length > i)result[i] = O[keys[i++]];
+	    return result;
+	  };
+	}
+	$def($def.S, 'Object', {
+	  values:  createObjectToArray(false),
+	  entries: createObjectToArray(true)
+	});
+
+/***/ },
+/* 67 */
+/*!***********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/js.array.statics.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// JavaScript 1.6 / Strawman array statics shim
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , core    = $.core
+	  , statics = {};
+	function setStatics(keys, length){
+	  $.each.call(keys.split(','), function(key){
+	    if(length == undefined && key in core.Array)statics[key] = core.Array[key];
+	    else if(key in [])statics[key] = __webpack_require__(/*! ./$.ctx */ 74)(Function.call, [][key], length);
+	  });
+	}
+	setStatics('pop,reverse,shift,keys,values,entries', 1);
+	setStatics('indexOf,every,some,forEach,map,filter,find,findIndex,includes', 3);
+	setStatics('join,slice,concat,push,splice,unshift,sort,lastIndexOf,' +
+	           'reduce,reduceRight,copyWithin,fill,turn');
+	$def($def.S, 'Array', statics);
+
+/***/ },
+/* 68 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/web.timers.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// ie9- setTimeout & setInterval additional parameters fix
+	var $       = __webpack_require__(/*! ./$ */ 25)
+	  , $def    = __webpack_require__(/*! ./$.def */ 72)
+	  , invoke  = __webpack_require__(/*! ./$.invoke */ 75)
+	  , partial = __webpack_require__(/*! ./$.partial */ 73)
+	  , MSIE    = !!$.g.navigator && /MSIE .\./.test(navigator.userAgent); // <- dirty ie9- check
+	function wrap(set){
+	  return MSIE ? function(fn, time /*, ...args */){
+	    return set(invoke(
+	      partial,
+	      [].slice.call(arguments, 2),
+	      $.isFunction(fn) ? fn : Function(fn)
+	    ), time);
+	  } : set;
+	}
+	$def($def.G + $def.B + $def.F * MSIE, {
+	  setTimeout:  wrap($.g.setTimeout),
+	  setInterval: wrap($.g.setInterval)
+	});
+
+/***/ },
+/* 69 */
+/*!********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/web.immediate.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def  = __webpack_require__(/*! ./$.def */ 72)
+	  , $task = __webpack_require__(/*! ./$.task */ 91);
+	$def($def.G + $def.B, {
+	  setImmediate:   $task.set,
+	  clearImmediate: $task.clear
+	});
+
+/***/ },
+/* 70 */
+/*!***********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/web.dom.iterable.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./es6.array.iterator */ 49);
+	var $         = __webpack_require__(/*! ./$ */ 25)
+	  , Iterators = __webpack_require__(/*! ./$.iter */ 71).Iterators
+	  , ITERATOR  = __webpack_require__(/*! ./$.wks */ 85)('iterator')
+	  , NodeList  = $.g.NodeList;
+	if($.FW && NodeList && !(ITERATOR in NodeList.prototype)){
+	  $.hide(NodeList.prototype, ITERATOR, Iterators.Array);
+	}
+	Iterators.NodeList = Iterators.Array;
+
+/***/ },
+/* 71 */
+/*!*************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.iter.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $                 = __webpack_require__(/*! ./$ */ 25)
+	  , ctx               = __webpack_require__(/*! ./$.ctx */ 74)
+	  , cof               = __webpack_require__(/*! ./$.cof */ 79)
+	  , $def              = __webpack_require__(/*! ./$.def */ 72)
+	  , assertObject      = __webpack_require__(/*! ./$.assert */ 76).obj
+	  , SYMBOL_ITERATOR   = __webpack_require__(/*! ./$.wks */ 85)('iterator')
+	  , FF_ITERATOR       = '@@iterator'
+	  , Iterators         = {}
+	  , IteratorPrototype = {};
+	// Safari has byggy iterators w/o `next`
+	var BUGGY = 'keys' in [] && !('next' in [].keys());
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	setIterator(IteratorPrototype, $.that);
+	function setIterator(O, value){
+	  $.hide(O, SYMBOL_ITERATOR, value);
+	  // Add iterator for FF iterator protocol
+	  if(FF_ITERATOR in [])$.hide(O, FF_ITERATOR, value);
+	}
+	function defineIterator(Constructor, NAME, value, DEFAULT){
+	  var proto = Constructor.prototype
+	    , iter  = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT] || value;
+	  // Define iterator
+	  if($.FW)setIterator(proto, iter);
+	  if(iter !== value){
+	    var iterProto = $.getProto(iter.call(new Constructor));
+	    // Set @@toStringTag to native iterators
+	    cof.set(iterProto, NAME + ' Iterator', true);
+	    // FF fix
+	    if($.FW)$.has(proto, FF_ITERATOR) && setIterator(iterProto, $.that);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = iter;
+	  // FF & v8 fix
+	  Iterators[NAME + ' Iterator'] = $.that;
+	  return iter;
+	}
+	function getIterator(it){
+	  var Symbol  = $.g.Symbol
+	    , ext     = it[Symbol && Symbol.iterator || FF_ITERATOR]
+	    , getIter = ext || it[SYMBOL_ITERATOR] || Iterators[cof.classof(it)];
+	  return assertObject(getIter.call(it));
+	}
+	function closeIterator(iterator){
+	  var ret = iterator['return'];
+	  if(ret !== undefined)assertObject(ret.call(iterator));
+	}
+	function stepCall(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(assertObject(value)[0], value[1]) : fn(value);
+	  } catch(e){
+	    closeIterator(iterator);
+	    throw e;
+	  }
+	}
+	var DANGER_CLOSING = true;
+	!function(){
+	  try {
+	    var iter = [1].keys();
+	    iter['return'] = function(){ DANGER_CLOSING = false; };
+	    Array.from(iter, function(){ throw 2; });
+	  } catch(e){ /* empty */ }
+	}();
+	var $iter = module.exports = {
+	  BUGGY: BUGGY,
+	  DANGER_CLOSING: DANGER_CLOSING,
+	  fail: function(exec){
+	    var fail = true;
+	    try {
+	      var arr  = [[{}, 1]]
+	        , iter = arr[SYMBOL_ITERATOR]()
+	        , next = iter.next;
+	      iter.next = function(){
+	        fail = false;
+	        return next.call(this);
+	      };
+	      arr[SYMBOL_ITERATOR] = function(){
+	        return iter;
+	      };
+	      exec(arr);
+	    } catch(e){ /* empty */ }
+	    return fail;
+	  },
+	  Iterators: Iterators,
+	  prototype: IteratorPrototype,
+	  step: function(done, value){
+	    return {value: value, done: !!done};
+	  },
+	  stepCall: stepCall,
+	  close: closeIterator,
+	  is: function(it){
+	    var O      = Object(it)
+	      , Symbol = $.g.Symbol
+	      , SYM    = Symbol && Symbol.iterator || FF_ITERATOR;
+	    return SYM in O || SYMBOL_ITERATOR in O || $.has(Iterators, cof.classof(O));
+	  },
+	  get: getIterator,
+	  set: setIterator,
+	  create: function(Constructor, NAME, next, proto){
+	    Constructor.prototype = $.create(proto || $iter.prototype, {next: $.desc(1, next)});
+	    cof.set(Constructor, NAME + ' Iterator');
+	  },
+	  define: defineIterator,
+	  std: function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE){
+	    function createIter(kind){
+	      return function(){
+	        return new Constructor(this, kind);
+	      };
+	    }
+	    $iter.create(Constructor, NAME, next);
+	    var entries = createIter('key+value')
+	      , values  = createIter('value')
+	      , proto   = Base.prototype
+	      , methods, key;
+	    if(DEFAULT == 'value')values = defineIterator(Base, NAME, values, 'values');
+	    else entries = defineIterator(Base, NAME, entries, 'entries');
+	    if(DEFAULT){
+	      methods = {
+	        entries: entries,
+	        keys:    IS_SET ? values : createIter('key'),
+	        values:  values
+	      };
+	      $def($def.P + $def.F * BUGGY, NAME, methods);
+	      if(FORCE)for(key in methods){
+	        if(!(key in proto))$.hide(proto, key, methods[key]);
+	      }
+	    }
+	  },
+	  forOf: function(iterable, entries, fn, that){
+	    var iterator = getIterator(iterable)
+	      , f = ctx(fn, that, entries ? 2 : 1)
+	      , step;
+	    while(!(step = iterator.next()).done){
+	      if(stepCall(iterator, f, step.value, entries) === false){
+	        return closeIterator(iterator);
+	      }
+	    }
+	  }
+	};
+
+/***/ },
+/* 72 */
+/*!************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.def.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(/*! ./$ */ 25)
+	  , global     = $.g
+	  , core       = $.core
+	  , isFunction = $.isFunction;
+	function ctx(fn, that){
+	  return function(){
+	    return fn.apply(that, arguments);
+	  };
+	}
+	// type bitmap
+	$def.F = 1;  // forced
+	$def.G = 2;  // global
+	$def.S = 4;  // static
+	$def.P = 8;  // proto
+	$def.B = 16; // bind
+	$def.W = 32; // wrap
+	function $def(type, name, source){
+	  var key, own, out, exp
+	    , isGlobal = type & $def.G
+	    , target   = isGlobal ? global : type & $def.S
+	        ? global[name] : (global[name] || {}).prototype
+	    , exports  = isGlobal ? core : core[name] || (core[name] = {});
+	  if(isGlobal)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !(type & $def.F) && target && key in target;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    if(isGlobal && !isFunction(target[key]))exp = source[key];
+	    // bind timers to global for call from export context
+	    else if(type & $def.B && own)exp = ctx(out, global);
+	    // wrap global constructors for prevent change them in library
+	    else if(type & $def.W && target[key] == out)!function(C){
+	      exp = function(param){
+	        return this instanceof C ? new C(param) : C(param);
+	      };
+	      exp.prototype = C.prototype;
+	    }(out);
+	    else exp = type & $def.P && isFunction(out) ? ctx(Function.call, out) : out;
+	    // export
+	    $.hide(exports, key, exp);
+	  }
+	}
+	module.exports = $def;
+
+/***/ },
+/* 73 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.partial.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $      = __webpack_require__(/*! ./$ */ 25)
+	  , invoke = __webpack_require__(/*! ./$.invoke */ 75)
+	  , assertFunction = __webpack_require__(/*! ./$.assert */ 76).fn;
+	module.exports = function(/* ...pargs */){
+	  var fn     = assertFunction(this)
+	    , length = arguments.length
+	    , pargs  = Array(length)
+	    , i      = 0
+	    , _      = $.path._
+	    , holder = false;
+	  while(length > i)if((pargs[i] = arguments[i++]) === _)holder = true;
+	  return function(/* ...args */){
+	    var that    = this
+	      , _length = arguments.length
+	      , j = 0, k = 0, args;
+	    if(!holder && !_length)return invoke(fn, pargs, that);
+	    args = pargs.slice();
+	    if(holder)for(;length > j; j++)if(args[j] === _)args[j] = arguments[k++];
+	    while(_length > k)args.push(arguments[k++]);
+	    return invoke(fn, args, that);
+	  };
+	};
+
+/***/ },
+/* 74 */
+/*!************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.ctx.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Optional / simple context binding
+	var assertFunction = __webpack_require__(/*! ./$.assert */ 76).fn;
+	module.exports = function(fn, that, length){
+	  assertFunction(fn);
+	  if(~length && that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  } return function(/* ...args */){
+	      return fn.apply(that, arguments);
+	    };
+	};
+
+/***/ },
+/* 75 */
+/*!***************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.invoke.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Fast apply
+	// http://jsperf.lnkit.com/fast-apply/5
+	module.exports = function(fn, args, that){
+	  var un = that === undefined;
+	  switch(args.length){
+	    case 0: return un ? fn()
+	                      : fn.call(that);
+	    case 1: return un ? fn(args[0])
+	                      : fn.call(that, args[0]);
+	    case 2: return un ? fn(args[0], args[1])
+	                      : fn.call(that, args[0], args[1]);
+	    case 3: return un ? fn(args[0], args[1], args[2])
+	                      : fn.call(that, args[0], args[1], args[2]);
+	    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+	                      : fn.call(that, args[0], args[1], args[2], args[3]);
+	    case 5: return un ? fn(args[0], args[1], args[2], args[3], args[4])
+	                      : fn.call(that, args[0], args[1], args[2], args[3], args[4]);
+	  } return              fn.apply(that, args);
+	};
+
+/***/ },
+/* 76 */
+/*!***************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.assert.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	function assert(condition, msg1, msg2){
+	  if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
+	}
+	assert.def = $.assertDefined;
+	assert.fn = function(it){
+	  if(!$.isFunction(it))throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+	assert.obj = function(it){
+	  if(!$.isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+	assert.inst = function(it, Constructor, name){
+	  if(!(it instanceof Constructor))throw TypeError(name + ": use the 'new' operator!");
+	  return it;
+	};
+	module.exports = assert;
+
+/***/ },
+/* 77 */
+/*!************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.uid.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var sid = 0;
+	function uid(key){
+	  return 'Symbol(' + key + ')_' + (++sid + Math.random()).toString(36);
+	}
+	uid.safe = __webpack_require__(/*! ./$ */ 25).g.Symbol || uid;
+	module.exports = uid;
+
+/***/ },
+/* 78 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.own-keys.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $            = __webpack_require__(/*! ./$ */ 25)
+	  , assertObject = __webpack_require__(/*! ./$.assert */ 76).obj;
+	module.exports = function(it){
+	  assertObject(it);
+	  return $.getSymbols ? $.getNames(it).concat($.getSymbols(it)) : $.getNames(it);
+	};
+
+/***/ },
+/* 79 */
+/*!************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.cof.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(/*! ./$ */ 25)
+	  , TAG      = __webpack_require__(/*! ./$.wks */ 85)('toStringTag')
+	  , toString = {}.toString;
+	function cof(it){
+	  return toString.call(it).slice(8, -1);
+	}
+	cof.classof = function(it){
+	  var O, T;
+	  return it == undefined ? it === undefined ? 'Undefined' : 'Null'
+	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T : cof(O);
+	};
+	cof.set = function(it, tag, stat){
+	  if(it && !$.has(it = stat ? it : it.prototype, TAG))$.hide(it, TAG, tag);
+	};
+	module.exports = cof;
+
+/***/ },
+/* 80 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.unscope.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 22.1.3.31 Array.prototype[@@unscopables]
+	var $           = __webpack_require__(/*! ./$ */ 25)
+	  , UNSCOPABLES = __webpack_require__(/*! ./$.wks */ 85)('unscopables');
+	if($.FW && !(UNSCOPABLES in []))$.hide(Array.prototype, UNSCOPABLES, {});
+	module.exports = function(key){
+	  if($.FW)[][UNSCOPABLES][key] = true;
+	};
+
+/***/ },
+/* 81 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.replacer.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	module.exports = function(regExp, replace, isStatic){
+	  var replacer = replace === Object(replace) ? function(part){
+	    return replace[part];
+	  } : replace;
+	  return function(it){
+	    return String(isStatic ? it : this).replace(regExp, replacer);
+	  };
+	};
+
+/***/ },
+/* 82 */
+/*!***************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.assign.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	// 19.1.2.1 Object.assign(target, source, ...)
+	module.exports = Object.assign || function(target, source){ // eslint-disable-line no-unused-vars
+	  var T = Object($.assertDefined(target))
+	    , l = arguments.length
+	    , i = 1;
+	  while(l > i){
+	    var S      = $.ES5Object(arguments[i++])
+	      , keys   = $.getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)T[key = keys[j++]] = S[key];
+	  }
+	  return T;
+	};
+
+/***/ },
+/* 83 */
+/*!**************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.keyof.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	module.exports = function(object, el){
+	  var O      = $.toObject(object)
+	    , keys   = $.getKeys(O)
+	    , length = keys.length
+	    , index  = 0
+	    , key;
+	  while(length > index)if(O[key = keys[index++]] === el)return key;
+	};
+
+/***/ },
+/* 84 */
+/*!***********************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.fw.js ***!
+  \***********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function($){
+	  $.FW   = false;
+	  $.path = $.core;
+	  return $;
+	};
+
+/***/ },
+/* 85 */
+/*!************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.wks.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(/*! ./$ */ 25).g
+	  , store  = {};
+	module.exports = function(name){
+	  return store[name] || (store[name] =
+	    global.Symbol && global.Symbol[name] || __webpack_require__(/*! ./$.uid */ 77).safe('Symbol.' + name));
+	};
+
+/***/ },
+/* 86 */
+/*!**********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.array-methods.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 0 -> Array#forEach
+	// 1 -> Array#map
+	// 2 -> Array#filter
+	// 3 -> Array#some
+	// 4 -> Array#every
+	// 5 -> Array#find
+	// 6 -> Array#findIndex
+	var $   = __webpack_require__(/*! ./$ */ 25)
+	  , ctx = __webpack_require__(/*! ./$.ctx */ 74);
+	module.exports = function(TYPE){
+	  var IS_MAP        = TYPE == 1
+	    , IS_FILTER     = TYPE == 2
+	    , IS_SOME       = TYPE == 3
+	    , IS_EVERY      = TYPE == 4
+	    , IS_FIND_INDEX = TYPE == 6
+	    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX;
+	  return function(callbackfn/*, that = undefined */){
+	    var O      = Object($.assertDefined(this))
+	      , self   = $.ES5Object(O)
+	      , f      = ctx(callbackfn, arguments[1], 3)
+	      , length = $.toLength(self.length)
+	      , index  = 0
+	      , result = IS_MAP ? Array(length) : IS_FILTER ? [] : undefined
+	      , val, res;
+	    for(;length > index; index++)if(NO_HOLES || index in self){
+	      val = self[index];
+	      res = f(val, index, O);
+	      if(TYPE){
+	        if(IS_MAP)result[index] = res;            // map
+	        else if(res)switch(TYPE){
+	          case 3: return true;                    // some
+	          case 5: return val;                     // find
+	          case 6: return index;                   // findIndex
+	          case 2: result.push(val);               // filter
+	        } else if(IS_EVERY)return false;          // every
+	      }
+	    }
+	    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+	  };
+	};
+
+/***/ },
+/* 87 */
+/*!***********************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.array-includes.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	module.exports = function(IS_INCLUDES){
+	  return function(el /*, fromIndex = 0 */){
+	    var O      = $.toObject(this)
+	      , length = $.toLength(O.length)
+	      , index  = $.toIndex(arguments[1], length)
+	      , value;
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 88 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.set-proto.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't works with null proto objects.
+	/*eslint-disable no-proto */
+	var $      = __webpack_require__(/*! ./$ */ 25)
+	  , assert = __webpack_require__(/*! ./$.assert */ 76);
+	module.exports = Object.setPrototypeOf || ('__proto__' in {} // eslint-disable-line
+	  ? function(buggy, set){
+	      try {
+	        set = __webpack_require__(/*! ./$.ctx */ 74)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+	        set({}, []);
+	      } catch(e){ buggy = true; }
+	      return function(O, proto){
+	        assert.obj(O);
+	        assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }()
+	  : undefined);
+
+/***/ },
+/* 89 */
+/*!******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.string-at.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// true  -> String#at
+	// false -> String#codePointAt
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	module.exports = function(TO_STRING){
+	  return function(pos){
+	    var s = String($.assertDefined(this))
+	      , i = $.toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l
+	      || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	        ? TO_STRING ? s.charAt(i) : a
+	        : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 90 */
+/*!****************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.species.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 25);
+	module.exports = function(C){
+	  if($.DESC && $.FW)$.setDesc(C, __webpack_require__(/*! ./$.wks */ 85)('species'), {
+	    configurable: true,
+	    get: $.that
+	  });
+	};
+
+/***/ },
+/* 91 */
+/*!*************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.task.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $      = __webpack_require__(/*! ./$ */ 25)
+	  , ctx    = __webpack_require__(/*! ./$.ctx */ 74)
+	  , cof    = __webpack_require__(/*! ./$.cof */ 79)
+	  , invoke = __webpack_require__(/*! ./$.invoke */ 75)
+	  , global             = $.g
+	  , isFunction         = $.isFunction
+	  , setTask            = global.setImmediate
+	  , clearTask          = global.clearImmediate
+	  , postMessage        = global.postMessage
+	  , addEventListener   = global.addEventListener
+	  , MessageChannel     = global.MessageChannel
+	  , counter            = 0
+	  , queue              = {}
+	  , ONREADYSTATECHANGE = 'onreadystatechange'
+	  , defer, channel, port;
+	function run(){
+	  var id = +this;
+	  if($.has(queue, id)){
+	    var fn = queue[id];
+	    delete queue[id];
+	    fn();
+	  }
+	}
+	function listner(event){
+	  run.call(event.data);
+	}
+	// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+	if(!isFunction(setTask) || !isFunction(clearTask)){
+	  setTask = function(fn){
+	    var args = [], i = 1;
+	    while(arguments.length > i)args.push(arguments[i++]);
+	    queue[++counter] = function(){
+	      invoke(isFunction(fn) ? fn : Function(fn), args);
+	    };
+	    defer(counter);
+	    return counter;
+	  };
+	  clearTask = function(id){
+	    delete queue[id];
+	  };
+	  // Node.js 0.8-
+	  if(cof(global.process) == 'process'){
+	    defer = function(id){
+	      global.process.nextTick(ctx(run, id, 1));
+	    };
+	  // Modern browsers, skip implementation for WebWorkers
+	  // IE8 has postMessage, but it's sync & typeof its postMessage is object
+	  } else if(addEventListener && isFunction(postMessage) && !$.g.importScripts){
+	    defer = function(id){
+	      postMessage(id, '*');
+	    };
+	    addEventListener('message', listner, false);
+	  // WebWorkers
+	  } else if(isFunction(MessageChannel)){
+	    channel = new MessageChannel;
+	    port    = channel.port2;
+	    channel.port1.onmessage = listner;
+	    defer = ctx(port.postMessage, port, 1);
+	  // IE8-
+	  } else if($.g.document && ONREADYSTATECHANGE in document.createElement('script')){
+	    defer = function(id){
+	      $.html.appendChild(document.createElement('script'))[ONREADYSTATECHANGE] = function(){
+	        $.html.removeChild(this);
+	        run.call(id);
+	      };
+	    };
+	  // Rest old browsers
+	  } else {
+	    defer = function(id){
+	      setTimeout(ctx(run, id, 1), 0);
+	    };
+	  }
+	}
+	module.exports = {
+	  set:   setTask,
+	  clear: clearTask
+	};
+
+/***/ },
+/* 92 */
+/*!**************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.collection-strong.js ***!
+  \**************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $        = __webpack_require__(/*! ./$ */ 25)
+	  , ctx      = __webpack_require__(/*! ./$.ctx */ 74)
+	  , safe     = __webpack_require__(/*! ./$.uid */ 77).safe
+	  , assert   = __webpack_require__(/*! ./$.assert */ 76)
+	  , $iter    = __webpack_require__(/*! ./$.iter */ 71)
+	  , has      = $.has
+	  , set      = $.set
+	  , isObject = $.isObject
+	  , hide     = $.hide
+	  , step     = $iter.step
+	  , isFrozen = Object.isFrozen || $.core.Object.isFrozen
+	  , ID       = safe('id')
+	  , O1       = safe('O1')
+	  , LAST     = safe('last')
+	  , FIRST    = safe('first')
+	  , ITER     = safe('iter')
+	  , SIZE     = $.DESC ? safe('size') : 'size'
+	  , id       = 0;
+	
+	function fastKey(it, create){
+	  // return primitive with prefix
+	  if(!isObject(it))return (typeof it == 'string' ? 'S' : 'P') + it;
+	  // can't set id to frozen object
+	  if(isFrozen(it))return 'F';
+	  if(!has(it, ID)){
+	    // not necessary to add id
+	    if(!create)return 'E';
+	    // add missing object id
+	    hide(it, ID, ++id);
+	  // return object id with prefix
+	  } return 'O' + it[ID];
+	}
+	
+	function getEntry(that, key){
+	  // fast case
+	  var index = fastKey(key), entry;
+	  if(index != 'F')return that[O1][index];
+	  // frozen object case
+	  for(entry = that[FIRST]; entry; entry = entry.n){
+	    if(entry.k == key)return entry;
+	  }
+	}
+	
+	module.exports = {
+	  getConstructor: function(NAME, IS_MAP, ADDER){
+	    function C(iterable){
+	      var that = assert.inst(this, C, NAME);
+	      set(that, O1, $.create(null));
+	      set(that, SIZE, 0);
+	      set(that, LAST, undefined);
+	      set(that, FIRST, undefined);
+	      if(iterable != undefined)$iter.forOf(iterable, IS_MAP, that[ADDER], that);
+	    }
+	    $.mix(C.prototype, {
+	      // 23.1.3.1 Map.prototype.clear()
+	      // 23.2.3.2 Set.prototype.clear()
+	      clear: function(){
+	        for(var that = this, data = that[O1], entry = that[FIRST]; entry; entry = entry.n){
+	          entry.r = true;
+	          if(entry.p)entry.p = entry.p.n = undefined;
+	          delete data[entry.i];
+	        }
+	        that[FIRST] = that[LAST] = undefined;
+	        that[SIZE] = 0;
+	      },
+	      // 23.1.3.3 Map.prototype.delete(key)
+	      // 23.2.3.4 Set.prototype.delete(value)
+	      'delete': function(key){
+	        var that  = this
+	          , entry = getEntry(that, key);
+	        if(entry){
+	          var next = entry.n
+	            , prev = entry.p;
+	          delete that[O1][entry.i];
+	          entry.r = true;
+	          if(prev)prev.n = next;
+	          if(next)next.p = prev;
+	          if(that[FIRST] == entry)that[FIRST] = next;
+	          if(that[LAST] == entry)that[LAST] = prev;
+	          that[SIZE]--;
+	        } return !!entry;
+	      },
+	      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
+	      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
+	      forEach: function(callbackfn /*, that = undefined */){
+	        var f = ctx(callbackfn, arguments[1], 3)
+	          , entry;
+	        while(entry = entry ? entry.n : this[FIRST]){
+	          f(entry.v, entry.k, this);
+	          // revert to the last existing entry
+	          while(entry && entry.r)entry = entry.p;
+	        }
+	      },
+	      // 23.1.3.7 Map.prototype.has(key)
+	      // 23.2.3.7 Set.prototype.has(value)
+	      has: function(key){
+	        return !!getEntry(this, key);
+	      }
+	    });
+	    if($.DESC)$.setDesc(C.prototype, 'size', {
+	      get: function(){
+	        return assert.def(this[SIZE]);
+	      }
+	    });
+	    return C;
+	  },
+	  def: function(that, key, value){
+	    var entry = getEntry(that, key)
+	      , prev, index;
+	    // change existing entry
+	    if(entry){
+	      entry.v = value;
+	    // create new entry
+	    } else {
+	      that[LAST] = entry = {
+	        i: index = fastKey(key, true), // <- index
+	        k: key,                        // <- key
+	        v: value,                      // <- value
+	        p: prev = that[LAST],          // <- previous entry
+	        n: undefined,                  // <- next entry
+	        r: false                       // <- removed
+	      };
+	      if(!that[FIRST])that[FIRST] = entry;
+	      if(prev)prev.n = entry;
+	      that[SIZE]++;
+	      // add to index
+	      if(index != 'F')that[O1][index] = entry;
+	    } return that;
+	  },
+	  getEntry: getEntry,
+	  getIterConstructor: function(){
+	    return function(iterated, kind){
+	      set(this, ITER, {o: iterated, k: kind});
+	    };
+	  },
+	  next: function(){
+	    var iter  = this[ITER]
+	      , kind  = iter.k
+	      , entry = iter.l;
+	    // revert to the last existing entry
+	    while(entry && entry.r)entry = entry.p;
+	    // get next entry
+	    if(!iter.o || !(iter.l = entry = entry ? entry.n : iter.o[FIRST])){
+	      // or finish the iteration
+	      iter.o = undefined;
+	      return step(1);
+	    }
+	    // return step by kind
+	    if(kind == 'key'  )return step(0, entry.k);
+	    if(kind == 'value')return step(0, entry.v);
+	    return step(0, [entry.k, entry.v]);
+	  }
+	};
+
+/***/ },
+/* 93 */
+/*!*******************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.collection.js ***!
+  \*******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $     = __webpack_require__(/*! ./$ */ 25)
+	  , $def  = __webpack_require__(/*! ./$.def */ 72)
+	  , $iter = __webpack_require__(/*! ./$.iter */ 71)
+	  , assertInstance = __webpack_require__(/*! ./$.assert */ 76).inst;
+	
+	module.exports = function(NAME, methods, common, IS_MAP, isWeak){
+	  var Base  = $.g[NAME]
+	    , C     = Base
+	    , ADDER = IS_MAP ? 'set' : 'add'
+	    , proto = C && C.prototype
+	    , O     = {};
+	  function fixMethod(KEY, CHAIN){
+	    var method = proto[KEY];
+	    if($.FW)proto[KEY] = function(a, b){
+	      var result = method.call(this, a === 0 ? 0 : a, b);
+	      return CHAIN ? this : result;
+	    };
+	  }
+	  if(!$.isFunction(C) || !(isWeak || !$iter.BUGGY && proto.forEach && proto.entries)){
+	    // create collection constructor
+	    C = common.getConstructor(NAME, IS_MAP, ADDER);
+	    $.mix(C.prototype, methods);
+	  } else {
+	    var inst  = new C
+	      , chain = inst[ADDER](isWeak ? {} : -0, 1)
+	      , buggyZero;
+	    // wrap for init collections from iterable
+	    if($iter.fail(function(iter){
+	      new C(iter); // eslint-disable-line no-new
+	    }) || $iter.DANGER_CLOSING){
+	      C = function(iterable){
+	        assertInstance(this, C, NAME);
+	        var that = new Base;
+	        if(iterable != undefined)$iter.forOf(iterable, IS_MAP, that[ADDER], that);
+	        return that;
+	      };
+	      C.prototype = proto;
+	      if($.FW)proto.constructor = C;
+	    }
+	    isWeak || inst.forEach(function(val, key){
+	      buggyZero = 1 / key === -Infinity;
+	    });
+	    // fix converting -0 key to +0
+	    if(buggyZero){
+	      fixMethod('delete');
+	      fixMethod('has');
+	      IS_MAP && fixMethod('get');
+	    }
+	    // + fix .add & .set for chaining
+	    if(buggyZero || chain !== inst)fixMethod(ADDER, true);
+	  }
+	
+	  __webpack_require__(/*! ./$.cof */ 79).set(C, NAME);
+	  __webpack_require__(/*! ./$.species */ 90)(C);
+	
+	  O[NAME] = C;
+	  $def($def.G + $def.W + $def.F * (C != Base), O);
+	
+	  // add .keys, .values, .entries, [@@iterator]
+	  // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
+	  if(!isWeak)$iter.std(
+	    C, NAME,
+	    common.getIterConstructor(), common.next,
+	    IS_MAP ? 'key+value' : 'value' , !IS_MAP, true
+	  );
+	
+	  return C;
+	};
+
+/***/ },
+/* 94 */
+/*!************************************************************************!*\
+  !*** ./~/babel-runtime/~/core-js/library/modules/$.collection-weak.js ***!
+  \************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $         = __webpack_require__(/*! ./$ */ 25)
+	  , safe      = __webpack_require__(/*! ./$.uid */ 77).safe
+	  , assert    = __webpack_require__(/*! ./$.assert */ 76)
+	  , forOf     = __webpack_require__(/*! ./$.iter */ 71).forOf
+	  , has       = $.has
+	  , isObject  = $.isObject
+	  , hide      = $.hide
+	  , isFrozen  = Object.isFrozen || $.core.Object.isFrozen
+	  , id        = 0
+	  , ID        = safe('id')
+	  , WEAK      = safe('weak')
+	  , LEAK      = safe('leak')
+	  , method    = __webpack_require__(/*! ./$.array-methods */ 86)
+	  , find      = method(5)
+	  , findIndex = method(6);
+	function findFrozen(store, key){
+	  return find.call(store.array, function(it){
+	    return it[0] === key;
+	  });
+	}
+	// fallback for frozen keys
+	function leakStore(that){
+	  return that[LEAK] || hide(that, LEAK, {
+	    array: [],
+	    get: function(key){
+	      var entry = findFrozen(this, key);
+	      if(entry)return entry[1];
+	    },
+	    has: function(key){
+	      return !!findFrozen(this, key);
+	    },
+	    set: function(key, value){
+	      var entry = findFrozen(this, key);
+	      if(entry)entry[1] = value;
+	      else this.array.push([key, value]);
+	    },
+	    'delete': function(key){
+	      var index = findIndex.call(this.array, function(it){
+	        return it[0] === key;
+	      });
+	      if(~index)this.array.splice(index, 1);
+	      return !!~index;
+	    }
+	  })[LEAK];
+	}
+	
+	module.exports = {
+	  getConstructor: function(NAME, IS_MAP, ADDER){
+	    function C(iterable){
+	      $.set(assert.inst(this, C, NAME), ID, id++);
+	      if(iterable != undefined)forOf(iterable, IS_MAP, this[ADDER], this);
+	    }
+	    $.mix(C.prototype, {
+	      // 23.3.3.2 WeakMap.prototype.delete(key)
+	      // 23.4.3.3 WeakSet.prototype.delete(value)
+	      'delete': function(key){
+	        if(!isObject(key))return false;
+	        if(isFrozen(key))return leakStore(this)['delete'](key);
+	        return has(key, WEAK) && has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
+	      },
+	      // 23.3.3.4 WeakMap.prototype.has(key)
+	      // 23.4.3.4 WeakSet.prototype.has(value)
+	      has: function(key){
+	        if(!isObject(key))return false;
+	        if(isFrozen(key))return leakStore(this).has(key);
+	        return has(key, WEAK) && has(key[WEAK], this[ID]);
+	      }
+	    });
+	    return C;
+	  },
+	  def: function(that, key, value){
+	    if(isFrozen(assert.obj(key))){
+	      leakStore(that).set(key, value);
+	    } else {
+	      has(key, WEAK) || hide(key, WEAK, {});
+	      key[WEAK][that[ID]] = value;
+	    } return that;
+	  },
+	  leakStore: leakStore,
+	  WEAK: WEAK,
+	  ID: ID
+	};
+
+/***/ },
+/* 95 */
+/*!*****************************************************!*\
+  !*** ./~/babel-core/~/regenerator-babel/runtime.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/**
+	 * Copyright (c) 2014, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * https://raw.github.com/facebook/regenerator/master/LICENSE file. An
+	 * additional grant of patent rights can be found in the PATENTS file in
+	 * the same directory.
+	 */
+	
+	!(function(global) {
+	  "use strict";
+	
+	  var hasOwn = Object.prototype.hasOwnProperty;
+	  var undefined; // More compressible than void 0.
+	  var iteratorSymbol =
+	    typeof Symbol === "function" && Symbol.iterator || "@@iterator";
+	
+	  var inModule = typeof module === "object";
+	  var runtime = global.regeneratorRuntime;
+	  if (runtime) {
+	    if (inModule) {
+	      // If regeneratorRuntime is defined globally and we're in a module,
+	      // make the exports object identical to regeneratorRuntime.
+	      module.exports = runtime;
+	    }
+	    // Don't bother evaluating the rest of this file if the runtime was
+	    // already defined globally.
+	    return;
+	  }
+	
+	  // Define the runtime globally (as expected by generated code) as either
+	  // module.exports (if we're in a module) or a new, empty object.
+	  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
+	
+	  function wrap(innerFn, outerFn, self, tryLocsList) {
+	    return new Generator(innerFn, outerFn, self || null, tryLocsList || []);
+	  }
+	  runtime.wrap = wrap;
+	
+	  // Try/catch helper to minimize deoptimizations. Returns a completion
+	  // record like context.tryEntries[i].completion. This interface could
+	  // have been (and was previously) designed to take a closure to be
+	  // invoked without arguments, but in all the cases we care about we
+	  // already have an existing method we want to call, so there's no need
+	  // to create a new function object. We can even get away with assuming
+	  // the method takes exactly one argument, since that happens to be true
+	  // in every case, so we don't have to touch the arguments object. The
+	  // only additional allocation required is the completion record, which
+	  // has a stable shape and so hopefully should be cheap to allocate.
+	  function tryCatch(fn, obj, arg) {
+	    try {
+	      return { type: "normal", arg: fn.call(obj, arg) };
+	    } catch (err) {
+	      return { type: "throw", arg: err };
+	    }
+	  }
+	
+	  var GenStateSuspendedStart = "suspendedStart";
+	  var GenStateSuspendedYield = "suspendedYield";
+	  var GenStateExecuting = "executing";
+	  var GenStateCompleted = "completed";
+	
+	  // Returning this object from the innerFn has the same effect as
+	  // breaking out of the dispatch switch statement.
+	  var ContinueSentinel = {};
+	
+	  // Dummy constructor functions that we use as the .constructor and
+	  // .constructor.prototype properties for functions that return Generator
+	  // objects. For full spec compliance, you may wish to configure your
+	  // minifier not to mangle the names of these two functions.
+	  function GeneratorFunction() {}
+	  function GeneratorFunctionPrototype() {}
+	
+	  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype;
+	  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+	  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+	  GeneratorFunction.displayName = "GeneratorFunction";
+	
+	  runtime.isGeneratorFunction = function(genFun) {
+	    var ctor = typeof genFun === "function" && genFun.constructor;
+	    return ctor
+	      ? ctor === GeneratorFunction ||
+	        // For the native GeneratorFunction constructor, the best we can
+	        // do is to check its .name property.
+	        (ctor.displayName || ctor.name) === "GeneratorFunction"
+	      : false;
+	  };
+	
+	  runtime.mark = function(genFun) {
+	    genFun.__proto__ = GeneratorFunctionPrototype;
+	    genFun.prototype = Object.create(Gp);
+	    return genFun;
+	  };
+	
+	  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
+	    return new Promise(function(resolve, reject) {
+	      var generator = wrap(innerFn, outerFn, self, tryLocsList);
+	      var callNext = step.bind(generator.next);
+	      var callThrow = step.bind(generator["throw"]);
+	
+	      function step(arg) {
+	        var record = tryCatch(this, null, arg);
+	        if (record.type === "throw") {
+	          reject(record.arg);
+	          return;
+	        }
+	
+	        var info = record.arg;
+	        if (info.done) {
+	          resolve(info.value);
+	        } else {
+	          Promise.resolve(info.value).then(callNext, callThrow);
+	        }
+	      }
+	
+	      callNext();
+	    });
+	  };
+	
+	  function Generator(innerFn, outerFn, self, tryLocsList) {
+	    var generator = outerFn ? Object.create(outerFn.prototype) : this;
+	    var context = new Context(tryLocsList);
+	    var state = GenStateSuspendedStart;
+	
+	    function invoke(method, arg) {
+	      if (state === GenStateExecuting) {
+	        throw new Error("Generator is already running");
+	      }
+	
+	      if (state === GenStateCompleted) {
+	        // Be forgiving, per 25.3.3.3.3 of the spec:
+	        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+	        return doneResult();
+	      }
+	
+	      while (true) {
+	        var delegate = context.delegate;
+	        if (delegate) {
+	          var record = tryCatch(
+	            delegate.iterator[method],
+	            delegate.iterator,
+	            arg
+	          );
+	
+	          if (record.type === "throw") {
+	            context.delegate = null;
+	
+	            // Like returning generator.throw(uncaught), but without the
+	            // overhead of an extra function call.
+	            method = "throw";
+	            arg = record.arg;
+	
+	            continue;
+	          }
+	
+	          // Delegate generator ran and handled its own exceptions so
+	          // regardless of what the method was, we continue as if it is
+	          // "next" with an undefined arg.
+	          method = "next";
+	          arg = undefined;
+	
+	          var info = record.arg;
+	          if (info.done) {
+	            context[delegate.resultName] = info.value;
+	            context.next = delegate.nextLoc;
+	          } else {
+	            state = GenStateSuspendedYield;
+	            return info;
+	          }
+	
+	          context.delegate = null;
+	        }
+	
+	        if (method === "next") {
+	          if (state === GenStateSuspendedStart &&
+	              typeof arg !== "undefined") {
+	            // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+	            throw new TypeError(
+	              "attempt to send " + JSON.stringify(arg) + " to newborn generator"
+	            );
+	          }
+	
+	          if (state === GenStateSuspendedYield) {
+	            context.sent = arg;
+	          } else {
+	            delete context.sent;
+	          }
+	
+	        } else if (method === "throw") {
+	          if (state === GenStateSuspendedStart) {
+	            state = GenStateCompleted;
+	            throw arg;
+	          }
+	
+	          if (context.dispatchException(arg)) {
+	            // If the dispatched exception was caught by a catch block,
+	            // then let that catch block handle the exception normally.
+	            method = "next";
+	            arg = undefined;
+	          }
+	
+	        } else if (method === "return") {
+	          context.abrupt("return", arg);
+	        }
+	
+	        state = GenStateExecuting;
+	
+	        var record = tryCatch(innerFn, self, context);
+	        if (record.type === "normal") {
+	          // If an exception is thrown from innerFn, we leave state ===
+	          // GenStateExecuting and loop back for another invocation.
+	          state = context.done
+	            ? GenStateCompleted
+	            : GenStateSuspendedYield;
+	
+	          var info = {
+	            value: record.arg,
+	            done: context.done
+	          };
+	
+	          if (record.arg === ContinueSentinel) {
+	            if (context.delegate && method === "next") {
+	              // Deliberately forget the last sent value so that we don't
+	              // accidentally pass it on to the delegate.
+	              arg = undefined;
+	            }
+	          } else {
+	            return info;
+	          }
+	
+	        } else if (record.type === "throw") {
+	          state = GenStateCompleted;
+	
+	          if (method === "next") {
+	            context.dispatchException(record.arg);
+	          } else {
+	            arg = record.arg;
+	          }
+	        }
+	      }
+	    }
+	
+	    generator.next = invoke.bind(generator, "next");
+	    generator["throw"] = invoke.bind(generator, "throw");
+	    generator["return"] = invoke.bind(generator, "return");
+	
+	    return generator;
+	  }
+	
+	  Gp[iteratorSymbol] = function() {
+	    return this;
+	  };
+	
+	  Gp.toString = function() {
+	    return "[object Generator]";
+	  };
+	
+	  function pushTryEntry(locs) {
+	    var entry = { tryLoc: locs[0] };
+	
+	    if (1 in locs) {
+	      entry.catchLoc = locs[1];
+	    }
+	
+	    if (2 in locs) {
+	      entry.finallyLoc = locs[2];
+	      entry.afterLoc = locs[3];
+	    }
+	
+	    this.tryEntries.push(entry);
+	  }
+	
+	  function resetTryEntry(entry) {
+	    var record = entry.completion || {};
+	    record.type = "normal";
+	    delete record.arg;
+	    entry.completion = record;
+	  }
+	
+	  function Context(tryLocsList) {
+	    // The root entry object (effectively a try statement without a catch
+	    // or a finally block) gives us a place to store values thrown from
+	    // locations where there is no enclosing try statement.
+	    this.tryEntries = [{ tryLoc: "root" }];
+	    tryLocsList.forEach(pushTryEntry, this);
+	    this.reset();
+	  }
+	
+	  runtime.keys = function(object) {
+	    var keys = [];
+	    for (var key in object) {
+	      keys.push(key);
+	    }
+	    keys.reverse();
+	
+	    // Rather than returning an object with a next method, we keep
+	    // things simple and return the next function itself.
+	    return function next() {
+	      while (keys.length) {
+	        var key = keys.pop();
+	        if (key in object) {
+	          next.value = key;
+	          next.done = false;
+	          return next;
+	        }
+	      }
+	
+	      // To avoid creating an additional object, we just hang the .value
+	      // and .done properties off the next function object itself. This
+	      // also ensures that the minifier will not anonymize the function.
+	      next.done = true;
+	      return next;
+	    };
+	  };
+	
+	  function values(iterable) {
+	    if (iterable) {
+	      var iteratorMethod = iterable[iteratorSymbol];
+	      if (iteratorMethod) {
+	        return iteratorMethod.call(iterable);
+	      }
+	
+	      if (typeof iterable.next === "function") {
+	        return iterable;
+	      }
+	
+	      if (!isNaN(iterable.length)) {
+	        var i = -1, next = function next() {
+	          while (++i < iterable.length) {
+	            if (hasOwn.call(iterable, i)) {
+	              next.value = iterable[i];
+	              next.done = false;
+	              return next;
+	            }
+	          }
+	
+	          next.value = undefined;
+	          next.done = true;
+	
+	          return next;
+	        };
+	
+	        return next.next = next;
+	      }
+	    }
+	
+	    // Return an iterator with no values.
+	    return { next: doneResult };
+	  }
+	  runtime.values = values;
+	
+	  function doneResult() {
+	    return { value: undefined, done: true };
+	  }
+	
+	  Context.prototype = {
+	    constructor: Context,
+	
+	    reset: function() {
+	      this.prev = 0;
+	      this.next = 0;
+	      this.sent = undefined;
+	      this.done = false;
+	      this.delegate = null;
+	
+	      this.tryEntries.forEach(resetTryEntry);
+	
+	      // Pre-initialize at least 20 temporary variables to enable hidden
+	      // class optimizations for simple generators.
+	      for (var tempIndex = 0, tempName;
+	           hasOwn.call(this, tempName = "t" + tempIndex) || tempIndex < 20;
+	           ++tempIndex) {
+	        this[tempName] = null;
+	      }
+	    },
+	
+	    stop: function() {
+	      this.done = true;
+	
+	      var rootEntry = this.tryEntries[0];
+	      var rootRecord = rootEntry.completion;
+	      if (rootRecord.type === "throw") {
+	        throw rootRecord.arg;
+	      }
+	
+	      return this.rval;
+	    },
+	
+	    dispatchException: function(exception) {
+	      if (this.done) {
+	        throw exception;
+	      }
+	
+	      var context = this;
+	      function handle(loc, caught) {
+	        record.type = "throw";
+	        record.arg = exception;
+	        context.next = loc;
+	        return !!caught;
+	      }
+	
+	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+	        var entry = this.tryEntries[i];
+	        var record = entry.completion;
+	
+	        if (entry.tryLoc === "root") {
+	          // Exception thrown outside of any try block that could handle
+	          // it, so set the completion value of the entire function to
+	          // throw the exception.
+	          return handle("end");
+	        }
+	
+	        if (entry.tryLoc <= this.prev) {
+	          var hasCatch = hasOwn.call(entry, "catchLoc");
+	          var hasFinally = hasOwn.call(entry, "finallyLoc");
+	
+	          if (hasCatch && hasFinally) {
+	            if (this.prev < entry.catchLoc) {
+	              return handle(entry.catchLoc, true);
+	            } else if (this.prev < entry.finallyLoc) {
+	              return handle(entry.finallyLoc);
+	            }
+	
+	          } else if (hasCatch) {
+	            if (this.prev < entry.catchLoc) {
+	              return handle(entry.catchLoc, true);
+	            }
+	
+	          } else if (hasFinally) {
+	            if (this.prev < entry.finallyLoc) {
+	              return handle(entry.finallyLoc);
+	            }
+	
+	          } else {
+	            throw new Error("try statement without catch or finally");
+	          }
+	        }
+	      }
+	    },
+	
+	    abrupt: function(type, arg) {
+	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+	        var entry = this.tryEntries[i];
+	        if (entry.tryLoc <= this.prev &&
+	            hasOwn.call(entry, "finallyLoc") &&
+	            this.prev < entry.finallyLoc) {
+	          var finallyEntry = entry;
+	          break;
+	        }
+	      }
+	
+	      if (finallyEntry &&
+	          (type === "break" ||
+	           type === "continue") &&
+	          finallyEntry.tryLoc <= arg &&
+	          arg < finallyEntry.finallyLoc) {
+	        // Ignore the finally entry if control is not jumping to a
+	        // location outside the try/catch block.
+	        finallyEntry = null;
+	      }
+	
+	      var record = finallyEntry ? finallyEntry.completion : {};
+	      record.type = type;
+	      record.arg = arg;
+	
+	      if (finallyEntry) {
+	        this.next = finallyEntry.finallyLoc;
+	      } else {
+	        this.complete(record);
+	      }
+	
+	      return ContinueSentinel;
+	    },
+	
+	    complete: function(record, afterLoc) {
+	      if (record.type === "throw") {
+	        throw record.arg;
+	      }
+	
+	      if (record.type === "break" ||
+	          record.type === "continue") {
+	        this.next = record.arg;
+	      } else if (record.type === "return") {
+	        this.rval = record.arg;
+	        this.next = "end";
+	      } else if (record.type === "normal" && afterLoc) {
+	        this.next = afterLoc;
+	      }
+	
+	      return ContinueSentinel;
+	    },
+	
+	    finish: function(finallyLoc) {
+	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+	        var entry = this.tryEntries[i];
+	        if (entry.finallyLoc === finallyLoc) {
+	          return this.complete(entry.completion, entry.afterLoc);
+	        }
+	      }
+	    },
+	
+	    "catch": function(tryLoc) {
+	      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+	        var entry = this.tryEntries[i];
+	        if (entry.tryLoc === tryLoc) {
+	          var record = entry.completion;
+	          if (record.type === "throw") {
+	            var thrown = record.arg;
+	            resetTryEntry(entry);
+	          }
+	          return thrown;
+	        }
+	      }
+	
+	      // The context.catch method must only be called with a location
+	      // argument that corresponds to a known catch block.
+	      throw new Error("illegal catch attempt");
+	    },
+	
+	    delegateYield: function(iterable, resultName, nextLoc) {
+	      this.delegate = {
+	        iterator: values(iterable),
+	        resultName: resultName,
+	        nextLoc: nextLoc
+	      };
+	
+	      return ContinueSentinel;
+	    }
+	  };
+	})(
+	  // Among the various tricks for obtaining a reference to the global
+	  // object, this seems to be the most reliable technique that does not
+	  // use indirect eval (which violates Content Security Policy).
+	  typeof global === "object" ? global :
+	  typeof window === "object" ? window : this
+	);
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 96 */
+/*!****************************************!*\
+  !*** ./~/babel-core/~/core-js/shim.js ***!
+  \****************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./modules/es5 */ 140);
+	__webpack_require__(/*! ./modules/es6.symbol */ 97);
+	__webpack_require__(/*! ./modules/es6.object.assign */ 98);
+	__webpack_require__(/*! ./modules/es6.object.is */ 99);
+	__webpack_require__(/*! ./modules/es6.object.set-prototype-of */ 100);
+	__webpack_require__(/*! ./modules/es6.object.to-string */ 101);
+	__webpack_require__(/*! ./modules/es6.object.statics-accept-primitives */ 102);
+	__webpack_require__(/*! ./modules/es6.function.name */ 103);
+	__webpack_require__(/*! ./modules/es6.number.constructor */ 104);
+	__webpack_require__(/*! ./modules/es6.number.statics */ 105);
+	__webpack_require__(/*! ./modules/es6.math */ 106);
+	__webpack_require__(/*! ./modules/es6.string.from-code-point */ 107);
+	__webpack_require__(/*! ./modules/es6.string.raw */ 108);
+	__webpack_require__(/*! ./modules/es6.string.iterator */ 109);
+	__webpack_require__(/*! ./modules/es6.string.code-point-at */ 110);
+	__webpack_require__(/*! ./modules/es6.string.ends-with */ 111);
+	__webpack_require__(/*! ./modules/es6.string.includes */ 112);
+	__webpack_require__(/*! ./modules/es6.string.repeat */ 113);
+	__webpack_require__(/*! ./modules/es6.string.starts-with */ 114);
+	__webpack_require__(/*! ./modules/es6.array.from */ 115);
+	__webpack_require__(/*! ./modules/es6.array.of */ 116);
+	__webpack_require__(/*! ./modules/es6.array.iterator */ 117);
+	__webpack_require__(/*! ./modules/es6.array.species */ 118);
+	__webpack_require__(/*! ./modules/es6.array.copy-within */ 119);
+	__webpack_require__(/*! ./modules/es6.array.fill */ 120);
+	__webpack_require__(/*! ./modules/es6.array.find */ 121);
+	__webpack_require__(/*! ./modules/es6.array.find-index */ 122);
+	__webpack_require__(/*! ./modules/es6.regexp */ 123);
+	__webpack_require__(/*! ./modules/es6.promise */ 124);
+	__webpack_require__(/*! ./modules/es6.map */ 125);
+	__webpack_require__(/*! ./modules/es6.set */ 126);
+	__webpack_require__(/*! ./modules/es6.weak-map */ 127);
+	__webpack_require__(/*! ./modules/es6.weak-set */ 128);
+	__webpack_require__(/*! ./modules/es6.reflect */ 129);
+	__webpack_require__(/*! ./modules/es7.array.includes */ 130);
+	__webpack_require__(/*! ./modules/es7.string.at */ 131);
+	__webpack_require__(/*! ./modules/es7.regexp.escape */ 132);
+	__webpack_require__(/*! ./modules/es7.object.get-own-property-descriptors */ 133);
+	__webpack_require__(/*! ./modules/es7.object.to-array */ 134);
+	__webpack_require__(/*! ./modules/js.array.statics */ 135);
+	__webpack_require__(/*! ./modules/web.timers */ 136);
+	__webpack_require__(/*! ./modules/web.immediate */ 137);
+	__webpack_require__(/*! ./modules/web.dom.iterable */ 138);
+	module.exports = __webpack_require__(/*! ./modules/$ */ 139).core;
+
+/***/ },
+/* 97 */
+/*!******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.symbol.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// ECMAScript 6 symbols shim
+	var $        = __webpack_require__(/*! ./$ */ 139)
+	  , setTag   = __webpack_require__(/*! ./$.cof */ 141).set
+	  , uid      = __webpack_require__(/*! ./$.uid */ 142)
+	  , $def     = __webpack_require__(/*! ./$.def */ 143)
+	  , keyOf    = __webpack_require__(/*! ./$.keyof */ 144)
+	  , has      = $.has
+	  , hide     = $.hide
+	  , getNames = $.getNames
+	  , toObject = $.toObject
+	  , Symbol   = $.g.Symbol
+	  , Base     = Symbol
+	  , setter   = false
+	  , TAG      = uid.safe('tag')
+	  , SymbolRegistry = {}
+	  , AllSymbols     = {};
+	
+	function wrap(tag){
+	  var sym = AllSymbols[tag] = $.set($.create(Symbol.prototype), TAG, tag);
+	  $.DESC && setter && $.setDesc(Object.prototype, tag, {
+	    configurable: true,
+	    set: function(value){
+	      hide(this, tag, value);
+	    }
+	  });
+	  return sym;
+	}
+	
+	// 19.4.1.1 Symbol([description])
+	if(!$.isFunction(Symbol)){
+	  Symbol = function(description){
+	    if(this instanceof Symbol)throw TypeError('Symbol is not a constructor');
+	    return wrap(uid(description));
+	  };
+	  hide(Symbol.prototype, 'toString', function(){
+	    return this[TAG];
+	  });
+	}
+	$def($def.G + $def.W, {Symbol: Symbol});
+	
+	var symbolStatics = {
+	  // 19.4.2.1 Symbol.for(key)
+	  'for': function(key){
+	    return has(SymbolRegistry, key += '')
+	      ? SymbolRegistry[key]
+	      : SymbolRegistry[key] = Symbol(key);
+	  },
+	  // 19.4.2.5 Symbol.keyFor(sym)
+	  keyFor: function(key){
+	    return keyOf(SymbolRegistry, key);
+	  },
+	  pure: uid.safe,
+	  set: $.set,
+	  useSetter: function(){ setter = true; },
+	  useSimple: function(){ setter = false; }
+	};
+	// 19.4.2.2 Symbol.hasInstance
+	// 19.4.2.3 Symbol.isConcatSpreadable
+	// 19.4.2.4 Symbol.iterator
+	// 19.4.2.6 Symbol.match
+	// 19.4.2.8 Symbol.replace
+	// 19.4.2.9 Symbol.search
+	// 19.4.2.10 Symbol.species
+	// 19.4.2.11 Symbol.split
+	// 19.4.2.12 Symbol.toPrimitive
+	// 19.4.2.13 Symbol.toStringTag
+	// 19.4.2.14 Symbol.unscopables
+	$.each.call((
+	    'hasInstance,isConcatSpreadable,iterator,match,replace,search,' +
+	    'species,split,toPrimitive,toStringTag,unscopables'
+	  ).split(','), function(it){
+	    var sym = __webpack_require__(/*! ./$.wks */ 145)(it);
+	    symbolStatics[it] = Symbol === Base ? sym : wrap(sym);
+	  }
+	);
+	
+	setter = true;
+	
+	$def($def.S, 'Symbol', symbolStatics);
+	
+	$def($def.S + $def.F * (Symbol != Base), 'Object', {
+	  // 19.1.2.7 Object.getOwnPropertyNames(O)
+	  getOwnPropertyNames: function(it){
+	    var names = getNames(toObject(it)), result = [], key, i = 0;
+	    while(names.length > i)has(AllSymbols, key = names[i++]) || result.push(key);
+	    return result;
+	  },
+	  // 19.1.2.8 Object.getOwnPropertySymbols(O)
+	  getOwnPropertySymbols: function(it){
+	    var names = getNames(toObject(it)), result = [], key, i = 0;
+	    while(names.length > i)has(AllSymbols, key = names[i++]) && result.push(AllSymbols[key]);
+	    return result;
+	  }
+	});
+	
+	setTag(Symbol, 'Symbol');
+	// 20.2.1.9 Math[@@toStringTag]
+	setTag(Math, 'Math', true);
+	// 24.3.3 JSON[@@toStringTag]
+	setTag($.g.JSON, 'JSON', true);
+
+/***/ },
+/* 98 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.object.assign.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.S, 'Object', {assign: __webpack_require__(/*! ./$.assign */ 146)});
+
+/***/ },
+/* 99 */
+/*!*********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.object.is.js ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.10 Object.is(value1, value2)
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.S, 'Object', {
+	  is: function(x, y){
+	    return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
+	  }
+	});
+
+/***/ },
+/* 100 */
+/*!***********************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.object.set-prototype-of.js ***!
+  \***********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.19 Object.setPrototypeOf(O, proto)
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.S, 'Object', {setPrototypeOf: __webpack_require__(/*! ./$.set-proto */ 147)});
+
+/***/ },
+/* 101 */
+/*!****************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.object.to-string.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.3.6 Object.prototype.toString()
+	var $   = __webpack_require__(/*! ./$ */ 139)
+	  , cof = __webpack_require__(/*! ./$.cof */ 141)
+	  , tmp = {};
+	tmp[__webpack_require__(/*! ./$.wks */ 145)('toStringTag')] = 'z';
+	if($.FW && cof(tmp) != 'z')$.hide(Object.prototype, 'toString', function(){
+	  return '[object ' + cof.classof(this) + ']';
+	});
+
+/***/ },
+/* 102 */
+/*!********************************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.object.statics-accept-primitives.js ***!
+  \********************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(/*! ./$ */ 139)
+	  , $def     = __webpack_require__(/*! ./$.def */ 143)
+	  , isObject = $.isObject
+	  , toObject = $.toObject;
+	function wrapObjectMethod(METHOD, MODE){
+	  var fn  = ($.core.Object || {})[METHOD] || Object[METHOD]
+	    , f   = 0
+	    , o   = {};
+	  o[METHOD] = MODE == 1 ? function(it){
+	    return isObject(it) ? fn(it) : it;
+	  } : MODE == 2 ? function(it){
+	    return isObject(it) ? fn(it) : true;
+	  } : MODE == 3 ? function(it){
+	    return isObject(it) ? fn(it) : false;
+	  } : MODE == 4 ? function(it, key){
+	    return fn(toObject(it), key);
+	  } : MODE == 5 ? function(it){
+	    return fn(Object($.assertDefined(it)));
+	  } : function(it){
+	    return fn(toObject(it));
+	  };
+	  try {
+	    fn('z');
+	  } catch(e){
+	    f = 1;
+	  }
+	  $def($def.S + $def.F * f, 'Object', o);
+	}
+	wrapObjectMethod('freeze', 1);
+	wrapObjectMethod('seal', 1);
+	wrapObjectMethod('preventExtensions', 1);
+	wrapObjectMethod('isFrozen', 2);
+	wrapObjectMethod('isSealed', 2);
+	wrapObjectMethod('isExtensible', 3);
+	wrapObjectMethod('getOwnPropertyDescriptor', 4);
+	wrapObjectMethod('getPrototypeOf', 5);
+	wrapObjectMethod('keys');
+	wrapObjectMethod('getOwnPropertyNames');
+
+/***/ },
+/* 103 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.function.name.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , NAME = 'name'
+	  , setDesc = $.setDesc
+	  , FunctionProto = Function.prototype;
+	// 19.2.4.2 name
+	NAME in FunctionProto || $.FW && $.DESC && setDesc(FunctionProto, NAME, {
+	  configurable: true,
+	  get: function(){
+	    var match = String(this).match(/^\s*function ([^ (]*)/)
+	      , name  = match ? match[1] : '';
+	    $.has(this, NAME) || setDesc(this, NAME, $.desc(5, name));
+	    return name;
+	  },
+	  set: function(value){
+	    $.has(this, NAME) || setDesc(this, NAME, $.desc(0, value));
+	  }
+	});
+
+/***/ },
+/* 104 */
+/*!******************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.number.constructor.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $          = __webpack_require__(/*! ./$ */ 139)
+	  , isObject   = $.isObject
+	  , isFunction = $.isFunction
+	  , NUMBER     = 'Number'
+	  , Number     = $.g[NUMBER]
+	  , Base       = Number
+	  , proto      = Number.prototype;
+	function toPrimitive(it){
+	  var fn, val;
+	  if(isFunction(fn = it.valueOf) && !isObject(val = fn.call(it)))return val;
+	  if(isFunction(fn = it.toString) && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to number");
+	}
+	function toNumber(it){
+	  if(isObject(it))it = toPrimitive(it);
+	  if(typeof it == 'string' && it.length > 2 && it.charCodeAt(0) == 48){
+	    var binary = false;
+	    switch(it.charCodeAt(1)){
+	      case 66 : case 98  : binary = true;
+	      case 79 : case 111 : return parseInt(it.slice(2), binary ? 2 : 8);
+	    }
+	  } return +it;
+	}
+	if($.FW && !(Number('0o1') && Number('0b1'))){
+	  Number = function Number(it){
+	    return this instanceof Number ? new Base(toNumber(it)) : toNumber(it);
+	  };
+	  $.each.call($.DESC ? $.getNames(Base) : (
+	      // ES3:
+	      'MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,' +
+	      // ES6 (in case, if modules with ES6 Number statics required before):
+	      'EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,' +
+	      'MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger'
+	    ).split(','), function(key){
+	      if($.has(Base, key) && !$.has(Number, key)){
+	        $.setDesc(Number, key, $.getDesc(Base, key));
+	      }
+	    }
+	  );
+	  Number.prototype = proto;
+	  proto.constructor = Number;
+	  $.hide($.g, NUMBER, Number);
+	}
+
+/***/ },
+/* 105 */
+/*!**************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.number.statics.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $     = __webpack_require__(/*! ./$ */ 139)
+	  , $def  = __webpack_require__(/*! ./$.def */ 143)
+	  , abs   = Math.abs
+	  , floor = Math.floor
+	  , MAX_SAFE_INTEGER = 0x1fffffffffffff; // pow(2, 53) - 1 == 9007199254740991;
+	function isInteger(it){
+	  return !$.isObject(it) && isFinite(it) && floor(it) === it;
+	}
+	$def($def.S, 'Number', {
+	  // 20.1.2.1 Number.EPSILON
+	  EPSILON: Math.pow(2, -52),
+	  // 20.1.2.2 Number.isFinite(number)
+	  isFinite: function(it){
+	    return typeof it == 'number' && isFinite(it);
+	  },
+	  // 20.1.2.3 Number.isInteger(number)
+	  isInteger: isInteger,
+	  // 20.1.2.4 Number.isNaN(number)
+	  isNaN: function(number){
+	    return number != number;
+	  },
+	  // 20.1.2.5 Number.isSafeInteger(number)
+	  isSafeInteger: function(number){
+	    return isInteger(number) && abs(number) <= MAX_SAFE_INTEGER;
+	  },
+	  // 20.1.2.6 Number.MAX_SAFE_INTEGER
+	  MAX_SAFE_INTEGER: MAX_SAFE_INTEGER,
+	  // 20.1.2.10 Number.MIN_SAFE_INTEGER
+	  MIN_SAFE_INTEGER: -MAX_SAFE_INTEGER,
+	  // 20.1.2.12 Number.parseFloat(string)
+	  parseFloat: parseFloat,
+	  // 20.1.2.13 Number.parseInt(string, radix)
+	  parseInt: parseInt
+	});
+
+/***/ },
+/* 106 */
+/*!****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.math.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var Infinity = 1 / 0
+	  , $def  = __webpack_require__(/*! ./$.def */ 143)
+	  , E     = Math.E
+	  , pow   = Math.pow
+	  , abs   = Math.abs
+	  , exp   = Math.exp
+	  , log   = Math.log
+	  , sqrt  = Math.sqrt
+	  , ceil  = Math.ceil
+	  , floor = Math.floor
+	  , sign  = Math.sign || function(x){
+	      return (x = +x) == 0 || x != x ? x : x < 0 ? -1 : 1;
+	    };
+	
+	// 20.2.2.5 Math.asinh(x)
+	function asinh(x){
+	  return !isFinite(x = +x) || x == 0 ? x : x < 0 ? -asinh(-x) : log(x + sqrt(x * x + 1));
+	}
+	// 20.2.2.14 Math.expm1(x)
+	function expm1(x){
+	  return (x = +x) == 0 ? x : x > -1e-6 && x < 1e-6 ? x + x * x / 2 : exp(x) - 1;
+	}
+	
+	$def($def.S, 'Math', {
+	  // 20.2.2.3 Math.acosh(x)
+	  acosh: function(x){
+	    return (x = +x) < 1 ? NaN : isFinite(x) ? log(x / E + sqrt(x + 1) * sqrt(x - 1) / E) + 1 : x;
+	  },
+	  // 20.2.2.5 Math.asinh(x)
+	  asinh: asinh,
+	  // 20.2.2.7 Math.atanh(x)
+	  atanh: function(x){
+	    return (x = +x) == 0 ? x : log((1 + x) / (1 - x)) / 2;
+	  },
+	  // 20.2.2.9 Math.cbrt(x)
+	  cbrt: function(x){
+	    return sign(x = +x) * pow(abs(x), 1 / 3);
+	  },
+	  // 20.2.2.11 Math.clz32(x)
+	  clz32: function(x){
+	    return (x >>>= 0) ? 32 - x.toString(2).length : 32;
+	  },
+	  // 20.2.2.12 Math.cosh(x)
+	  cosh: function(x){
+	    return (exp(x = +x) + exp(-x)) / 2;
+	  },
+	  // 20.2.2.14 Math.expm1(x)
+	  expm1: expm1,
+	  // 20.2.2.16 Math.fround(x)
+	  // TODO: fallback for IE9-
+	  fround: function(x){
+	    return new Float32Array([x])[0];
+	  },
+	  // 20.2.2.17 Math.hypot([value1[, value2[, … ]]])
+	  hypot: function(value1, value2){ // eslint-disable-line no-unused-vars
+	    var sum  = 0
+	      , len1 = arguments.length
+	      , len2 = len1
+	      , args = Array(len1)
+	      , larg = -Infinity
+	      , arg;
+	    while(len1--){
+	      arg = args[len1] = +arguments[len1];
+	      if(arg == Infinity || arg == -Infinity)return Infinity;
+	      if(arg > larg)larg = arg;
+	    }
+	    larg = arg || 1;
+	    while(len2--)sum += pow(args[len2] / larg, 2);
+	    return larg * sqrt(sum);
+	  },
+	  // 20.2.2.18 Math.imul(x, y)
+	  imul: function(x, y){
+	    var UInt16 = 0xffff
+	      , xn = +x
+	      , yn = +y
+	      , xl = UInt16 & xn
+	      , yl = UInt16 & yn;
+	    return 0 | xl * yl + ((UInt16 & xn >>> 16) * yl + xl * (UInt16 & yn >>> 16) << 16 >>> 0);
+	  },
+	  // 20.2.2.20 Math.log1p(x)
+	  log1p: function(x){
+	    return (x = +x) > -1e-8 && x < 1e-8 ? x - x * x / 2 : log(1 + x);
+	  },
+	  // 20.2.2.21 Math.log10(x)
+	  log10: function(x){
+	    return log(x) / Math.LN10;
+	  },
+	  // 20.2.2.22 Math.log2(x)
+	  log2: function(x){
+	    return log(x) / Math.LN2;
+	  },
+	  // 20.2.2.28 Math.sign(x)
+	  sign: sign,
+	  // 20.2.2.30 Math.sinh(x)
+	  sinh: function(x){
+	    return abs(x = +x) < 1 ? (expm1(x) - expm1(-x)) / 2 : (exp(x - 1) - exp(-x - 1)) * (E / 2);
+	  },
+	  // 20.2.2.33 Math.tanh(x)
+	  tanh: function(x){
+	    var a = expm1(x = +x)
+	      , b = expm1(-x);
+	    return a == Infinity ? 1 : b == Infinity ? -1 : (a - b) / (exp(x) + exp(-x));
+	  },
+	  // 20.2.2.34 Math.trunc(x)
+	  trunc: function(it){
+	    return (it > 0 ? floor : ceil)(it);
+	  }
+	});
+
+/***/ },
+/* 107 */
+/*!**********************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.from-code-point.js ***!
+  \**********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , toIndex = __webpack_require__(/*! ./$ */ 139).toIndex
+	  , fromCharCode = String.fromCharCode;
+	
+	$def($def.S, 'String', {
+	  // 21.1.2.2 String.fromCodePoint(...codePoints)
+	  fromCodePoint: function(x){ // eslint-disable-line no-unused-vars
+	    var res = []
+	      , len = arguments.length
+	      , i   = 0
+	      , code;
+	    while(len > i){
+	      code = +arguments[i++];
+	      if(toIndex(code, 0x10ffff) !== code)throw RangeError(code + ' is not a valid code point');
+	      res.push(code < 0x10000
+	        ? fromCharCode(code)
+	        : fromCharCode(((code -= 0x10000) >> 10) + 0xd800, code % 0x400 + 0xdc00)
+	      );
+	    } return res.join('');
+	  }
+	});
+
+/***/ },
+/* 108 */
+/*!**********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.raw.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , $def = __webpack_require__(/*! ./$.def */ 143);
+	
+	$def($def.S, 'String', {
+	  // 21.1.2.4 String.raw(callSite, ...substitutions)
+	  raw: function(callSite){
+	    var raw = $.toObject(callSite.raw)
+	      , len = $.toLength(raw.length)
+	      , sln = arguments.length
+	      , res = []
+	      , i   = 0;
+	    while(len > i){
+	      res.push(String(raw[i++]));
+	      if(i < sln)res.push(String(arguments[i]));
+	    } return res.join('');
+	  }
+	});
+
+/***/ },
+/* 109 */
+/*!***************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.iterator.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var set   = __webpack_require__(/*! ./$ */ 139).set
+	  , at    = __webpack_require__(/*! ./$.string-at */ 148)(true)
+	  , ITER  = __webpack_require__(/*! ./$.uid */ 142).safe('iter')
+	  , $iter = __webpack_require__(/*! ./$.iter */ 149)
+	  , step  = $iter.step;
+	
+	// 21.1.3.27 String.prototype[@@iterator]()
+	$iter.std(String, 'String', function(iterated){
+	  set(this, ITER, {o: String(iterated), i: 0});
+	// 21.1.5.2.1 %StringIteratorPrototype%.next()
+	}, function(){
+	  var iter  = this[ITER]
+	    , O     = iter.o
+	    , index = iter.i
+	    , point;
+	  if(index >= O.length)return step(1);
+	  point = at.call(O, index);
+	  iter.i += point.length;
+	  return step(0, point);
+	});
+
+/***/ },
+/* 110 */
+/*!********************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.code-point-at.js ***!
+  \********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.P, 'String', {
+	  // 21.1.3.3 String.prototype.codePointAt(pos)
+	  codePointAt: __webpack_require__(/*! ./$.string-at */ 148)(false)
+	});
+
+/***/ },
+/* 111 */
+/*!****************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.ends-with.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def = __webpack_require__(/*! ./$.def */ 143)
+	  , toLength = $.toLength;
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.6 String.prototype.endsWith(searchString [, endPosition])
+	  endsWith: function(searchString /*, endPosition = @length */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    var that = String($.assertDefined(this))
+	      , endPosition = arguments[1]
+	      , len = toLength(that.length)
+	      , end = endPosition === undefined ? len : Math.min(toLength(endPosition), len);
+	    searchString += '';
+	    return that.slice(end - searchString.length, end) === searchString;
+	  }
+	});
+
+/***/ },
+/* 112 */
+/*!***************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.includes.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def = __webpack_require__(/*! ./$.def */ 143);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.7 String.prototype.includes(searchString, position = 0)
+	  includes: function(searchString /*, position = 0 */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    return !!~String($.assertDefined(this)).indexOf(searchString, arguments[1]);
+	  }
+	});
+
+/***/ },
+/* 113 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.repeat.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , $def = __webpack_require__(/*! ./$.def */ 143);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.13 String.prototype.repeat(count)
+	  repeat: function(count){
+	    var str = String($.assertDefined(this))
+	      , res = ''
+	      , n   = $.toInteger(count);
+	    if(n < 0 || n == Infinity)throw RangeError("Count can't be negative");
+	    for(;n > 0; (n >>>= 1) && (str += str))if(n & 1)res += str;
+	    return res;
+	  }
+	});
+
+/***/ },
+/* 114 */
+/*!******************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.string.starts-with.js ***!
+  \******************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , cof  = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def = __webpack_require__(/*! ./$.def */ 143);
+	
+	$def($def.P, 'String', {
+	  // 21.1.3.18 String.prototype.startsWith(searchString [, position ])
+	  startsWith: function(searchString /*, position = 0 */){
+	    if(cof(searchString) == 'RegExp')throw TypeError();
+	    var that  = String($.assertDefined(this))
+	      , index = $.toLength(Math.min(arguments[1], that.length));
+	    searchString += '';
+	    return that.slice(index, index + searchString.length) === searchString;
+	  }
+	});
+
+/***/ },
+/* 115 */
+/*!**********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.from.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $     = __webpack_require__(/*! ./$ */ 139)
+	  , ctx   = __webpack_require__(/*! ./$.ctx */ 150)
+	  , $def  = __webpack_require__(/*! ./$.def */ 143)
+	  , $iter = __webpack_require__(/*! ./$.iter */ 149)
+	  , stepCall = $iter.stepCall;
+	$def($def.S + $def.F * $iter.DANGER_CLOSING, 'Array', {
+	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
+	  from: function(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
+	    var O       = Object($.assertDefined(arrayLike))
+	      , mapfn   = arguments[1]
+	      , mapping = mapfn !== undefined
+	      , f       = mapping ? ctx(mapfn, arguments[2], 2) : undefined
+	      , index   = 0
+	      , length, result, step, iterator;
+	    if($iter.is(O)){
+	      iterator = $iter.get(O);
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      result   = new (typeof this == 'function' ? this : Array);
+	      for(; !(step = iterator.next()).done; index++){
+	        result[index] = mapping ? stepCall(iterator, f, [step.value, index], true) : step.value;
+	      }
+	    } else {
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      result = new (typeof this == 'function' ? this : Array)(length = $.toLength(O.length));
+	      for(; length > index; index++){
+	        result[index] = mapping ? f(O[index], index) : O[index];
+	      }
+	    }
+	    result.length = index;
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 116 */
+/*!********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.of.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.S, 'Array', {
+	  // 22.1.2.3 Array.of( ...items)
+	  of: function(/* ...args */){
+	    var index  = 0
+	      , length = arguments.length
+	      // strange IE quirks mode bug -> use typeof instead of isFunction
+	      , result = new (typeof this == 'function' ? this : Array)(length);
+	    while(length > index)result[index] = arguments[index++];
+	    result.length = length;
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 117 */
+/*!**************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.iterator.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(/*! ./$ */ 139)
+	  , setUnscope = __webpack_require__(/*! ./$.unscope */ 151)
+	  , ITER       = __webpack_require__(/*! ./$.uid */ 142).safe('iter')
+	  , $iter      = __webpack_require__(/*! ./$.iter */ 149)
+	  , step       = $iter.step
+	  , Iterators  = $iter.Iterators;
+	
+	// 22.1.3.4 Array.prototype.entries()
+	// 22.1.3.13 Array.prototype.keys()
+	// 22.1.3.29 Array.prototype.values()
+	// 22.1.3.30 Array.prototype[@@iterator]()
+	$iter.std(Array, 'Array', function(iterated, kind){
+	  $.set(this, ITER, {o: $.toObject(iterated), i: 0, k: kind});
+	// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+	}, function(){
+	  var iter  = this[ITER]
+	    , O     = iter.o
+	    , kind  = iter.k
+	    , index = iter.i++;
+	  if(!O || index >= O.length){
+	    iter.o = undefined;
+	    return step(1);
+	  }
+	  if(kind == 'key'  )return step(0, index);
+	  if(kind == 'value')return step(0, O[index]);
+	  return step(0, [index, O[index]]);
+	}, 'value');
+	
+	// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+	Iterators.Arguments = Iterators.Array;
+	
+	setUnscope('keys');
+	setUnscope('values');
+	setUnscope('entries');
+
+/***/ },
+/* 118 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.species.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./$.species */ 152)(Array);
+
+/***/ },
+/* 119 */
+/*!*****************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.copy-within.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , toIndex = $.toIndex;
+	$def($def.P, 'Array', {
+	  // 22.1.3.3 Array.prototype.copyWithin(target, start, end = this.length)
+	  copyWithin: function(target/* = 0 */, start /* = 0, end = @length */){
+	    var O     = Object($.assertDefined(this))
+	      , len   = $.toLength(O.length)
+	      , to    = toIndex(target, len)
+	      , from  = toIndex(start, len)
+	      , end   = arguments[2]
+	      , fin   = end === undefined ? len : toIndex(end, len)
+	      , count = Math.min(fin - from, len - to)
+	      , inc   = 1;
+	    if(from < to && to < from + count){
+	      inc  = -1;
+	      from = from + count - 1;
+	      to   = to   + count - 1;
+	    }
+	    while(count-- > 0){
+	      if(from in O)O[to] = O[from];
+	      else delete O[to];
+	      to   += inc;
+	      from += inc;
+	    } return O;
+	  }
+	});
+	__webpack_require__(/*! ./$.unscope */ 151)('copyWithin');
+
+/***/ },
+/* 120 */
+/*!**********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.fill.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , toIndex = $.toIndex;
+	$def($def.P, 'Array', {
+	  // 22.1.3.6 Array.prototype.fill(value, start = 0, end = this.length)
+	  fill: function(value /*, start = 0, end = @length */){
+	    var O      = Object($.assertDefined(this))
+	      , length = $.toLength(O.length)
+	      , index  = toIndex(arguments[1], length)
+	      , end    = arguments[2]
+	      , endPos = end === undefined ? length : toIndex(end, length);
+	    while(endPos > index)O[index++] = value;
+	    return O;
+	  }
+	});
+	__webpack_require__(/*! ./$.unscope */ 151)('fill');
+
+/***/ },
+/* 121 */
+/*!**********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.find.js ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.P, 'Array', {
+	  // 22.1.3.8 Array.prototype.find(predicate, thisArg = undefined)
+	  find: __webpack_require__(/*! ./$.array-methods */ 153)(5)
+	});
+	__webpack_require__(/*! ./$.unscope */ 151)('find');
+
+/***/ },
+/* 122 */
+/*!****************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.array.find-index.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.P, 'Array', {
+	  // 22.1.3.9 Array.prototype.findIndex(predicate, thisArg = undefined)
+	  findIndex: __webpack_require__(/*! ./$.array-methods */ 153)(6)
+	});
+	__webpack_require__(/*! ./$.unscope */ 151)('findIndex');
+
+/***/ },
+/* 123 */
+/*!******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.regexp.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $      = __webpack_require__(/*! ./$ */ 139)
+	  , cof    = __webpack_require__(/*! ./$.cof */ 141)
+	  , RegExp = $.g.RegExp
+	  , Base   = RegExp
+	  , proto  = RegExp.prototype;
+	if($.FW && $.DESC){
+	  // RegExp allows a regex with flags as the pattern
+	  if(!function(){try{ return RegExp(/a/g, 'i') == '/a/i'; }catch(e){ /* empty */ }}()){
+	    RegExp = function RegExp(pattern, flags){
+	      return new Base(cof(pattern) == 'RegExp' && flags !== undefined
+	        ? pattern.source : pattern, flags);
+	    };
+	    $.each.call($.getNames(Base), function(key){
+	      key in RegExp || $.setDesc(RegExp, key, {
+	        configurable: true,
+	        get: function(){ return Base[key]; },
+	        set: function(it){ Base[key] = it; }
+	      });
+	    });
+	    proto.constructor = RegExp;
+	    RegExp.prototype = proto;
+	    $.hide($.g, 'RegExp', RegExp);
+	  }
+	  // 21.2.5.3 get RegExp.prototype.flags()
+	  if(/./g.flags != 'g')$.setDesc(proto, 'flags', {
+	    configurable: true,
+	    get: __webpack_require__(/*! ./$.replacer */ 154)(/^.*\/(\w*)$/, '$1')
+	  });
+	}
+	__webpack_require__(/*! ./$.species */ 152)(RegExp);
+
+/***/ },
+/* 124 */
+/*!*******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.promise.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , ctx     = __webpack_require__(/*! ./$.ctx */ 150)
+	  , cof     = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , assert  = __webpack_require__(/*! ./$.assert */ 155)
+	  , $iter   = __webpack_require__(/*! ./$.iter */ 149)
+	  , SPECIES = __webpack_require__(/*! ./$.wks */ 145)('species')
+	  , RECORD  = __webpack_require__(/*! ./$.uid */ 142).safe('record')
+	  , forOf   = $iter.forOf
+	  , PROMISE = 'Promise'
+	  , global  = $.g
+	  , process = global.process
+	  , asap    = process && process.nextTick || __webpack_require__(/*! ./$.task */ 156).set
+	  , Promise = global[PROMISE]
+	  , Base    = Promise
+	  , isFunction     = $.isFunction
+	  , isObject       = $.isObject
+	  , assertFunction = assert.fn
+	  , assertObject   = assert.obj
+	  , test;
+	function getConstructor(C){
+	  var S = assertObject(C)[SPECIES];
+	  return S != undefined ? S : C;
+	}
+	isFunction(Promise) && isFunction(Promise.resolve)
+	&& Promise.resolve(test = new Promise(function(){})) == test
+	|| function(){
+	  function isThenable(it){
+	    var then;
+	    if(isObject(it))then = it.then;
+	    return isFunction(then) ? then : false;
+	  }
+	  function handledRejectionOrHasOnRejected(promise){
+	    var record = promise[RECORD]
+	      , chain  = record.c
+	      , i      = 0
+	      , react;
+	    if(record.h)return true;
+	    while(chain.length > i){
+	      react = chain[i++];
+	      if(react.fail || handledRejectionOrHasOnRejected(react.P))return true;
+	    }
+	  }
+	  function notify(record, isReject){
+	    var chain = record.c;
+	    if(isReject || chain.length)asap(function(){
+	      var promise = record.p
+	        , value   = record.v
+	        , ok      = record.s == 1
+	        , i       = 0;
+	      if(isReject && !handledRejectionOrHasOnRejected(promise)){
+	        setTimeout(function(){
+	          if(!handledRejectionOrHasOnRejected(promise)){
+	            if(cof(process) == 'process'){
+	              process.emit('unhandledRejection', value, promise);
+	            } else if(global.console && isFunction(console.error)){
+	              console.error('Unhandled promise rejection', value);
+	            }
+	          }
+	        }, 1e3);
+	      } else while(chain.length > i)!function(react){
+	        var cb = ok ? react.ok : react.fail
+	          , ret, then;
+	        try {
+	          if(cb){
+	            if(!ok)record.h = true;
+	            ret = cb === true ? value : cb(value);
+	            if(ret === react.P){
+	              react.rej(TypeError(PROMISE + '-chain cycle'));
+	            } else if(then = isThenable(ret)){
+	              then.call(ret, react.res, react.rej);
+	            } else react.res(ret);
+	          } else react.rej(value);
+	        } catch(err){
+	          react.rej(err);
+	        }
+	      }(chain[i++]);
+	      chain.length = 0;
+	    });
+	  }
+	  function reject(value){
+	    var record = this;
+	    if(record.d)return;
+	    record.d = true;
+	    record = record.r || record; // unwrap
+	    record.v = value;
+	    record.s = 2;
+	    notify(record, true);
+	  }
+	  function resolve(value){
+	    var record = this
+	      , then, wrapper;
+	    if(record.d)return;
+	    record.d = true;
+	    record = record.r || record; // unwrap
+	    try {
+	      if(then = isThenable(value)){
+	        wrapper = {r: record, d: false}; // wrap
+	        then.call(value, ctx(resolve, wrapper, 1), ctx(reject, wrapper, 1));
+	      } else {
+	        record.v = value;
+	        record.s = 1;
+	        notify(record);
+	      }
+	    } catch(err){
+	      reject.call(wrapper || {r: record, d: false}, err); // wrap
+	    }
+	  }
+	  // 25.4.3.1 Promise(executor)
+	  Promise = function(executor){
+	    assertFunction(executor);
+	    var record = {
+	      p: assert.inst(this, Promise, PROMISE), // <- promise
+	      c: [],                                  // <- chain
+	      s: 0,                                   // <- state
+	      d: false,                               // <- done
+	      v: undefined,                           // <- value
+	      h: false                                // <- handled rejection
+	    };
+	    $.hide(this, RECORD, record);
+	    try {
+	      executor(ctx(resolve, record, 1), ctx(reject, record, 1));
+	    } catch(err){
+	      reject.call(record, err);
+	    }
+	  };
+	  $.mix(Promise.prototype, {
+	    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+	    then: function(onFulfilled, onRejected){
+	      var S = assertObject(assertObject(this).constructor)[SPECIES];
+	      var react = {
+	        ok:   isFunction(onFulfilled) ? onFulfilled : true,
+	        fail: isFunction(onRejected)  ? onRejected  : false
+	      };
+	      var P = react.P = new (S != undefined ? S : Promise)(function(res, rej){
+	        react.res = assertFunction(res);
+	        react.rej = assertFunction(rej);
+	      });
+	      var record = this[RECORD];
+	      record.c.push(react);
+	      record.s && notify(record);
+	      return P;
+	    },
+	    // 25.4.5.1 Promise.prototype.catch(onRejected)
+	    'catch': function(onRejected){
+	      return this.then(undefined, onRejected);
+	    }
+	  });
+	}();
+	$def($def.G + $def.W + $def.F * (Promise != Base), {Promise: Promise});
+	$def($def.S, PROMISE, {
+	  // 25.4.4.5 Promise.reject(r)
+	  reject: function(r){
+	    return new (getConstructor(this))(function(res, rej){
+	      rej(r);
+	    });
+	  },
+	  // 25.4.4.6 Promise.resolve(x)
+	  resolve: function(x){
+	    return isObject(x) && RECORD in x && $.getProto(x) === this.prototype
+	      ? x : new (getConstructor(this))(function(res){
+	        res(x);
+	      });
+	  }
+	});
+	$def($def.S + $def.F * ($iter.fail(function(iter){
+	  Promise.all(iter)['catch'](function(){});
+	}) || $iter.DANGER_CLOSING), PROMISE, {
+	  // 25.4.4.1 Promise.all(iterable)
+	  all: function(iterable){
+	    var C      = getConstructor(this)
+	      , values = [];
+	    return new C(function(resolve, reject){
+	      forOf(iterable, false, values.push, values);
+	      var remaining = values.length
+	        , results   = Array(remaining);
+	      if(remaining)$.each.call(values, function(promise, index){
+	        C.resolve(promise).then(function(value){
+	          results[index] = value;
+	          --remaining || resolve(results);
+	        }, reject);
+	      });
+	      else resolve(results);
+	    });
+	  },
+	  // 25.4.4.4 Promise.race(iterable)
+	  race: function(iterable){
+	    var C = getConstructor(this);
+	    return new C(function(resolve, reject){
+	      forOf(iterable, false, function(promise){
+	        C.resolve(promise).then(resolve, reject);
+	      });
+	    });
+	  }
+	});
+	cof.set(Promise, PROMISE);
+	__webpack_require__(/*! ./$.species */ 152)(Promise);
+
+/***/ },
+/* 125 */
+/*!***************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.map.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strong = __webpack_require__(/*! ./$.collection-strong */ 157);
+	
+	// 23.1 Map Objects
+	__webpack_require__(/*! ./$.collection */ 158)('Map', {
+	  // 23.1.3.6 Map.prototype.get(key)
+	  get: function(key){
+	    var entry = strong.getEntry(this, key);
+	    return entry && entry.v;
+	  },
+	  // 23.1.3.9 Map.prototype.set(key, value)
+	  set: function(key, value){
+	    return strong.def(this, key === 0 ? 0 : key, value);
+	  }
+	}, strong, true);
+
+/***/ },
+/* 126 */
+/*!***************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.set.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var strong = __webpack_require__(/*! ./$.collection-strong */ 157);
+	
+	// 23.2 Set Objects
+	__webpack_require__(/*! ./$.collection */ 158)('Set', {
+	  // 23.2.3.1 Set.prototype.add(value)
+	  add: function(value){
+	    return strong.def(this, value = value === 0 ? 0 : value, value);
+	  }
+	}, strong);
+
+/***/ },
+/* 127 */
+/*!********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.weak-map.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $         = __webpack_require__(/*! ./$ */ 139)
+	  , weak      = __webpack_require__(/*! ./$.collection-weak */ 159)
+	  , leakStore = weak.leakStore
+	  , ID        = weak.ID
+	  , WEAK      = weak.WEAK
+	  , has       = $.has
+	  , isObject  = $.isObject
+	  , isFrozen  = Object.isFrozen || $.core.Object.isFrozen
+	  , tmp       = {};
+	
+	// 23.3 WeakMap Objects
+	var WeakMap = __webpack_require__(/*! ./$.collection */ 158)('WeakMap', {
+	  // 23.3.3.3 WeakMap.prototype.get(key)
+	  get: function(key){
+	    if(isObject(key)){
+	      if(isFrozen(key))return leakStore(this).get(key);
+	      if(has(key, WEAK))return key[WEAK][this[ID]];
+	    }
+	  },
+	  // 23.3.3.5 WeakMap.prototype.set(key, value)
+	  set: function(key, value){
+	    return weak.def(this, key, value);
+	  }
+	}, weak, true, true);
+	
+	// IE11 WeakMap frozen keys fix
+	if($.FW && new WeakMap().set((Object.freeze || Object)(tmp), 7).get(tmp) != 7){
+	  $.each.call(['delete', 'has', 'get', 'set'], function(key){
+	    var method = WeakMap.prototype[key];
+	    WeakMap.prototype[key] = function(a, b){
+	      // store frozen objects on leaky map
+	      if(isObject(a) && isFrozen(a)){
+	        var result = leakStore(this)[key](a, b);
+	        return key == 'set' ? this : result;
+	      // store all the rest on native weakmap
+	      } return method.call(this, a, b);
+	    };
+	  });
+	}
+
+/***/ },
+/* 128 */
+/*!********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.weak-set.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var weak = __webpack_require__(/*! ./$.collection-weak */ 159);
+	
+	// 23.4 WeakSet Objects
+	__webpack_require__(/*! ./$.collection */ 158)('WeakSet', {
+	  // 23.4.3.1 WeakSet.prototype.add(value)
+	  add: function(value){
+	    return weak.def(this, value, true);
+	  }
+	}, weak, false, true);
+
+/***/ },
+/* 129 */
+/*!*******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es6.reflect.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $         = __webpack_require__(/*! ./$ */ 139)
+	  , $def      = __webpack_require__(/*! ./$.def */ 143)
+	  , setProto  = __webpack_require__(/*! ./$.set-proto */ 147)
+	  , $iter     = __webpack_require__(/*! ./$.iter */ 149)
+	  , ITER      = __webpack_require__(/*! ./$.uid */ 142).safe('iter')
+	  , step      = $iter.step
+	  , assert    = __webpack_require__(/*! ./$.assert */ 155)
+	  , isObject  = $.isObject
+	  , getDesc   = $.getDesc
+	  , setDesc   = $.setDesc
+	  , getProto  = $.getProto
+	  , apply     = Function.apply
+	  , assertObject = assert.obj
+	  , isExtensible = Object.isExtensible || $.it;
+	function Enumerate(iterated){
+	  var keys = [], key;
+	  for(key in iterated)keys.push(key);
+	  $.set(this, ITER, {o: iterated, a: keys, i: 0});
+	}
+	$iter.create(Enumerate, 'Object', function(){
+	  var iter = this[ITER]
+	    , keys = iter.a
+	    , key;
+	  do {
+	    if(iter.i >= keys.length)return step(1);
+	  } while(!((key = keys[iter.i++]) in iter.o));
+	  return step(0, key);
+	});
+	
+	function wrap(fn){
+	  return function(it){
+	    assertObject(it);
+	    try {
+	      fn.apply(undefined, arguments);
+	      return true;
+	    } catch(e){
+	      return false;
+	    }
+	  };
+	}
+	
+	function reflectGet(target, propertyKey/*, receiver*/){
+	  var receiver = arguments.length < 3 ? target : arguments[2]
+	    , desc = getDesc(assertObject(target), propertyKey), proto;
+	  if(desc)return $.has(desc, 'value')
+	    ? desc.value
+	    : desc.get === undefined
+	      ? undefined
+	      : desc.get.call(receiver);
+	  return isObject(proto = getProto(target))
+	    ? reflectGet(proto, propertyKey, receiver)
+	    : undefined;
+	}
+	function reflectSet(target, propertyKey, V/*, receiver*/){
+	  var receiver = arguments.length < 4 ? target : arguments[3]
+	    , ownDesc  = getDesc(assertObject(target), propertyKey)
+	    , existingDescriptor, proto;
+	  if(!ownDesc){
+	    if(isObject(proto = getProto(target))){
+	      return reflectSet(proto, propertyKey, V, receiver);
+	    }
+	    ownDesc = $.desc(0);
+	  }
+	  if($.has(ownDesc, 'value')){
+	    if(ownDesc.writable === false || !isObject(receiver))return false;
+	    existingDescriptor = getDesc(receiver, propertyKey) || $.desc(0);
+	    existingDescriptor.value = V;
+	    setDesc(receiver, propertyKey, existingDescriptor);
+	    return true;
+	  }
+	  return ownDesc.set === undefined ? false : (ownDesc.set.call(receiver, V), true);
+	}
+	
+	var reflect = {
+	  // 26.1.1 Reflect.apply(target, thisArgument, argumentsList)
+	  apply: __webpack_require__(/*! ./$.ctx */ 150)(Function.call, apply, 3),
+	  // 26.1.2 Reflect.construct(target, argumentsList [, newTarget])
+	  construct: function(target, argumentsList /*, newTarget*/){
+	    var proto    = assert.fn(arguments.length < 3 ? target : arguments[2]).prototype
+	      , instance = $.create(isObject(proto) ? proto : Object.prototype)
+	      , result   = apply.call(target, instance, argumentsList);
+	    return isObject(result) ? result : instance;
+	  },
+	  // 26.1.3 Reflect.defineProperty(target, propertyKey, attributes)
+	  defineProperty: wrap(setDesc),
+	  // 26.1.4 Reflect.deleteProperty(target, propertyKey)
+	  deleteProperty: function(target, propertyKey){
+	    var desc = getDesc(assertObject(target), propertyKey);
+	    return desc && !desc.configurable ? false : delete target[propertyKey];
+	  },
+	  // 26.1.5 Reflect.enumerate(target)
+	  enumerate: function(target){
+	    return new Enumerate(assertObject(target));
+	  },
+	  // 26.1.6 Reflect.get(target, propertyKey [, receiver])
+	  get: reflectGet,
+	  // 26.1.7 Reflect.getOwnPropertyDescriptor(target, propertyKey)
+	  getOwnPropertyDescriptor: function(target, propertyKey){
+	    return getDesc(assertObject(target), propertyKey);
+	  },
+	  // 26.1.8 Reflect.getPrototypeOf(target)
+	  getPrototypeOf: function(target){
+	    return getProto(assertObject(target));
+	  },
+	  // 26.1.9 Reflect.has(target, propertyKey)
+	  has: function(target, propertyKey){
+	    return propertyKey in target;
+	  },
+	  // 26.1.10 Reflect.isExtensible(target)
+	  isExtensible: function(target){
+	    return !!isExtensible(assertObject(target));
+	  },
+	  // 26.1.11 Reflect.ownKeys(target)
+	  ownKeys: __webpack_require__(/*! ./$.own-keys */ 160),
+	  // 26.1.12 Reflect.preventExtensions(target)
+	  preventExtensions: wrap(Object.preventExtensions || $.it),
+	  // 26.1.13 Reflect.set(target, propertyKey, V [, receiver])
+	  set: reflectSet
+	};
+	// 26.1.14 Reflect.setPrototypeOf(target, proto)
+	if(setProto)reflect.setPrototypeOf = function(target, proto){
+	  setProto(assertObject(target), proto);
+	  return true;
+	};
+	
+	$def($def.G, {Reflect: {}});
+	$def($def.S, 'Reflect', reflect);
+
+/***/ },
+/* 130 */
+/*!**************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es7.array.includes.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://github.com/domenic/Array.prototype.includes
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.P, 'Array', {
+	  includes: __webpack_require__(/*! ./$.array-includes */ 161)(true)
+	});
+	__webpack_require__(/*! ./$.unscope */ 151)('includes');
+
+/***/ },
+/* 131 */
+/*!*********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es7.string.at.js ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://github.com/mathiasbynens/String.prototype.at
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.P, 'String', {
+	  at: __webpack_require__(/*! ./$.string-at */ 148)(true)
+	});
+
+/***/ },
+/* 132 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es7.regexp.escape.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://gist.github.com/kangax/9698100
+	var $def = __webpack_require__(/*! ./$.def */ 143);
+	$def($def.S, 'RegExp', {
+	  escape: __webpack_require__(/*! ./$.replacer */ 154)(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)
+	});
+
+/***/ },
+/* 133 */
+/*!***********************************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es7.object.get-own-property-descriptors.js ***!
+  \***********************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// https://gist.github.com/WebReflection/9353781
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , ownKeys = __webpack_require__(/*! ./$.own-keys */ 160);
+	
+	$def($def.S, 'Object', {
+	  getOwnPropertyDescriptors: function(object){
+	    var O      = $.toObject(object)
+	      , result = {};
+	    $.each.call(ownKeys(O), function(key){
+	      $.setDesc(result, key, $.desc(0, $.getDesc(O, key)));
+	    });
+	    return result;
+	  }
+	});
+
+/***/ },
+/* 134 */
+/*!***************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es7.object.to-array.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// http://goo.gl/XkBrjD
+	var $    = __webpack_require__(/*! ./$ */ 139)
+	  , $def = __webpack_require__(/*! ./$.def */ 143);
+	function createObjectToArray(isEntries){
+	  return function(object){
+	    var O      = $.toObject(object)
+	      , keys   = $.getKeys(object)
+	      , length = keys.length
+	      , i      = 0
+	      , result = Array(length)
+	      , key;
+	    if(isEntries)while(length > i)result[i] = [key = keys[i++], O[key]];
+	    else while(length > i)result[i] = O[keys[i++]];
+	    return result;
+	  };
+	}
+	$def($def.S, 'Object', {
+	  values:  createObjectToArray(false),
+	  entries: createObjectToArray(true)
+	});
+
+/***/ },
+/* 135 */
+/*!************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/js.array.statics.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// JavaScript 1.6 / Strawman array statics shim
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , core    = $.core
+	  , statics = {};
+	function setStatics(keys, length){
+	  $.each.call(keys.split(','), function(key){
+	    if(length == undefined && key in core.Array)statics[key] = core.Array[key];
+	    else if(key in [])statics[key] = __webpack_require__(/*! ./$.ctx */ 150)(Function.call, [][key], length);
+	  });
+	}
+	setStatics('pop,reverse,shift,keys,values,entries', 1);
+	setStatics('indexOf,every,some,forEach,map,filter,find,findIndex,includes', 3);
+	setStatics('join,slice,concat,push,splice,unshift,sort,lastIndexOf,' +
+	           'reduce,reduceRight,copyWithin,fill,turn');
+	$def($def.S, 'Array', statics);
+
+/***/ },
+/* 136 */
+/*!******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/web.timers.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// ie9- setTimeout & setInterval additional parameters fix
+	var $       = __webpack_require__(/*! ./$ */ 139)
+	  , $def    = __webpack_require__(/*! ./$.def */ 143)
+	  , invoke  = __webpack_require__(/*! ./$.invoke */ 162)
+	  , partial = __webpack_require__(/*! ./$.partial */ 163)
+	  , MSIE    = !!$.g.navigator && /MSIE .\./.test(navigator.userAgent); // <- dirty ie9- check
+	function wrap(set){
+	  return MSIE ? function(fn, time /*, ...args */){
+	    return set(invoke(
+	      partial,
+	      [].slice.call(arguments, 2),
+	      $.isFunction(fn) ? fn : Function(fn)
+	    ), time);
+	  } : set;
+	}
+	$def($def.G + $def.B + $def.F * MSIE, {
+	  setTimeout:  wrap($.g.setTimeout),
+	  setInterval: wrap($.g.setInterval)
+	});
+
+/***/ },
+/* 137 */
+/*!*********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/web.immediate.js ***!
+  \*********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $def  = __webpack_require__(/*! ./$.def */ 143)
+	  , $task = __webpack_require__(/*! ./$.task */ 156);
+	$def($def.G + $def.B, {
+	  setImmediate:   $task.set,
+	  clearImmediate: $task.clear
+	});
+
+/***/ },
+/* 138 */
+/*!************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/web.dom.iterable.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(/*! ./es6.array.iterator */ 117);
+	var $         = __webpack_require__(/*! ./$ */ 139)
+	  , Iterators = __webpack_require__(/*! ./$.iter */ 149).Iterators
+	  , ITERATOR  = __webpack_require__(/*! ./$.wks */ 145)('iterator')
+	  , NodeList  = $.g.NodeList;
+	if($.FW && NodeList && !(ITERATOR in NodeList.prototype)){
+	  $.hide(NodeList.prototype, ITERATOR, Iterators.Array);
+	}
+	Iterators.NodeList = Iterators.Array;
+
+/***/ },
+/* 139 */
+/*!*********************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.js ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var global = typeof self != 'undefined' ? self : Function('return this')()
+	  , core   = {}
+	  , defineProperty = Object.defineProperty
+	  , hasOwnProperty = {}.hasOwnProperty
+	  , ceil  = Math.ceil
+	  , floor = Math.floor
+	  , max   = Math.max
+	  , min   = Math.min;
+	// The engine works fine with descriptors? Thank's IE8 for his funny defineProperty.
+	var DESC = !!function(){
+	  try {
+	    return defineProperty({}, 'a', {get: function(){ return 2; }}).a == 2;
+	  } catch(e){ /* empty */ }
+	}();
+	var hide = createDefiner(1);
+	// 7.1.4 ToInteger
+	function toInteger(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	}
+	function desc(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	}
+	function simpleSet(object, key, value){
+	  object[key] = value;
+	  return object;
+	}
+	function createDefiner(bitmap){
+	  return DESC ? function(object, key, value){
+	    return $.setDesc(object, key, desc(bitmap, value)); // eslint-disable-line no-use-before-define
+	  } : simpleSet;
+	}
+	
+	function isObject(it){
+	  return it !== null && (typeof it == 'object' || typeof it == 'function');
+	}
+	function isFunction(it){
+	  return typeof it == 'function';
+	}
+	function assertDefined(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	}
+	
+	var $ = module.exports = __webpack_require__(/*! ./$.fw */ 164)({
+	  g: global,
+	  core: core,
+	  html: global.document && document.documentElement,
+	  // http://jsperf.com/core-js-isobject
+	  isObject:   isObject,
+	  isFunction: isFunction,
+	  it: function(it){
+	    return it;
+	  },
+	  that: function(){
+	    return this;
+	  },
+	  // 7.1.4 ToInteger
+	  toInteger: toInteger,
+	  // 7.1.15 ToLength
+	  toLength: function(it){
+	    return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	  },
+	  toIndex: function(index, length){
+	    index = toInteger(index);
+	    return index < 0 ? max(index + length, 0) : min(index, length);
+	  },
+	  has: function(it, key){
+	    return hasOwnProperty.call(it, key);
+	  },
+	  create:     Object.create,
+	  getProto:   Object.getPrototypeOf,
+	  DESC:       DESC,
+	  desc:       desc,
+	  getDesc:    Object.getOwnPropertyDescriptor,
+	  setDesc:    defineProperty,
+	  getKeys:    Object.keys,
+	  getNames:   Object.getOwnPropertyNames,
+	  getSymbols: Object.getOwnPropertySymbols,
+	  // Dummy, fix for not array-like ES3 string in es5 module
+	  assertDefined: assertDefined,
+	  ES5Object: Object,
+	  toObject: function(it){
+	    return $.ES5Object(assertDefined(it));
+	  },
+	  hide: hide,
+	  def: createDefiner(0),
+	  set: global.Symbol ? simpleSet : hide,
+	  mix: function(target, src){
+	    for(var key in src)hide(target, key, src[key]);
+	    return target;
+	  },
+	  each: [].forEach
+	});
+	if(typeof __e != 'undefined')__e = core;
+	if(typeof __g != 'undefined')__g = global;
+
+/***/ },
+/* 140 */
+/*!***********************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/es5.js ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $                = __webpack_require__(/*! ./$ */ 139)
+	  , cof              = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def             = __webpack_require__(/*! ./$.def */ 143)
+	  , invoke           = __webpack_require__(/*! ./$.invoke */ 162)
+	  , arrayMethod      = __webpack_require__(/*! ./$.array-methods */ 153)
+	  , IE_PROTO         = __webpack_require__(/*! ./$.uid */ 142).safe('__proto__')
+	  , assert           = __webpack_require__(/*! ./$.assert */ 155)
+	  , assertObject     = assert.obj
+	  , ObjectProto      = Object.prototype
+	  , A                = []
+	  , slice            = A.slice
+	  , indexOf          = A.indexOf
+	  , classof          = cof.classof
+	  , defineProperties = Object.defineProperties
+	  , has              = $.has
+	  , defineProperty   = $.setDesc
+	  , getOwnDescriptor = $.getDesc
+	  , isFunction       = $.isFunction
+	  , toObject         = $.toObject
+	  , toLength         = $.toLength
+	  , IE8_DOM_DEFINE   = false;
+	
+	if(!$.DESC){
+	  try {
+	    IE8_DOM_DEFINE = defineProperty(document.createElement('div'), 'x',
+	      {get: function(){ return 8; }}
+	    ).x == 8;
+	  } catch(e){ /* empty */ }
+	  $.setDesc = function(O, P, Attributes){
+	    if(IE8_DOM_DEFINE)try {
+	      return defineProperty(O, P, Attributes);
+	    } catch(e){ /* empty */ }
+	    if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	    if('value' in Attributes)assertObject(O)[P] = Attributes.value;
+	    return O;
+	  };
+	  $.getDesc = function(O, P){
+	    if(IE8_DOM_DEFINE)try {
+	      return getOwnDescriptor(O, P);
+	    } catch(e){ /* empty */ }
+	    if(has(O, P))return $.desc(!ObjectProto.propertyIsEnumerable.call(O, P), O[P]);
+	  };
+	  defineProperties = function(O, Properties){
+	    assertObject(O);
+	    var keys   = $.getKeys(Properties)
+	      , length = keys.length
+	      , i = 0
+	      , P;
+	    while(length > i)$.setDesc(O, P = keys[i++], Properties[P]);
+	    return O;
+	  };
+	}
+	$def($def.S + $def.F * !$.DESC, 'Object', {
+	  // 19.1.2.6 / 15.2.3.3 Object.getOwnPropertyDescriptor(O, P)
+	  getOwnPropertyDescriptor: $.getDesc,
+	  // 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	  defineProperty: $.setDesc,
+	  // 19.1.2.3 / 15.2.3.7 Object.defineProperties(O, Properties)
+	  defineProperties: defineProperties
+	});
+	
+	  // IE 8- don't enum bug keys
+	var keys1 = ('constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,' +
+	            'toLocaleString,toString,valueOf').split(',')
+	  // Additional keys for getOwnPropertyNames
+	  , keys2 = keys1.concat('length', 'prototype')
+	  , keysLen1 = keys1.length;
+	
+	// Create object with `null` prototype: use iframe Object with cleared prototype
+	var createDict = function(){
+	  // Thrash, waste and sodomy: IE GC bug
+	  var iframe = document.createElement('iframe')
+	    , i      = keysLen1
+	    , iframeDocument;
+	  iframe.style.display = 'none';
+	  $.html.appendChild(iframe);
+	  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+	  // createDict = iframe.contentWindow.Object;
+	  // html.removeChild(iframe);
+	  iframeDocument = iframe.contentWindow.document;
+	  iframeDocument.open();
+	  iframeDocument.write('<script>document.F=Object</script>');
+	  iframeDocument.close();
+	  createDict = iframeDocument.F;
+	  while(i--)delete createDict.prototype[keys1[i]];
+	  return createDict();
+	};
+	function createGetKeys(names, length){
+	  return function(object){
+	    var O      = toObject(object)
+	      , i      = 0
+	      , result = []
+	      , key;
+	    for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	    // Don't enum bug & hidden keys
+	    while(length > i)if(has(O, key = names[i++])){
+	      ~indexOf.call(result, key) || result.push(key);
+	    }
+	    return result;
+	  };
+	}
+	function isPrimitive(it){ return !$.isObject(it); }
+	function Empty(){}
+	$def($def.S, 'Object', {
+	  // 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+	  getPrototypeOf: $.getProto = $.getProto || function(O){
+	    O = Object(assert.def(O));
+	    if(has(O, IE_PROTO))return O[IE_PROTO];
+	    if(isFunction(O.constructor) && O instanceof O.constructor){
+	      return O.constructor.prototype;
+	    } return O instanceof Object ? ObjectProto : null;
+	  },
+	  // 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
+	  getOwnPropertyNames: $.getNames = $.getNames || createGetKeys(keys2, keys2.length, true),
+	  // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+	  create: $.create = $.create || function(O, /*?*/Properties){
+	    var result;
+	    if(O !== null){
+	      Empty.prototype = assertObject(O);
+	      result = new Empty();
+	      Empty.prototype = null;
+	      // add "__proto__" for Object.getPrototypeOf shim
+	      result[IE_PROTO] = O;
+	    } else result = createDict();
+	    return Properties === undefined ? result : defineProperties(result, Properties);
+	  },
+	  // 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	  keys: $.getKeys = $.getKeys || createGetKeys(keys1, keysLen1, false),
+	  // 19.1.2.17 / 15.2.3.8 Object.seal(O)
+	  seal: $.it, // <- cap
+	  // 19.1.2.5 / 15.2.3.9 Object.freeze(O)
+	  freeze: $.it, // <- cap
+	  // 19.1.2.15 / 15.2.3.10 Object.preventExtensions(O)
+	  preventExtensions: $.it, // <- cap
+	  // 19.1.2.13 / 15.2.3.11 Object.isSealed(O)
+	  isSealed: isPrimitive, // <- cap
+	  // 19.1.2.12 / 15.2.3.12 Object.isFrozen(O)
+	  isFrozen: isPrimitive, // <- cap
+	  // 19.1.2.11 / 15.2.3.13 Object.isExtensible(O)
+	  isExtensible: $.isObject // <- cap
+	});
+	
+	// 19.2.3.2 / 15.3.4.5 Function.prototype.bind(thisArg, args...)
+	$def($def.P, 'Function', {
+	  bind: function(that /*, args... */){
+	    var fn       = assert.fn(this)
+	      , partArgs = slice.call(arguments, 1);
+	    function bound(/* args... */){
+	      var args = partArgs.concat(slice.call(arguments));
+	      return invoke(fn, args, this instanceof bound ? $.create(fn.prototype) : that);
+	    }
+	    if(fn.prototype)bound.prototype = fn.prototype;
+	    return bound;
+	  }
+	});
+	
+	// Fix for not array-like ES3 string
+	function arrayMethodFix(fn){
+	  return function(){
+	    return fn.apply($.ES5Object(this), arguments);
+	  };
+	}
+	if(!(0 in Object('z') && 'z'[0] == 'z')){
+	  $.ES5Object = function(it){
+	    return cof(it) == 'String' ? it.split('') : Object(it);
+	  };
+	}
+	$def($def.P + $def.F * ($.ES5Object != Object), 'Array', {
+	  slice: arrayMethodFix(slice),
+	  join: arrayMethodFix(A.join)
+	});
+	
+	// 22.1.2.2 / 15.4.3.2 Array.isArray(arg)
+	$def($def.S, 'Array', {
+	  isArray: function(arg){
+	    return cof(arg) == 'Array';
+	  }
+	});
+	function createArrayReduce(isRight){
+	  return function(callbackfn, memo){
+	    assert.fn(callbackfn);
+	    var O      = toObject(this)
+	      , length = toLength(O.length)
+	      , index  = isRight ? length - 1 : 0
+	      , i      = isRight ? -1 : 1;
+	    if(arguments.length < 2)for(;;){
+	      if(index in O){
+	        memo = O[index];
+	        index += i;
+	        break;
+	      }
+	      index += i;
+	      assert(isRight ? index >= 0 : length > index, 'Reduce of empty array with no initial value');
+	    }
+	    for(;isRight ? index >= 0 : length > index; index += i)if(index in O){
+	      memo = callbackfn(memo, O[index], index, this);
+	    }
+	    return memo;
+	  };
+	}
+	$def($def.P, 'Array', {
+	  // 22.1.3.10 / 15.4.4.18 Array.prototype.forEach(callbackfn [, thisArg])
+	  forEach: $.each = $.each || arrayMethod(0),
+	  // 22.1.3.15 / 15.4.4.19 Array.prototype.map(callbackfn [, thisArg])
+	  map: arrayMethod(1),
+	  // 22.1.3.7 / 15.4.4.20 Array.prototype.filter(callbackfn [, thisArg])
+	  filter: arrayMethod(2),
+	  // 22.1.3.23 / 15.4.4.17 Array.prototype.some(callbackfn [, thisArg])
+	  some: arrayMethod(3),
+	  // 22.1.3.5 / 15.4.4.16 Array.prototype.every(callbackfn [, thisArg])
+	  every: arrayMethod(4),
+	  // 22.1.3.18 / 15.4.4.21 Array.prototype.reduce(callbackfn [, initialValue])
+	  reduce: createArrayReduce(false),
+	  // 22.1.3.19 / 15.4.4.22 Array.prototype.reduceRight(callbackfn [, initialValue])
+	  reduceRight: createArrayReduce(true),
+	  // 22.1.3.11 / 15.4.4.14 Array.prototype.indexOf(searchElement [, fromIndex])
+	  indexOf: indexOf = indexOf || __webpack_require__(/*! ./$.array-includes */ 161)(false),
+	  // 22.1.3.14 / 15.4.4.15 Array.prototype.lastIndexOf(searchElement [, fromIndex])
+	  lastIndexOf: function(el, fromIndex /* = @[*-1] */){
+	    var O      = toObject(this)
+	      , length = toLength(O.length)
+	      , index  = length - 1;
+	    if(arguments.length > 1)index = Math.min(index, $.toInteger(fromIndex));
+	    if(index < 0)index = toLength(length + index);
+	    for(;index >= 0; index--)if(index in O)if(O[index] === el)return index;
+	    return -1;
+	  }
+	});
+	
+	// 21.1.3.25 / 15.5.4.20 String.prototype.trim()
+	$def($def.P, 'String', {trim: __webpack_require__(/*! ./$.replacer */ 154)(/^\s*([\s\S]*\S)?\s*$/, '$1')});
+	
+	// 20.3.3.1 / 15.9.4.4 Date.now()
+	$def($def.S, 'Date', {now: function(){
+	  return +new Date;
+	}});
+	
+	function lz(num){
+	  return num > 9 ? num : '0' + num;
+	}
+	// 20.3.4.36 / 15.9.5.43 Date.prototype.toISOString()
+	$def($def.P, 'Date', {toISOString: function(){
+	  if(!isFinite(this))throw RangeError('Invalid time value');
+	  var d = this
+	    , y = d.getUTCFullYear()
+	    , m = d.getUTCMilliseconds()
+	    , s = y < 0 ? '-' : y > 9999 ? '+' : '';
+	  return s + ('00000' + Math.abs(y)).slice(s ? -6 : -4) +
+	    '-' + lz(d.getUTCMonth() + 1) + '-' + lz(d.getUTCDate()) +
+	    'T' + lz(d.getUTCHours()) + ':' + lz(d.getUTCMinutes()) +
+	    ':' + lz(d.getUTCSeconds()) + '.' + (m > 99 ? m : '0' + lz(m)) + 'Z';
+	}});
+	
+	if(classof(function(){ return arguments; }()) == 'Object')cof.classof = function(it){
+	  var tag = classof(it);
+	  return tag == 'Object' && isFunction(it.callee) ? 'Arguments' : tag;
+	};
+
+/***/ },
+/* 141 */
+/*!*************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.cof.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $        = __webpack_require__(/*! ./$ */ 139)
+	  , TAG      = __webpack_require__(/*! ./$.wks */ 145)('toStringTag')
+	  , toString = {}.toString;
+	function cof(it){
+	  return toString.call(it).slice(8, -1);
+	}
+	cof.classof = function(it){
+	  var O, T;
+	  return it == undefined ? it === undefined ? 'Undefined' : 'Null'
+	    : typeof (T = (O = Object(it))[TAG]) == 'string' ? T : cof(O);
+	};
+	cof.set = function(it, tag, stat){
+	  if(it && !$.has(it = stat ? it : it.prototype, TAG))$.hide(it, TAG, tag);
+	};
+	module.exports = cof;
+
+/***/ },
+/* 142 */
+/*!*************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.uid.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var sid = 0;
+	function uid(key){
+	  return 'Symbol(' + key + ')_' + (++sid + Math.random()).toString(36);
+	}
+	uid.safe = __webpack_require__(/*! ./$ */ 139).g.Symbol || uid;
+	module.exports = uid;
+
+/***/ },
+/* 143 */
+/*!*************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.def.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $          = __webpack_require__(/*! ./$ */ 139)
+	  , global     = $.g
+	  , core       = $.core
+	  , isFunction = $.isFunction;
+	function ctx(fn, that){
+	  return function(){
+	    return fn.apply(that, arguments);
+	  };
+	}
+	global.core = core;
+	// type bitmap
+	$def.F = 1;  // forced
+	$def.G = 2;  // global
+	$def.S = 4;  // static
+	$def.P = 8;  // proto
+	$def.B = 16; // bind
+	$def.W = 32; // wrap
+	function $def(type, name, source){
+	  var key, own, out, exp
+	    , isGlobal = type & $def.G
+	    , target   = isGlobal ? global : type & $def.S
+	        ? global[name] : (global[name] || {}).prototype
+	    , exports  = isGlobal ? core : core[name] || (core[name] = {});
+	  if(isGlobal)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !(type & $def.F) && target && key in target;
+	    // export native or passed
+	    out = (own ? target : source)[key];
+	    // bind timers to global for call from export context
+	    if(type & $def.B && own)exp = ctx(out, global);
+	    else exp = type & $def.P && isFunction(out) ? ctx(Function.call, out) : out;
+	    // extend global
+	    if(target && !own){
+	      if(isGlobal)target[key] = out;
+	      else delete target[key] && $.hide(target, key, out);
+	    }
+	    // export
+	    if(exports[key] != out)$.hide(exports, key, exp);
+	  }
+	}
+	module.exports = $def;
+
+/***/ },
+/* 144 */
+/*!***************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.keyof.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	module.exports = function(object, el){
+	  var O      = $.toObject(object)
+	    , keys   = $.getKeys(O)
+	    , length = keys.length
+	    , index  = 0
+	    , key;
+	  while(length > index)if(O[key = keys[index++]] === el)return key;
+	};
+
+/***/ },
+/* 145 */
+/*!*************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.wks.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(/*! ./$ */ 139).g
+	  , store  = {};
+	module.exports = function(name){
+	  return store[name] || (store[name] =
+	    global.Symbol && global.Symbol[name] || __webpack_require__(/*! ./$.uid */ 142).safe('Symbol.' + name));
+	};
+
+/***/ },
+/* 146 */
+/*!****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.assign.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	// 19.1.2.1 Object.assign(target, source, ...)
+	module.exports = Object.assign || function(target, source){ // eslint-disable-line no-unused-vars
+	  var T = Object($.assertDefined(target))
+	    , l = arguments.length
+	    , i = 1;
+	  while(l > i){
+	    var S      = $.ES5Object(arguments[i++])
+	      , keys   = $.getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)T[key = keys[j++]] = S[key];
+	  }
+	  return T;
+	};
+
+/***/ },
+/* 147 */
+/*!*******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.set-proto.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Works with __proto__ only. Old v8 can't works with null proto objects.
+	/*eslint-disable no-proto */
+	var $      = __webpack_require__(/*! ./$ */ 139)
+	  , assert = __webpack_require__(/*! ./$.assert */ 155);
+	module.exports = Object.setPrototypeOf || ('__proto__' in {} // eslint-disable-line
+	  ? function(buggy, set){
+	      try {
+	        set = __webpack_require__(/*! ./$.ctx */ 150)(Function.call, $.getDesc(Object.prototype, '__proto__').set, 2);
+	        set({}, []);
+	      } catch(e){ buggy = true; }
+	      return function(O, proto){
+	        assert.obj(O);
+	        assert(proto === null || $.isObject(proto), proto, ": can't set as prototype!");
+	        if(buggy)O.__proto__ = proto;
+	        else set(O, proto);
+	        return O;
+	      };
+	    }()
+	  : undefined);
+
+/***/ },
+/* 148 */
+/*!*******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.string-at.js ***!
+  \*******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// true  -> String#at
+	// false -> String#codePointAt
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	module.exports = function(TO_STRING){
+	  return function(pos){
+	    var s = String($.assertDefined(this))
+	      , i = $.toInteger(pos)
+	      , l = s.length
+	      , a, b;
+	    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
+	    a = s.charCodeAt(i);
+	    return a < 0xd800 || a > 0xdbff || i + 1 === l
+	      || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+	        ? TO_STRING ? s.charAt(i) : a
+	        : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+	  };
+	};
+
+/***/ },
+/* 149 */
+/*!**************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.iter.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $                 = __webpack_require__(/*! ./$ */ 139)
+	  , ctx               = __webpack_require__(/*! ./$.ctx */ 150)
+	  , cof               = __webpack_require__(/*! ./$.cof */ 141)
+	  , $def              = __webpack_require__(/*! ./$.def */ 143)
+	  , assertObject      = __webpack_require__(/*! ./$.assert */ 155).obj
+	  , SYMBOL_ITERATOR   = __webpack_require__(/*! ./$.wks */ 145)('iterator')
+	  , FF_ITERATOR       = '@@iterator'
+	  , Iterators         = {}
+	  , IteratorPrototype = {};
+	// Safari has byggy iterators w/o `next`
+	var BUGGY = 'keys' in [] && !('next' in [].keys());
+	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+	setIterator(IteratorPrototype, $.that);
+	function setIterator(O, value){
+	  $.hide(O, SYMBOL_ITERATOR, value);
+	  // Add iterator for FF iterator protocol
+	  if(FF_ITERATOR in [])$.hide(O, FF_ITERATOR, value);
+	}
+	function defineIterator(Constructor, NAME, value, DEFAULT){
+	  var proto = Constructor.prototype
+	    , iter  = proto[SYMBOL_ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT] || value;
+	  // Define iterator
+	  if($.FW)setIterator(proto, iter);
+	  if(iter !== value){
+	    var iterProto = $.getProto(iter.call(new Constructor));
+	    // Set @@toStringTag to native iterators
+	    cof.set(iterProto, NAME + ' Iterator', true);
+	    // FF fix
+	    if($.FW)$.has(proto, FF_ITERATOR) && setIterator(iterProto, $.that);
+	  }
+	  // Plug for library
+	  Iterators[NAME] = iter;
+	  // FF & v8 fix
+	  Iterators[NAME + ' Iterator'] = $.that;
+	  return iter;
+	}
+	function getIterator(it){
+	  var Symbol  = $.g.Symbol
+	    , ext     = it[Symbol && Symbol.iterator || FF_ITERATOR]
+	    , getIter = ext || it[SYMBOL_ITERATOR] || Iterators[cof.classof(it)];
+	  return assertObject(getIter.call(it));
+	}
+	function closeIterator(iterator){
+	  var ret = iterator['return'];
+	  if(ret !== undefined)assertObject(ret.call(iterator));
+	}
+	function stepCall(iterator, fn, value, entries){
+	  try {
+	    return entries ? fn(assertObject(value)[0], value[1]) : fn(value);
+	  } catch(e){
+	    closeIterator(iterator);
+	    throw e;
+	  }
+	}
+	var DANGER_CLOSING = true;
+	!function(){
+	  try {
+	    var iter = [1].keys();
+	    iter['return'] = function(){ DANGER_CLOSING = false; };
+	    Array.from(iter, function(){ throw 2; });
+	  } catch(e){ /* empty */ }
+	}();
+	var $iter = module.exports = {
+	  BUGGY: BUGGY,
+	  DANGER_CLOSING: DANGER_CLOSING,
+	  fail: function(exec){
+	    var fail = true;
+	    try {
+	      var arr  = [[{}, 1]]
+	        , iter = arr[SYMBOL_ITERATOR]()
+	        , next = iter.next;
+	      iter.next = function(){
+	        fail = false;
+	        return next.call(this);
+	      };
+	      arr[SYMBOL_ITERATOR] = function(){
+	        return iter;
+	      };
+	      exec(arr);
+	    } catch(e){ /* empty */ }
+	    return fail;
+	  },
+	  Iterators: Iterators,
+	  prototype: IteratorPrototype,
+	  step: function(done, value){
+	    return {value: value, done: !!done};
+	  },
+	  stepCall: stepCall,
+	  close: closeIterator,
+	  is: function(it){
+	    var O      = Object(it)
+	      , Symbol = $.g.Symbol
+	      , SYM    = Symbol && Symbol.iterator || FF_ITERATOR;
+	    return SYM in O || SYMBOL_ITERATOR in O || $.has(Iterators, cof.classof(O));
+	  },
+	  get: getIterator,
+	  set: setIterator,
+	  create: function(Constructor, NAME, next, proto){
+	    Constructor.prototype = $.create(proto || $iter.prototype, {next: $.desc(1, next)});
+	    cof.set(Constructor, NAME + ' Iterator');
+	  },
+	  define: defineIterator,
+	  std: function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE){
+	    function createIter(kind){
+	      return function(){
+	        return new Constructor(this, kind);
+	      };
+	    }
+	    $iter.create(Constructor, NAME, next);
+	    var entries = createIter('key+value')
+	      , values  = createIter('value')
+	      , proto   = Base.prototype
+	      , methods, key;
+	    if(DEFAULT == 'value')values = defineIterator(Base, NAME, values, 'values');
+	    else entries = defineIterator(Base, NAME, entries, 'entries');
+	    if(DEFAULT){
+	      methods = {
+	        entries: entries,
+	        keys:    IS_SET ? values : createIter('key'),
+	        values:  values
+	      };
+	      $def($def.P + $def.F * BUGGY, NAME, methods);
+	      if(FORCE)for(key in methods){
+	        if(!(key in proto))$.hide(proto, key, methods[key]);
+	      }
+	    }
+	  },
+	  forOf: function(iterable, entries, fn, that){
+	    var iterator = getIterator(iterable)
+	      , f = ctx(fn, that, entries ? 2 : 1)
+	      , step;
+	    while(!(step = iterator.next()).done){
+	      if(stepCall(iterator, f, step.value, entries) === false){
+	        return closeIterator(iterator);
+	      }
+	    }
+	  }
+	};
+
+/***/ },
+/* 150 */
+/*!*************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.ctx.js ***!
+  \*************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Optional / simple context binding
+	var assertFunction = __webpack_require__(/*! ./$.assert */ 155).fn;
+	module.exports = function(fn, that, length){
+	  assertFunction(fn);
+	  if(~length && that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  } return function(/* ...args */){
+	      return fn.apply(that, arguments);
+	    };
+	};
+
+/***/ },
+/* 151 */
+/*!*****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.unscope.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// 22.1.3.31 Array.prototype[@@unscopables]
+	var $           = __webpack_require__(/*! ./$ */ 139)
+	  , UNSCOPABLES = __webpack_require__(/*! ./$.wks */ 145)('unscopables');
+	if($.FW && !(UNSCOPABLES in []))$.hide(Array.prototype, UNSCOPABLES, {});
+	module.exports = function(key){
+	  if($.FW)[][UNSCOPABLES][key] = true;
+	};
+
+/***/ },
+/* 152 */
+/*!*****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.species.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	module.exports = function(C){
+	  if($.DESC && $.FW)$.setDesc(C, __webpack_require__(/*! ./$.wks */ 145)('species'), {
+	    configurable: true,
+	    get: $.that
+	  });
+	};
+
+/***/ },
+/* 153 */
+/*!***********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.array-methods.js ***!
+  \***********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 0 -> Array#forEach
+	// 1 -> Array#map
+	// 2 -> Array#filter
+	// 3 -> Array#some
+	// 4 -> Array#every
+	// 5 -> Array#find
+	// 6 -> Array#findIndex
+	var $   = __webpack_require__(/*! ./$ */ 139)
+	  , ctx = __webpack_require__(/*! ./$.ctx */ 150);
+	module.exports = function(TYPE){
+	  var IS_MAP        = TYPE == 1
+	    , IS_FILTER     = TYPE == 2
+	    , IS_SOME       = TYPE == 3
+	    , IS_EVERY      = TYPE == 4
+	    , IS_FIND_INDEX = TYPE == 6
+	    , NO_HOLES      = TYPE == 5 || IS_FIND_INDEX;
+	  return function(callbackfn/*, that = undefined */){
+	    var O      = Object($.assertDefined(this))
+	      , self   = $.ES5Object(O)
+	      , f      = ctx(callbackfn, arguments[1], 3)
+	      , length = $.toLength(self.length)
+	      , index  = 0
+	      , result = IS_MAP ? Array(length) : IS_FILTER ? [] : undefined
+	      , val, res;
+	    for(;length > index; index++)if(NO_HOLES || index in self){
+	      val = self[index];
+	      res = f(val, index, O);
+	      if(TYPE){
+	        if(IS_MAP)result[index] = res;            // map
+	        else if(res)switch(TYPE){
+	          case 3: return true;                    // some
+	          case 5: return val;                     // find
+	          case 6: return index;                   // findIndex
+	          case 2: result.push(val);               // filter
+	        } else if(IS_EVERY)return false;          // every
+	      }
+	    }
+	    return IS_FIND_INDEX ? -1 : IS_SOME || IS_EVERY ? IS_EVERY : result;
+	  };
+	};
+
+/***/ },
+/* 154 */
+/*!******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.replacer.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	module.exports = function(regExp, replace, isStatic){
+	  var replacer = replace === Object(replace) ? function(part){
+	    return replace[part];
+	  } : replace;
+	  return function(it){
+	    return String(isStatic ? it : this).replace(regExp, replacer);
+	  };
+	};
+
+/***/ },
+/* 155 */
+/*!****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.assert.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	function assert(condition, msg1, msg2){
+	  if(!condition)throw TypeError(msg2 ? msg1 + msg2 : msg1);
+	}
+	assert.def = $.assertDefined;
+	assert.fn = function(it){
+	  if(!$.isFunction(it))throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+	assert.obj = function(it){
+	  if(!$.isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+	assert.inst = function(it, Constructor, name){
+	  if(!(it instanceof Constructor))throw TypeError(name + ": use the 'new' operator!");
+	  return it;
+	};
+	module.exports = assert;
+
+/***/ },
+/* 156 */
+/*!**************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.task.js ***!
+  \**************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $      = __webpack_require__(/*! ./$ */ 139)
+	  , ctx    = __webpack_require__(/*! ./$.ctx */ 150)
+	  , cof    = __webpack_require__(/*! ./$.cof */ 141)
+	  , invoke = __webpack_require__(/*! ./$.invoke */ 162)
+	  , global             = $.g
+	  , isFunction         = $.isFunction
+	  , setTask            = global.setImmediate
+	  , clearTask          = global.clearImmediate
+	  , postMessage        = global.postMessage
+	  , addEventListener   = global.addEventListener
+	  , MessageChannel     = global.MessageChannel
+	  , counter            = 0
+	  , queue              = {}
+	  , ONREADYSTATECHANGE = 'onreadystatechange'
+	  , defer, channel, port;
+	function run(){
+	  var id = +this;
+	  if($.has(queue, id)){
+	    var fn = queue[id];
+	    delete queue[id];
+	    fn();
+	  }
+	}
+	function listner(event){
+	  run.call(event.data);
+	}
+	// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+	if(!isFunction(setTask) || !isFunction(clearTask)){
+	  setTask = function(fn){
+	    var args = [], i = 1;
+	    while(arguments.length > i)args.push(arguments[i++]);
+	    queue[++counter] = function(){
+	      invoke(isFunction(fn) ? fn : Function(fn), args);
+	    };
+	    defer(counter);
+	    return counter;
+	  };
+	  clearTask = function(id){
+	    delete queue[id];
+	  };
+	  // Node.js 0.8-
+	  if(cof(global.process) == 'process'){
+	    defer = function(id){
+	      global.process.nextTick(ctx(run, id, 1));
+	    };
+	  // Modern browsers, skip implementation for WebWorkers
+	  // IE8 has postMessage, but it's sync & typeof its postMessage is object
+	  } else if(addEventListener && isFunction(postMessage) && !$.g.importScripts){
+	    defer = function(id){
+	      postMessage(id, '*');
+	    };
+	    addEventListener('message', listner, false);
+	  // WebWorkers
+	  } else if(isFunction(MessageChannel)){
+	    channel = new MessageChannel;
+	    port    = channel.port2;
+	    channel.port1.onmessage = listner;
+	    defer = ctx(port.postMessage, port, 1);
+	  // IE8-
+	  } else if($.g.document && ONREADYSTATECHANGE in document.createElement('script')){
+	    defer = function(id){
+	      $.html.appendChild(document.createElement('script'))[ONREADYSTATECHANGE] = function(){
+	        $.html.removeChild(this);
+	        run.call(id);
+	      };
+	    };
+	  // Rest old browsers
+	  } else {
+	    defer = function(id){
+	      setTimeout(ctx(run, id, 1), 0);
+	    };
+	  }
+	}
+	module.exports = {
+	  set:   setTask,
+	  clear: clearTask
+	};
+
+/***/ },
+/* 157 */
+/*!***************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.collection-strong.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $        = __webpack_require__(/*! ./$ */ 139)
+	  , ctx      = __webpack_require__(/*! ./$.ctx */ 150)
+	  , safe     = __webpack_require__(/*! ./$.uid */ 142).safe
+	  , assert   = __webpack_require__(/*! ./$.assert */ 155)
+	  , $iter    = __webpack_require__(/*! ./$.iter */ 149)
+	  , has      = $.has
+	  , set      = $.set
+	  , isObject = $.isObject
+	  , hide     = $.hide
+	  , step     = $iter.step
+	  , isFrozen = Object.isFrozen || $.core.Object.isFrozen
+	  , ID       = safe('id')
+	  , O1       = safe('O1')
+	  , LAST     = safe('last')
+	  , FIRST    = safe('first')
+	  , ITER     = safe('iter')
+	  , SIZE     = $.DESC ? safe('size') : 'size'
+	  , id       = 0;
+	
+	function fastKey(it, create){
+	  // return primitive with prefix
+	  if(!isObject(it))return (typeof it == 'string' ? 'S' : 'P') + it;
+	  // can't set id to frozen object
+	  if(isFrozen(it))return 'F';
+	  if(!has(it, ID)){
+	    // not necessary to add id
+	    if(!create)return 'E';
+	    // add missing object id
+	    hide(it, ID, ++id);
+	  // return object id with prefix
+	  } return 'O' + it[ID];
+	}
+	
+	function getEntry(that, key){
+	  // fast case
+	  var index = fastKey(key), entry;
+	  if(index != 'F')return that[O1][index];
+	  // frozen object case
+	  for(entry = that[FIRST]; entry; entry = entry.n){
+	    if(entry.k == key)return entry;
+	  }
+	}
+	
+	module.exports = {
+	  getConstructor: function(NAME, IS_MAP, ADDER){
+	    function C(iterable){
+	      var that = assert.inst(this, C, NAME);
+	      set(that, O1, $.create(null));
+	      set(that, SIZE, 0);
+	      set(that, LAST, undefined);
+	      set(that, FIRST, undefined);
+	      if(iterable != undefined)$iter.forOf(iterable, IS_MAP, that[ADDER], that);
+	    }
+	    $.mix(C.prototype, {
+	      // 23.1.3.1 Map.prototype.clear()
+	      // 23.2.3.2 Set.prototype.clear()
+	      clear: function(){
+	        for(var that = this, data = that[O1], entry = that[FIRST]; entry; entry = entry.n){
+	          entry.r = true;
+	          if(entry.p)entry.p = entry.p.n = undefined;
+	          delete data[entry.i];
+	        }
+	        that[FIRST] = that[LAST] = undefined;
+	        that[SIZE] = 0;
+	      },
+	      // 23.1.3.3 Map.prototype.delete(key)
+	      // 23.2.3.4 Set.prototype.delete(value)
+	      'delete': function(key){
+	        var that  = this
+	          , entry = getEntry(that, key);
+	        if(entry){
+	          var next = entry.n
+	            , prev = entry.p;
+	          delete that[O1][entry.i];
+	          entry.r = true;
+	          if(prev)prev.n = next;
+	          if(next)next.p = prev;
+	          if(that[FIRST] == entry)that[FIRST] = next;
+	          if(that[LAST] == entry)that[LAST] = prev;
+	          that[SIZE]--;
+	        } return !!entry;
+	      },
+	      // 23.2.3.6 Set.prototype.forEach(callbackfn, thisArg = undefined)
+	      // 23.1.3.5 Map.prototype.forEach(callbackfn, thisArg = undefined)
+	      forEach: function(callbackfn /*, that = undefined */){
+	        var f = ctx(callbackfn, arguments[1], 3)
+	          , entry;
+	        while(entry = entry ? entry.n : this[FIRST]){
+	          f(entry.v, entry.k, this);
+	          // revert to the last existing entry
+	          while(entry && entry.r)entry = entry.p;
+	        }
+	      },
+	      // 23.1.3.7 Map.prototype.has(key)
+	      // 23.2.3.7 Set.prototype.has(value)
+	      has: function(key){
+	        return !!getEntry(this, key);
+	      }
+	    });
+	    if($.DESC)$.setDesc(C.prototype, 'size', {
+	      get: function(){
+	        return assert.def(this[SIZE]);
+	      }
+	    });
+	    return C;
+	  },
+	  def: function(that, key, value){
+	    var entry = getEntry(that, key)
+	      , prev, index;
+	    // change existing entry
+	    if(entry){
+	      entry.v = value;
+	    // create new entry
+	    } else {
+	      that[LAST] = entry = {
+	        i: index = fastKey(key, true), // <- index
+	        k: key,                        // <- key
+	        v: value,                      // <- value
+	        p: prev = that[LAST],          // <- previous entry
+	        n: undefined,                  // <- next entry
+	        r: false                       // <- removed
+	      };
+	      if(!that[FIRST])that[FIRST] = entry;
+	      if(prev)prev.n = entry;
+	      that[SIZE]++;
+	      // add to index
+	      if(index != 'F')that[O1][index] = entry;
+	    } return that;
+	  },
+	  getEntry: getEntry,
+	  getIterConstructor: function(){
+	    return function(iterated, kind){
+	      set(this, ITER, {o: iterated, k: kind});
+	    };
+	  },
+	  next: function(){
+	    var iter  = this[ITER]
+	      , kind  = iter.k
+	      , entry = iter.l;
+	    // revert to the last existing entry
+	    while(entry && entry.r)entry = entry.p;
+	    // get next entry
+	    if(!iter.o || !(iter.l = entry = entry ? entry.n : iter.o[FIRST])){
+	      // or finish the iteration
+	      iter.o = undefined;
+	      return step(1);
+	    }
+	    // return step by kind
+	    if(kind == 'key'  )return step(0, entry.k);
+	    if(kind == 'value')return step(0, entry.v);
+	    return step(0, [entry.k, entry.v]);
+	  }
+	};
+
+/***/ },
+/* 158 */
+/*!********************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.collection.js ***!
+  \********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $     = __webpack_require__(/*! ./$ */ 139)
+	  , $def  = __webpack_require__(/*! ./$.def */ 143)
+	  , $iter = __webpack_require__(/*! ./$.iter */ 149)
+	  , assertInstance = __webpack_require__(/*! ./$.assert */ 155).inst;
+	
+	module.exports = function(NAME, methods, common, IS_MAP, isWeak){
+	  var Base  = $.g[NAME]
+	    , C     = Base
+	    , ADDER = IS_MAP ? 'set' : 'add'
+	    , proto = C && C.prototype
+	    , O     = {};
+	  function fixMethod(KEY, CHAIN){
+	    var method = proto[KEY];
+	    if($.FW)proto[KEY] = function(a, b){
+	      var result = method.call(this, a === 0 ? 0 : a, b);
+	      return CHAIN ? this : result;
+	    };
+	  }
+	  if(!$.isFunction(C) || !(isWeak || !$iter.BUGGY && proto.forEach && proto.entries)){
+	    // create collection constructor
+	    C = common.getConstructor(NAME, IS_MAP, ADDER);
+	    $.mix(C.prototype, methods);
+	  } else {
+	    var inst  = new C
+	      , chain = inst[ADDER](isWeak ? {} : -0, 1)
+	      , buggyZero;
+	    // wrap for init collections from iterable
+	    if($iter.fail(function(iter){
+	      new C(iter); // eslint-disable-line no-new
+	    }) || $iter.DANGER_CLOSING){
+	      C = function(iterable){
+	        assertInstance(this, C, NAME);
+	        var that = new Base;
+	        if(iterable != undefined)$iter.forOf(iterable, IS_MAP, that[ADDER], that);
+	        return that;
+	      };
+	      C.prototype = proto;
+	      if($.FW)proto.constructor = C;
+	    }
+	    isWeak || inst.forEach(function(val, key){
+	      buggyZero = 1 / key === -Infinity;
+	    });
+	    // fix converting -0 key to +0
+	    if(buggyZero){
+	      fixMethod('delete');
+	      fixMethod('has');
+	      IS_MAP && fixMethod('get');
+	    }
+	    // + fix .add & .set for chaining
+	    if(buggyZero || chain !== inst)fixMethod(ADDER, true);
+	  }
+	
+	  __webpack_require__(/*! ./$.cof */ 141).set(C, NAME);
+	  __webpack_require__(/*! ./$.species */ 152)(C);
+	
+	  O[NAME] = C;
+	  $def($def.G + $def.W + $def.F * (C != Base), O);
+	
+	  // add .keys, .values, .entries, [@@iterator]
+	  // 23.1.3.4, 23.1.3.8, 23.1.3.11, 23.1.3.12, 23.2.3.5, 23.2.3.8, 23.2.3.10, 23.2.3.11
+	  if(!isWeak)$iter.std(
+	    C, NAME,
+	    common.getIterConstructor(), common.next,
+	    IS_MAP ? 'key+value' : 'value' , !IS_MAP, true
+	  );
+	
+	  return C;
+	};
+
+/***/ },
+/* 159 */
+/*!*************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.collection-weak.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $         = __webpack_require__(/*! ./$ */ 139)
+	  , safe      = __webpack_require__(/*! ./$.uid */ 142).safe
+	  , assert    = __webpack_require__(/*! ./$.assert */ 155)
+	  , forOf     = __webpack_require__(/*! ./$.iter */ 149).forOf
+	  , has       = $.has
+	  , isObject  = $.isObject
+	  , hide      = $.hide
+	  , isFrozen  = Object.isFrozen || $.core.Object.isFrozen
+	  , id        = 0
+	  , ID        = safe('id')
+	  , WEAK      = safe('weak')
+	  , LEAK      = safe('leak')
+	  , method    = __webpack_require__(/*! ./$.array-methods */ 153)
+	  , find      = method(5)
+	  , findIndex = method(6);
+	function findFrozen(store, key){
+	  return find.call(store.array, function(it){
+	    return it[0] === key;
+	  });
+	}
+	// fallback for frozen keys
+	function leakStore(that){
+	  return that[LEAK] || hide(that, LEAK, {
+	    array: [],
+	    get: function(key){
+	      var entry = findFrozen(this, key);
+	      if(entry)return entry[1];
+	    },
+	    has: function(key){
+	      return !!findFrozen(this, key);
+	    },
+	    set: function(key, value){
+	      var entry = findFrozen(this, key);
+	      if(entry)entry[1] = value;
+	      else this.array.push([key, value]);
+	    },
+	    'delete': function(key){
+	      var index = findIndex.call(this.array, function(it){
+	        return it[0] === key;
+	      });
+	      if(~index)this.array.splice(index, 1);
+	      return !!~index;
+	    }
+	  })[LEAK];
+	}
+	
+	module.exports = {
+	  getConstructor: function(NAME, IS_MAP, ADDER){
+	    function C(iterable){
+	      $.set(assert.inst(this, C, NAME), ID, id++);
+	      if(iterable != undefined)forOf(iterable, IS_MAP, this[ADDER], this);
+	    }
+	    $.mix(C.prototype, {
+	      // 23.3.3.2 WeakMap.prototype.delete(key)
+	      // 23.4.3.3 WeakSet.prototype.delete(value)
+	      'delete': function(key){
+	        if(!isObject(key))return false;
+	        if(isFrozen(key))return leakStore(this)['delete'](key);
+	        return has(key, WEAK) && has(key[WEAK], this[ID]) && delete key[WEAK][this[ID]];
+	      },
+	      // 23.3.3.4 WeakMap.prototype.has(key)
+	      // 23.4.3.4 WeakSet.prototype.has(value)
+	      has: function(key){
+	        if(!isObject(key))return false;
+	        if(isFrozen(key))return leakStore(this).has(key);
+	        return has(key, WEAK) && has(key[WEAK], this[ID]);
+	      }
+	    });
+	    return C;
+	  },
+	  def: function(that, key, value){
+	    if(isFrozen(assert.obj(key))){
+	      leakStore(that).set(key, value);
+	    } else {
+	      has(key, WEAK) || hide(key, WEAK, {});
+	      key[WEAK][that[ID]] = value;
+	    } return that;
+	  },
+	  leakStore: leakStore,
+	  WEAK: WEAK,
+	  ID: ID
+	};
+
+/***/ },
+/* 160 */
+/*!******************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.own-keys.js ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var $            = __webpack_require__(/*! ./$ */ 139)
+	  , assertObject = __webpack_require__(/*! ./$.assert */ 155).obj;
+	module.exports = function(it){
+	  assertObject(it);
+	  return $.getSymbols ? $.getNames(it).concat($.getSymbols(it)) : $.getNames(it);
+	};
+
+/***/ },
+/* 161 */
+/*!************************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.array-includes.js ***!
+  \************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var $ = __webpack_require__(/*! ./$ */ 139);
+	module.exports = function(IS_INCLUDES){
+	  return function(el /*, fromIndex = 0 */){
+	    var O      = $.toObject(this)
+	      , length = $.toLength(O.length)
+	      , index  = $.toIndex(arguments[1], length)
+	      , value;
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 162 */
+/*!****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.invoke.js ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// Fast apply
+	// http://jsperf.lnkit.com/fast-apply/5
+	module.exports = function(fn, args, that){
+	  var un = that === undefined;
+	  switch(args.length){
+	    case 0: return un ? fn()
+	                      : fn.call(that);
+	    case 1: return un ? fn(args[0])
+	                      : fn.call(that, args[0]);
+	    case 2: return un ? fn(args[0], args[1])
+	                      : fn.call(that, args[0], args[1]);
+	    case 3: return un ? fn(args[0], args[1], args[2])
+	                      : fn.call(that, args[0], args[1], args[2]);
+	    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+	                      : fn.call(that, args[0], args[1], args[2], args[3]);
+	    case 5: return un ? fn(args[0], args[1], args[2], args[3], args[4])
+	                      : fn.call(that, args[0], args[1], args[2], args[3], args[4]);
+	  } return              fn.apply(that, args);
+	};
+
+/***/ },
+/* 163 */
+/*!*****************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.partial.js ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	var $      = __webpack_require__(/*! ./$ */ 139)
+	  , invoke = __webpack_require__(/*! ./$.invoke */ 162)
+	  , assertFunction = __webpack_require__(/*! ./$.assert */ 155).fn;
+	module.exports = function(/* ...pargs */){
+	  var fn     = assertFunction(this)
+	    , length = arguments.length
+	    , pargs  = Array(length)
+	    , i      = 0
+	    , _      = $.path._
+	    , holder = false;
+	  while(length > i)if((pargs[i] = arguments[i++]) === _)holder = true;
+	  return function(/* ...args */){
+	    var that    = this
+	      , _length = arguments.length
+	      , j = 0, k = 0, args;
+	    if(!holder && !_length)return invoke(fn, pargs, that);
+	    args = pargs.slice();
+	    if(holder)for(;length > j; j++)if(args[j] === _)args[j] = arguments[k++];
+	    while(_length > k)args.push(arguments[k++]);
+	    return invoke(fn, args, that);
+	  };
+	};
+
+/***/ },
+/* 164 */
+/*!************************************************!*\
+  !*** ./~/babel-core/~/core-js/modules/$.fw.js ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function($){
+	  $.FW   = true;
+	  $.path = $.g;
+	  return $;
+	};
+
+/***/ }
+/******/ ]);
+//# sourceMappingURL=3-triangles.js.map

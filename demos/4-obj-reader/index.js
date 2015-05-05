@@ -31,12 +31,17 @@ const ELEMS = {
   fileinput: document.querySelector('.fileupload input'),
   filebtn: document.querySelector('.fileupload button'),
   filename: document.querySelector('.fileupload p'),
+  // gallery: document.querySelector('.fileupload-gallery'),
 
   vshader: document.getElementById('vshader'),
   fshader: document.getElementById('fshader'),
 
   vshader_fragment: document.getElementById('vshader-fragment'),
   fshader_fragment: document.getElementById('fshader-fragment'),
+
+  // rotate: document.querySelector('.command-rotate'),
+  // translate: document.querySelector('.command-translate'),
+  // scale: document.querySelector('.command-scale'),
 
   rotateX: document.querySelector('.command-rotateX'),
   rotateY: document.querySelector('.command-rotateY'),
