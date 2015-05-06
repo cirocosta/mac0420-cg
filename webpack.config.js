@@ -9,6 +9,7 @@ module.exports = {
     '4-obj-reader': "./demos/4-obj-reader",
     '5-textures': "./demos/5-textures",
     '6-cubes': "./demos/6-cubes",
+    '7-lib': "./demos/7-lib",
   },
   output: {
     path: __dirname + '/dist',
@@ -21,7 +22,15 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader?optional=runtime'
       },
+      {
+        test: /\.glsl$/,
+        loader: 'shader'
+      }
     ]
-  }
+  },
+
+  shader: {
+    chunkPath: "chunks"
+  },
 };
 

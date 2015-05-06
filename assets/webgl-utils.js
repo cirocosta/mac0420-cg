@@ -92,7 +92,7 @@ let WebGLUtils = {
 
   initBuffer (gl, data, num, type, attrib_location, buffer_type) {
     if (arguments.length < 5)
-      throw new Error('initSimpleArrayBuffer requires all args');
+      throw new Error('initBuffer requires all args');
 
     const buff = gl.createBuffer();
     if (!buff)

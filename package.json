@@ -25,6 +25,7 @@
     "babel-core": "^5.0.12",
     "babel-loader": "^5.0.0",
     "babel-runtime": "^5.0.12",
+    "shader-loader": "^1.1.2",
     "webpack": "^1.8.2"
   },
   "dependencies": {
