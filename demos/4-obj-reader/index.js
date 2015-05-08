@@ -1,10 +1,9 @@
 'use strict';
 
 import {mat4} from 'gl-matrix';
-import 'babel/polyfill';
 import '../../assets/webgl-debug';
 import WebGLUtils from '../../assets/webgl-utils';
-import ObjParser from './ObjParser.js';
+import ObjParser from './ObjParser';
 
 let _rotating = {
   ROTATE_X: false,
