@@ -45,7 +45,9 @@ let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let mesh = new Mesh(square, material);
+mesh.setRotation([0.0, 0.0, 1.0], 45);
 mesh.setPosition([0.4, 0.0, 0.0]);
+mesh.setScale([1.9, 1.0, 1.0]);
 
 world.add(mesh);
 renderer.render(world, camera);
