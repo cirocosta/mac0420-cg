@@ -175,9 +175,10 @@ let Shaders = {
    * Get attribute/uniform location from
    * shaders considering the consistent
    * notation of a_, u_, v_
+   *
    * @param  {WebGLContext} gl
    * @param  {Array} names
-   * @return {Array}
+   * @return {Object}
    */
   getLocations (gl, names) {
     return names.reduce((mem, name) => {

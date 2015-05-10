@@ -1,6 +1,3 @@
-attribute vec4 a_Position;
-attribute vec4 a_Normal;
-
 /* vec4 mat_ambient = vec4(1.0, 1.0, 1.0, 1.0); */
 /* vec4 mat_diffuse = vec4(1.0, 1.0, 1.0, 1.0); */
 /* vec4 mat_specular = vec4(1.0, 1.0, 1.0, 1.0); */
@@ -14,14 +11,17 @@ attribute vec4 a_Normal;
 
 /* vec4 ambient = lightAmbient * mat_ambient; */
 
-/* uniform mat4 u_NormalMatrix;    // (M^{-1})^T */
+attribute vec4 a_Normal;
+attribute vec4 a_Position;
+
+uniform mat4 u_NormalMatrix;    // (M^{-1})^T
 uniform mat4 u_ModelMatrix;     // ModelMatrix
-/* uniform mat4 u_MvpMatrix;       // model-view-projection matrix */
+uniform mat4 u_MvpMatrix;       // model-view-projection matrix
 
 varying vec4 v_Color;
 
 void
 main()
 {
-  gl_Position = u_ModelMatrix * a_Position;
+  gl_Position = u_MvpMatrix * a_Position;
 }

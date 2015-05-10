@@ -140,6 +140,7 @@ function draw_obj (obj) {
     obj.new = false;
   }
 
+  // model transfs
   mat4.scale(M, M, [obj.scale, obj.scale, obj.scale]);
   mat4.rotateX(M, M, deg_to_rad(_rotations['ROTATE_X']));
   mat4.rotateY(M, M, deg_to_rad(_rotations['ROTATE_Y']));
