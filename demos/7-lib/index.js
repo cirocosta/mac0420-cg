@@ -30,45 +30,49 @@ let camera = new PerspectiveCamera(
   70, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
 );
 let ray = new Ray();
-camera.setPosition([0.0, 0.0, 3.0]);
-
-canvas.addEventListener('click', (evt) => {
-  ray.generate(canvas, camera, evt.clientX, evt.clientY);
-
-  console.log(ray);
-});
+camera.setPosition([0.0, 0.0, 5.0], true);
 
 const vertices = new Float32Array([
-  0.0, 0.5, 0.0,
-  0.5, 0.0, 0.0,
-  -0.5, 0.0, 0.0,
-  0.0, -0.5, 0.0
+     1.0,  1.0,  1.0,
+    -1.0,  1.0,  1.0,
+    -1.0, -1.0,  1.0,
+     1.0, -1.0,  1.0,
+     1.0, -1.0, -1.0,
+     1.0,  1.0, -1.0,
+    -1.0,  1.0, -1.0,
+    -1.0, -1.0, -1.0,
 ]);
 
-let square = new Geometry({
+const indices = new Uint8Array([
+  0, 1, 2,   0, 2, 3,    // front
+  0, 3, 4,   0, 4, 5,    // right
+  0, 5, 6,   0, 6, 1,    // up
+  1, 6, 7,   1, 7, 2,    // left
+  7, 4, 3,   7, 3, 2,    // down
+  4, 7, 6,   4, 6, 5     // back
+]);
+
+let cube = new Geometry({
   vertices: vertices,
-  vertices_num: 4,
-  type: ARRAY_BUFFER
+  indices: indices,
+  vertices_num: 8,
 });
+
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
-let inhabitant2 = new Inhabitant(square, material);
-let inhabitant = new Inhabitant(square, material);
+let inhabitant = new Inhabitant(cube, material);
+let inhabitant2 = new Inhabitant(cube, material);
 
-inhabitant.setRotation([0.0, 0.0, 1.0], 90);
-inhabitant.setPosition([0.4, 0.0, 0.0]);
-inhabitant.setScale([1.2, 1.0, 1.0]);
-
-inhabitant2.setPosition([-0.4, -1.0, -5.5]);
+// inhabitant.setPosition([-1.0, 0.0, 0.0]);
 
 world.add(inhabitant);
-world.add(inhabitant2);
 
-console.log(square.getBoundingBox());
+canvas.addEventListener('click', (evt) => {
+  ray.generate(canvas, camera, evt.clientX, evt.clientY);
+  console.log(ray);
+  console.log(world.getIntersections(ray, camera));
+});
 
 renderer.render(world, camera);
-
-
-
 

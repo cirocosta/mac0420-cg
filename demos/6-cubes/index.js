@@ -169,6 +169,8 @@ function drawColorCube (gl, locations) {
   gl.vertexAttribPointer(locations.a_Color, COLOR_VSIZE, gl.FLOAT, false,
                          STRIDE, OFFSET_COLOR);
   gl.enableVertexAttribArray(locations.a_Color);
+
+  // indices
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);
   gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_SHORT, 0);
