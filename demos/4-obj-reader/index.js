@@ -93,7 +93,7 @@ const gl = WebGLUtils.setupWebGL(ELEMS.canvas);
 let M = mat4.create();    // model
 let N = mat4.create();    // normal
 let V = mat4.create();    // view
-let P = mat4.create();    // perspective
+let P = mat4.create();    // projection
 let VM = mat4.create();   // model-view
 let PVM = mat4.create();  // model-view-perspective
 

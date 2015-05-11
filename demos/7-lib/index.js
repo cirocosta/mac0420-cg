@@ -28,6 +28,7 @@ let renderer = new Renderer(canvas);
 let camera = new PerspectiveCamera(
   70, window.innerWidth/window.innerHeight, 0.1, 1000.0
 );
+camera.setPosition([0.0, 0.0, 3.0]);
 
 const vertices = new Float32Array([
   0.0, 0.5, 0.0,
@@ -45,6 +46,7 @@ let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let inhabitant = new Inhabitant(square, material);
+
 inhabitant.setRotation([0.0, 0.0, 1.0], 90);
 inhabitant.setPosition([0.4, 0.0, 0.0]);
 inhabitant.setScale([1.2, 1.0, 1.0]);
