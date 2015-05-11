@@ -20,15 +20,23 @@ import {Geometry} from "../../lib/Geometry";
 import {Material} from "../../lib/Material";
 import {Inhabitant} from "../../lib/Inhabitant";
 import {ARRAY_BUFFER} from "../../lib/Constants";
+import {Ray} from "../../lib/Ray";
 
 const canvas = document.querySelector("canvas");
 
 let world = new World();
 let renderer = new Renderer(canvas);
 let camera = new PerspectiveCamera(
-  70, window.innerWidth/window.innerHeight, 0.1, 1000.0
+  70, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
 );
+let ray = new Ray();
 camera.setPosition([0.0, 0.0, 3.0]);
+
+canvas.addEventListener('click', (evt) => {
+  ray.generate(canvas, camera, evt.clientX, evt.clientY);
+
+  console.log(ray);
+});
 
 const vertices = new Float32Array([
   0.0, 0.5, 0.0,
@@ -45,13 +53,20 @@ let square = new Geometry({
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
+let inhabitant2 = new Inhabitant(square, material);
 let inhabitant = new Inhabitant(square, material);
 
 inhabitant.setRotation([0.0, 0.0, 1.0], 90);
 inhabitant.setPosition([0.4, 0.0, 0.0]);
 inhabitant.setScale([1.2, 1.0, 1.0]);
 
+inhabitant2.setPosition([-0.4, -1.0, -5.5]);
+
 world.add(inhabitant);
+world.add(inhabitant2);
+
+console.log(square.getBoundingBox());
+
 renderer.render(world, camera);
 
 
