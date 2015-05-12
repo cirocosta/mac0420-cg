@@ -33,7 +33,6 @@ let camera = new PerspectiveCamera(
   70, canvas.clientWidth/canvas.clientHeight, 1.0, 100.0
 );
 let ray = new Ray();
-camera.setPosition([0.0, 0.0, 0.0], true);
 
 const vertices = new Float32Array([
      1.0,  1.0,  1.0,
@@ -60,20 +59,17 @@ let cube = new Geometry({
   indices: indices,
   vertices_num: 8,
 });
-camera.setPosition([0.0, 0.0, 0.0]);
+camera.setPosition([0.2, 0.0, 0.0], true);
 
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let inhabitant = new Inhabitant(cube, material);
-let inhabitant2 = new Inhabitant(cube, material);
 
-inhabitant2.setPosition([0.0, 0.0, -10.0]);
-inhabitant.setPosition([-5.0, 0.0, -10.0]);
+inhabitant.setPosition([-1.0, 0.0, -10.0]);
 
 // world.add(lineInhabitant);
 world.add(inhabitant);
-world.add(inhabitant2);
 
 canvas.addEventListener('click', (evt) => {
   ray.generate(canvas, camera, evt.clientX, evt.clientY);
