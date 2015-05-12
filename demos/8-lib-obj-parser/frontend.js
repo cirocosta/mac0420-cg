@@ -63,4 +63,4 @@ ELEMS.bSelect.addEventListener('click', (ev) => {
   ELEMS.fileInput.click();
 });
 
-export default ELEMS;
+export default {ELEMS};

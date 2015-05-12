@@ -16,7 +16,7 @@
 import {World} from "../../lib/World";
 import {vec3} from "gl-matrix";
 import {Renderer} from "../../lib/Renderer";
-import {PerspectiveCamera} from "../../lib/PerspectiveCamera";
+import {Camera} from "../../lib/Camera";
 import {Geometry} from "../../lib/Geometry";
 import {Material} from "../../lib/Material";
 import {Inhabitant} from "../../lib/Inhabitant";
@@ -30,7 +30,7 @@ const canvas = document.querySelector("canvas");
 
 let world = new World();
 let renderer = new Renderer(canvas);
-let camera = new PerspectiveCamera(
+let camera = new Camera(
   70, canvas.clientWidth/canvas.clientHeight, 1.0, 100.0
 );
 let ray = new Ray();

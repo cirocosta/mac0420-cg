@@ -8,6 +8,12 @@ let _state = {
   objGeometries: [],
   // caching external resources
   objExternalFiles: {},
+  appState: {
+    WORLD: 1,
+    SELECT: 0,
+    EDIT: 0,
+    selectedObj: null
+  }
 };
 
 /**

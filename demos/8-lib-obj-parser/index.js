@@ -24,31 +24,50 @@ import {Material} from "../../lib/Material";
 import {Inhabitant} from "../../lib/Inhabitant";
 import {ARRAY_BUFFER} from "../../lib/Constants";
 import {ObjParser} from "../../lib/ObjParser";
-
-const canvas = document.querySelector("canvas");
+import {Ray} from "../../lib/Ray";
+import "../../lib/ArcBall";
 
 let world = new World();
-let renderer = new Renderer(canvas);
+let renderer = new Renderer(ELEMS.canvas);
+let ray = new Ray();
 let camera = new Camera(
-  30, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
+  30, ELEMS.canvas.clientWidth/ELEMS.canvas.clientHeight, 0.1, 100.0
 );
 camera.position = [0.0, 0.0, 1.0];
 
 Store.listenTo('objGeometries', () => {
   let geom = Store.consume('objGeometries');
-  let inh = new Inhabitant(geom, new Material({}), false);
+  let inh = new Inhabitant(geom, new Material({}));
   inh.setPosition([0.0,0.0,-10.0]);
 
   world.populate(inh);
 });
 
-// zooming
+
 document.addEventListener('mousewheel', (e) => {
   camera.fov -= event.wheelDeltaY * 0.05;
 }, false);
 
-canvas.addEventListener('click', (evt) => {
-  console.log('click');
+function shootRay () {
+  let min = 999.0;
+  let min_i = -1;
+  ray.generate(ELEMS.canvas, camera, evt.clientX, evt.clientY);
+  let intersections = world.getIntersections(ray, camera);
+
+  for (let i = 0; i < intersections.length; i++) {
+    if (intersections[i] < min) {
+      min_i = i;
+      min = intersections[i];
+    }
+  }
+
+  console.log(world.inhabitants[min_i]);
+}
+
+ELEMS.canvas.addEventListener('click', (evt) => {
+  if (Store.retrieve['appState']['WORLD']) {
+    shootRay();
+  }
 });
 
 renderer.render(world, camera);
