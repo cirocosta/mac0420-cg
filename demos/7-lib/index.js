@@ -60,7 +60,9 @@ let cube = new Geometry({
   indices: indices,
   vertices_num: 8,
 });
-camera.setPosition([0.0, 0.0, 0.0], true);
+camera.position = vec3.clone([0.0, 0.0, 5.0]);
+camera.lookAt = vec3.clone([0.0, 0.0, 0.0]);
+camera.updateView();
 
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
@@ -72,8 +74,8 @@ inhabitant.setPosition([-0.0, 0.0, -10.0]);
 sphere.setPosition([-3.0, 0.0, -5.0]);
 
 // world.add(lineInhabitant);
-world.add(inhabitant);
-world.add(sphere);
+world.populate(inhabitant);
+world.populate(sphere);
 
 canvas.addEventListener('click', (evt) => {
   ray.generate(canvas, camera, evt.clientX, evt.clientY);

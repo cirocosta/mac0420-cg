@@ -67,3 +67,6 @@ button {
   background: #4D4D4D;
 }
 
+.gallery-item {
+  cursor: pointer;
+}

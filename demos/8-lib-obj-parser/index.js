@@ -30,7 +30,7 @@ const canvas = document.querySelector("canvas");
 let world = new World();
 let renderer = new Renderer(canvas);
 let camera = new PerspectiveCamera(
-  70, canvas.clientWidth/canvas.clientHeight, 1.0, 100.0
+  70, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
 );
 
 camera.setPosition([0.0, 0.0, 0.0], true);
@@ -41,6 +41,7 @@ Store.listenTo('objGeometries', () => {
   inh.setPosition([0.0,0.0,-10.0]);
 
   world.populate(inh);
+
   renderer.render(world, camera);
 });
 
@@ -55,9 +56,11 @@ canvas.addEventListener('click', (evt) => {
   console.log('click');
 });
 
-function loop () {
-  window.requestAnimationFrame(loop);
-  renderer.render(world, camera);
-}
-loop();
+renderer.render(world, camera);
+
+// const loop = () => {
+//   window.requestAnimationFrame(loop);
+//   renderer.render(world, camera);
+// };
+// loop();
 

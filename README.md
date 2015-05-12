@@ -10,12 +10,14 @@ $ git clone git@github.com:cirocosta/mac0420-cg.git
 $ npm install
 $ npm run start-dev
 
-$ python -m 'SimpleHTTPServer'
+$ python -m 'SimpleHTTPServer' # or http-server if you're a noder
 ```
 
 then open Firefox on http://localhost:8000 (if any other port supplied).
 
-## Planning
+ps: this project relies on Fetch API without providing polyfill for it.
+    Make sure you're running this on a dev channel release of your browser
+    of choce or that you have enabled this feature via flag setting.
 
 
 ## LICENSE
