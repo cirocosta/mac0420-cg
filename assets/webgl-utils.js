@@ -101,6 +101,7 @@ let WebGLUtils = {
     buffer_type = buffer_type || gl.ARRAY_BUFFER;
 
     gl.bindBuffer(buffer_type, buff);
+
     if (data != null)
       gl.bufferData(buffer_type, data, gl.STATIC_DRAW);
     if (attrib_location != null && num != null)

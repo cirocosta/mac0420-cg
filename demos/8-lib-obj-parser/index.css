@@ -69,4 +69,8 @@ button {
 
 .gallery-item {
   cursor: pointer;
+  list-style-type: none;
+  display: inline;
 }
+
+

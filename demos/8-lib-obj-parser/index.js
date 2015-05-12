@@ -32,7 +32,6 @@ let renderer = new Renderer(canvas);
 let camera = new PerspectiveCamera(
   70, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
 );
-
 camera.setPosition([0.0, 0.0, 0.0], true);
 
 Store.listenTo('objGeometries', () => {
@@ -42,15 +41,16 @@ Store.listenTo('objGeometries', () => {
 
   world.populate(inh);
 
+  console.log(world.inhabitants);
   renderer.render(world, camera);
 });
 
+// zooming
 document.addEventListener('mousewheel', (e) => {
   camera.fov -= event.wheelDeltaY * 0.05;
   camera.updateProjection(camera.ar);
   camera.updateInverseProjection(camera.ar);
 }, false);
-
 
 canvas.addEventListener('click', (evt) => {
   console.log('click');
@@ -58,9 +58,9 @@ canvas.addEventListener('click', (evt) => {
 
 renderer.render(world, camera);
 
-// const loop = () => {
-//   window.requestAnimationFrame(loop);
-//   renderer.render(world, camera);
-// };
-// loop();
+const loop = () => {
+  window.requestAnimationFrame(loop);
+  renderer.render(world, camera);
+};
+loop();
 
