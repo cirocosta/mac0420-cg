@@ -61,24 +61,23 @@ let cube = new Geometry({
   vertices_num: 8,
 });
 camera.setPosition([0.0, 0.0, 0.0]);
-let line = new Line(vec3.clone([0.0, 0.0, 0.0]),
-                    vec3.clone([0.0, 0.0, -10.0]));
 
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let inhabitant = new Inhabitant(cube, material);
-let lineInhabitant = new Inhabitant(line, material);
+let inhabitant2 = new Inhabitant(cube, material);
 
-inhabitant.setPosition([0.0, 0.0, -10.0]);
-lineInhabitant.setPosition([0.0, 0.0, -0.0]);
+inhabitant2.setPosition([0.0, 0.0, -10.0]);
+inhabitant.setPosition([-5.0, 0.0, -10.0]);
 
 // world.add(lineInhabitant);
 world.add(inhabitant);
+world.add(inhabitant2);
 
 canvas.addEventListener('click', (evt) => {
   ray.generate(canvas, camera, evt.clientX, evt.clientY);
-  // console.log(world.getIntersections(ray, camera));
+  console.log(world.getIntersections(ray, camera));
 });
 
 renderer.render(world, camera);
