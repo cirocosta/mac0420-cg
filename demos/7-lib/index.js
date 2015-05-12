@@ -22,6 +22,7 @@ import {Material} from "../../lib/Material";
 import {Inhabitant} from "../../lib/Inhabitant";
 import {ARRAY_BUFFER} from "../../lib/Constants";
 import {Ray} from "../../lib/Ray";
+import {Sphere} from "../../lib/Sphere";
 import {Line} from "../../lib/Line";
 
 
@@ -59,17 +60,20 @@ let cube = new Geometry({
   indices: indices,
   vertices_num: 8,
 });
-camera.setPosition([0.2, 0.0, 0.0], true);
+camera.setPosition([0.0, 0.0, 0.0], true);
 
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let inhabitant = new Inhabitant(cube, material);
+let sphere = new Inhabitant(new Sphere(1.0), material, false);
 
-inhabitant.setPosition([-1.0, 0.0, -10.0]);
+inhabitant.setPosition([-0.0, 0.0, -10.0]);
+sphere.setPosition([-3.0, 0.0, -5.0]);
 
 // world.add(lineInhabitant);
 world.add(inhabitant);
+world.add(sphere);
 
 canvas.addEventListener('click', (evt) => {
   ray.generate(canvas, camera, evt.clientX, evt.clientY);
