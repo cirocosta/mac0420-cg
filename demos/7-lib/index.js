@@ -7,13 +7,14 @@
  * corpuses. Each of these, if wanting to appear
  * on a camera, must also set up a material for
  * it and blend itself with the material, forming
- * a Inhabitant. Inhabitants are added to the world so that
- * a camera might look at it. In our current
- * world there's only one lightsource (which is a
- * shame).
+ * a Inhabitant. Inhabitants are added to the
+ * world so that a camera might look at it. In
+ * our current world there's only one lightsource
+ * (which is a shame).
  */
 
 import {World} from "../../lib/World";
+import {vec3} from "gl-matrix";
 import {Renderer} from "../../lib/Renderer";
 import {PerspectiveCamera} from "../../lib/PerspectiveCamera";
 import {Geometry} from "../../lib/Geometry";
@@ -21,16 +22,18 @@ import {Material} from "../../lib/Material";
 import {Inhabitant} from "../../lib/Inhabitant";
 import {ARRAY_BUFFER} from "../../lib/Constants";
 import {Ray} from "../../lib/Ray";
+import {Line} from "../../lib/Line";
+
 
 const canvas = document.querySelector("canvas");
 
 let world = new World();
 let renderer = new Renderer(canvas);
 let camera = new PerspectiveCamera(
-  70, canvas.clientWidth/canvas.clientHeight, 0.1, 100.0
+  70, canvas.clientWidth/canvas.clientHeight, 1.0, 100.0
 );
 let ray = new Ray();
-camera.setPosition([0.0, 0.0, 5.0], true);
+camera.setPosition([0.0, 0.0, 0.0], true);
 
 const vertices = new Float32Array([
      1.0,  1.0,  1.0,
@@ -57,21 +60,25 @@ let cube = new Geometry({
   indices: indices,
   vertices_num: 8,
 });
+camera.setPosition([0.0, 0.0, 0.0]);
+let line = new Line(vec3.clone([0.0, 0.0, 0.0]),
+                    vec3.clone([0.0, 0.0, -10.0]));
 
 let material = new Material({
   color: new Float32Array(1.0, 0.0, 0.0)
 });
 let inhabitant = new Inhabitant(cube, material);
-let inhabitant2 = new Inhabitant(cube, material);
+let lineInhabitant = new Inhabitant(line, material);
 
-// inhabitant.setPosition([-1.0, 0.0, 0.0]);
+inhabitant.setPosition([0.0, 0.0, -10.0]);
+lineInhabitant.setPosition([0.0, 0.0, -0.0]);
 
+// world.add(lineInhabitant);
 world.add(inhabitant);
 
 canvas.addEventListener('click', (evt) => {
   ray.generate(canvas, camera, evt.clientX, evt.clientY);
-  console.log(ray);
-  console.log(world.getIntersections(ray, camera));
+  // console.log(world.getIntersections(ray, camera));
 });
 
 renderer.render(world, camera);
