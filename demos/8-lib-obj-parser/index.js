@@ -55,21 +55,20 @@ function shootRay (evt) {
   let min_i = -1;
   ray.generate(ELEMS.canvas, camera, evt.clientX, evt.clientY);
   let intersections = world.getIntersections(ray, camera);
+  let intersectedInhab;
 
-  for (let i = 0; i < intersections.length; i++) {
-    if (intersections[i] < min) {
-      min_i = i;
-      min = intersections[i];
-    }
-  }
+  if (!intersections.length)
+    return;
 
-  console.log(world.inhabitants[min_i]);
+  intersectedInhab = world.inhabitants[intersections[0].index];
+
+  Store.updateAppState('EDIT');
+  Store.update('appState', 'selectedObj', intersectedInhab);
 }
 
 ELEMS.canvas.addEventListener('click', (evt) => {
-  if (Store.retrieve('appState')['SELECT']) {
+  if (Store.retrieve('appState')['SELECT'])
     shootRay(evt);
-  }
 });
 
 

@@ -1,3 +1,7 @@
+"use strict";
+
+import {Keyer} from "../../lib/utils/Keyer";
+
 /**
  * Holds application state in general, like the
  * current mode, etc
@@ -12,6 +16,10 @@ let _state = {
     WORLD: 1,
     SELECT: 0,
     EDIT: 0,
+    ROTATE: 0,
+    TRANSLATE: 0,
+    SCALE: 0,
+    KILL: 0,
     selectedObj: null
   }
 };
@@ -20,7 +28,8 @@ let _state = {
  * Notification system
  */
 let _notify = {
-  objGeometries: []
+  objGeometries: [],
+  appState: [],
 };
 
 /**
@@ -30,12 +39,34 @@ let _notify = {
  * (in <3 with closures)
  */
 let Store = {
+  Keyer: Keyer,
+  isKeyActive: Keyer.isKeyActive,
+  isButtonActive: Keyer.isButtonActive,
+
   pushBack (key, data) {
     if (!_state[key])
       throw new Error('Tried to push to ' + key + ' which doesnt exists');
 
     _state[key].push(data);
     Store.notify(key);
+  },
+
+  isEditting () {
+    let appState = _state.appState;
+
+    if (appState.EDIT || appState.SCALE ||
+        appState.TRANSLATE || appState.ROTATE || appState.KILL)
+      return true;
+    return false;
+  },
+
+  updateAppState (actualState) {
+    for (let state in _state.appState) {
+      _state.appState[state] = 0;
+    }
+
+    _state.appState[actualState] = 1;
+    Store.notify('appState');
   },
 
   update (key, entryKey, entryValue) {
