@@ -35,12 +35,12 @@ let arcball = new ArcBall(ELEMS.canvas.clientWidth,
 let camera = new Camera(
   30, ELEMS.canvas.clientWidth/ELEMS.canvas.clientHeight, 0.1, 100.0
 );
-camera.position = [0.0, 1.0, 5.0];
+camera.position = [0.0, 0.0, 10.0];
 
 Store.listenTo('objGeometries', () => {
   let geom = Store.consume('objGeometries');
   let inh = new Inhabitant(geom, new Material({}));
-  inh.setPosition([0.0,0.0,-10.0]);
+  inh.setPosition([0.0,0.0,-30.0]);
 
   world.populate(inh);
 });
@@ -80,8 +80,8 @@ arcball.start();
 const loop = () => {
   arcball.update();
 
-  if (world.inhabitants.length > 0)
-    world.inhabitants[0]._modelMatrix = arcball.transform;
+  for (let inhabitant of world.inhabitants)
+    inhabitant._modelMatrix = arcball.transform;
 
   window.requestAnimationFrame(loop);
   renderer.render(world, camera);
