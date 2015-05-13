@@ -63,4 +63,8 @@ ELEMS.bSelect.addEventListener('click', (ev) => {
   ELEMS.fileInput.click();
 });
 
+ELEMS.canvas.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+});
+
 export default {ELEMS};

@@ -25,15 +25,17 @@ import {Inhabitant} from "../../lib/Inhabitant";
 import {ARRAY_BUFFER} from "../../lib/Constants";
 import {ObjParser} from "../../lib/ObjParser";
 import {Ray} from "../../lib/Ray";
-import "../../lib/ArcBall";
+import {ArcBall} from "../../lib/ArcBall";
 
 let world = new World();
 let renderer = new Renderer(ELEMS.canvas);
 let ray = new Ray();
+let arcball = new ArcBall(ELEMS.canvas.clientWidth,
+                          ELEMS.canvas.clientHeight);
 let camera = new Camera(
   30, ELEMS.canvas.clientWidth/ELEMS.canvas.clientHeight, 0.1, 100.0
 );
-camera.position = [0.0, 0.0, 1.0];
+camera.position = [0.0, 1.0, 5.0];
 
 Store.listenTo('objGeometries', () => {
   let geom = Store.consume('objGeometries');
@@ -48,7 +50,7 @@ document.addEventListener('mousewheel', (e) => {
   camera.fov -= event.wheelDeltaY * 0.05;
 }, false);
 
-function shootRay () {
+function shootRay (evt) {
   let min = 999.0;
   let min_i = -1;
   ray.generate(ELEMS.canvas, camera, evt.clientX, evt.clientY);
@@ -65,16 +67,22 @@ function shootRay () {
 }
 
 ELEMS.canvas.addEventListener('click', (evt) => {
-  if (Store.retrieve['appState']['WORLD']) {
-    shootRay();
+  if (Store.retrieve('appState')['SELECT']) {
+    shootRay(evt);
   }
 });
 
-renderer.render(world, camera);
 
+renderer.render(world, camera);
 window.addEventListener('resize', renderer.adjustSize.bind(renderer));
+arcball.start();
 
 const loop = () => {
+  arcball.update();
+
+  if (world.inhabitants.length > 0)
+    world.inhabitants[0]._modelMatrix = arcball.transform;
+
   window.requestAnimationFrame(loop);
   renderer.render(world, camera);
 };
