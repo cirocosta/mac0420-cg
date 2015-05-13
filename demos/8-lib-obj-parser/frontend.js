@@ -79,23 +79,46 @@ Store.Keyer.bindDown('shift', () => {
 }).bindUp('shift', () => {
   if (!Store.isEditting())
     Store.updateAppState('WORLD');
-}).bindDown('x', () => {
+}).bindDown('x', (evt) => {
+  evt.preventDefault();
+  if (Store.getTransformState())
+    Store.setTransformAxis(0);
   if (Store.isEditting())
     Store.updateAppState('KILL');
 }).bindDown('r', () => {
+  Store.setTransformState('ROTATE');
   if (Store.isEditting())
     Store.updateAppState('ROTATE');
 }).bindDown('s', () => {
+  Store.setTransformState('SCALE');
   if (Store.isEditting())
     Store.updateAppState('SCALE');
+}).bindDown('y', () => {
+  if (Store.getTransformState())
+    Store.setTransformAxis(1);
+}).bindDown('z', () => {
+  if (Store.getTransformState())
+    Store.setTransformAxis(2);
 }).bindDown('t', () => {
+  Store.setTransformState('TRANSLATE');
   if (Store.isEditting())
     Store.updateAppState('TRANSLATE');
 }).bindDown('esc', () => {
   if (Store.isEditting())
     Store.updateAppState('WORLD');
-}).bindMouseDown('left', () => {
-}).bindMouseUp('left', () => {
+    Store.setTransformAxis(-1);
+    Store.setTransformState(null);
+}).bindMouseDown('left', (evt) => {
+  if (!Store.isEditting())
+    return;
+
+  Store.Keyer._mouseY = evt.clientY;
+}).bindMouseUp('left', (evt) => {
+  if (!Store.isEditting())
+    return;
+
+  let delta = Store.Keyer._mouseY - evt.clientY;
+  Store.notifyMouseDelta(delta);
 }).bindMouseDown('right', (evt) => {
 }).bindMouseUp('right', (evt) => {
   ELEMS.modeIndicator.className = "mode-indicator world";

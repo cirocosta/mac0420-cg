@@ -26,6 +26,8 @@ let _state = {
   },
 
   selectedObject: null,
+  transformState: null,
+  transformAxis: null,
 };
 
 /**
@@ -35,6 +37,8 @@ let _notify = {
   objGeometries: [],
   appState: [],
 };
+
+let _mouseDeltaListener = null;
 
 /**
  * Helper methods. This is exported to those who
@@ -51,11 +55,40 @@ let Store = {
     _state.selectedObject = object;
   },
 
+  setTransformAxis (axis) {
+    _state.transformAxis = axis;
+  },
+
+  getTransformAxis () {
+    return _state.transformAxis;
+  },
+
+  getTransformState () {
+    return _state.transformState;
+  },
+
+  setTransformState (state) {
+    _state.transformState = state;
+  },
+
+  getSelectedObject () {
+    return _state.selectedObject;
+  },
+
   retrieveSelectedObject () {
     let obj = _state.selectedObject;
     _state.selectedObject = null;
 
     return obj;
+  },
+
+  notifyMouseDelta (delta) {
+    if (_mouseDeltaListener)
+      _mouseDeltaListener(delta);
+  },
+
+  listenToMouseDelta (func) {
+    _mouseDeltaListener = func;
   },
 
   pushBack (key, data) {

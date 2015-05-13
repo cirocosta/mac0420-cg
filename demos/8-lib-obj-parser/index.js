@@ -50,7 +50,7 @@ document.addEventListener('mousewheel', (e) => {
   camera.fov -= event.wheelDeltaY * 0.05;
 }, false);
 
-function shootRay (evt) {
+function shotRay (evt) {
   let min = 999.0;
   let min_i = -1;
   ray.generate(ELEMS.canvas, camera, evt.clientX, evt.clientY);
@@ -66,13 +66,42 @@ function shootRay (evt) {
 
 ELEMS.canvas.addEventListener('click', (evt) => {
   if (Store.retrieve('appState')['SELECT'])
-    shootRay(evt);
+    shotRay(evt);
 });
 
 
 renderer.render(world, camera);
 window.addEventListener('resize', renderer.adjustSize.bind(renderer));
 arcball.start();
+
+// called only when editting
+Store.listenToMouseDelta((delta) => {
+  let selectedInh = world.inhabitants[Store.getSelectedObject()];
+  let axis = Store.getTransformAxis();
+
+  delta = delta / ELEMS.canvas.clientHeight;
+
+  if (!~axis)
+    return;
+
+  switch (Store.getTransformState()) {
+    case 'ROTATE':
+      let axisRot = [0.0, 0.0, 0.0];
+      axisRot[axis] = 1.0;
+      selectedInh.setRotation(axisRot, delta);
+      break;
+    case 'TRANSLATE':
+      let pos = selectedInh.position;
+      pos[axis] += delta;
+      selectedInh.setPosition(pos);
+      break;
+    case 'SCALE':
+      let scale = selectedInh.scale;
+      scale[axis] += delta;
+      selectedInh.setScale(scale);
+      break;
+  }
+});
 
 const loop = () => {
   if (Store.shouldKill()) {
@@ -84,10 +113,11 @@ const loop = () => {
     Store.updateAppState('WORLD');
   }
 
-  arcball.update();
-
-  for (let inhabitant of world.inhabitants)
-    inhabitant._modelMatrix = arcball.transform;
+  if (!Store.isEditting()) {
+    arcball.update();
+    for (let inhabitant of world.inhabitants)
+      inhabitant._modelMatrix = arcball.transform;
+  }
 
   window.requestAnimationFrame(loop);
   renderer.render(world, camera);
