@@ -60,10 +60,8 @@ function shootRay (evt) {
   if (!intersections.length)
     return;
 
-  intersectedInhab = world.inhabitants[intersections[0].index];
-
   Store.updateAppState('EDIT');
-  Store.update('appState', 'selectedObj', intersectedInhab);
+  Store.setSelectedObject(intersections[0].index);
 }
 
 ELEMS.canvas.addEventListener('click', (evt) => {
@@ -77,6 +75,15 @@ window.addEventListener('resize', renderer.adjustSize.bind(renderer));
 arcball.start();
 
 const loop = () => {
+  if (Store.shouldKill()) {
+    let objIndex = Store.retrieveSelectedObject();
+
+    world.inhabitants[objIndex].selfDestruct();
+    world.inhabitants.splice(objIndex, 1);
+
+    Store.updateAppState('WORLD');
+  }
+
   arcball.update();
 
   for (let inhabitant of world.inhabitants)

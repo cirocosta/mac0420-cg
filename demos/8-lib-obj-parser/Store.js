@@ -7,6 +7,9 @@ import {Keyer} from "../../lib/utils/Keyer";
  * current mode, etc
  */
 
+// TODO create a constants file and just set
+// a single entry for the state. No need for an
+// appState like this. Terrible.
 let _state = {
   // queue of generated objects to be consumed
   objGeometries: [],
@@ -20,8 +23,9 @@ let _state = {
     TRANSLATE: 0,
     SCALE: 0,
     KILL: 0,
-    selectedObj: null
-  }
+  },
+
+  selectedObject: null,
 };
 
 /**
@@ -43,12 +47,27 @@ let Store = {
   isKeyActive: Keyer.isKeyActive,
   isButtonActive: Keyer.isButtonActive,
 
+  setSelectedObject (object) {
+    _state.selectedObject = object;
+  },
+
+  retrieveSelectedObject () {
+    let obj = _state.selectedObject;
+    _state.selectedObject = null;
+
+    return obj;
+  },
+
   pushBack (key, data) {
     if (!_state[key])
       throw new Error('Tried to push to ' + key + ' which doesnt exists');
 
     _state[key].push(data);
     Store.notify(key);
+  },
+
+  shouldKill () {
+    return _state.appState.KILL;
   },
 
   isEditting () {

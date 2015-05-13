@@ -82,7 +82,6 @@ Store.Keyer.bindDown('shift', () => {
 }).bindDown('x', () => {
   if (Store.isEditting())
     Store.updateAppState('KILL');
-  // index must then set back to world state.
 }).bindDown('r', () => {
   if (Store.isEditting())
     Store.updateAppState('ROTATE');
@@ -93,7 +92,6 @@ Store.Keyer.bindDown('shift', () => {
   if (Store.isEditting())
     Store.updateAppState('TRANSLATE');
 }).bindDown('esc', () => {
-  // TODO !!!!!!!!!!!!!!
   if (Store.isEditting())
     Store.updateAppState('WORLD');
 }).bindMouseDown('left', () => {
