@@ -14,13 +14,6 @@ const VERTICES_1 = [
   0.0, -0.5
 ];
 const TRANSLATION_1 = -.3;
-
-const VERTICES_2 = [
-  0.0, 0.5,
-  0.5, 0.0,
-  -0.5, 0.0,
-  0.0, -0.5
-];
 const TRANSLATION_2 = .3;
 
 // specifies the affine transformation of x and
@@ -63,7 +56,7 @@ function render () {
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
   // second rectangle
-  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(VERTICES_2), gl.STATIC_DRAW);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(VERTICES_1), gl.STATIC_DRAW);
   gl.vertexAttrib1f(a_Translation, TRANSLATION_2);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }

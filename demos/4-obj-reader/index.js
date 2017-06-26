@@ -1,10 +1,9 @@
 'use strict';
 
 import {mat4} from 'gl-matrix';
-import 'babel/polyfill';
 import '../../assets/webgl-debug';
 import WebGLUtils from '../../assets/webgl-utils';
-import ObjParser from './ObjParser.js';
+import ObjParser from './ObjParser';
 
 let _rotating = {
   ROTATE_X: false,
@@ -94,7 +93,7 @@ const gl = WebGLUtils.setupWebGL(ELEMS.canvas);
 let M = mat4.create();    // model
 let N = mat4.create();    // normal
 let V = mat4.create();    // view
-let P = mat4.create();    // perspective
+let P = mat4.create();    // projection
 let VM = mat4.create();   // model-view
 let PVM = mat4.create();  // model-view-perspective
 
@@ -141,6 +140,7 @@ function draw_obj (obj) {
     obj.new = false;
   }
 
+  // model transfs
   mat4.scale(M, M, [obj.scale, obj.scale, obj.scale]);
   mat4.rotateX(M, M, deg_to_rad(_rotations['ROTATE_X']));
   mat4.rotateY(M, M, deg_to_rad(_rotations['ROTATE_Y']));

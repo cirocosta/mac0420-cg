@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Scene Editor</title>
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+  <header>
+    <h1>Scene Editor!</h1>
+
+    <div class="fileupload">
+      <!-- todo: allow multiple files -->
+      <input type="file" id="fileinput" name="fileinput"/>
+      <button id="b-select">SELECT</button>
+      <button id="b-help">HELP</select>
+      <button id="b-gallery">GALLERY</button>
+
+      <ul id="ul-gallery">
+        <li class="gallery-item" data-url="../../assets/objs/pecas/cavalo.obj">knight</li>
+        <li class="gallery-item" data-url="../../assets/objs/pecas/bispo.obj">bishop</li>
+        <li class="gallery-item" data-url="../../assets/objs/pecas/peao.obj">pawn</li>
+        <li class="gallery-item" data-url="../../assets/objs/pecas/rainha.obj">queen</li>
+        <li class="gallery-item" data-url="../../assets/objs/pecas/rei.obj">king</li>
+        <li class="gallery-item" data-url="../../assets/objs/pecas/torre.obj">hook</li>
+      </ul>
+
+    </div>
+  </header>
+
+  <main>
+    <canvas>
+    </canvas>
+  </main>
+
+  <footer>
+    <div class="mode-indicator world">WORLD</div>
+    <p>contribute to it on <a href="https://github.com/cirocosta/mac0420-cg">github</a></p>
+  </footer>
+
+  <script src="../../dist/8-lib-obj-parser.js"></script>
+  </body>
+</html>

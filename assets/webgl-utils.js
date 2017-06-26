@@ -92,7 +92,7 @@ let WebGLUtils = {
 
   initBuffer (gl, data, num, type, attrib_location, buffer_type) {
     if (arguments.length < 5)
-      throw new Error('initSimpleArrayBuffer requires all args');
+      throw new Error('initBuffer requires all args');
 
     const buff = gl.createBuffer();
     if (!buff)
@@ -101,6 +101,7 @@ let WebGLUtils = {
     buffer_type = buffer_type || gl.ARRAY_BUFFER;
 
     gl.bindBuffer(buffer_type, buff);
+
     if (data != null)
       gl.bufferData(buffer_type, data, gl.STATIC_DRAW);
     if (attrib_location != null && num != null)
@@ -175,25 +176,30 @@ let Shaders = {
    * Get attribute/uniform location from
    * shaders considering the consistent
    * notation of a_, u_, v_
+   *
+   * ps: notice that an attrib/uniform that is
+   * never used in the shader code might lead
+   * to a '-1' pointer (and so, an error)
+   *
    * @param  {WebGLContext} gl
    * @param  {Array} names
-   * @return {Array}
+   * @return {Object}
    */
   getLocations (gl, names) {
     return names.reduce((mem, name) => {
-      let location;
+      let loc;
 
       if (name.startsWith('a_'))
-        location = gl.getAttribLocation(gl.program, name);
+        loc = gl.getAttribLocation(gl.program, name);
       else if (name.startsWith('u_'))
-        location = gl.getUniformLocation(gl.program, name);
+        loc = gl.getUniformLocation(gl.program, name);
       else // enforcing name consistency
         throw new Error('Attrib/Unif/Var must start with u_, a_ or v_');
 
-      if (!~location)
+      if (!~loc)
         throw new Error('Failed to retrieve location of ' + name);
 
-      mem[name] = location;
+      mem[name] = loc;
 
       return mem;
     }, {});

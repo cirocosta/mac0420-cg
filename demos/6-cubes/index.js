@@ -50,8 +50,12 @@ gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 // drawColorCube(gl, LOCATIONS);
 drawColorFacesCube(gl, LOCATIONS);
 
+/**
+ * Color data separated from vertices array
+ */
 function drawColorFacesCube (gl, locations) {
-  const VERTICES = new Float32Array([   // Vertex coordinates
+  // Vertex coordinates
+  const VERTICES = new Float32Array([
      1.0, 1.0, 1.0,  -1.0, 1.0, 1.0,  -1.0,-1.0, 1.0,   1.0,-1.0, 1.0,  // v0-v1-v2-v3 front
      1.0, 1.0, 1.0,   1.0,-1.0, 1.0,   1.0,-1.0,-1.0,   1.0, 1.0,-1.0,  // v0-v3-v4-v5 right
      1.0, 1.0, 1.0,   1.0, 1.0,-1.0,  -1.0, 1.0,-1.0,  -1.0, 1.0, 1.0,  // v0-v5-v6-v1 up
@@ -60,6 +64,8 @@ function drawColorFacesCube (gl, locations) {
      1.0,-1.0,-1.0,  -1.0,-1.0,-1.0,  -1.0, 1.0,-1.0,   1.0, 1.0,-1.0   // v4-v7-v6-v5 back
   ]);
 
+  // indicates the colocar that each vertex
+  // must assume
   const COLORS = new Float32Array([     // Colors
     1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v0-v1-v2-v3 front(blue)
     1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  // v0-v3-v4-v5 right(green)
@@ -69,6 +75,7 @@ function drawColorFacesCube (gl, locations) {
     1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0,  1.0, 0.0, 0.0   // v4-v7-v6-v5 back
   ]);
 
+  // normal of a given vertex
   const NORMALS = new Float32Array([    // Normal
     0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,   0.0, 0.0, 1.0,  // v0-v1-v2-v3 front
     1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,   1.0, 0.0, 0.0,  // v0-v3-v4-v5 right
@@ -78,7 +85,8 @@ function drawColorFacesCube (gl, locations) {
     0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0,   0.0, 0.0,-1.0   // v4-v7-v6-v5 back
   ]);
 
-  const INDICES = new Uint8Array([       // Indices of the vertices
+  // Indices of the vertices
+  const INDICES = new Uint8Array([
      0, 1, 2,   0, 2, 3,    // front
      4, 5, 6,   4, 6, 7,    // right
      8, 9,10,   8,10,11,    // up
@@ -106,6 +114,9 @@ function drawColorFacesCube (gl, locations) {
   gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_BYTE, 0);
 }
 
+/**
+ * Color data stands right with vertices
+ */
 function drawColorCube (gl, locations) {
   // 8 vertices that denotes what a cube is.
   const VERTICES = new Float32Array([
@@ -158,6 +169,8 @@ function drawColorCube (gl, locations) {
   gl.vertexAttribPointer(locations.a_Color, COLOR_VSIZE, gl.FLOAT, false,
                          STRIDE, OFFSET_COLOR);
   gl.enableVertexAttribArray(locations.a_Color);
+
+  // indices
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, INDICES, gl.STATIC_DRAW);
   gl.drawElements(gl.TRIANGLES, INDICES.length, gl.UNSIGNED_SHORT, 0);

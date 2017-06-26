@@ -6,3 +6,5 @@ node_modules/
 *.pdf
 *.zip
 *.map
+*.log
+*.mtl
